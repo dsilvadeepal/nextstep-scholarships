@@ -64,3 +64,20 @@ embedding_cache = Table(
     Column("key", String, primary_key=True),
     Column("vector", json_type, nullable=False),
 )
+eval_runs = Table(
+    "eval_runs",
+    metadata,
+    Column("id", String, primary_key=True),
+    Column("status", String, nullable=False),
+    Column("config", json_type, nullable=False),
+)
+eval_results = Table(
+    "eval_results",
+    metadata,
+    Column("run_id", String, primary_key=True),
+    Column("case_id", String, primary_key=True),
+    Column("method", String, primary_key=True),
+    Column("status", String, nullable=False),
+    Column("lease_until", Numeric(20, 4)),
+    Column("result", json_type),
+)
