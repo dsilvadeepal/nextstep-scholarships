@@ -1,7 +1,8 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 import pytest
-from nextstep.models import NormalizedDocument, Section, EvidenceRef
 from nextstep.ingest.extract import validate_evidence
+from nextstep.models import EvidenceRef, NormalizedDocument, Section
 
 
 def test_exact_evidence_rejects_fabrication_and_wrong_source():
@@ -10,7 +11,7 @@ def test_exact_evidence_rejects_fabrication_and_wrong_source():
         content_hash="hash",
         source_id="s",
         url="https://example.org",
-        fetched_at=datetime.now(timezone.utc),
+        fetched_at=datetime.now(UTC),
         sections=[Section(id="one", heading="Rules", text="Seniors only.")],
     )
     ref = EvidenceRef(

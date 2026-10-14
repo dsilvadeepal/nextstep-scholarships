@@ -1,10 +1,11 @@
 import hashlib
 import io
-from bs4 import BeautifulSoup
-from pypdf import PdfReader
+
 import pdfplumber
+from bs4 import BeautifulSoup, Comment, NavigableString
 from langchain_core.documents import Document
 from nextstep.models import NormalizedDocument, Section
+from pypdf import PdfReader
 
 
 def _document(data, sections, **source):
@@ -35,10 +36,16 @@ def parse_html(data: bytes, **source) -> NormalizedDocument:
             )
             lines.clear()
 
-    for tag in root.find_all(["h1", "h2", "h3", "h4", "p", "li", "table"]):
-        if tag.find_parent(["table", "li"]):
-            continue
-        if tag.name.startswith("h"):
+    def walk(tag):
+        nonlocal heading
+        if isinstance(tag, Comment):
+            return
+        if isinstance(tag, NavigableString):
+            text = str(tag).strip()
+            if text:
+                lines.append(text)
+            return
+        if tag.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
             flush()
             heading = tag.get_text(" ", strip=True)
         elif tag.name == "table":
@@ -59,9 +66,10 @@ def parse_html(data: bytes, **source) -> NormalizedDocument:
                     )
                 )
         else:
-            text = tag.get_text(" ", strip=True)
-            if text:
-                lines.append(text)
+            for child in tag.children:
+                walk(child)
+
+    walk(root)
     flush()
     if not sections:
         raise ValueError("empty_or_unstructured_html")

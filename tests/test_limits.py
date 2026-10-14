@@ -1,14 +1,15 @@
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
-from sqlalchemy import create_engine
+
 from nextstep.db import metadata
 from nextstep.limits import BudgetLedger
+from sqlalchemy import create_engine
 
 
 def test_reservations_cannot_exceed_cap_and_timeout_retains_cost(tmp_path):
     engine = create_engine(f"sqlite:///{tmp_path}/usage.db")
     metadata.create_all(engine)
-    ledger = BudgetLedger(engine, Decimal("1"), Decimal("1"), enabled=True)
+    ledger = BudgetLedger(engine, Decimal(1), Decimal(1), enabled=True)
 
     def reserve(key):
         try:
@@ -30,6 +31,6 @@ def test_paid_calls_fail_closed(tmp_path):
     engine = create_engine(f"sqlite:///{tmp_path}/usage.db")
     metadata.create_all(engine)
     with pytest.raises(ValueError):
-        BudgetLedger(engine, Decimal("10"), Decimal("10")).reserve_budget(
+        BudgetLedger(engine, Decimal(10), Decimal(10)).reserve_budget(
             "a", Decimal(".1")
         )

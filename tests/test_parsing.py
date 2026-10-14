@@ -1,4 +1,5 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 import pytest
 from nextstep.ingest.parse import parse_html, parse_pdf, sections_as_documents
 from nextstep.storage import LocalArtifactStore
@@ -10,7 +11,7 @@ def test_html_keeps_exceptions_and_separates_programs():
         html,
         source_id="s",
         url="https://example.org",
-        fetched_at=datetime.now(timezone.utc),
+        fetched_at=datetime.now(UTC),
     )
     assert len(doc.sections) == 2
     assert "except renewed" in doc.sections[0].text
@@ -21,6 +22,7 @@ def test_html_keeps_exceptions_and_separates_programs():
 
 def test_empty_pdf_needs_ocr():
     import io
+
     from pypdf import PdfWriter
 
     writer = PdfWriter()
@@ -32,7 +34,7 @@ def test_empty_pdf_needs_ocr():
             buf.getvalue(),
             source_id="s",
             url="https://example.org",
-            fetched_at=datetime.now(timezone.utc),
+            fetched_at=datetime.now(UTC),
         )
 
 
@@ -44,3 +46,15 @@ def test_artifacts_stable_and_confined(tmp_path):
     assert store.get("originals/abc.html") == b"original"
     with pytest.raises(ValueError):
         store.put("../escape", b"no")
+
+
+def test_direct_container_text_preserves_exclusions():
+    doc = parse_html(
+        b"<main><h2>Award</h2><p>Minimum GPA 3.0.</p><div>Exception: employees are ineligible.</div><dl><dt>Residency</dt><dd>Georgia only.</dd></dl></main>",
+        source_id="s",
+        url="https://example.org",
+        fetched_at=datetime.now(UTC),
+    )
+    text = "\n".join(s.text for s in doc.sections)
+    assert "employees are ineligible" in text
+    assert "Georgia only" in text

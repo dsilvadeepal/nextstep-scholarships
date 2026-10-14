@@ -1,12 +1,12 @@
-from sqlalchemy import select, insert, update, delete
 from nextstep.db import (
-    corpus_versions,
     active_corpus,
-    scholarships,
     chunk_manifest,
+    corpus_versions,
+    scholarships,
     serialized,
 )
-from nextstep.models import Scholarship, Chunk
+from nextstep.models import Chunk, Scholarship
+from sqlalchemy import delete, insert, select, update
 
 
 class Repository:
@@ -158,3 +158,41 @@ class Repository:
                 ).scalar_one_or_none()
                 == "ready"
             )
+
+    def freeze_manifest(self, version):
+        """Freeze SQL inputs before provider I/O; retries reuse this immutable snapshot."""
+        with serialized(self.engine) as conn:
+            status = conn.execute(
+                select(corpus_versions.c.status).where(
+                    corpus_versions.c.version == version
+                )
+            ).scalar_one()
+            if status not in ("staged", "publishing", "ready"):
+                raise ValueError("Invalid publication state")
+            records = [
+                Scholarship.model_validate(row)
+                for row in conn.execute(
+                    select(scholarships.c.data).where(scholarships.c.version == version)
+                ).scalars()
+            ]
+            chunks = [
+                Chunk.model_validate(row)
+                for row in conn.execute(
+                    select(chunk_manifest.c.data).where(
+                        chunk_manifest.c.version == version
+                    )
+                ).scalars()
+            ]
+            if (
+                not records
+                or not chunks
+                or {c.program_id for c in chunks} != {r.id for r in records}
+            ):
+                raise ValueError("Incomplete corpus manifest")
+            if status == "staged":
+                conn.execute(
+                    update(corpus_versions)
+                    .where(corpus_versions.c.version == version)
+                    .values(status="publishing")
+                )
+            return records, chunks

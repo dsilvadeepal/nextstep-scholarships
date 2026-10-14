@@ -1,7 +1,8 @@
 import time
 import uuid
-from sqlalchemy import select, insert, update, and_
-from nextstep.db import eval_runs, eval_results, serialized
+
+from nextstep.db import eval_results, eval_runs, serialized
+from sqlalchemy import and_, insert, select, update
 
 
 class EvalRunner:
@@ -85,7 +86,7 @@ class EvalRunner:
         try:
             result = execute()
             status = "completed"
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - persist provider failure without logging profile data
             result = {"error": type(exc).__name__}
             status = "error"
         with serialized(self.engine) as conn:

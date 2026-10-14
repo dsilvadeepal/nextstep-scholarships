@@ -1,7 +1,8 @@
 import os
+
 from alembic import context
-from sqlalchemy import create_engine
 from nextstep.db import metadata
+from sqlalchemy import create_engine
 
 url = os.environ["DATABASE_URL"]
 if context.is_offline_mode():

@@ -1,8 +1,9 @@
 from concurrent.futures import ThreadPoolExecutor
+
 import pytest
-from sqlalchemy import create_engine
 from nextstep.db import metadata
 from nextstep.evals.runner import EvalRunner
+from sqlalchemy import create_engine
 
 
 def runner(tmp_path):
@@ -44,7 +45,7 @@ def test_expired_lease_requires_explicit_retry(tmp_path):
     )
     r.claim(run, "one", "semantic", now=0)
     with pytest.raises(ValueError, match="ambiguous"):
-        r.execute_case(run, "one", "semantic", lambda: {}, now=61)
+        r.execute_case(run, "one", "semantic", dict, now=61)
     assert r.status(run)["results"][0]["status"] == "interrupted"
 
 

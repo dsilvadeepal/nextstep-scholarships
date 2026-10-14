@@ -1,9 +1,9 @@
 import pytest
 from fastapi.testclient import TestClient
-from pydantic import ValidationError
-from nextstep.models import StudentProfile
-from nextstep.config import Settings
 from nextstep.app import create_app
+from nextstep.config import Settings
+from nextstep.models import StudentProfile
+from pydantic import ValidationError
 
 
 def test_profile_limits_and_unknowns():

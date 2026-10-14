@@ -1,9 +1,10 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
+
 from fastapi import APIRouter, HTTPException, Request
-from pydantic import BaseModel
-from nextstep.models import StudentProfile, Scenario
 from nextstep.matching import match_catalog
+from nextstep.models import Scenario, StudentProfile
+from pydantic import BaseModel
 
 router = APIRouter()
 

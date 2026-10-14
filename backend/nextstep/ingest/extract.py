@@ -1,6 +1,6 @@
 """Deterministic evidence checks; they establish resolution, not truth."""
 
-from nextstep.models import NormalizedDocument, EvidenceRef
+from nextstep.models import EvidenceRef, NormalizedDocument
 
 
 def validate_evidence(document: NormalizedDocument, ref: EvidenceRef) -> None:

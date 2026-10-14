@@ -2,9 +2,10 @@
 
 import json
 from pathlib import Path
-from pydantic.json_schema import models_json_schema
-from nextstep.app import app
+
 from nextstep import models
+from nextstep.app import app
+from pydantic.json_schema import models_json_schema
 
 contracts = [
     getattr(models, name)

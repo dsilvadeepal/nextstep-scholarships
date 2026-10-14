@@ -1,6 +1,6 @@
-from dataclasses import dataclass
 import hashlib
 import math
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
@@ -17,8 +17,7 @@ class Publisher:
 
     def publish_corpus(self, version: str, expected_old: str | None) -> PublishReport:
         repo = self.repository
-        records = repo.list_scholarships(version)
-        chunks = repo.get_chunks(version)
+        records, chunks = repo.freeze_manifest(version)
         if (
             not records
             or not chunks

@@ -1,9 +1,9 @@
 import pytest
-from sqlalchemy import create_engine
 from nextstep.db import metadata
-from nextstep.repository import Repository
-from nextstep.models import Scholarship, Chunk
 from nextstep.ingest.publish import Publisher
+from nextstep.models import Chunk, Scholarship
+from nextstep.repository import Repository
+from sqlalchemy import create_engine
 
 
 class Embeddings:
@@ -84,3 +84,23 @@ def test_bad_dimension_never_activates(tmp_path):
     with pytest.raises(ValueError, match="dimension"):
         Publisher(repo, embed, Vectors()).publish_corpus("one", None)
     assert repo.active_version() is None
+
+
+def test_manifest_is_frozen_before_external_indexing(tmp_path):
+    engine = create_engine(f"sqlite:///{tmp_path}/pub.db")
+    metadata.create_all(engine)
+    repo = Repository(engine)
+    stage(repo, "one")
+
+    class RacingVectors(Vectors):
+        def upsert(self, version, chunks, vectors):
+            replacement = chunks[0].model_copy(
+                update={"id": "replacement", "text": "Changed rule"}
+            )
+            with pytest.raises(ValueError, match="immutable|frozen"):
+                repo.stage_chunks(version, [replacement])
+            super().upsert(version, chunks, vectors)
+
+    vectors = RacingVectors()
+    Publisher(repo, Embeddings(), vectors).publish_corpus("one", None)
+    assert {c.id for c in repo.get_chunks("one")} == vectors.data["one"]

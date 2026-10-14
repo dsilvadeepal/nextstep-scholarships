@@ -1,8 +1,8 @@
 import pytest
-from sqlalchemy import create_engine
 from nextstep.db import metadata
-from nextstep.repository import Repository
 from nextstep.models import Scholarship
+from nextstep.repository import Repository
+from sqlalchemy import create_engine
 
 
 def test_staging_activation_and_compare_swap():

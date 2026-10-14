@@ -1,7 +1,8 @@
 from datetime import date
+
 import pytest
-from nextstep.models import Condition, Scholarship, StudentProfile
 from nextstep.matching import evaluate_condition, match_catalog
+from nextstep.models import Condition, Scholarship, StudentProfile
 
 TODAY = date(2026, 10, 14)
 

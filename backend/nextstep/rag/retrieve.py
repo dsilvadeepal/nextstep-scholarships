@@ -1,7 +1,8 @@
 import re
 import time
-from rank_bm25 import BM25Okapi
+
 from nextstep.models import RetrievedEvidence
+from rank_bm25 import BM25Okapi
 
 
 def tokens(text):

@@ -1,6 +1,6 @@
 import pytest
 from fastapi import HTTPException
-from nextstep.auth import authorize, AdminIdentity
+from nextstep.auth import AdminIdentity, authorize
 
 
 def test_forged_or_missing_identity_denied():

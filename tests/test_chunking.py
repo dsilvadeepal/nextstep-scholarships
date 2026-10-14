@@ -1,7 +1,9 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+from itertools import pairwise
+
 import pytest
-from nextstep.models import NormalizedDocument, Section, Scholarship
 from nextstep.ingest.chunk import make_chunks
+from nextstep.models import NormalizedDocument, Scholarship, Section
 
 
 def document(sections):
@@ -10,7 +12,7 @@ def document(sections):
         content_hash="hash",
         source_id="source",
         url="https://example.org",
-        fetched_at=datetime.now(timezone.utc),
+        fetched_at=datetime.now(UTC),
         sections=sections,
     )
 
@@ -61,7 +63,7 @@ def test_repeated_text_offsets_do_not_create_excessive_overlap():
     text = "Repeated identical sentence. " * 1000
     doc = document([Section(id="a", heading="A", text=text, program_id="a")])
     chunks = make_chunks(doc, [Scholarship(id="a", name="A", corpus_version="v")], "v")
-    for previous, current in zip(chunks, chunks[1:]):
+    for previous, current in pairwise(chunks):
         left, right = previous.evidence[0], current.evidence[0]
         overlap = text[right.start : left.end] if right.start < left.end else ""
         assert len(encoding.encode(overlap)) <= 75

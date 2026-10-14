@@ -1,5 +1,5 @@
 import pytest
-from nextstep.models import AnswerResult, AnswerBlock, RetrievedEvidence
+from nextstep.models import AnswerBlock, AnswerResult, RetrievedEvidence
 from nextstep.rag.answer import validate_answer
 
 

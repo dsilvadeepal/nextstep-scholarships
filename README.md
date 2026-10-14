@@ -1,6 +1,6 @@
 # Week 2 — Georgia Scholarship Planner
 
-Status: PRD and design approved October 14, 2026; implementation plan ready for review. Implementation has not started.
+Status: Native implementation in progress on `feat/nextstep-native`. Partial local foundations and student UI are built; live services, corpus, full journey and release remain unfinished. See [build status](docs/BUILD_STATUS.md).
 
 Working name: **NextStep Scholarships**.
 
@@ -26,4 +26,4 @@ Use automated extraction and deterministic checks with explicit unknowns, standa
 
 Build a responsive React + FastAPI app using LangChain, OpenAI, Pinecone, Replit PostgreSQL and App Storage, and LangSmith. Use manual ingestion and Replit Autoscale when ready to publish; no Reserved VM or always-running worker. Students need no account; admin controls are restricted.
 
-Next: review the implementation plan and choose Native or Subagent-driven execution before implementation.
+Run instructions and connection gates: [environment](docs/ENVIRONMENT.md). Main remains untouched pending tests, review and the owner's merge decision.

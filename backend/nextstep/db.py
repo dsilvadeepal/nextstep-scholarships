@@ -1,5 +1,6 @@
 from contextlib import contextmanager
-from sqlalchemy import MetaData, Table, Column, String, Integer, JSON, Numeric
+
+from sqlalchemy import JSON, Column, Integer, MetaData, Numeric, String, Table
 from sqlalchemy.dialects.postgresql import JSONB
 
 metadata = MetaData()

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { ProfileForm } from "./components/ProfileForm";
 import type { StudentProfile } from "./components/ProfileForm";
@@ -16,26 +16,37 @@ type Catalog = {
 };
 function App() {
   const [original, setOriginal] = useState<StudentProfile | null>(null);
-  const [hypothetical, setHypothetical] = useState(false);
-  const [catalog, setCatalog] = useState<Catalog | null>(null);
+  const requestSequence = useRef(0);
+  const [catalog, setCatalog] = useState<
+    (Catalog & { hypothetical: boolean }) | null
+  >(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  async function explore(profile: StudentProfile) {
+  const hypothetical = catalog?.hypothetical ?? false;
+  async function explore(
+    profile: StudentProfile,
+    isHypothetical = false,
+    baseProfile = profile,
+  ) {
+    const sequence = ++requestSequence.current;
     setLoading(true);
     setError("");
     try {
       const next = await request<Catalog>("/api/matches", { profile });
-      setCatalog(next);
+      if (sequence !== requestSequence.current) return;
+      setCatalog({ ...next, hypothetical: isHypothetical });
+      setOriginal(baseProfile);
       setSelected((old) =>
         old.filter((id) => next.scholarships.some((s) => s.id === id)),
       );
     } catch {
+      if (sequence !== requestSequence.current) return;
       setError(
         "The scholarship catalog is not available right now. Please try again later. Your information has not been saved.",
       );
     } finally {
-      setLoading(false);
+      if (sequence === requestSequence.current) setLoading(false);
     }
   }
   return (
@@ -51,8 +62,6 @@ function App() {
       <main>
         <ProfileForm
           onSubmit={(profile) => {
-            setOriginal(profile);
-            setHypothetical(false);
             void explore(profile);
           }}
         />
@@ -60,11 +69,9 @@ function App() {
           <ScenarioPanel
             profile={original}
             onApply={(overrides) => {
-              setHypothetical(true);
-              void explore(applyScenario(original, overrides));
+              void explore(applyScenario(original, overrides), true, original);
             }}
             onReset={() => {
-              setHypothetical(false);
               void explore(original);
             }}
           />

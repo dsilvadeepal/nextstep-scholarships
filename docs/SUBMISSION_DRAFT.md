@@ -1,7 +1,7 @@
 # NextStep Scholarships — Week 2 Project Submission
 
 **Author:** Deepal Silva
-**Status:** Pre-build draft, October 14, 2026. Approved product/design; implementation has not started. Targets and proposed prompts below are plans, not measured results or executed prompt history.
+**Status:** Build in progress, October 14, 2026. Local foundations and partial student UI implemented. Live corpus, RAG generation, service integrations and source-checked evaluations remain pending. Targets and proposed prompts below are plans, not measured results or executed prompt history. The linked Google Doc has not yet been synchronized with this build update.
 **Project repository:** https://github.com/dsilvadeepal/nextstep-scholarships (private; creation/verification recorded separately).
 **Google Doc:** https://docs.google.com/document/d/1Nn_ZbfUnSVDwCozP7RpaeimTY08WvDCH0MwjedAYRts/edit
 
@@ -186,3 +186,7 @@ The Week 2 handout records an October 18, 2026, 11:59 p.m. Pacific Builder of th
 - Project PRD.md, DESIGN_SPEC.md, SOURCE_INVENTORY.md and docs/superpowers/plans/2026-10-14-nextstep-scholarships.md.
 - LangChain retrieval architectures: https://docs.langchain.com/oss/python/deepagents/retrieval
 - LangChain text-splitter reference: https://reference.langchain.com/python/langchain-text-splitters
+
+## Local build evidence — October 14, 2026
+
+Native implementation used Python 3.12, test-first contract checks, generated TypeScript and a React/FastAPI shell. Latest recorded checks: 36 backend tests, 4 frontend unit tests, production build and 8 phone/desktop browser checks passed. Independent review found three important local defects; each was reproduced with failing tests and fixed. Browser print fixtures are explicitly synthetic, not sponsor evidence. A repeated-text regression exposed excessive chunk overlap; the offset search was corrected and the regression passed. This is a code-level finding, not a measured retrieval-quality improvement. See BUILD_STATUS.md for current partial tasks and remaining work.

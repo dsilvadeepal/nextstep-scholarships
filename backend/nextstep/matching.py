@@ -1,12 +1,13 @@
 """Three-valued, bounded rules; missing facts never count as satisfied."""
 
 from datetime import date
+
 from nextstep.models import (
     Condition,
     ConditionResult,
-    StudentProfile,
-    Scholarship,
     MatchResult,
+    Scholarship,
+    StudentProfile,
 )
 
 

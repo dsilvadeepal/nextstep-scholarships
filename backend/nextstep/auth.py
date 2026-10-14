@@ -4,6 +4,7 @@ AdminIdentity is created only by a server-side verifier, never from request JSON
 """
 
 from dataclasses import dataclass
+
 from fastapi import HTTPException, Request
 
 
