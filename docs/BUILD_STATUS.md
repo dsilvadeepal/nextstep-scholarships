@@ -2,8 +2,8 @@
 
 Native implementation on `feat/nextstep-native`; main remains at planning commit 679c49e.
 
-Task 1: contracts, Python 3.12 environment, FastAPI health/API boundary, React shell and generated TypeScript implemented. Verification in progress.
-Tasks 2–12: pending. No live catalog, paid calls, integration results, deployment, or final review yet.
+Task 1: contracts, Python 3.12 environment, FastAPI health/API boundary, React shell and generated TypeScript implemented. Verified: 3 tests passed; generated types and production frontend build passed. Commit 33e843f.
+Task 2: partial. Local repository/auth/budget tests pass (9 total); production identity, PostgreSQL integration and rate controls remain pending. Tasks 3–12: pending. No live catalog, paid calls, integration results, deployment, or final review yet.
 
 Secrets and approvals needed for live integration: DATABASE_URL, Replit identity issuer/audience and owner subject allowlist, App Storage bucket, OPENAI_API_KEY, PINECONE_API_KEY/index, LANGSMITH_API_KEY/project. Enter secrets in ignored `.env` or Replit Secrets. Numerical OpenAI run/total caps and service cost approval are required before live calls. Defaults are disabled and zero.
 

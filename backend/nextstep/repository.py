@@ -1,0 +1,45 @@
+from sqlalchemy import select, insert, update, delete
+from nextstep.db import corpus_versions, active_corpus, scholarships, chunk_manifest, serialized
+from nextstep.models import Scholarship, Chunk
+
+class Repository:
+    def __init__(self, engine):
+        self.engine = engine
+
+    def active_version(self):
+        with self.engine.connect() as conn:
+            return conn.execute(select(active_corpus.c.version).where(active_corpus.c.id == 1)).scalar_one_or_none()
+
+    def list_scholarships(self, version):
+        with self.engine.connect() as conn:
+            return [Scholarship.model_validate(row) for row in conn.execute(select(scholarships.c.data).where(scholarships.c.version == version)).scalars()]
+
+    def get_chunks(self, version, ids=None):
+        query = select(chunk_manifest.c.data).where(chunk_manifest.c.version == version)
+        if ids is not None:
+            query = query.where(chunk_manifest.c.id.in_(ids))
+        with self.engine.connect() as conn:
+            return [Chunk.model_validate(row) for row in conn.execute(query).scalars()]
+
+    def stage_catalog(self, version, records):
+        if len({r.id for r in records}) != len(records) or any(r.corpus_version != version for r in records):
+            raise ValueError('Duplicate or inconsistent versioned records')
+        with serialized(self.engine) as conn:
+            status = conn.execute(select(corpus_versions.c.status).where(corpus_versions.c.version == version)).scalar_one_or_none()
+            if status is not None:
+                raise ValueError('Corpus version already exists; use a new immutable version')
+            conn.execute(insert(corpus_versions).values(version=version, status='staged'))
+            if records:
+                conn.execute(insert(scholarships), [{'version': version, 'id': r.id, 'data': r.model_dump(mode='json')} for r in records])
+
+    def activate_version(self, expected_old, new):
+        with serialized(self.engine) as conn:
+            current = conn.execute(select(active_corpus.c.version).where(active_corpus.c.id == 1)).scalar_one_or_none()
+            if current != expected_old:
+                raise ValueError('Active corpus changed')
+            if conn.execute(select(corpus_versions.c.version).where(corpus_versions.c.version == new)).scalar_one_or_none() is None:
+                raise ValueError('Unknown corpus')
+            if current is None:
+                conn.execute(insert(active_corpus).values(id=1, version=new))
+            else:
+                conn.execute(update(active_corpus).where(active_corpus.c.id == 1).values(version=new))
