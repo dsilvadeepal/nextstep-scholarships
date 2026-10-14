@@ -25,3 +25,4 @@ def serialized(engine):
         except Exception:
             conn.rollback()
             raise
+embedding_cache = Table('embedding_cache', metadata, Column('key', String, primary_key=True), Column('vector', json_type, nullable=False))

@@ -43,3 +43,33 @@ class Repository:
                 conn.execute(insert(active_corpus).values(id=1, version=new))
             else:
                 conn.execute(update(active_corpus).where(active_corpus.c.id == 1).values(version=new))
+
+    def stage_chunks(self, version, chunks):
+        if len({c.id for c in chunks}) != len(chunks) or any(c.corpus_version != version for c in chunks):
+            raise ValueError('Duplicate or inconsistent chunk versions')
+        with serialized(self.engine) as conn:
+            status=conn.execute(select(corpus_versions.c.status).where(corpus_versions.c.version==version)).scalar_one()
+            if status != 'staged':
+                raise ValueError('Published corpus is immutable')
+            conn.execute(delete(chunk_manifest).where(chunk_manifest.c.version==version))
+            if chunks:
+                conn.execute(insert(chunk_manifest),[{'version':version,'id':c.id,'data':c.model_dump(mode='json')} for c in chunks])
+
+    def cached_embedding(self, key):
+        from nextstep.db import embedding_cache
+        with self.engine.connect() as conn:
+            return conn.execute(select(embedding_cache.c.vector).where(embedding_cache.c.key==key)).scalar_one_or_none()
+
+    def cache_embedding(self, key, vector):
+        from nextstep.db import embedding_cache
+        with serialized(self.engine) as conn:
+            if conn.execute(select(embedding_cache.c.key).where(embedding_cache.c.key==key)).scalar_one_or_none() is None:
+                conn.execute(insert(embedding_cache).values(key=key,vector=vector))
+
+    def mark_ready(self, version):
+        with serialized(self.engine) as conn:
+            conn.execute(update(corpus_versions).where(corpus_versions.c.version==version).values(status='ready'))
+
+    def is_ready(self, version):
+        with self.engine.connect() as conn:
+            return conn.execute(select(corpus_versions.c.status).where(corpus_versions.c.version==version)).scalar_one_or_none()=='ready'
