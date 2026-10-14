@@ -23,3 +23,11 @@ artifacts/
 data/raw/
 data/normalized/
 data/chunks/
+.superpowers/
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+dist/
+.env
+artifacts/
