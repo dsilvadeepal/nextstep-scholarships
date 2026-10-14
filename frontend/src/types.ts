@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/api/matches": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Matches */
+        post: operations["matches_api_matches_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -25,6 +42,89 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** GPA */
+        GPA: {
+            /** Value */
+            value: number;
+            /**
+             * Scale
+             * @default null
+             */
+            scale: number | null;
+            /**
+             * Type
+             * @default unknown
+             * @enum {string}
+             */
+            type: "weighted" | "unweighted" | "unknown";
+            /**
+             * Estimated
+             * @default null
+             */
+            estimated: boolean | null;
+            /**
+             * As Of
+             * @default null
+             */
+            as_of: string | null;
+        };
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
+        /** MatchRequest */
+        MatchRequest: {
+            profile: components["schemas"]["StudentProfile"];
+            scenario?: components["schemas"]["Scenario"] | null;
+        };
+        /** Scenario */
+        Scenario: {
+            /** Overrides */
+            overrides?: {
+                [key: string]: unknown;
+            };
+        };
+        /** StudentProfile */
+        StudentProfile: {
+            /**
+             * Grade
+             * @default null
+             */
+            grade: (11 | 12) | null;
+            /**
+             * Graduation Year
+             * @default null
+             */
+            graduation_year: number | null;
+            /** Residence */
+            residence?: {
+                [key: string]: string;
+            };
+            /** @default null */
+            gpa: components["schemas"]["GPA"] | null;
+            /** Interests */
+            interests?: string[];
+            /** Prospective Colleges */
+            prospective_colleges?: string[];
+            /** Context */
+            context?: {
+                [key: string]: unknown;
+            };
+        };
+        /** ValidationError */
+        ValidationError: {
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+            /** Input */
+            input?: unknown;
+            /** Context */
+            ctx?: Record<string, never>;
+        };
         /** AnswerBlock */
         AnswerBlock: {
             /** Text */
@@ -234,32 +334,6 @@ export interface components {
              */
             cycle: string | null;
         };
-        /** GPA */
-        GPA: {
-            /** Value */
-            value: number;
-            /**
-             * Scale
-             * @default null
-             */
-            scale: number | null;
-            /**
-             * Type
-             * @default unknown
-             * @enum {string}
-             */
-            type: "weighted" | "unweighted" | "unknown";
-            /**
-             * Estimated
-             * @default null
-             */
-            estimated: boolean | null;
-            /**
-             * As Of
-             * @default null
-             */
-            as_of: string | null;
-        };
         /** MatchResult */
         MatchResult: {
             /** Scholarship Id */
@@ -334,13 +408,6 @@ export interface components {
             /** Timings */
             timings?: {
                 [key: string]: number;
-            };
-        };
-        /** Scenario */
-        Scenario: {
-            /** Overrides */
-            overrides?: {
-                [key: string]: unknown;
             };
         };
         /** Scholarship */
@@ -432,33 +499,6 @@ export interface components {
              */
             kind: string;
         };
-        /** StudentProfile */
-        StudentProfile: {
-            /**
-             * Grade
-             * @default null
-             */
-            grade: (11 | 12) | null;
-            /**
-             * Graduation Year
-             * @default null
-             */
-            graduation_year: number | null;
-            /** Residence */
-            residence?: {
-                [key: string]: string;
-            };
-            /** @default null */
-            gpa: components["schemas"]["GPA"] | null;
-            /** Interests */
-            interests?: string[];
-            /** Prospective Colleges */
-            prospective_colleges?: string[];
-            /** Context */
-            context?: {
-                [key: string]: unknown;
-            };
-        };
     };
     responses: never;
     parameters: never;
@@ -468,6 +508,39 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    matches_api_matches_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MatchRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     health_api_health_get: {
         parameters: {
             query?: never;

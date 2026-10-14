@@ -6,6 +6,8 @@ from nextstep.config import Settings
 def create_app() -> FastAPI:
     app = FastAPI(title='NextStep Scholarships')
     app.state.settings = Settings()
+    from nextstep.api.catalog import router
+    app.include_router(router)
     @app.get('/api/health')
     def health() -> dict[str, str]:
         return {'status': 'ok'}
