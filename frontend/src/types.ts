@@ -4,563 +4,563 @@
  */
 
 export interface paths {
-    "/api/matches": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Matches */
-        post: operations["matches_api_matches_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/api/matches": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Health */
-        get: operations["health_api_health_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** Matches */
+    post: operations["matches_api_matches_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/health": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /** Health */
+    get: operations["health_api_health_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** GPA */
-        GPA: {
-            /** Value */
-            value: number;
-            /**
-             * Scale
-             * @default null
-             */
-            scale: number | null;
-            /**
-             * Type
-             * @default unknown
-             * @enum {string}
-             */
-            type: "weighted" | "unweighted" | "unknown";
-            /**
-             * Estimated
-             * @default null
-             */
-            estimated: boolean | null;
-            /**
-             * As Of
-             * @default null
-             */
-            as_of: string | null;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** MatchRequest */
-        MatchRequest: {
-            profile: components["schemas"]["StudentProfile"];
-            scenario?: components["schemas"]["Scenario"] | null;
-        };
-        /** Scenario */
-        Scenario: {
-            /** Overrides */
-            overrides?: {
-                [key: string]: unknown;
-            };
-        };
-        /** StudentProfile */
-        StudentProfile: {
-            /**
-             * Grade
-             * @default null
-             */
-            grade: (11 | 12) | null;
-            /**
-             * Graduation Year
-             * @default null
-             */
-            graduation_year: number | null;
-            /** Residence */
-            residence?: {
-                [key: string]: string;
-            };
-            /** @default null */
-            gpa: components["schemas"]["GPA"] | null;
-            /** Interests */
-            interests?: string[];
-            /** Prospective Colleges */
-            prospective_colleges?: string[];
-            /** Context */
-            context?: {
-                [key: string]: unknown;
-            };
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-            /** Input */
-            input?: unknown;
-            /** Context */
-            ctx?: Record<string, never>;
-        };
-        /** AnswerBlock */
-        AnswerBlock: {
-            /** Text */
-            text: string;
-            /** Evidence Ids */
-            evidence_ids?: string[];
-        };
-        /** AnswerResult */
-        AnswerResult: {
-            /** Blocks */
-            blocks: components["schemas"]["AnswerBlock"][];
-            /** Gaps */
-            gaps?: string[];
-            /** Corpus Version */
-            corpus_version: string;
-            /** Method */
-            method: string;
-            evidence: components["schemas"]["RetrievedEvidence"];
-            /** Timings */
-            timings?: {
-                [key: string]: number;
-            };
-            /** Usage */
-            usage?: {
-                [key: string]: unknown;
-            };
-        };
-        /** ChatTurn */
-        ChatTurn: {
-            /**
-             * Role
-             * @enum {string}
-             */
-            role: "user" | "assistant";
-            /** Content */
-            content: string;
-        };
-        /** Chunk */
-        Chunk: {
-            /** Id */
-            id: string;
-            /** Program Id */
-            program_id: string;
-            /** Source Id */
-            source_id: string;
-            /** Corpus Version */
-            corpus_version: string;
-            /** Text */
-            text: string;
-            /** Heading */
-            heading: string;
-            /** Section Ids */
-            section_ids: string[];
-            /** Token Count */
-            token_count: number;
-            /** Evidence */
-            evidence?: components["schemas"]["EvidenceRef"][];
-            /** Neighbors */
-            neighbors?: string[];
-            /**
-             * Indivisible
-             * @default false
-             */
-            indivisible: boolean;
-        };
-        /** Condition */
-        Condition: {
-            /** Id */
-            id: string;
-            /** Kind */
-            kind: string;
-            /** Operator */
-            operator: string;
-            /**
-             * Value
-             * @default null
-             */
-            value: unknown;
-            /**
-             * Required
-             * @default true
-             */
-            required: boolean;
-            /** Evidence */
-            evidence?: components["schemas"]["EvidenceRef"][];
-            /** Children */
-            children?: components["schemas"]["Condition"][];
-            /**
-             * Reason
-             * @default null
-             */
-            reason: string | null;
-        };
-        /** ConditionResult */
-        ConditionResult: {
-            /** Condition Id */
-            condition_id: string;
-            /**
-             * Status
-             * @enum {string}
-             */
-            status: "met" | "unmet" | "unknown";
-            /** Reason */
-            reason: string;
-        };
-        /** EvalCase */
-        EvalCase: {
-            /** Id */
-            id: string;
-            profile: components["schemas"]["StudentProfile"];
-            /** Question */
-            question: string;
-            /**
-             * Frozen Date
-             * Format: date
-             */
-            frozen_date: string;
-            /** Expected Conditions */
-            expected_conditions?: {
-                [key: string]: string;
-            };
-            /** Expected Evidence */
-            expected_evidence?: string[];
-            /** Expected Claims */
-            expected_claims?: string[];
-            /**
-             * Critical
-             * @default false
-             */
-            critical: boolean;
-            /** Checked Sources */
-            checked_sources?: components["schemas"]["EvidenceRef"][];
-            /**
-             * Synthetic
-             * @default false
-             */
-            synthetic: boolean;
-        };
-        /** EvalResult */
-        EvalResult: {
-            /** Run Id */
-            run_id: string;
-            /** Case Id */
-            case_id: string;
-            /** Method */
-            method: string;
-            /** @default null */
-            answer: components["schemas"]["AnswerResult"] | null;
-            /** Scores */
-            scores?: {
-                [key: string]: unknown;
-            };
-            /**
-             * Error
-             * @default null
-             */
-            error: string | null;
-            /** Timings */
-            timings?: {
-                [key: string]: number;
-            };
-            /** Usage */
-            usage?: {
-                [key: string]: unknown;
-            };
-            /** Config Snapshot */
-            config_snapshot?: {
-                [key: string]: unknown;
-            };
-        };
-        /** EvidenceRef */
-        EvidenceRef: {
-            /** Id */
-            id: string;
-            /** Source Id */
-            source_id: string;
-            /** Document Version */
-            document_version: string;
-            /** Section Id */
-            section_id: string;
-            /**
-             * Page
-             * @default null
-             */
-            page: number | null;
-            /** Quote */
-            quote: string;
-            /** Start */
-            start: number;
-            /** End */
-            end: number;
-            /** Url */
-            url: string;
-            /**
-             * Fetched At
-             * Format: date-time
-             */
-            fetched_at: string;
-            /**
-             * Title
-             * @default
-             */
-            title: string;
-            /**
-             * Cycle
-             * @default null
-             */
-            cycle: string | null;
-        };
-        /** MatchResult */
-        MatchResult: {
-            /** Scholarship Id */
-            scholarship_id: string;
-            /** Conditions */
-            conditions: components["schemas"]["ConditionResult"][];
-            /**
-             * Group
-             * @enum {string}
-             */
-            group: "matches" | "prepare" | "explore" | "unmet";
-            /** Fit */
-            fit: string;
-            /** Timing */
-            timing: string;
-            /** Evidence Label */
-            evidence_label: string;
-            /** Followups */
-            followups?: string[];
-            /** Sort Key */
-            sort_key: [
-                number,
-                number,
-                string,
-                string
-            ];
-        };
-        /** NormalizedDocument */
-        NormalizedDocument: {
-            /** Id */
-            id: string;
-            /** Content Hash */
-            content_hash: string;
-            /** Source Id */
-            source_id: string;
-            /** Url */
-            url: string;
-            /**
-             * Fetched At
-             * Format: date-time
-             */
-            fetched_at: string;
-            /** Sections */
-            sections: components["schemas"]["Section"][];
-        };
-        /** RetrievalRequest */
-        RetrievalRequest: {
-            /** Question */
-            question: string;
-            /** Program Ids */
-            program_ids?: string[];
-            /**
-             * Corpus Version
-             * @default null
-             */
-            corpus_version: string | null;
-            /**
-             * Method
-             * @default semantic
-             * @enum {string}
-             */
-            method: "semantic" | "hybrid";
-        };
-        /** RetrievedEvidence */
-        RetrievedEvidence: {
-            /** Chunks */
-            chunks: components["schemas"]["Chunk"][];
-            /** Ranks */
-            ranks?: {
-                [key: string]: number;
-            };
-            /** Timings */
-            timings?: {
-                [key: string]: number;
-            };
-        };
-        /** Scholarship */
-        Scholarship: {
-            /** Id */
-            id: string;
-            /** Corpus Version */
-            corpus_version: string;
-            /** Name */
-            name: string;
-            /**
-             * Sponsor
-             * @default null
-             */
-            sponsor: string | null;
-            /**
-             * Scope
-             * @default null
-             */
-            scope: string | null;
-            /**
-             * Cycle
-             * @default null
-             */
-            cycle: string | null;
-            /** Conditions */
-            conditions?: components["schemas"]["Condition"][];
-            /** Materials */
-            materials?: string[];
-            /**
-             * Deadline
-             * @default null
-             */
-            deadline: string | null;
-            /**
-             * Opens
-             * @default null
-             */
-            opens: string | null;
-            /**
-             * Timezone
-             * @default null
-             */
-            timezone: string | null;
-            /**
-             * Date Precision
-             * @default null
-             */
-            date_precision: string | null;
-            /** Evidence */
-            evidence?: components["schemas"]["EvidenceRef"][];
-            /**
-             * Information Status
-             * @default incomplete
-             * @enum {string}
-             */
-            information_status: "automatically_extracted" | "incomplete" | "historical" | "conflicting" | "source_checked";
-            /**
-             * Official Url
-             * @default null
-             */
-            official_url: string | null;
-        };
-        /** Section */
-        Section: {
-            /** Id */
-            id: string;
-            /** Heading */
-            heading: string;
-            /**
-             * Page
-             * @default null
-             */
-            page: number | null;
-            /** Text */
-            text: string;
-            /** Table Headers */
-            table_headers?: string[];
-            /** Table Rows */
-            table_rows?: string[][];
-            /**
-             * Program Id
-             * @default null
-             */
-            program_id: string | null;
-            /**
-             * Kind
-             * @default text
-             */
-            kind: string;
-        };
+  schemas: {
+    /** GPA */
+    GPA: {
+      /** Value */
+      value: number;
+      /**
+       * Scale
+       * @default null
+       */
+      scale: number | null;
+      /**
+       * Type
+       * @default unknown
+       * @enum {string}
+       */
+      type: "weighted" | "unweighted" | "unknown";
+      /**
+       * Estimated
+       * @default null
+       */
+      estimated: boolean | null;
+      /**
+       * As Of
+       * @default null
+       */
+      as_of: string | null;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components["schemas"]["ValidationError"][];
+    };
+    /** MatchRequest */
+    MatchRequest: {
+      profile: components["schemas"]["StudentProfile"];
+      scenario?: components["schemas"]["Scenario"] | null;
+    };
+    /** Scenario */
+    Scenario: {
+      /** Overrides */
+      overrides?: {
+        [key: string]: unknown;
+      };
+    };
+    /** StudentProfile */
+    StudentProfile: {
+      /**
+       * Grade
+       * @default null
+       */
+      grade: (11 | 12) | null;
+      /**
+       * Graduation Year
+       * @default null
+       */
+      graduation_year: number | null;
+      /** Residence */
+      residence?: {
+        [key: string]: string;
+      };
+      /** @default null */
+      gpa: components["schemas"]["GPA"] | null;
+      /** Interests */
+      interests?: string[];
+      /** Prospective Colleges */
+      prospective_colleges?: string[];
+      /** Context */
+      context?: {
+        [key: string]: unknown;
+      };
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
+      /** Input */
+      input?: unknown;
+      /** Context */
+      ctx?: Record<string, never>;
+    };
+    /** AnswerBlock */
+    AnswerBlock: {
+      /** Text */
+      text: string;
+      /** Evidence Ids */
+      evidence_ids?: string[];
+    };
+    /** AnswerResult */
+    AnswerResult: {
+      /** Blocks */
+      blocks: components["schemas"]["AnswerBlock"][];
+      /** Gaps */
+      gaps?: string[];
+      /** Corpus Version */
+      corpus_version: string;
+      /** Method */
+      method: string;
+      evidence: components["schemas"]["RetrievedEvidence"];
+      /** Timings */
+      timings?: {
+        [key: string]: number;
+      };
+      /** Usage */
+      usage?: {
+        [key: string]: unknown;
+      };
+    };
+    /** ChatTurn */
+    ChatTurn: {
+      /**
+       * Role
+       * @enum {string}
+       */
+      role: "user" | "assistant";
+      /** Content */
+      content: string;
+    };
+    /** Chunk */
+    Chunk: {
+      /** Id */
+      id: string;
+      /** Program Id */
+      program_id: string;
+      /** Source Id */
+      source_id: string;
+      /** Corpus Version */
+      corpus_version: string;
+      /** Text */
+      text: string;
+      /** Heading */
+      heading: string;
+      /** Section Ids */
+      section_ids: string[];
+      /** Token Count */
+      token_count: number;
+      /** Evidence */
+      evidence?: components["schemas"]["EvidenceRef"][];
+      /** Neighbors */
+      neighbors?: string[];
+      /**
+       * Indivisible
+       * @default false
+       */
+      indivisible: boolean;
+    };
+    /** Condition */
+    Condition: {
+      /** Id */
+      id: string;
+      /** Kind */
+      kind: string;
+      /** Operator */
+      operator: string;
+      /**
+       * Value
+       * @default null
+       */
+      value: unknown;
+      /**
+       * Required
+       * @default true
+       */
+      required: boolean;
+      /** Evidence */
+      evidence?: components["schemas"]["EvidenceRef"][];
+      /** Children */
+      children?: components["schemas"]["Condition"][];
+      /**
+       * Reason
+       * @default null
+       */
+      reason: string | null;
+    };
+    /** ConditionResult */
+    ConditionResult: {
+      /** Condition Id */
+      condition_id: string;
+      /**
+       * Status
+       * @enum {string}
+       */
+      status: "met" | "unmet" | "unknown";
+      /** Reason */
+      reason: string;
+    };
+    /** EvalCase */
+    EvalCase: {
+      /** Id */
+      id: string;
+      profile: components["schemas"]["StudentProfile"];
+      /** Question */
+      question: string;
+      /**
+       * Frozen Date
+       * Format: date
+       */
+      frozen_date: string;
+      /** Expected Conditions */
+      expected_conditions?: {
+        [key: string]: string;
+      };
+      /** Expected Evidence */
+      expected_evidence?: string[];
+      /** Expected Claims */
+      expected_claims?: string[];
+      /**
+       * Critical
+       * @default false
+       */
+      critical: boolean;
+      /** Checked Sources */
+      checked_sources?: components["schemas"]["EvidenceRef"][];
+      /**
+       * Synthetic
+       * @default false
+       */
+      synthetic: boolean;
+    };
+    /** EvalResult */
+    EvalResult: {
+      /** Run Id */
+      run_id: string;
+      /** Case Id */
+      case_id: string;
+      /** Method */
+      method: string;
+      /** @default null */
+      answer: components["schemas"]["AnswerResult"] | null;
+      /** Scores */
+      scores?: {
+        [key: string]: unknown;
+      };
+      /**
+       * Error
+       * @default null
+       */
+      error: string | null;
+      /** Timings */
+      timings?: {
+        [key: string]: number;
+      };
+      /** Usage */
+      usage?: {
+        [key: string]: unknown;
+      };
+      /** Config Snapshot */
+      config_snapshot?: {
+        [key: string]: unknown;
+      };
+    };
+    /** EvidenceRef */
+    EvidenceRef: {
+      /** Id */
+      id: string;
+      /** Source Id */
+      source_id: string;
+      /** Document Version */
+      document_version: string;
+      /** Section Id */
+      section_id: string;
+      /**
+       * Page
+       * @default null
+       */
+      page: number | null;
+      /** Quote */
+      quote: string;
+      /** Start */
+      start: number;
+      /** End */
+      end: number;
+      /** Url */
+      url: string;
+      /**
+       * Fetched At
+       * Format: date-time
+       */
+      fetched_at: string;
+      /**
+       * Title
+       * @default
+       */
+      title: string;
+      /**
+       * Cycle
+       * @default null
+       */
+      cycle: string | null;
+    };
+    /** MatchResult */
+    MatchResult: {
+      /** Scholarship Id */
+      scholarship_id: string;
+      /** Conditions */
+      conditions: components["schemas"]["ConditionResult"][];
+      /**
+       * Group
+       * @enum {string}
+       */
+      group: "matches" | "prepare" | "explore" | "unmet";
+      /** Fit */
+      fit: string;
+      /** Timing */
+      timing: string;
+      /** Evidence Label */
+      evidence_label: string;
+      /** Followups */
+      followups?: string[];
+      /** Sort Key */
+      sort_key: [number, number, string, string];
+    };
+    /** NormalizedDocument */
+    NormalizedDocument: {
+      /** Id */
+      id: string;
+      /** Content Hash */
+      content_hash: string;
+      /** Source Id */
+      source_id: string;
+      /** Url */
+      url: string;
+      /**
+       * Fetched At
+       * Format: date-time
+       */
+      fetched_at: string;
+      /** Sections */
+      sections: components["schemas"]["Section"][];
+    };
+    /** RetrievalRequest */
+    RetrievalRequest: {
+      /** Question */
+      question: string;
+      /** Program Ids */
+      program_ids?: string[];
+      /**
+       * Corpus Version
+       * @default null
+       */
+      corpus_version: string | null;
+      /**
+       * Method
+       * @default semantic
+       * @enum {string}
+       */
+      method: "semantic" | "hybrid";
+    };
+    /** RetrievedEvidence */
+    RetrievedEvidence: {
+      /** Chunks */
+      chunks: components["schemas"]["Chunk"][];
+      /** Ranks */
+      ranks?: {
+        [key: string]: number;
+      };
+      /** Timings */
+      timings?: {
+        [key: string]: number;
+      };
+    };
+    /** Scholarship */
+    Scholarship: {
+      /** Id */
+      id: string;
+      /** Corpus Version */
+      corpus_version: string;
+      /** Name */
+      name: string;
+      /**
+       * Sponsor
+       * @default null
+       */
+      sponsor: string | null;
+      /**
+       * Scope
+       * @default null
+       */
+      scope: string | null;
+      /**
+       * Cycle
+       * @default null
+       */
+      cycle: string | null;
+      /** Conditions */
+      conditions?: components["schemas"]["Condition"][];
+      /** Materials */
+      materials?: string[];
+      /**
+       * Deadline
+       * @default null
+       */
+      deadline: string | null;
+      /**
+       * Opens
+       * @default null
+       */
+      opens: string | null;
+      /**
+       * Timezone
+       * @default null
+       */
+      timezone: string | null;
+      /**
+       * Date Precision
+       * @default null
+       */
+      date_precision: string | null;
+      /** Evidence */
+      evidence?: components["schemas"]["EvidenceRef"][];
+      /**
+       * Information Status
+       * @default incomplete
+       * @enum {string}
+       */
+      information_status:
+        | "automatically_extracted"
+        | "incomplete"
+        | "historical"
+        | "conflicting"
+        | "source_checked";
+      /**
+       * Official Url
+       * @default null
+       */
+      official_url: string | null;
+    };
+    /** Section */
+    Section: {
+      /** Id */
+      id: string;
+      /** Heading */
+      heading: string;
+      /**
+       * Page
+       * @default null
+       */
+      page: number | null;
+      /** Text */
+      text: string;
+      /** Table Headers */
+      table_headers?: string[];
+      /** Table Rows */
+      table_rows?: string[][];
+      /**
+       * Program Id
+       * @default null
+       */
+      program_id: string | null;
+      /**
+       * Kind
+       * @default text
+       */
+      kind: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    matches_api_matches_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MatchRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  matches_api_matches_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    health_api_health_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: string;
-                    };
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["MatchRequest"];
+      };
     };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  health_api_health_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            [key: string]: string;
+          };
+        };
+      };
+    };
+  };
 }

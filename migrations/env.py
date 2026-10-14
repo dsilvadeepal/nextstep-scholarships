@@ -2,7 +2,8 @@ import os
 from alembic import context
 from sqlalchemy import create_engine
 from nextstep.db import metadata
-url = os.environ['DATABASE_URL']
+
+url = os.environ["DATABASE_URL"]
 if context.is_offline_mode():
     context.configure(url=url, target_metadata=metadata, literal_binds=True)
     with context.begin_transaction():

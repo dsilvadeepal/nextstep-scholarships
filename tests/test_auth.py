@@ -2,14 +2,16 @@ import pytest
 from fastapi import HTTPException
 from nextstep.auth import authorize, AdminIdentity
 
+
 def test_forged_or_missing_identity_denied():
-    for identity in [None, {'sub': 'owner'}, 'owner']:
+    for identity in [None, {"sub": "owner"}, "owner"]:
         with pytest.raises(HTTPException) as exc:
-            authorize(identity, {'owner'})
+            authorize(identity, {"owner"})
         assert exc.value.status_code == 401
+
 
 def test_verified_identity_must_be_allowlisted():
     with pytest.raises(HTTPException) as exc:
-        authorize(AdminIdentity(subject='other'), {'owner'})
+        authorize(AdminIdentity(subject="other"), {"owner"})
     assert exc.value.status_code == 403
-    assert authorize(AdminIdentity(subject='owner'), {'owner'}).subject == 'owner'
+    assert authorize(AdminIdentity(subject="owner"), {"owner"}).subject == "owner"

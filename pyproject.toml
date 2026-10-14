@@ -23,6 +23,7 @@ dev = [
     "pytest",
     "httpx",
     "httpx2>=2.13.1",
+    "ruff>=0.17.0",
 ]
 [tool.pytest.ini_options]
 pythonpath = ["backend"]

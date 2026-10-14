@@ -1,17 +1,21 @@
 """Shared public contracts. Unknown source/profile facts stay null."""
+
 from datetime import date, datetime
 from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field
 
+
 class Model(BaseModel):
-    model_config = ConfigDict(extra='forbid')
+    model_config = ConfigDict(extra="forbid")
+
 
 class GPA(Model):
     value: float = Field(ge=0, le=100)
     scale: float | None = Field(default=None, gt=0)
-    type: Literal['weighted', 'unweighted', 'unknown'] = 'unknown'
+    type: Literal["weighted", "unweighted", "unknown"] = "unknown"
     estimated: bool | None = None
     as_of: date | None = None
+
 
 class StudentProfile(Model):
     grade: Literal[11, 12] | None = None
@@ -22,8 +26,10 @@ class StudentProfile(Model):
     prospective_colleges: list[str] = Field(default_factory=list, max_length=3)
     context: dict[str, Any] = Field(default_factory=dict)
 
+
 class Scenario(Model):
     overrides: dict[str, Any] = Field(default_factory=dict)
+
 
 class EvidenceRef(Model):
     id: str
@@ -36,8 +42,9 @@ class EvidenceRef(Model):
     end: int = Field(ge=0)
     url: str
     fetched_at: datetime
-    title: str = ''
+    title: str = ""
     cycle: str | None = None
+
 
 class Condition(Model):
     id: str
@@ -46,13 +53,15 @@ class Condition(Model):
     value: Any = None
     required: bool = True
     evidence: list[EvidenceRef] = Field(default_factory=list)
-    children: list['Condition'] = Field(default_factory=list)
+    children: list["Condition"] = Field(default_factory=list)
     reason: str | None = None
+
 
 class ConditionResult(Model):
     condition_id: str
-    status: Literal['met', 'unmet', 'unknown']
+    status: Literal["met", "unmet", "unknown"]
     reason: str
+
 
 class Scholarship(Model):
     id: str
@@ -68,8 +77,15 @@ class Scholarship(Model):
     timezone: str | None = None
     date_precision: str | None = None
     evidence: list[EvidenceRef] = Field(default_factory=list)
-    information_status: Literal['automatically_extracted', 'incomplete', 'historical', 'conflicting', 'source_checked'] = 'incomplete'
+    information_status: Literal[
+        "automatically_extracted",
+        "incomplete",
+        "historical",
+        "conflicting",
+        "source_checked",
+    ] = "incomplete"
     official_url: str | None = None
+
 
 class Section(Model):
     id: str
@@ -79,7 +95,8 @@ class Section(Model):
     table_headers: list[str] = Field(default_factory=list)
     table_rows: list[list[str]] = Field(default_factory=list)
     program_id: str | None = None
-    kind: str = 'text'
+    kind: str = "text"
+
 
 class NormalizedDocument(Model):
     id: str
@@ -88,6 +105,7 @@ class NormalizedDocument(Model):
     url: str
     fetched_at: datetime
     sections: list[Section]
+
 
 class Chunk(Model):
     id: str
@@ -102,30 +120,35 @@ class Chunk(Model):
     neighbors: list[str] = Field(default_factory=list)
     indivisible: bool = False
 
+
 class MatchResult(Model):
     scholarship_id: str
     conditions: list[ConditionResult]
-    group: Literal['matches', 'prepare', 'explore', 'unmet']
+    group: Literal["matches", "prepare", "explore", "unmet"]
     fit: str
     timing: str
     evidence_label: str
     followups: list[str] = Field(default_factory=list)
     sort_key: tuple[int, int, str, str]
 
+
 class RetrievalRequest(Model):
     question: str = Field(min_length=1, max_length=2000)
     program_ids: list[str] = Field(default_factory=list, max_length=4)
     corpus_version: str | None = None
-    method: Literal['semantic', 'hybrid'] = 'semantic'
+    method: Literal["semantic", "hybrid"] = "semantic"
+
 
 class RetrievedEvidence(Model):
     chunks: list[Chunk]
     ranks: dict[str, float] = Field(default_factory=dict)
     timings: dict[str, float] = Field(default_factory=dict)
 
+
 class AnswerBlock(Model):
     text: str
     evidence_ids: list[str] = Field(default_factory=list)
+
 
 class AnswerResult(Model):
     blocks: list[AnswerBlock]
@@ -136,9 +159,11 @@ class AnswerResult(Model):
     timings: dict[str, float] = Field(default_factory=dict)
     usage: dict[str, Any] = Field(default_factory=dict)
 
+
 class ChatTurn(Model):
-    role: Literal['user', 'assistant']
+    role: Literal["user", "assistant"]
     content: str = Field(max_length=8000)
+
 
 class EvalCase(Model):
     id: str
@@ -151,6 +176,7 @@ class EvalCase(Model):
     critical: bool = False
     checked_sources: list[EvidenceRef] = Field(default_factory=list)
     synthetic: bool = False
+
 
 class EvalResult(Model):
     run_id: str
