@@ -100,7 +100,7 @@ export function Results({
                         · {ref.section_id}{" "}
                         {ref.page ? `· page ${ref.page}` : ""} · Retrieved{" "}
                         {ref.fetched_at.slice(0, 10)} · Cycle{" "}
-                        {ref.cycle || "unknown"}
+                        {ref.cycle || s.cycle || "unknown"}
                       </small>
                     </blockquote>
                   ))}

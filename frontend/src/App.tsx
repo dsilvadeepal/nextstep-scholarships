@@ -10,6 +10,7 @@ import { PrintPlan } from "./components/PrintPlan";
 import { ChatPanel } from "./components/ChatPanel";
 import { EvalDashboard } from "./admin/EvalDashboard";
 import { applyScenario } from "./scenarios";
+import { BrandMark } from "./components/BrandAssets";
 type Catalog = components["schemas"]["CatalogResponse"];
 export default function App() {
   const [original, setOriginal] = useState<StudentProfile | null>(null);
@@ -65,7 +66,8 @@ export default function App() {
     <>
       <header>
         <div className="brand">
-          ✦ next<span>step</span>
+          <BrandMark />
+          <span className="brand-name">next<span>step</span></span>
         </div>
         <span className="header-note">
           Scholarship possibilities for Georgia students

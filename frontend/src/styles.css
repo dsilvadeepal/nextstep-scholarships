@@ -50,11 +50,20 @@ header {
   border-bottom: 1px solid #e3e7f3;
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: Manrope, sans-serif;
   font-size: 24px;
   font-weight: 800;
+  letter-spacing: -1px;
 }
-.brand span {
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+.brand-name > span {
   color: #3454f5;
 }
 .header-note {
@@ -72,6 +81,27 @@ main {
   border-radius: 28px;
   padding: 40px;
   position: relative;
+  overflow: hidden;
+}
+.profile > .eyebrow,
+.profile > h1,
+.profile > p,
+.profile > form,
+.profile > .starters {
+  position: relative;
+  z-index: 1;
+}
+.hero-illustration {
+  position: absolute;
+  top: 36px;
+  right: 26px;
+  width: min(31%, 380px);
+  pointer-events: none;
+}
+.hero-illustration svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .eyebrow {
   letter-spacing: 2px;
@@ -100,6 +130,11 @@ h1 span {
 }
 .profile form {
   max-width: 760px;
+}
+@media (min-width: 1101px) {
+  .profile form {
+    max-width: min(760px, calc(100% - 370px));
+  }
 }
 .fields {
   display: grid;
@@ -135,6 +170,18 @@ select {
   margin-top: 22px;
   font-weight: 700;
   padding: 15px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.primary svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 160ms ease;
+}
+.primary:hover svg {
+  transform: translateX(3px);
 }
 .starters {
   display: flex;
@@ -271,12 +318,34 @@ footer {
   color: #52617f;
   text-align: center;
 }
+@media (max-width: 1100px) {
+  .hero-illustration {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 420px);
+    height: 128px;
+    margin: 10px 0 20px;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+  .hero-illustration svg {
+    transform: translateY(-32px);
+  }
+}
 @media (max-width: 650px) {
   main {
     padding: 24px 5%;
   }
   .profile {
     padding: 24px;
+  }
+  .hero-illustration {
+    height: 106px;
+    margin: 4px 0 18px;
+  }
+  .hero-illustration svg {
+    transform: translateY(-22px);
   }
   .fields,
   .cards {
@@ -296,6 +365,9 @@ footer {
   }
   .starters {
     gap: 8px;
+  }
+  .primary {
+    width: 100%;
   }
   h2 {
     font-size: 23px;

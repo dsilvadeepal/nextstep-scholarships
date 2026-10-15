@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { components } from "../types";
+import { RouteIllustration } from "./BrandAssets";
 export type StudentProfile = components["schemas"]["StudentProfile"];
 const list = (value: string) =>
   value
@@ -58,6 +59,9 @@ export function ProfileForm({
         Explore scholarships, understand the requirements, and build a plan that
         feels manageable.
       </p>
+      <div className="hero-illustration" aria-hidden="true">
+        <RouteIllustration />
+      </div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -166,7 +170,12 @@ export function ProfileForm({
             {input("citizenship", "Citizenship or residency category")}
           </div>
         </details>
-        <button className="primary">Explore scholarships</button>
+        <button className="primary">
+          Explore scholarships
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+            <path d="M3 10h13m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </form>
       <div className="starters">
         <span>Just looking? Try a fictional profile</span>
