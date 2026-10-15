@@ -10,4 +10,4 @@ This is the intended five-minute recording flow, not a claim that all steps curr
 - 3:40–4:40: Show one real saved comparison, a failure case and exact evidence/citation scoring denominators.
 - 4:40–5:00: State actual coverage, measured limits and one learning supported by executed evidence.
 
-Currently recordable: local profile/empty/error states and synthetic print fixture only. No live RAG, checked corpus or measured comparison is ready for recording.
+Currently verified locally: full synthetic profile/results/chat/citation/print journey, admin saved-run inspection, and controlled source update/rollback. Synthetic fixtures must be labeled if shown. Real original-source inspection is available, but live RAG quality and a measured comparison still require the setup gates. No final video has been recorded or submitted.

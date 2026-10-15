@@ -17,6 +17,12 @@ dependencies = [
     "tiktoken>=0.14.0",
     "pyyaml>=6.0.3",
     "rank-bm25>=0.2.2",
+    "authlib>=1.9.1",
+    "itsdangerous>=2.2.0",
+    "httpx>=0.28.1",
+    "replit-object-storage>=1.0.2",
+    "langchain-openai>=1.7.2",
+    "pinecone>=10.0.0",
 ]
 [dependency-groups]
 dev = [
@@ -27,6 +33,7 @@ dev = [
 ]
 [tool.pytest.ini_options]
 pythonpath = ["backend"]
+markers = ["postgres: requires a configured disposable PostgreSQL database"]
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

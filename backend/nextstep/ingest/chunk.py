@@ -36,9 +36,7 @@ def make_chunks(document, records, corpus_version):
                 raise ValueError("Split passage lost exact provenance")
             previous_start = start
             previous_end = start + len(piece)
-            identity = (
-                f"{corpus_version}:{document.content_hash}:{section.id}:{start}:{piece}"
-            )
+            identity = f"{corpus_version}:{document.content_hash}:{section.program_id}:{section.id}:{start + section.start_offset}:{piece}"
             chunk_id = hashlib.sha256(identity.encode()).hexdigest()[:24]
             ref = EvidenceRef(
                 id=chunk_id,
@@ -47,8 +45,8 @@ def make_chunks(document, records, corpus_version):
                 section_id=section.id,
                 page=section.page,
                 quote=piece,
-                start=start,
-                end=start + len(piece),
+                start=start + section.start_offset,
+                end=start + section.start_offset + len(piece),
                 url=document.url,
                 fetched_at=document.fetched_at,
                 title=section.heading,

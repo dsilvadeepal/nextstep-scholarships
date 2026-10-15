@@ -109,3 +109,49 @@ test("late scenario response cannot replace restored original results", async ({
     page.getByRole("heading", { name: "Obsolete scenario award" }),
   ).toHaveCount(0);
 });
+
+test("chat is keyboard accessible and service failure preserves catalog", async ({
+  page,
+}) => {
+  await page.route("**/api/matches", (r) =>
+    r.fulfill({
+      json: { corpus_version: "fixture", scholarships: [], matches: [] },
+    }),
+  );
+  await page.route("**/api/chat", (r) =>
+    r.fulfill({ status: 503, body: "{}" }),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Fictional junior" }).click();
+  await page.getByRole("button", { name: "Ask about scholarships" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.getByLabel("Your question").fill("What can I prepare?");
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText("still browse");
+  await page.keyboard.press("Escape");
+  await expect(
+    page.getByRole("button", { name: "Ask about scholarships" }),
+  ).toBeFocused();
+  await expect(
+    page.getByRole("heading", { name: "Your scholarship starting point" }),
+  ).toBeVisible();
+});
+
+test("new corpus replaces shortlist records and announces source changes", async ({
+  page,
+}) => {
+  let n = 0;
+  await page.route("**/api/matches", (r) =>
+    r.fulfill({
+      json: {
+        corpus_version: ++n === 1 ? "old" : "new",
+        scholarships: [],
+        matches: [],
+      },
+    }),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Fictional senior" }).click();
+  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await expect(page.getByText(/Sources changed from old to new/)).toBeVisible();
+});

@@ -34,3 +34,20 @@ def test_paid_calls_fail_closed(tmp_path):
         BudgetLedger(engine, Decimal(10), Decimal(10)).reserve_budget(
             "a", Decimal(".1")
         )
+
+
+def test_rate_counters_are_shared_expire_and_ignore_forwarded_claims(tmp_path):
+    import pytest
+    from nextstep.limits import RateLimiter
+
+    engine = create_engine(f"sqlite:///{tmp_path}/rate.db")
+    metadata.create_all(engine)
+    limiter = RateLimiter(engine, "test-secret", per_minute=2, global_per_hour=3)
+    limiter.consume("127.0.0.1", now=100)
+    limiter.consume("127.0.0.1", now=101)
+    with pytest.raises(ValueError):
+        limiter.consume("127.0.0.1", now=102)
+    limiter.consume("127.0.0.2", now=102)
+    with pytest.raises(ValueError):
+        limiter.consume("127.0.0.3", now=103)
+    limiter.consume("127.0.0.1", now=4000)

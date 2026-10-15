@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { createRoot } from "react-dom/client";
 import { ProfileForm } from "./components/ProfileForm";
 import type { StudentProfile } from "./components/ProfileForm";
 import { Results } from "./components/Results";
@@ -8,18 +7,20 @@ import { request } from "./api";
 import "./styles.css";
 import { ScenarioPanel } from "./components/ScenarioPanel";
 import { PrintPlan } from "./components/PrintPlan";
+import { ChatPanel } from "./components/ChatPanel";
+import { EvalDashboard } from "./admin/EvalDashboard";
 import { applyScenario } from "./scenarios";
-type Catalog = {
-  corpus_version: string;
-  scholarships: components["schemas"]["Scholarship"][];
-  matches: components["schemas"]["MatchResult"][];
-};
-function App() {
+type Catalog = components["schemas"]["CatalogResponse"];
+export default function App() {
   const [original, setOriginal] = useState<StudentProfile | null>(null);
   const requestSequence = useRef(0);
   const [catalog, setCatalog] = useState<
     (Catalog & { hypothetical: boolean }) | null
   >(null);
+  const [activeProfile, setActiveProfile] = useState<StudentProfile | null>(
+    null,
+  );
+  const [sourceChange, setSourceChange] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -35,7 +36,16 @@ function App() {
     try {
       const next = await request<Catalog>("/api/matches", { profile });
       if (sequence !== requestSequence.current) return;
+      if (catalog && catalog.corpus_version !== next.corpus_version) {
+        const removed = selected.filter(
+          (id) => !next.scholarships.some((s) => s.id === id),
+        );
+        setSourceChange(
+          `Sources changed from ${catalog.corpus_version} to ${next.corpus_version}. Saved records were refreshed; ${removed.length} removed from this collection. Recheck requirements before printing.`,
+        );
+      }
       setCatalog({ ...next, hypothetical: isHypothetical });
+      setActiveProfile(profile);
       setOriginal(baseProfile);
       setSelected((old) =>
         old.filter((id) => next.scholarships.some((s) => s.id === id)),
@@ -49,6 +59,8 @@ function App() {
       if (sequence === requestSequence.current) setLoading(false);
     }
   }
+  if (new URLSearchParams(location.search).get("admin") === "1")
+    return <EvalDashboard />;
   return (
     <>
       <header>
@@ -87,6 +99,12 @@ function App() {
             {error}
           </p>
         )}
+        {catalog?.coverage && (
+          <p className="coverage hint">
+            {catalog.coverage.program_count} programs · {catalog.coverage.note}
+          </p>
+        )}
+        {sourceChange && <p className="notice">{sourceChange}</p>}
         <Results
           scholarships={catalog?.scholarships || []}
           matches={catalog?.matches || []}
@@ -97,6 +115,14 @@ function App() {
             )
           }
         />
+        {catalog && activeProfile && (
+          <ChatPanel
+            profile={activeProfile}
+            programIds={selected}
+            corpusVersion={catalog.corpus_version}
+            hypothetical={hypothetical}
+          />
+        )}
         <button
           className="print-button"
           disabled={!selected.length}
@@ -110,15 +136,19 @@ function App() {
           }
           matches={catalog?.matches || []}
           hypothetical={hypothetical}
-          generatedAt={new Date().toLocaleDateString("en-CA")}
+          generatedAt={new Date().toLocaleDateString("en-CA", {
+            timeZone: "America/New_York",
+          })}
         />
         <p className="hint">
           Potential fit is provisional. Always confirm current requirements with
           the official sponsor.
         </p>
       </main>
-      <footer>Your next step starts with a question. No account needed.</footer>
+      <footer>
+        Your next step starts with a question. No account needed.{" "}
+        <a href="/?admin=1">Admin</a>
+      </footer>
     </>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);

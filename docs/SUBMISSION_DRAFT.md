@@ -1,7 +1,7 @@
 # NextStep Scholarships — Week 2 Project Submission
 
 **Author:** Deepal Silva
-**Status:** Build in progress, October 14, 2026. Local foundations and partial student UI implemented. Live corpus, RAG generation, service integrations and source-checked evaluations remain pending. Targets and proposed prompts below are plans, not measured results or executed prompt history. The linked Google Doc has not yet been synchronized with this build update.
+**Status:** Local implementation verified, October 14, 2026. Live model evaluation, hosted integration and release remain pending access and approved spend. The Google Doc is synchronized with this checkpoint. Targets and proposed prompts below are not measured model results.
 **Project repository:** https://github.com/dsilvadeepal/nextstep-scholarships (private; creation/verification recorded separately).
 **Google Doc:** https://docs.google.com/document/d/1Nn_ZbfUnSVDwCozP7RpaeimTY08WvDCH0MwjedAYRts/edit
 
@@ -31,7 +31,7 @@ My RAG app helps Georgia high-school juniors and seniors answer scholarship-fit,
 | Field | Fill in (1–2 sentences) |
 | --- | --- |
 | Use case (one line) | Georgia juniors/seniors ask which scholarships may fit their profile, what remains unknown, and what to prepare next in a public responsive website with cited conversation. |
-| Corpus | English-language official state-aid regulations, college scholarship pages, sponsor applications and FAQs in HTML/PDF, with DOCX only if needed; sponsors own the source of truth. No documents are ingested yet: begin with a varied five-source batch, then expand broadly and report actual document/program counts without an arbitrary catalog cap. |
+| Corpus | English-language official state-aid regulations, college scholarship pages, sponsor applications and FAQs in HTML/PDF, with DOCX only if needed; sponsors own the source of truth. Sixteen public candidate documents have been downloaded and parsed; real structured extraction, indexing and verified program counts remain pending. Discovery is not exhaustive and has no arbitrary program-count cap. |
 | Ingestion + cleaning | An explicit Python command registers/downloads originals, removes page boilerplate, decodes entities, and preserves ordered sections, table headers, exceptions and page references. It creates normalized document JSON, evidence-backed scholarship JSON and separate chunk records before embedding passage text. |
 | Ingestion + freshness | Refresh manually before a demo/release and when known source changes need processing; hashes identify changed content and validated staged versions are promoted together with a retained rollback version. There is no continuous freshness SLA in this demo: fetch dates and applicable cycles are separate, unknown dates stay unknown, and historical rules cannot confirm future cycles. |
 | Chunking + embedding | Use structure-aware recursive splitting with a 500-token target and up to 75-token overlap only within the same long section; keep short FAQ pairs, requirements/exceptions and table relationships together, and never mix scholarships. Embed contextual passage text with OpenAI text-embedding-3-small at 1536 dimensions; this is a testable starting configuration, not embedding-based semantic chunking or a guarantee of quality. |
@@ -189,4 +189,8 @@ The Week 2 handout records an October 18, 2026, 11:59 p.m. Pacific Builder of th
 
 ## Local build evidence — October 14, 2026
 
-Native implementation used Python 3.12, test-first contract checks, generated TypeScript and a React/FastAPI shell. Latest recorded checks: 36 backend tests, 4 frontend unit tests, production build and 8 phone/desktop browser checks passed. Independent review found three important local defects; each was reproduced with failing tests and fixed. Browser print fixtures are explicitly synthetic, not sponsor evidence. A repeated-text regression exposed excessive chunk overlap; the offset search was corrected and the regression passed. This is a code-level finding, not a measured retrieval-quality improvement. See BUILD_STATUS.md for current partial tasks and remaining work.
+Native implementation uses Python 3.12, React and FastAPI. Verified checks: 71 backend tests, 2 separate native PostgreSQL integration tests, 6 frontend unit tests, a production build and 18 phone/desktop browser checks passed. Docker was not used for these checks. Student profile, matching, shortlist, cited chat, temporary scenarios, printable plans and the owner evaluation interface are implemented; live integrations remain unverified.
+
+Sixteen public candidate documents were collected and parsed. Fifteen checked source excerpts support 24 prepared fictional cases (18 tuning and 6 held out); no live model evaluation or held-out run has occurred. Synthetic update tests verified changed GPA/deadline behavior, failed publication isolation and rollback. Independent review identified six important defects in section retention, evaluation leases, configuration drift, retrieval filters, conversation context and cross-document reconciliation; regressions now pass.
+
+The native Google Doc was updated and read back. Pinecone setup is recorded separately. Real extraction, retrieval quality, hosted storage/database/sign-in and final release require OpenAI access, approved numeric spending limits and Replit configuration. See BUILD_STATUS.md and ENVIRONMENT.md for exact status and setup. Public deployment, recording and submission remain pending.

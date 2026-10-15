@@ -80,5 +80,14 @@ eval_results = Table(
     Column("method", String, primary_key=True),
     Column("status", String, nullable=False),
     Column("lease_until", Numeric(20, 4)),
+    Column("lease_token", String),
+    Column("attempts", json_type),
     Column("result", json_type),
+)
+rate_counters = Table(
+    "rate_counters",
+    metadata,
+    Column("key", String, primary_key=True),
+    Column("count", Integer, nullable=False),
+    Column("expires", Integer, nullable=False),
 )

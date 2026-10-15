@@ -74,3 +74,51 @@ class BudgetLedger:
                     status="ambiguous" if actual_usd is None else "completed",
                 )
             )
+
+
+class RateLimiter:
+    def __init__(self, engine, secret, per_minute=10, global_per_hour=100):
+        self.engine, self.secret = engine, secret
+        self.per_minute, self.global_per_hour = per_minute, global_per_hour
+
+    def consume(self, client_address, now=None):
+        import hashlib
+        import hmac
+        import time
+
+        from nextstep.db import rate_counters
+        from sqlalchemy import delete
+
+        now = int(time.time() if now is None else now)
+        client = hmac.new(
+            self.secret.encode(),
+            f"{now // 86400}:{client_address}".encode(),
+            hashlib.sha256,
+        ).hexdigest()
+        keys = [
+            (f"client:{client}:{now // 60}", self.per_minute),
+            (f"global:{now // 3600}", self.global_per_hour),
+        ]
+        with serialized(self.engine) as conn:
+            conn.execute(delete(rate_counters).where(rate_counters.c.expires < now))
+            values = []
+            for key, limit in keys:
+                count = conn.execute(
+                    select(rate_counters.c.count).where(rate_counters.c.key == key)
+                ).scalar_one_or_none()
+                if count is not None and count >= limit:
+                    raise ValueError("Request limit reached. Try again later.")
+                values.append((key, count))
+            for key, count in values:
+                if count is None:
+                    conn.execute(
+                        insert(rate_counters).values(
+                            key=key, count=1, expires=now + 86400
+                        )
+                    )
+                else:
+                    conn.execute(
+                        update(rate_counters)
+                        .where(rate_counters.c.key == key)
+                        .values(count=count + 1)
+                    )

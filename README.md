@@ -1,6 +1,6 @@
 # Week 2 — Georgia Scholarship Planner
 
-Status: Native implementation in progress on `feat/nextstep-native`. Partial local foundations and student UI are built; live services, corpus, full journey and release remain unfinished. See [build status](docs/BUILD_STATUS.md).
+Status: Credential-free implementation and local verification completed on `feat/nextstep-native`; live extraction, hosted integrations, measured model evaluation and release await access and approved spend. No Docker is required. See [build status](docs/BUILD_STATUS.md) and [setup handoff](docs/ENVIRONMENT.md).
 
 Working name: **NextStep Scholarships**.
 

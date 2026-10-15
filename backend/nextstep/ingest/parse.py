@@ -60,8 +60,13 @@ def parse_html(data: bytes, **source) -> NormalizedDocument:
                         id=f"s{len(sections) + 1}",
                         heading=heading,
                         text="\n".join(" | ".join(row) for row in rows),
-                        table_headers=rows[0],
-                        table_rows=rows[1:],
+                        table_headers=rows[0] if tag.find("tr").find("th") else [],
+                        table_rows=rows[1:] if tag.find("tr").find("th") else rows,
+                        warnings=[]
+                        if tag.find("tr").find("th")
+                        else [
+                            "Table has no explicit header; verify column relationships"
+                        ],
                         kind="table",
                     )
                 )
@@ -96,8 +101,11 @@ def parse_pdf(data: bytes, **source) -> NormalizedDocument:
                             heading=f"Page {i + 1} table {j + 1}",
                             page=i + 1,
                             text="\n".join(" | ".join(row) for row in rows),
-                            table_headers=rows[0],
-                            table_rows=rows[1:],
+                            table_headers=[],
+                            table_rows=rows,
+                            warnings=[
+                                "PDF table structure is inferred; verify against original page before using rules"
+                            ],
                             kind="table",
                         )
                     )
@@ -119,3 +127,17 @@ def sections_as_documents(document):
         )
         for s in document.sections
     ]
+
+
+def parse_source(source, store):
+    if source.status != "collected" or not source.artifact_key:
+        raise ValueError("Source has not been collected")
+    parser = {"html": parse_html, "pdf": parse_pdf}.get(source.source.format)
+    if parser is None:
+        raise ValueError("Unsupported source format")
+    return parser(
+        store.get(source.artifact_key),
+        source_id=source.source.id,
+        url=source.final_url or source.source.url,
+        fetched_at=source.fetched_at,
+    )

@@ -86,6 +86,8 @@ class Scholarship(Model):
         "source_checked",
     ] = "incomplete"
     official_url: str | None = None
+    field_evidence: dict[str, list[str]] = Field(default_factory=dict)
+    conflicts: dict[str, list[Any]] = Field(default_factory=dict)
 
 
 class Section(Model):
@@ -97,6 +99,8 @@ class Section(Model):
     table_rows: list[list[str]] = Field(default_factory=list)
     program_id: str | None = None
     kind: str = "text"
+    warnings: list[str] = Field(default_factory=list)
+    start_offset: int = Field(default=0, ge=0)
 
 
 class NormalizedDocument(Model):
@@ -168,6 +172,7 @@ class ChatTurn(Model):
 
 class EvalCase(Model):
     id: str
+    program_ids: list[str] = Field(default_factory=list, max_length=4)
     profile: StudentProfile
     question: str
     frozen_date: date

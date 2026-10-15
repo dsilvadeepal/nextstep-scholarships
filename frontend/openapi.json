@@ -5,6 +5,346 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/api/auth/status": {
+      "get": {
+        "summary": "Auth Status",
+        "operationId": "auth_status_api_auth_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "get": {
+        "summary": "Login",
+        "operationId": "login_api_auth_login_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/callback": {
+      "get": {
+        "summary": "Callback",
+        "operationId": "callback_api_auth_callback_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": "Logout",
+        "operationId": "logout_api_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/suite": {
+      "get": {
+        "summary": "Suite",
+        "operationId": "suite_api_admin_suite_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/runs": {
+      "get": {
+        "summary": "Runs",
+        "operationId": "runs_api_admin_runs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Start",
+        "operationId": "start_api_admin_runs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/runs/{run_id}": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_api_admin_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/runs/{run_id}/cases/{case_id}": {
+      "post": {
+        "summary": "Execute",
+        "operationId": "execute_api_admin_runs__run_id__cases__case_id__post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "case_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Case Id"
+            }
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Method"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/runs/{run_id}/cases/{case_id}/retry": {
+      "post": {
+        "summary": "Retry",
+        "operationId": "retry_api_admin_runs__run_id__cases__case_id__retry_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "case_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Case Id"
+            }
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Method"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/runs/{run_id}/cancel": {
+      "post": {
+        "summary": "Cancel",
+        "operationId": "cancel_api_admin_runs__run_id__cancel_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/ingestion": {
+      "get": {
+        "summary": "Ingestion",
+        "operationId": "ingestion_api_admin_ingestion_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/matches": {
       "post": {
         "summary": "Matches",
@@ -24,7 +364,47 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chat": {
+      "post": {
+        "summary": "Chat",
+        "operationId": "chat_api_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerResult"
+                }
               }
             }
           },
@@ -66,231 +446,6 @@
   },
   "components": {
     "schemas": {
-      "GPA": {
-        "additionalProperties": false,
-        "properties": {
-          "value": {
-            "maximum": 100,
-            "minimum": 0,
-            "title": "Value",
-            "type": "number"
-          },
-          "scale": {
-            "anyOf": [
-              {
-                "exclusiveMinimum": 0,
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Scale"
-          },
-          "type": {
-            "default": "unknown",
-            "enum": [
-              "weighted",
-              "unweighted",
-              "unknown"
-            ],
-            "title": "Type",
-            "type": "string"
-          },
-          "estimated": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Estimated"
-          },
-          "as_of": {
-            "anyOf": [
-              {
-                "format": "date",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "As Of"
-          }
-        },
-        "required": [
-          "value"
-        ],
-        "title": "GPA",
-        "type": "object"
-      },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
-      },
-      "MatchRequest": {
-        "properties": {
-          "profile": {
-            "$ref": "#/components/schemas/StudentProfile"
-          },
-          "scenario": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Scenario"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "profile"
-        ],
-        "title": "MatchRequest"
-      },
-      "Scenario": {
-        "additionalProperties": false,
-        "properties": {
-          "overrides": {
-            "additionalProperties": true,
-            "title": "Overrides",
-            "type": "object"
-          }
-        },
-        "title": "Scenario",
-        "type": "object"
-      },
-      "StudentProfile": {
-        "additionalProperties": false,
-        "properties": {
-          "grade": {
-            "anyOf": [
-              {
-                "enum": [
-                  11,
-                  12
-                ],
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Grade"
-          },
-          "graduation_year": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Graduation Year"
-          },
-          "residence": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "title": "Residence",
-            "type": "object"
-          },
-          "gpa": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/GPA"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null
-          },
-          "interests": {
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 20,
-            "title": "Interests",
-            "type": "array"
-          },
-          "prospective_colleges": {
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 3,
-            "title": "Prospective Colleges",
-            "type": "array"
-          },
-          "context": {
-            "additionalProperties": true,
-            "title": "Context",
-            "type": "object"
-          }
-        },
-        "title": "StudentProfile",
-        "type": "object"
-      },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          },
-          "input": {
-            "title": "Input"
-          },
-          "ctx": {
-            "type": "object",
-            "title": "Context"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      },
       "AnswerBlock": {
         "additionalProperties": false,
         "properties": {
@@ -361,6 +516,65 @@
         ],
         "title": "AnswerResult",
         "type": "object"
+      },
+      "CatalogResponse": {
+        "properties": {
+          "corpus_version": {
+            "type": "string",
+            "title": "Corpus Version"
+          },
+          "matches": {
+            "items": {
+              "$ref": "#/components/schemas/MatchResult"
+            },
+            "type": "array",
+            "title": "Matches"
+          },
+          "scholarships": {
+            "items": {
+              "$ref": "#/components/schemas/Scholarship"
+            },
+            "type": "array",
+            "title": "Scholarships"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "corpus_version",
+          "matches",
+          "scholarships",
+          "coverage"
+        ],
+        "title": "CatalogResponse"
+      },
+      "ChatRequest": {
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/StudentProfile"
+          },
+          "request": {
+            "$ref": "#/components/schemas/RetrievalRequest"
+          },
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/ChatTurn"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "title": "History"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "profile",
+          "request"
+        ],
+        "title": "ChatRequest"
       },
       "ChatTurn": {
         "additionalProperties": false,
@@ -545,141 +759,24 @@
         "title": "ConditionResult",
         "type": "object"
       },
-      "EvalCase": {
-        "additionalProperties": false,
+      "Coverage": {
         "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
+          "program_count": {
+            "type": "integer",
+            "title": "Program Count"
           },
-          "profile": {
-            "$ref": "#/components/schemas/StudentProfile"
-          },
-          "question": {
-            "title": "Question",
-            "type": "string"
-          },
-          "frozen_date": {
-            "format": "date",
-            "title": "Frozen Date",
-            "type": "string"
-          },
-          "expected_conditions": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "title": "Expected Conditions",
-            "type": "object"
-          },
-          "expected_evidence": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Expected Evidence",
-            "type": "array"
-          },
-          "expected_claims": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Expected Claims",
-            "type": "array"
-          },
-          "critical": {
-            "default": false,
-            "title": "Critical",
-            "type": "boolean"
-          },
-          "checked_sources": {
-            "items": {
-              "$ref": "#/components/schemas/EvidenceRef"
-            },
-            "title": "Checked Sources",
-            "type": "array"
-          },
-          "synthetic": {
-            "default": false,
-            "title": "Synthetic",
-            "type": "boolean"
+          "note": {
+            "type": "string",
+            "title": "Note"
           }
         },
-        "required": [
-          "id",
-          "profile",
-          "question",
-          "frozen_date"
-        ],
-        "title": "EvalCase",
-        "type": "object"
-      },
-      "EvalResult": {
         "additionalProperties": false,
-        "properties": {
-          "run_id": {
-            "title": "Run Id",
-            "type": "string"
-          },
-          "case_id": {
-            "title": "Case Id",
-            "type": "string"
-          },
-          "method": {
-            "title": "Method",
-            "type": "string"
-          },
-          "answer": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AnswerResult"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null
-          },
-          "scores": {
-            "additionalProperties": true,
-            "title": "Scores",
-            "type": "object"
-          },
-          "error": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Error"
-          },
-          "timings": {
-            "additionalProperties": {
-              "type": "number"
-            },
-            "title": "Timings",
-            "type": "object"
-          },
-          "usage": {
-            "additionalProperties": true,
-            "title": "Usage",
-            "type": "object"
-          },
-          "config_snapshot": {
-            "additionalProperties": true,
-            "title": "Config Snapshot",
-            "type": "object"
-          }
-        },
+        "type": "object",
         "required": [
-          "run_id",
-          "case_id",
-          "method"
+          "program_count",
+          "note"
         ],
-        "title": "EvalResult",
-        "type": "object"
+        "title": "Coverage"
       },
       "EvidenceRef": {
         "additionalProperties": false,
@@ -767,6 +864,105 @@
         "title": "EvidenceRef",
         "type": "object"
       },
+      "GPA": {
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "maximum": 100,
+            "minimum": 0,
+            "title": "Value",
+            "type": "number"
+          },
+          "scale": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scale"
+          },
+          "type": {
+            "default": "unknown",
+            "enum": [
+              "weighted",
+              "unweighted",
+              "unknown"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "estimated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Estimated"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "GPA",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MatchRequest": {
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/StudentProfile"
+          },
+          "scenario": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Scenario"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile"
+        ],
+        "title": "MatchRequest"
+      },
       "MatchResult": {
         "additionalProperties": false,
         "properties": {
@@ -843,49 +1039,6 @@
         "title": "MatchResult",
         "type": "object"
       },
-      "NormalizedDocument": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "content_hash": {
-            "title": "Content Hash",
-            "type": "string"
-          },
-          "source_id": {
-            "title": "Source Id",
-            "type": "string"
-          },
-          "url": {
-            "title": "Url",
-            "type": "string"
-          },
-          "fetched_at": {
-            "format": "date-time",
-            "title": "Fetched At",
-            "type": "string"
-          },
-          "sections": {
-            "items": {
-              "$ref": "#/components/schemas/Section"
-            },
-            "title": "Sections",
-            "type": "array"
-          }
-        },
-        "required": [
-          "id",
-          "content_hash",
-          "source_id",
-          "url",
-          "fetched_at",
-          "sections"
-        ],
-        "title": "NormalizedDocument",
-        "type": "object"
-      },
       "RetrievalRequest": {
         "additionalProperties": false,
         "properties": {
@@ -960,6 +1113,46 @@
           "chunks"
         ],
         "title": "RetrievedEvidence",
+        "type": "object"
+      },
+      "RetryRequest": {
+        "properties": {
+          "acknowledge_cost": {
+            "type": "boolean",
+            "title": "Acknowledge Cost",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RetryRequest"
+      },
+      "RunRequest": {
+        "properties": {
+          "split": {
+            "type": "string",
+            "enum": [
+              "tuning",
+              "heldout"
+            ],
+            "title": "Split",
+            "default": "tuning"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RunRequest"
+      },
+      "Scenario": {
+        "additionalProperties": false,
+        "properties": {
+          "overrides": {
+            "additionalProperties": true,
+            "title": "Overrides",
+            "type": "object"
+          }
+        },
+        "title": "Scenario",
         "type": "object"
       },
       "Scholarship": {
@@ -1107,6 +1300,24 @@
             ],
             "default": null,
             "title": "Official Url"
+          },
+          "field_evidence": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": "Field Evidence",
+            "type": "object"
+          },
+          "conflicts": {
+            "additionalProperties": {
+              "items": {},
+              "type": "array"
+            },
+            "title": "Conflicts",
+            "type": "object"
           }
         },
         "required": [
@@ -1115,6 +1326,307 @@
           "name"
         ],
         "title": "Scholarship",
+        "type": "object"
+      },
+      "StudentProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "grade": {
+            "anyOf": [
+              {
+                "enum": [
+                  11,
+                  12
+                ],
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Grade"
+          },
+          "graduation_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Graduation Year"
+          },
+          "residence": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Residence",
+            "type": "object"
+          },
+          "gpa": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GPA"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "interests": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Interests",
+            "type": "array"
+          },
+          "prospective_colleges": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 3,
+            "title": "Prospective Colleges",
+            "type": "array"
+          },
+          "context": {
+            "additionalProperties": true,
+            "title": "Context",
+            "type": "object"
+          }
+        },
+        "title": "StudentProfile",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "EvalCase": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "program_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Program Ids",
+            "type": "array"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/StudentProfile"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "frozen_date": {
+            "format": "date",
+            "title": "Frozen Date",
+            "type": "string"
+          },
+          "expected_conditions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Expected Conditions",
+            "type": "object"
+          },
+          "expected_evidence": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Expected Evidence",
+            "type": "array"
+          },
+          "expected_claims": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Expected Claims",
+            "type": "array"
+          },
+          "critical": {
+            "default": false,
+            "title": "Critical",
+            "type": "boolean"
+          },
+          "checked_sources": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "title": "Checked Sources",
+            "type": "array"
+          },
+          "synthetic": {
+            "default": false,
+            "title": "Synthetic",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "profile",
+          "question",
+          "frozen_date"
+        ],
+        "title": "EvalCase",
+        "type": "object"
+      },
+      "EvalResult": {
+        "additionalProperties": false,
+        "properties": {
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "case_id": {
+            "title": "Case Id",
+            "type": "string"
+          },
+          "method": {
+            "title": "Method",
+            "type": "string"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnswerResult"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "scores": {
+            "additionalProperties": true,
+            "title": "Scores",
+            "type": "object"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "timings": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Timings",
+            "type": "object"
+          },
+          "usage": {
+            "additionalProperties": true,
+            "title": "Usage",
+            "type": "object"
+          },
+          "config_snapshot": {
+            "additionalProperties": true,
+            "title": "Config Snapshot",
+            "type": "object"
+          }
+        },
+        "required": [
+          "run_id",
+          "case_id",
+          "method"
+        ],
+        "title": "EvalResult",
+        "type": "object"
+      },
+      "NormalizedDocument": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "content_hash": {
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "fetched_at": {
+            "format": "date-time",
+            "title": "Fetched At",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/Section"
+            },
+            "title": "Sections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "content_hash",
+          "source_id",
+          "url",
+          "fetched_at",
+          "sections"
+        ],
+        "title": "NormalizedDocument",
         "type": "object"
       },
       "Section": {
@@ -1177,6 +1689,19 @@
             "default": "text",
             "title": "Kind",
             "type": "string"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          },
+          "start_offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Start Offset",
+            "type": "integer"
           }
         },
         "required": [

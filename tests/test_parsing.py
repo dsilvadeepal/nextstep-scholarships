@@ -58,3 +58,15 @@ def test_direct_container_text_preserves_exclusions():
     text = "\n".join(s.text for s in doc.sections)
     assert "employees are ineligible" in text
     assert "Georgia only" in text
+
+
+def test_table_without_header_never_promotes_first_data_row_to_schema():
+    doc = parse_html(
+        b"<table><tr><td>A Award</td><td>3.0</td></tr><tr><td>B Award</td><td>2.5</td></tr></table>",
+        source_id="s",
+        url="https://example.org",
+        fetched_at=datetime.now(UTC),
+    )
+    assert doc.sections[0].table_headers == []
+    assert doc.sections[0].table_rows[0] == ["A Award", "3.0"]
+    assert doc.sections[0].warnings

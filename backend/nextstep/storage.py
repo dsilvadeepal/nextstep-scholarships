@@ -25,3 +25,28 @@ class LocalArtifactStore:
 
     def get(self, key):
         return self._path(key).read_bytes()
+
+
+class ReplitArtifactStore:
+    """Requires the supported Replit runtime identity; never falls back to local storage."""
+
+    def __init__(self, bucket_id):
+        from replit.object_storage import Client
+
+        self.client = Client(bucket_id=bucket_id)
+
+    def put(self, key, data):
+        if key.startswith("/") or ".." in key.split("/"):
+            raise ValueError("Invalid artifact key")
+        self.client.upload_from_bytes(key, data)
+        return key
+
+    def get(self, key):
+        if key.startswith("/") or ".." in key.split("/"):
+            raise ValueError("Invalid artifact key")
+        from replit.object_storage.errors import ObjectNotFoundError
+
+        try:
+            return self.client.download_as_bytes(key)
+        except ObjectNotFoundError:
+            raise FileNotFoundError(key) from None

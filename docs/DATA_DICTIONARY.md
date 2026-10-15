@@ -1,0 +1,17 @@
+# Evidence and state contracts
+
+`StudentProfile` is optional, session-only information. Unknown GPA scale/type, admission, membership or residence never count as satisfied. `prospective_colleges` is preference context, not acceptance. `context.accepted_colleges` and `context.enrolled_colleges` are explicit facts only. No name, email, student account, stored chat or profile table exists.
+
+`Scholarship` stores a stable program ID, corpus version, provisional conditions, materials, dates/cycle and provenance. Conditions are three-valued and support nested AND/OR/NOT. Unsupported kinds stay unknown. `field_evidence` maps substantive fields to exact evidence IDs. `conflicts` preserves incompatible source values; the reconciled scalar becomes unknown and the record is labeled conflicting. Cross-page aliases are explicit `program_bindings` in the source register; otherwise a stable sponsor/name key is used. Similar names are not automatically treated as the same award.
+
+`EvidenceRef` identifies source ID, original content hash, normalized section, exact quote, character start/end, URL, fetch timestamp and optional PDF page/cycle. Offsets use Python Unicode character indexing, not bytes or PDF coordinates. Source fetch time never supplies a missing deadline/cycle. `source_checked` is never accepted from a model.
+
+`NormalizedDocument` retains structural sections and inferred-table warnings. A single-program page retains every section, including uncited exceptions. Multi-program sections with unresolved ownership block staging and need source partitioning; nothing silently disappears. Blank PDF pages require OCR review. Parser version is part of the normalization cache key.
+
+`Chunk` contains exactly one program, original section references, neighbors, source hash and pinned corpus version. Target 500 tokens; overlap <=75 within a long section. Tables/FAQ/exceptions can remain indivisible. Retrieval caps whole passages at eight / 5,000 passage tokens. An oversized indivisible passage can be omitted rather than truncated; this must be inspected in live evaluations.
+
+Catalog and passage storage use immutable corpus manifests, retained vector namespaces, query-readiness checks and transactional activation. Rollback switches only to a ready retained corpus. Budget reservations survive ambiguous provider failures. Rate-limit keys are daily HMACs, not raw stored addresses.
+
+Evaluation cases contain fictional profiles, frozen date, checked source references, explicit user-selected program IDs (empty by default), expected claims/conditions and critical flags. References are assertions, never retrieval filters. Runs snapshot cases, suite hash, models, embedding/index identity, prompts, chunk/retrieval settings, prices and caps. Changed execution settings reject resume. Results preserve attempts, errors, denominators and a correlated automated judge label. Trace upload occurs only after result persistence and only for these fixed fictional cases.
+
+For a reviewed mixed section, `SourceSpec.section_partitions` maps original section IDs to ordered spans: `{start, end, program_ids}`. Every character must be covered; shared rules can name multiple programs and produce separate chunks. An excluded span must contain `exclusion_reason`. `expected_content_hash` must equal the downloaded original hash, so updates invalidate stale partitions. Each chunk retains original section ID and offsets, verified by the partition regression. This is an explicit review mechanism, not model certification of program boundaries.

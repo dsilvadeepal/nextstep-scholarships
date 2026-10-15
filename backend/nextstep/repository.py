@@ -71,6 +71,11 @@ class Repository:
             current = conn.execute(
                 select(active_corpus.c.version).where(active_corpus.c.id == 1)
             ).scalar_one_or_none()
+            ready = conn.execute(
+                select(corpus_versions.c.status).where(corpus_versions.c.version == new)
+            ).scalar_one_or_none()
+            if ready != "ready":
+                raise ValueError("Corpus must be ready before activation")
             if current != expected_old:
                 raise ValueError("Active corpus changed")
             if (

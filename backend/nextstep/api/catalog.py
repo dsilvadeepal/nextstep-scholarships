@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, HTTPException, Request
 from nextstep.matching import match_catalog
-from nextstep.models import Scenario, StudentProfile
+from nextstep.models import MatchResult, Model, Scenario, Scholarship, StudentProfile
 from pydantic import BaseModel
 
 router = APIRouter()
@@ -14,7 +14,19 @@ class MatchRequest(BaseModel):
     scenario: Scenario | None = None
 
 
-@router.post("/api/matches")
+class Coverage(Model):
+    program_count: int
+    note: str
+
+
+class CatalogResponse(Model):
+    corpus_version: str
+    matches: list[MatchResult]
+    scholarships: list[Scholarship]
+    coverage: Coverage
+
+
+@router.post("/api/matches", response_model=CatalogResponse)
 def matches(payload: MatchRequest, request: Request):
     repo = getattr(request.app.state, "repository", None)
     if repo is None:

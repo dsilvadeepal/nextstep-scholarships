@@ -1,53 +1,55 @@
 # Build status — October 14, 2026
 
-**Partial local implementation, not a completed demo.** Native execution on `feat/nextstep-native`. Main remains at planning commit `679c49e`. Nothing pushed, merged, deployed or submitted. No paid calls made.
+**Credential-free implementation and local verification are complete; the live demo is not release-ready.** Native execution remains on `feat/nextstep-native`. Main stays at `679c49e`. No merge, push, deployment, recording or submission performed. No OpenAI calls or spending enabled. **Do not use Docker.**
 
-## Verified in this build pass
+## Verified evidence
 
-- Python 3.12.15; locked Python/Node dependencies; FastAPI serves the production React build.
-- **36 backend tests passed**, including profile unknowns, tri-state rules, source offsets/chunk budgets, catalog versioning, publication failure/cache/rollback, budget concurrency and eval idempotency/leases.
-- **4 frontend unit tests passed**; TypeScript and Vite production build passed.
-- **8 Playwright checks passed** across 390px phone and 1440px desktop: unavailable catalog, synthetic print, failed scenario reset and stale response ordering.
-- Phone/desktop screenshots and print screenshot visually inspected. Generated synthetic PDFs: `/tmp/nextstep-plan-phone.pdf` and `/tmp/nextstep-plan-desktop.pdf`. No real-source PDF journey claimed.
-- Ruff and Git whitespace checks passed. Chromium needed sandbox escalation for macOS launch permissions; escalation succeeded.
-- Independent whole-branch review completed. Three important findings reproduced with failing tests and fixed: dropped direct-container HTML exceptions, mutable corpus manifest during indexing, and scenario result/label races. Full suites passed after fixes. No release-readiness claim.
+- **71 backend tests passed**, with two PostgreSQL tests skipped only in the default unconfigured test invocation.
+- **2 PostgreSQL integration tests passed separately** against our dedicated local PostgreSQL 17.7 Unix-socket instance: JSONB, concurrent budget reservations, concurrent run start and persistence/resume across runner instances. No Docker.
+- **6 frontend unit tests passed**; TypeScript and Vite production build passed.
+- **18 Playwright checks passed** across 390px phone and 1440px desktop: full synthetic student profile/results/chat/citation/print journey, service failures, scenario/reset/source-version races, anonymous admin boundary, saved-case inspection and refresh without replay.
+- Phone/desktop chat and source PDF screenshots visually inspected. Synthetic full-journey print PDFs generated at `/tmp/nextstep-complete-plan-phone.pdf` and `/tmp/nextstep-complete-plan-desktop.pdf`; earlier print fixtures also retained. These are not live-model evidence.
+- Ruff and Git whitespace checks passed. Initial frozen Alembic migration successfully applied to a fresh local SQLite database. PostgreSQL schema behavior verified separately; hosted migration still requires the selected development database.
+- 16 public documents collected/parsed; originals retained under ignored `artifacts/`. 15 excerpts checked against original HTML/PDF to prepare **24 fictional eval cases: 18 tuning, 6 held out**. No model evaluation has consumed the heldout suite.
+- Synthetic source update/failed-publication/rollback test passed. Invented rules live only in the separate fixture directory.
 
-## Task ledger
+## Scope ledger
 
-| Task | Status | Remaining work |
-| --- | --- | --- |
-| 1 Contracts/shell | Complete | Extend API response contracts as routes land |
-| 2 Persistence/auth | Partial | PostgreSQL integration, supported identity verifier, request limits, live budget wiring |
-| 3 Matching | Complete local implementation | Broaden against source-checked references |
-| 4 Collection/parsing | Partial | Safe HTTP collector, source register, App Storage, real varied-format inspection |
-| 5 Extraction/chunking | Partial | Structured extraction provider, field provenance validation, real batch and reference checks |
-| 6 Corpus publication | Partial | Pinecone adapter, CLI, real query-readiness verification; SQL manifest now freezes before indexing |
-| 7 RAG | Partial | Providers, fixed LCEL answer chain, chat API, semantic support guards, bounded calls |
-| 8 Student UI | Partial | Complete profile fields, relevant follow-ups, cited chat, full junior/senior journeys |
-| 9 Scenarios/print | Partial | Source-change messaging and broader print/reset/selection coverage |
-| 10 Evals/admin | Partial | Checked cases, scoring/judge, explicit retry/resume, admin API/UI and LangSmith |
-| 11 Real comparison | Not started | Broad ingestion, checked suite, controlled update and genuine measured comparison |
-| 12 Release | Partial documentation only | Full integration checks, release packet, deployment approval and submission evidence |
+| Area | Locally implemented and verified | Access-dependent work |
+|---|---|---|
+| Contracts/matching | Generated types; optional profile/GPA semantics; deterministic tri-state rules; matching independent of retrieval | Inspect real extracted rules and condition coverage |
+| Persistence/security | PostgreSQL-compatible schema/migration, session verification/owner allowlist, origin/body/rate/budget guards, production configuration validation | Genuine Replit OIDC login, hosted DB/storage access |
+| Collection/extraction | Safe pinned-public-IP collector, source register, HTML/PDF provenance, field evidence validation, explicit hash-pinned program partitions, cross-page aliases/reconciliation/conflicts | Real structured extraction; inspect all flagged partitions/unknowns and refine bindings from actual output |
+| Publication | Embedding cache, namespaces, immutable manifests, fetched-count/search-probe readiness, atomic activation/rollback, resumable CLI | Real embeddings/upsert/query-readiness and storage verification |
+| RAG | Dense/BM25/RRF, fixed LCEL flow, bounded prior-user context, exact quoted support, deterministic unknowns, pinned API, failure fallback | One/two-program live smoke checks, claim inspection, measured quality/latency |
+| Student experience | Complete skippable form, three fictional starters, result groups/details, shortlist, cited dialog, scenarios/reset/source-change notice, print | Review real junior/senior journeys against published corpus |
+| Evals/admin | Checked reference files, protected API, sequential browser driver, durable leases/token CAS, explicit retries/cancel, immutable settings, inspector, aggregates/denominators, post-save fictional trace upload | Run actual tuning/heldout comparison; inspect failures; verify real LangSmith links |
+| Release packet | One-port `.replit` and scripts, setup instructions, source/eval reports, demo/submission drafts | Owner access/spend configuration, hosted smoke checks, publication approval, video and submission |
 
-**Independent coding remains; credentials are not the only remaining work.** Do not mark partial tasks complete based on fixture tests. The current application intentionally reports an unavailable catalog. Repository wiring and a real published corpus are not yet configured; browser tests use explicitly synthetic responses where needed.
+## Independent review and fixes
 
-## Exact live setup gates
+The fresh whole-branch review found six important issues. Each was reproduced and fixed with local regression evidence:
 
-Enter secrets directly in ignored `.env` or Replit Secrets, never chat or Git:
+1. Uncited exceptions: retain all sections for a single program, include nested condition evidence in ownership, and block ambiguous multi-program attribution. Reviewed partitions must cover the entire section and match the original hash; offsets remain exact.
+2. Lease expiry: a completed result remains saveable when its original token is still current; explicit retry/cancel invalidates the token. Optional trace upload happens after durable persistence.
+3. Configuration drift: execution rejects changed model, embedding dimensions/index, prompt/chunk/retrieval version, prices or budget caps.
+4. Answer-key leakage: reference sources are used only after retrieval for assertions; explicit case input selects programs, empty by default.
+5. Follow-ups: bounded prior user turns inform retrieval; unsupported assistant claims do not become retrieval context.
+6. Cross-page rules: stable program bindings and conservative reconciliation retain source evidence and flag incompatible conditions/dates.
 
-- `DATABASE_URL`: explicitly identified development PostgreSQL database.
-- Replit-supported identity configuration: verified issuer, audience and immutable owner subject; production admin remains disabled.
-- App Storage bucket ID and supported runtime authentication.
-- `OPENAI_API_KEY`, funded project and explicit numerical per-run/total spending approval.
-- `PINECONE_API_KEY`, index name/region and included allowance or approved cost.
-- `LANGSMITH_API_KEY`, workspace/project for fictional evaluations only.
+The separate Pinecone setup chat reported an SDK constructor incompatibility. It was reproduced and fixed: timeout and zero retries are configured on `Pinecone`, not `Index`. The setup chat verified an empty ready `nextstep-scholarships` index; this build verified key/index presence without displaying secrets. Real application search is still unexecuted.
 
-`LIVE_CALLS_ENABLED=false`, `OPENAI_RUN_BUDGET_USD=0`, `OPENAI_TOTAL_BUDGET_USD=0` remain defaults. Provider prices and service identities are not confirmed. Credentials alone do not authorize paid deployment.
+## Actual stop point
 
-## Resume and runtime
+The next meaningful step is **the first live source-to-answer slice**. It needs:
 
-Progress ledger: `.superpowers/sdd/2026-10-14-nextstep-scholarships/progress.md` (ignored, intentionally retained because plan is unfinished). Read it and Git history before resuming. First close the independent gaps in Tasks 2, 4 and 5; do not redo completed scaffolding.
+- Funded OpenAI server key, approved numerical run/total budgets, and verified price inputs/date.
+- Replit development PostgreSQL and App Storage configuration for hosted persistence.
+- Replit owner identity/client/callback configuration and one genuine owner sign-in.
+- LangSmith key/project if live traces are required (local eval persistence does not depend on it).
 
-Runtime is installed in `/tmp/nextstep-python`; `.venv` references it. Use `UV_CACHE_DIR=/tmp/nextstep-uv-cache`. Reinstall Python 3.12 if temporary storage is cleared. Browser cache: `PLAYWRIGHT_BROWSERS_PATH=/tmp/nextstep-browsers`.
+Pinecone setup is already supplied; do not ask for its key again. `LIVE_CALLS_ENABLED=false`, caps remain zero, and no OpenAI key/price configuration is present. Credentials alone do not authorize publication or paid deployment.
 
-Verification commands: `uv run pytest -q`; `npm --prefix frontend test -- --run`; `npm --prefix frontend run build`; `npm --prefix frontend run test:e2e`; `uv run ruff check backend tests migrations scripts`; `git diff --check`.
+Collection and preprocessing have already happened without credentials. The remaining corpus-quality decisions must be based on actual extracted output and measured model behavior; fixture tests cannot substitute for them. See `ENVIRONMENT.md` for exact setup order and commands, `RELEASE_CHECKLIST.md` for approval gates, and `SOURCE_INSPECTION.md` for known coverage limitations.
+
+The execution ledger is retained because live Tasks 11–12 and integration acceptance remain unfinished. Main/worktree are retained; no automatic merge/push/cleanup. Native implementation remains the owner-selected approach. No measured evidence establishes a parallel-execution time saving.
