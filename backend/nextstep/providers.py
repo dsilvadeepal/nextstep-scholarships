@@ -6,8 +6,8 @@ from typing import Protocol
 from uuid import uuid4
 
 import tiktoken
-from nextstep.models import Scholarship
-from pydantic import BaseModel
+from nextstep.models import Condition, Scholarship
+from pydantic import BaseModel, Field, model_validator
 
 
 class ExtractionModel(Protocol):
@@ -24,6 +24,45 @@ class VectorStore(Protocol):
 
 class ExtractedRecords(BaseModel):
     records: list[Scholarship]
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_wire_collections(cls, data):
+        # Only repair equivalent JSON collection shapes, never content or evidence.
+        import copy
+
+        data = copy.deepcopy(data)
+        if not isinstance(data, dict) or not isinstance(data.get("records"), list):
+            return data
+        for record in data["records"]:
+            if not isinstance(record, dict):
+                continue
+            for field in ("materials", "conditions", "evidence"):
+                if field in record and record[field] is None:
+                    record[field] = []
+            refs = record.get("field_evidence")
+            if isinstance(refs, dict):
+                record["field_evidence"] = {
+                    field: [ids] if isinstance(ids, str) else ids
+                    for field, ids in refs.items()
+                }
+        return data
+
+
+class UnitCondition(Condition):
+    evidence: list[str]
+    children: list["UnitCondition"] = Field(default_factory=list)
+
+
+class UnitScholarship(Scholarship):
+    deadline: str | None = None
+    opens: str | None = None
+    evidence: list[str]
+    conditions: list[UnitCondition] = Field(default_factory=list)
+
+
+class UnitRecords(ExtractedRecords):
+    records: list[UnitScholarship]
 
 
 class PaidModel:
@@ -44,7 +83,7 @@ class PaidModel:
             or settings.output_usd_per_million is None
         ):
             raise ValueError("Approved current provider prices required")
-        encoded = json.dumps(payload, default=str)
+        encoded = json.dumps(payload, default=str, ensure_ascii=False)
         count = len(
             tiktoken.get_encoding("cl100k_base").encode(
                 instructions + encoded + json.dumps(schema.model_json_schema())
@@ -102,17 +141,20 @@ class PaidModel:
     def extract(self, section_text):
         from nextstep.ingest.extract import (
             EXTRACTION_INSTRUCTIONS,
-            anchor_extracted_evidence,
+            expand_unit_evidence,
+            source_units,
         )
         from nextstep.models import NormalizedDocument
 
-        result, _ = self.invoke(
-            ExtractedRecords, EXTRACTION_INSTRUCTIONS, json.loads(section_text), 4000
-        )
-        return anchor_extracted_evidence(
-            NormalizedDocument.model_validate_json(section_text),
-            result.model_dump(mode="json"),
-        )
+        document = NormalizedDocument.model_validate_json(section_text)
+        units = source_units(document)
+        payload = {
+            "source_id": document.source_id,
+            "url": document.url,
+            "evidence_units": [{"id": ref.id, "text": ref.quote} for ref in units],
+        }
+        result, _ = self.invoke(UnitRecords, EXTRACTION_INSTRUCTIONS, payload, 4000)
+        return expand_unit_evidence(result.model_dump(mode="json"), units)
 
 
 class OpenAIEmbeddingProvider:

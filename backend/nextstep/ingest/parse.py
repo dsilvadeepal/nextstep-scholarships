@@ -3,7 +3,6 @@ import io
 
 import pdfplumber
 from bs4 import BeautifulSoup, Comment, NavigableString
-from langchain_core.documents import Document
 from nextstep.models import NormalizedDocument, Section
 from pypdf import PdfReader
 
@@ -110,23 +109,6 @@ def parse_pdf(data: bytes, **source) -> NormalizedDocument:
                         )
                     )
     return _document(data, sections, **source)
-
-
-def sections_as_documents(document):
-    return [
-        Document(
-            page_content=s.text,
-            metadata={
-                "section_id": s.id,
-                "page": s.page,
-                "source_id": document.source_id,
-                "document_version": document.content_hash,
-                "program_id": s.program_id,
-                "url": document.url,
-            },
-        )
-        for s in document.sections
-    ]
 
 
 def parse_source(source, store):

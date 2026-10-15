@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 
 import pytest
-from nextstep.ingest.parse import parse_html, parse_pdf, sections_as_documents
+from nextstep.ingest.parse import parse_html, parse_pdf
 from nextstep.storage import LocalArtifactStore
 
 
@@ -17,7 +17,6 @@ def test_html_keeps_exceptions_and_separates_programs():
     assert "except renewed" in doc.sections[0].text
     assert "Senior" not in doc.sections[0].text
     assert "Menu" not in "".join(s.text for s in doc.sections)
-    assert sections_as_documents(doc)[0].metadata["section_id"] == doc.sections[0].id
 
 
 def test_empty_pdf_needs_ocr():
