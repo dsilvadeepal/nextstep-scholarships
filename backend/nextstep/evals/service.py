@@ -157,6 +157,7 @@ def validate_configuration(settings, config):
         "embedding_dimensions",
         "pinecone_index",
         "prompt_version",
+        "answer_code_hash",
         "scoring_version",
         "coverage_register_hash",
         "chunking",

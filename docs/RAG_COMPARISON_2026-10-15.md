@@ -27,6 +27,10 @@ Full run inputs, outputs, retrieved passages, citations, review decisions, and p
 
 The final absence-of-information filter converts unsupported-topic statements into gaps instead of citing unrelated passages; it was added after the saved comparison and does not change any of the five demo answers.
 
+Validation complete: **99 backend tests passed, 2 PostgreSQL-dependent tests skipped; 8 frontend tests passed; 18 Playwright phone/desktop tests passed; frontend build, Ruff, and Git whitespace checks passed.** Chromium required execution outside the process sandbox; no product test failed after the browser could launch. The local server was restarted on port 8014; a live HTTP smoke check confirmed targeted selection and official HOPE links. The .env fingerprint matches the pre-change checkpoint.
+
+The final local default is phase 1 + phase 2; this revision has not been deployed to Replit.
+
 ## Measured comparison
 
 | Case | Phase 1 OpenAI cost | Phase 1 + 2 OpenAI cost | Finding |

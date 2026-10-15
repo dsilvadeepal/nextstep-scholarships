@@ -59,3 +59,8 @@ Prepared October 14, 2026 for the reviewed Fall 2027 pilot. The reviewed corpus 
 ## Recording check
 
 Use only one or two journeys in a five-minute recording. The live local run supports **Case 1** (profile → one award → citation) followed by **Case 2** (3.79 edge → exact 3.80 rule → unresolved requirements). Case 3 returned a potentially misleading leading “No” fragment and omitted the two-letter count; Case 4 gave a partial comparison. Do not use either as a clean answer demo without a fix and retest. Case 5 correctly declined to guess at no OpenAI cost, but lacked a direct GSFC/GAfutures link. For Park, the source gives a non-rounded 3.80 unweighted rule but no numeric GPA scale, so the structured match remains unknown; show the citation without claiming deterministic ineligibility.
+
+
+## October 15: grounded answers and targeted retrieval
+
+The local default is now phase 1 + phase 2: cited explanations with a bounded support review, source-bound ACT comparisons, and targeted selection of existing passages after 50/50 hybrid search. The same five exposed demo cases were compared against phase 1 alone; the combined approach recovers the missing Auburn Heritage threshold. See [the complete comparison](RAG_COMPARISON_2026-10-15.md) for exact outputs, costs, source links, rollback checkpoints and wording limitations. These results supersede the earlier fragment-based demo outputs, but are not a held-out accuracy claim. Hosted transfer of this new revision remains separate.

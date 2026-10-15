@@ -156,7 +156,7 @@ class RetrievalRequest(Model):
     program_ids: list[str] = Field(default_factory=list, max_length=4)
     corpus_version: str | None = None
     method: Literal["semantic", "hybrid", "hybrid_60_40"] = "hybrid"
-    retrieval_policy: Literal["baseline", "targeted"] = "baseline"
+    retrieval_policy: Literal["baseline", "targeted"] = "targeted"
 
 
 class RetrievedEvidence(Model):

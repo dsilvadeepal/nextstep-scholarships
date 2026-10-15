@@ -49,7 +49,19 @@ def snapshot(settings, version, split, methods=None):
             (ROOT.parent / "data/reviewed-coverage-2026-10-14.json").read_bytes()
         ).hexdigest(),
         "chunking": "500/75/section-v1",
-        "retrieval": "40 candidates or 20+20 RRF60; 8 passages/5000 tokens",
+        "retrieval": "40 candidates or 20+20 RRF60; targeted facet coverage for selected programs; 8 passages/5000 tokens",
+        "answer_code_hash": hashlib.sha256(
+            b"".join(
+                (ROOT.parent / "backend/nextstep/rag" / name).read_bytes()
+                for name in (
+                    "answer.py",
+                    "construction.py",
+                    "comparisons.py",
+                    "retrieve.py",
+                    "target.py",
+                )
+            )
+        ).hexdigest(),
         "pricing_date": settings.pricing_effective_date,
         "input_usd_per_million": str(settings.input_usd_per_million),
         "output_usd_per_million": str(settings.output_usd_per_million),

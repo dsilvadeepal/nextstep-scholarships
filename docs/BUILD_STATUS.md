@@ -77,3 +77,8 @@ Live output exposed nullable-list/schema mistakes and unreliable citation metada
 During this work the local `.env` changed again: both previously present API keys disappeared, as did the appended local database/pricing settings. No key values were displayed or copied into tracked files. The responsible editor/process has not been identified. Paid execution is stopped until the owner saves the keys durably. Preserve this ledger for all resumed work so the $5 total ceiling remains cumulative.
 
 Pricing used: GPT-4.1 mini input $0.40/output $1.60 per million tokens, and text-embedding-3-small $0.02 per million, checked against https://developers.openai.com/api/docs/models/gpt-4.1-mini and https://developers.openai.com/api/docs/models/text-embedding-3-small on October 14, 2026. Live enablement was command-scoped; no hosted deployment occurred.
+
+
+## October 15: grounded answers and targeted retrieval
+
+The local default is now phase 1 + phase 2: cited explanations with a bounded support review, source-bound ACT comparisons, and targeted selection of existing passages after 50/50 hybrid search. The same five exposed demo cases were compared against phase 1 alone; the combined approach recovers the missing Auburn Heritage threshold. See [the complete comparison](RAG_COMPARISON_2026-10-15.md) for exact outputs, costs, source links, rollback checkpoints and wording limitations. These results supersede the earlier fragment-based demo outputs, but are not a held-out accuracy claim. Hosted transfer of this new revision remains separate.

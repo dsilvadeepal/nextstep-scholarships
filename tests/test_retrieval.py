@@ -4,6 +4,7 @@ from nextstep.rag.retrieve import Retriever
 
 def test_default_retrieval_is_equal_weight_hybrid():
     assert RetrievalRequest(question="test").method == "hybrid"
+    assert RetrievalRequest(question="test").retrieval_policy == "targeted"
 
 
 def chunk(i, program, version="v"):
@@ -98,6 +99,7 @@ def test_targeted_retrieval_recovers_award_table_with_same_dense_calls_and_budge
     service = Retriever(corpus, dense)
     request = RetrievalRequest(
         question="Does my ACT superscore satisfy this award?",
+        retrieval_policy="baseline",
         program_ids=["a"],
         corpus_version="v",
     )

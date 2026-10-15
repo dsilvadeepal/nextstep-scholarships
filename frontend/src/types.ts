@@ -570,7 +570,7 @@ export interface components {
             method: "semantic" | "hybrid" | "hybrid_60_40";
             /**
              * Retrieval Policy
-             * @default baseline
+             * @default targeted
              * @enum {string}
              */
             retrieval_policy: "baseline" | "targeted";

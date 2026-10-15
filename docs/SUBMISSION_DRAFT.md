@@ -225,3 +225,8 @@ The student app now defaults to the existing equal-weight (50/50) hybrid retriev
 The five queries added **$0.01187412** to the existing ledger, bringing cumulative recorded OpenAI spend to **$0.82332942 of $5**. Query costs are measured ledger differences; later live questions cost extra. For the recording, Georgia Southern and Park are the best-supported examples from this run. Do not portray the Coolidge or Alabama/Auburn response as a complete answer. No extra question was asked in these runs; the app displayed unresolved requirements as gaps rather than prompting for more input.
 
 An independent check against freshly searched official public pages is in `docs/EXTERNAL_DEMO_AUDIT_2026-10-15.md` and the linked Google Doc. It did not use the app corpus or Pinecone. It found the Coolidge answer contextually misleading and the Alabama/Auburn answer materially incomplete; these two cases should be fixed and retested before being used as correct-answer demonstrations.
+
+
+## October 15: grounded answers and targeted retrieval
+
+The local default is now phase 1 + phase 2: cited explanations with a bounded support review, source-bound ACT comparisons, and targeted selection of existing passages after 50/50 hybrid search. The same five exposed demo cases were compared against phase 1 alone; the combined approach recovers the missing Auburn Heritage threshold. See [the complete comparison](RAG_COMPARISON_2026-10-15.md) for exact outputs, costs, source links, rollback checkpoints and wording limitations. These results supersede the earlier fragment-based demo outputs, but are not a held-out accuracy claim. Hosted transfer of this new revision remains separate.

@@ -19,3 +19,8 @@ The implementation suite now passes 85 backend tests with two default native-Pos
 Targets remain: all critical and missing-evidence cases pass, expected-evidence recall at least 90%, answer case pass at least 90%, checked claim support at least 95%, citation resolution 100%, and at least 95% of cases completed within 15 seconds. Errors and incomplete answers count as failures. The 60/40 variant does not meet the all-critical/completion/citation release gate. Final independent source spot-checks and a public student smoke test remain before release. No Docker was used.
 
 Five later local demo questions with equal-weight hybrid retrieval added $0.01187412, bringing the shared ledger to **$0.82332942 of $5**. See `docs/DEMO_RUN_RESULTS_2026-10-15.md` for per-query costs and observed answer limits.
+
+
+## October 15: grounded answers and targeted retrieval
+
+The local default is now phase 1 + phase 2: cited explanations with a bounded support review, source-bound ACT comparisons, and targeted selection of existing passages after 50/50 hybrid search. The same five exposed demo cases were compared against phase 1 alone; the combined approach recovers the missing Auburn Heritage threshold. See [the complete comparison](RAG_COMPARISON_2026-10-15.md) for exact outputs, costs, source links, rollback checkpoints and wording limitations. These results supersede the earlier fragment-based demo outputs, but are not a held-out accuracy claim. Hosted transfer of this new revision remains separate.
