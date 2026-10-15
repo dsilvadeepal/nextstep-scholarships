@@ -35,3 +35,11 @@ After OpenAI access/budget approval, `... cli run --sources data/sources.yaml --
 `.replit` contains one-port build/run commands and `deploymentTarget="cloudrun"`. `scripts/build.sh` installs locked dependencies and builds React; `scripts/start.sh` starts one FastAPI service without access logs. Migrations and ingestion are explicit manual actions, not startup side effects. Use Replit Autoscale only after owner approval and account-specific allowance review. Cold/warm live checks, verified admin login, artifact persistence, budget accounting and a real saved comparison are still release gates.
 
 Configuration reference checked October 14: [Replit application configuration](https://docs.replit.com/features/project-setup/configuration), [Replit Auth](https://docs.replit.com/features/auth-and-identity/authentication). These document the platform; they do not prove this project's hosted configuration.
+
+## Local configuration overwrite investigation — October 14, 2026
+
+VS Code local history confirmed both provider keys had been saved at 9:18:23 p.m. Eastern; the working `.env` was subsequently modified at 9:19:05 p.m. with both values empty. Repository app/test/start scripts contain no `.env` writer, and the setup chat was idle. The exact writer is unconfirmed; stale editor state is a hypothesis, not a proven cause. Process-level filesystem tracing requires administrator access that was unavailable.
+
+Both existing key values were recovered from the latest matching VS Code history entry without displaying them. Local `.env` now has owner-only permissions and macOS user-immutable protection (`uchg`). Both keys remain readable by Settings; opening the file for writing is denied. This prevents accidental overwrites, but does not identify or repair the responsible editor/process. No new keys were generated and no provider calls were made during recovery.
+
+Before an intentional local configuration edit, unlock only this file with `chflags nouchg .env` from the project directory; after saving, restore protection with `chflags uchg .env`. Avoid leaving stale `.env` editor tabs open. Keep runtime-only database/pricing overrides outside this file until the writer is identified. Preserve `artifacts/nextstep-live.db` for cumulative spend tracking.
