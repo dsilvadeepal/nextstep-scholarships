@@ -97,3 +97,8 @@ def test_incomplete_and_unknown_followup():
     }
     assert results["a"].group == "explore"
     assert "Club" in results["b"].followups[0]
+
+
+def test_unspecified_college_requirement_cannot_be_marked_unmet():
+    profile = StudentProfile(context={'accepted_colleges':['UGA']})
+    assert evaluate_condition(rule('college','accepted',None),profile,TODAY).status == 'unknown'

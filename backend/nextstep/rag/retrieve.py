@@ -4,6 +4,8 @@ import time
 from nextstep.models import RetrievedEvidence
 from rank_bm25 import BM25Okapi
 
+HYBRID_WEIGHTS = {"hybrid": (1.0, 1.0), "hybrid_60_40": (0.6, 0.4)}
+
 
 def tokens(text):
     return re.findall(r"\w+", text.casefold())
@@ -34,7 +36,7 @@ class Retriever:
                 request.question, request.corpus_version, program, limit
             )
             dense = list(dict.fromkeys(i for i in dense_ids if i in by_id))[:limit]
-            if request.method == "hybrid" and corpus:
+            if request.method in HYBRID_WEIGHTS and corpus:
                 bm = BM25Okapi(
                     [tokens(c.heading + " " + c.text) or [""] for c in corpus]
                 )
@@ -46,9 +48,9 @@ class Retriever:
                     )[:limit]
                 ]
                 fused = {}
-                for ranking in (dense, keyword):
+                for ranking, weight in zip((dense, keyword), HYBRID_WEIGHTS[request.method]):
                     for rank, i in enumerate(ranking, 1):
-                        fused[i] = fused.get(i, 0) + 1 / (60 + rank)
+                        fused[i] = fused.get(i, 0) + weight / (60 + rank)
                 ordered = sorted(fused, key=lambda i: (-fused[i], i))
                 scores.update(fused)
             else:

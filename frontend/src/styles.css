@@ -413,8 +413,12 @@ footer {
   .print-plan h1 {
     font-size: 28px;
   }
+  .print-plan h2,
+  .print-plan h3 {
+    break-after: avoid;
+  }
   .print-plan article {
-    break-inside: avoid;
+    break-inside: auto;
     border-top: 1px solid #ccc;
     padding: 18px 0;
   }
@@ -425,6 +429,7 @@ footer {
   }
   .print-plan a {
     color: #172244;
+    overflow-wrap: anywhere;
   }
   body {
     background: white;

@@ -328,6 +328,22 @@ export interface components {
              * @default false
              */
             indivisible: boolean;
+            /**
+             * Cycle
+             * @default null
+             */
+            cycle: string | null;
+            cycle_metadata?: components["schemas"]["CycleMetadata"];
+            /**
+             * Information Status
+             * @default null
+             */
+            information_status: string | null;
+            /**
+             * Source Checked At
+             * @default null
+             */
+            source_checked_at: string | null;
         };
         /** Condition */
         Condition: {
@@ -375,6 +391,34 @@ export interface components {
             program_count: number;
             /** Note */
             note: string;
+        };
+        /** CycleMetadata */
+        CycleMetadata: {
+            /**
+             * Application Cycle
+             * @default null
+             */
+            application_cycle: string | null;
+            /**
+             * College Entry Year
+             * @default null
+             */
+            college_entry_year: number | null;
+            /**
+             * Award Academic Year
+             * @default null
+             */
+            award_academic_year: string | null;
+            /**
+             * Regulation Academic Year
+             * @default null
+             */
+            regulation_academic_year: string | null;
+            /**
+             * High School Graduation Year
+             * @default null
+             */
+            high_school_graduation_year: number | null;
         };
         /** EvidenceRef */
         EvidenceRef: {
@@ -491,10 +535,10 @@ export interface components {
             corpus_version: string | null;
             /**
              * Method
-             * @default semantic
+             * @default hybrid
              * @enum {string}
              */
-            method: "semantic" | "hybrid";
+            method: "semantic" | "hybrid" | "hybrid_60_40";
         };
         /** RetrievedEvidence */
         RetrievedEvidence: {
@@ -556,6 +600,12 @@ export interface components {
              * @default null
              */
             cycle: string | null;
+            cycle_metadata?: components["schemas"]["CycleMetadata"];
+            /**
+             * Source Checked At
+             * @default null
+             */
+            source_checked_at: string | null;
             /** Conditions */
             conditions?: components["schemas"]["Condition"][];
             /** Materials */
@@ -664,6 +714,11 @@ export interface components {
             expected_evidence?: string[];
             /** Expected Claims */
             expected_claims?: string[];
+            /**
+             * Expects Evidence Gap
+             * @default false
+             */
+            expects_evidence_gap: boolean;
             /**
              * Critical
              * @default false

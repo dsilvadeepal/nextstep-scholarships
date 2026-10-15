@@ -64,6 +64,14 @@ class ConditionResult(Model):
     reason: str
 
 
+class CycleMetadata(Model):
+    application_cycle: str | None = None
+    college_entry_year: int | None = None
+    award_academic_year: str | None = None
+    regulation_academic_year: str | None = None
+    high_school_graduation_year: int | None = None
+
+
 class Scholarship(Model):
     id: str
     corpus_version: str
@@ -71,6 +79,8 @@ class Scholarship(Model):
     sponsor: str | None = None
     scope: str | None = None
     cycle: str | None = None
+    cycle_metadata: CycleMetadata = Field(default_factory=CycleMetadata)
+    source_checked_at: date | None = None
     conditions: list[Condition] = Field(default_factory=list)
     materials: list[str] = Field(default_factory=list)
     deadline: date | None = None
@@ -124,6 +134,10 @@ class Chunk(Model):
     evidence: list[EvidenceRef] = Field(default_factory=list)
     neighbors: list[str] = Field(default_factory=list)
     indivisible: bool = False
+    cycle: str | None = None
+    cycle_metadata: CycleMetadata = Field(default_factory=CycleMetadata)
+    information_status: str | None = None
+    source_checked_at: date | None = None
 
 
 class MatchResult(Model):
@@ -141,7 +155,7 @@ class RetrievalRequest(Model):
     question: str = Field(min_length=1, max_length=2000)
     program_ids: list[str] = Field(default_factory=list, max_length=4)
     corpus_version: str | None = None
-    method: Literal["semantic", "hybrid"] = "semantic"
+    method: Literal["semantic", "hybrid", "hybrid_60_40"] = "hybrid"
 
 
 class RetrievedEvidence(Model):
@@ -179,6 +193,7 @@ class EvalCase(Model):
     expected_conditions: dict[str, str] = Field(default_factory=dict)
     expected_evidence: list[str] = Field(default_factory=list)
     expected_claims: list[str] = Field(default_factory=list)
+    expects_evidence_gap: bool = False
     critical: bool = False
     checked_sources: list[EvidenceRef] = Field(default_factory=list)
     synthetic: bool = False

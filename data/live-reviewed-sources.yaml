@@ -1,0 +1,191 @@
+sources:
+- id: gafutures-hope
+  url: https://www.gafutures.org/hope-state-aid-programs/hope-zell-miller-scholarships/hope-scholarship/
+  format: html
+  sponsor: Georgia Student Finance Commission
+  category: state
+  status: candidate
+  expected_content_hash: 21363aa61be357694beb4ca7006a27b267e0a50a32b58ba7fe318a42157d8809
+  section_partitions: {}
+  program_bindings: {}
+- id: amicalola
+  url: https://www.amicalolaemc.com/about-us/news/amicalola-emc-awards-146000-in-scholarships-and-names-2026-washington-youth-tour-delegates
+  format: html
+  sponsor: Amicalola EMC
+  category: utility
+  status: candidate
+  expected_content_hash: c93373703d4903fd3b9839675558dc2a049e6df43adbbcddb87e92e711fcd6ac
+  section_partitions: {}
+  program_bindings: {}
+- id: delta-hbcu
+  url: https://www.deltacommunitycu.com/community/scholarships/hbcu-scholarship.html
+  format: html
+  sponsor: Delta Community Credit Union
+  category: credit_union
+  status: candidate
+  expected_content_hash: 2ee9787dac82c6218390a9c8192b4e325f0b8141f1a5f39c7eaa40475d6dba68
+  section_partitions: {}
+  program_bindings: {}
+- id: delta-annual
+  url: https://scholarship.deltacommunitycu.com/
+  format: html
+  sponsor: Delta Community Credit Union
+  category: credit_union
+  status: candidate
+  expected_content_hash: cd87f21c1da4df1771877caca43560f3d7b87b94c19cb7b760162302e7a99c45
+  section_partitions: {}
+  program_bindings: {}
+- id: georgias-own
+  url: https://georgiasownfoundation.org/wp-content/uploads/2025-Presidential-Scholarship-Rules.pdf
+  format: pdf
+  sponsor: Georgia Own Foundation
+  category: credit_union
+  status: candidate
+  expected_content_hash: 9f785b13b530eb50081fd80f8355d30ac5708241365b9b856ea5f86ca7529c21
+  section_partitions: {}
+  program_bindings: {}
+- id: cfa-criteria
+  url: https://cfa.scholarsapply.org/team-member-dates/
+  format: html
+  sponsor: Chick-fil-A
+  category: employer_family
+  status: candidate
+  expected_content_hash: 987a4a794c514858561461697d501056f5061bd89a40cb92ced565525231c869
+  section_partitions:
+    s1:
+    - start: 0
+      end: 108
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s2:
+    - start: 0
+      end: 429
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    - start: 429
+      end: 653
+      program_ids:
+      - program-483fa3bb69e3522d
+    - start: 653
+      end: 1300
+      program_ids:
+      - program-7cac295ae6a12e90
+    - start: 1300
+      end: 1958
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s3:
+    - start: 0
+      end: 199
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s4:
+    - start: 0
+      end: 667
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s5:
+    - start: 0
+      end: 177
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s6:
+    - start: 0
+      end: 26
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s7:
+    - start: 0
+      end: 21
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s8:
+    - start: 0
+      end: 836
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+    s9:
+    - start: 0
+      end: 534
+      program_ids:
+      - program-483fa3bb69e3522d
+      - program-7cac295ae6a12e90
+  program_bindings: {}
+- id: cfa-community
+  url: https://www.chick-fil-a.com/communityscholars
+  format: html
+  sponsor: Chick-fil-A
+  category: corporate
+  status: candidate
+  expected_content_hash: 8b176bf12462fd6de21976f08e3cd83e2d033e780f2fbce15b58f7b97a23c728
+  section_partitions: {}
+  program_bindings: {}
+- id: coca-cola
+  url: https://www.coca-colascholarsfoundation.org/apply/
+  format: html
+  sponsor: Coca-Cola Scholars Foundation
+  category: corporate
+  status: candidate
+  expected_content_hash: 7ddfed6492bd69996207f36c6151695d85dea4bb0ac09ecff8e244d7bc3cd366
+  section_partitions:
+    s11:
+    - start: 0
+      end: 442
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s12:
+    - start: 0
+      end: 301
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s13:
+    - start: 0
+      end: 488
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s14:
+    - start: 0
+      end: 155
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s15:
+    - start: 0
+      end: 143
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s16:
+    - start: 0
+      end: 424
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+    s17:
+    - start: 0
+      end: 3159
+      program_ids: []
+      exclusion_reason: Different community-college awards and general external resource
+        directories, not the high-school Scholars Program.
+  program_bindings: {}
+- id: coolidge
+  url: https://coolidgescholars.org/about/
+  format: html
+  sponsor: Calvin Coolidge Presidential Foundation
+  category: national
+  status: candidate
+  expected_content_hash: d94c19b7af3f5b595db967ded6027338e38917f7c6ff21a899fbd8ba1bd7cfb7
+  section_partitions: {}
+  program_bindings: {}

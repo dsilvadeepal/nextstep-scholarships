@@ -56,10 +56,7 @@ def test_answer_flow_preserves_deterministic_unknowns_and_uses_lcel():
     class Model:
         def invoke(self, schema, instructions, payload, max_output):
             # Model cannot replace deterministic fit outcomes; output contains only cited claims.
-            return schema(
-                blocks=[AnswerBlock(text="GPA 3.5 required.", evidence_ids=["c"])],
-                gaps=[],
-            ), {}
+            return schema(evidence_unit_ids=[payload["evidence"][0]["id"]]), {}
 
     records = [
         Scholarship(
@@ -107,4 +104,82 @@ def test_followup_retrieval_includes_bounded_prior_user_context():
             ChatTurn(role="user", content="Tell me about Coolidge"),
             ChatTurn(role="assistant", content="unsupported assistant claim"),
         ],
+    )
+
+
+def test_answer_selection_rejects_invented_units_and_preserves_unicode():
+    from nextstep.models import Chunk, RetrievalRequest, StudentProfile
+    from nextstep.rag.answer import AnswerService
+
+    class Retriever:
+        def retrieve(self, request):
+            return RetrievedEvidence(
+                chunks=[
+                    Chunk(
+                        id="c",
+                        program_id="p",
+                        source_id="s",
+                        corpus_version="v",
+                        text="A student’s award. Juniors only.",
+                        heading="Award",
+                        section_ids=["s"],
+                        token_count=8,
+                    )
+                ]
+            )
+
+    class Model:
+        invalid = False
+
+        def invoke(self, schema, instructions, payload, max_output):
+            return schema(
+                evidence_unit_ids=[
+                    "invented" if self.invalid else payload["evidence"][0]["id"]
+                ]
+            ), {}
+
+    model = Model()
+    service = AnswerService(Retriever(), model, [])
+    request = RetrievalRequest(question="What is it?", corpus_version="v")
+    assert (
+        service.answer_question(StudentProfile(), request, []).blocks[0].text
+        == "A student’s award."
+    )
+    model.invalid = True
+    with pytest.raises(ValueError, match="Unknown answer evidence unit"):
+        service.answer_question(StudentProfile(), request, [])
+
+
+def test_deferred_named_program_never_substitutes_related_university_rules():
+    from nextstep.models import RetrievalRequest, StudentProfile
+    from nextstep.rag.answer import AnswerService
+
+    class Forbidden:
+        def retrieve(self, request):
+            raise AssertionError(
+                "Deferred program must not retrieve unrelated scholarships"
+            )
+
+    answer = AnswerService(Forbidden(), None, []).answer_question(
+        StudentProfile(),
+        RetrievalRequest(
+            question="What are the confirmed 2027–28 HOPE Scholarship rules?",
+            corpus_version="verified-2026-10-14-v2",
+        ),
+        [],
+    )
+    assert answer.blocks == []
+    assert any("2027–28" in gap and "not" in gap for gap in answer.gaps)
+    assert answer.evidence.chunks == []
+
+
+def test_coverage_guard_is_versioned_and_does_not_match_ordinary_hope():
+    from nextstep.rag.answer import deferred_coverage
+
+    assert not deferred_coverage(
+        "I hope to qualify for Alabama", "verified-2026-10-14-v2"
+    )
+    assert not deferred_coverage("HOPE Scholarship", "synthetic-fixture")
+    assert deferred_coverage(
+        "Can I get a Clemson scholarship?", "verified-2026-10-14-v2"
     )

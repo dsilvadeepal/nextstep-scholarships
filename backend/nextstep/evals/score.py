@@ -47,6 +47,19 @@ def score_case(case, answer, judgment, actual_conditions=None):
             ]
         )
     )
+    expected_gap_pass = None
+    if case.expects_evidence_gap:
+        # A checked expectation of missing evidence must not reward invented facts.
+        # Contradiction/unknown and claim-support checks still apply to gap text.
+        expected_gap_pass = bool(
+            judgment
+            and judgment.no_contradiction
+            and judgment.unknowns_preserved
+            and not answer.blocks
+            and answer.gaps
+            and not required
+        )
+        rubric = expected_gap_pass
     # A judge omitting claims from a factual answer cannot manufacture N/A or a pass.
     claim_coverage = not answer.blocks or checked > 0
     return {
@@ -59,6 +72,7 @@ def score_case(case, answer, judgment, actual_conditions=None):
             and supported == checked
         ),
         "condition_pass": condition_ok,
+        "expected_gap_pass": expected_gap_pass,
         "citation_resolution": sum(i in evidence_ids for i in cited) / len(cited)
         if cited
         else None,

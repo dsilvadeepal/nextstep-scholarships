@@ -6,6 +6,74 @@ from nextstep.evals.runner import EvalRunner
 from sqlalchemy import create_engine
 
 
+def test_expected_evidence_gap_does_not_require_invented_eligibility_rules():
+    from nextstep.evals.score import Judgment, score_case
+    from nextstep.models import (
+        AnswerBlock,
+        AnswerResult,
+        EvalCase,
+        RetrievedEvidence,
+        StudentProfile,
+    )
+
+    case = EvalCase(
+        id="missing-program",
+        question="Clemson rules?",
+        profile=StudentProfile(),
+        frozen_date="2026-10-14",
+        expects_evidence_gap=True,
+    )
+    judgment = Judgment(
+        required_facts_addressed=False,
+        responsive=False,
+        no_contradiction=True,
+        unknowns_preserved=True,
+        reason="Rules unavailable; expected coverage gap preserved",
+        claims=[],
+    )
+    answer = AnswerResult(
+        blocks=[],
+        gaps=["Clemson is not in this verified corpus."],
+        corpus_version="v",
+        method="semantic",
+        evidence=RetrievedEvidence(chunks=[]),
+    )
+    assert score_case(case, answer, judgment)["passed"] is True
+    # A factual answer substituted for a required gap must still fail.
+    answer.blocks = [AnswerBlock(text="Another award's rules", evidence_ids=[])]
+    assert score_case(case, answer, judgment)["passed"] is False
+    answer.blocks = []
+    answer.gaps = []
+    assert score_case(case, answer, judgment)["passed"] is False
+
+
+def test_rubric_only_edits_do_not_make_exposed_heldout_questions_fresh(tmp_path):
+    r = runner(tmp_path)
+    case = {
+        "question": "Missing program rules?",
+        "profile": {},
+        "program_ids": [],
+        "frozen_date": "2026-10-14",
+    }
+    config = {
+        "corpus_version": "v",
+        "cases": ["a"],
+        "methods": ["semantic"],
+        "split": "heldout",
+        "suite_hash": "before",
+        "case_snapshots": {"a": case},
+    }
+    run = r.start_run(config)
+    r.cancel(run)
+    edited = {
+        **config,
+        "suite_hash": "after",
+        "case_snapshots": {"a": {**case, "expects_evidence_gap": True}},
+    }
+    with pytest.raises(ValueError, match="heldout"):
+        r.start_run(edited)
+
+
 def runner(tmp_path):
     engine = create_engine(f"sqlite:///{tmp_path}/evals.db")
     metadata.create_all(engine)
@@ -231,7 +299,14 @@ def test_execution_settings_cannot_drift_and_expected_sources_do_not_filter():
         validate_configuration(
             s.model_copy(update={"input_usd_per_million": 1}), config
         )
-    case = load_suite()[0][0]
+    weighted = snapshot(s, "v", "tuning", ["hybrid_60_40"])
+    assert weighted["retrieval_weights"] == {"hybrid_60_40": [0.6, 0.4]}
+    validate_configuration(s, weighted)
+    with pytest.raises(ValueError, match="Retrieval weights"):
+        validate_configuration(
+            s, {**weighted, "retrieval_weights": {"hybrid_60_40": [0.7, 0.3]}}
+        )
+    case = load_suite()[0][0].model_copy(update={"program_ids": []})
     assert case.checked_sources
     assert case_request(case, "v", "semantic").program_ids == []
 

@@ -33,6 +33,8 @@ def test_no_global_trace_leak_and_usage_reconciled(tmp_path, monkeypatch):
             from langsmith.run_helpers import get_tracing_context
 
             assert get_tracing_context()["enabled"] is False
+            assert "student’s" in args[0][1][1]
+            assert "\\u2019" not in args[0][1][1]
             return {
                 "parsed": ExtractedRecords(records=[]),
                 "raw": SimpleNamespace(
@@ -41,7 +43,7 @@ def test_no_global_trace_leak_and_usage_reconciled(tmp_path, monkeypatch):
             }
 
     PaidModel(settings, ledger, Client).invoke(
-        ExtractedRecords, "source instructions", {}
+        ExtractedRecords, "source instructions", {"text": "student’s"}
     )
     assert ledger.spent() == Decimal(".000020")
 
@@ -104,3 +106,92 @@ def test_pinecone_constructor_matches_installed_sdk(monkeypatch):
         None,
     )
     assert store.index.host == "fixture-host"
+
+
+def test_extraction_wire_shape_normalizes_only_empty_lists_and_single_evidence_ids():
+    parsed = ExtractedRecords.model_validate(
+        {
+            "records": [
+                {
+                    "id": "a",
+                    "name": "Award",
+                    "corpus_version": "staged",
+                    "materials": None,
+                    "field_evidence": {"name": "e1"},
+                }
+            ]
+        }
+    )
+    assert parsed.records[0].materials == []
+    assert parsed.records[0].field_evidence == {"name": ["e1"]}
+    with pytest.raises(ValueError):
+        ExtractedRecords.model_validate(
+            {
+                "records": [
+                    {
+                        "id": "a",
+                        "name": "Award",
+                        "corpus_version": "staged",
+                        "materials": 42,
+                    }
+                ]
+            }
+        )
+
+
+def test_vector_metadata_keeps_cycle_and_exact_source_provenance():
+    from datetime import UTC, datetime
+
+    from nextstep.models import Chunk, EvidenceRef
+    from nextstep.providers import PineconeStore
+
+    captured = []
+    store = object.__new__(PineconeStore)
+    store.index = SimpleNamespace(upsert=lambda **kwargs: captured.append(kwargs))
+    ref = EvidenceRef(
+        id="e",
+        source_id="official-rules",
+        document_version="sha256-original",
+        section_id="p7",
+        page=7,
+        quote="Current juniors",
+        start=4,
+        end=19,
+        url="https://example.org/rules.pdf",
+        fetched_at=datetime(2026, 10, 14, tzinfo=UTC),
+        title="Eligibility",
+        cycle="2026–27 application; Fall 2028 entry",
+    )
+    chunk = Chunk(
+        id="c",
+        program_id="award",
+        source_id="official-rules",
+        corpus_version="v",
+        text=ref.quote,
+        heading="Eligibility",
+        section_ids=["p7"],
+        token_count=3,
+        evidence=[ref],
+        cycle=ref.cycle,
+        information_status="source_checked",
+        source_checked_at="2026-10-14",
+        cycle_metadata={
+            "application_cycle": "2026–27",
+            "college_entry_year": 2028,
+            "high_school_graduation_year": 2028,
+        },
+    )
+    store.upsert("v", [chunk], [[1.0, 0.0]])
+    metadata = captured[0]["vectors"][0]["metadata"]
+    assert captured[0]["namespace"] == "v"
+    assert metadata["source_url"] == ref.url
+    assert metadata["document_hash"] == ref.document_version
+    assert metadata["page_number"] == 7
+    assert metadata["quote_start"] == 4 and metadata["quote_end"] == 19
+    assert metadata["college_entry_year"] == 2028
+    assert metadata["application_cycle"] == "2026–27"
+    assert "award_academic_year" not in metadata
+    assert metadata["information_status"] == "source_checked"
+    assert metadata["source_checked_at"] == "2026-10-14"
+    assert metadata["fetched_at"] == ref.fetched_at.isoformat()
+    assert all(value is not None for value in metadata.values())

@@ -44,7 +44,7 @@ export function ChatPanel({
           question,
           program_ids: programIds.slice(0, 4),
           corpus_version: corpusVersion,
-          method: "semantic",
+          method: "hybrid",
         },
         history,
       });

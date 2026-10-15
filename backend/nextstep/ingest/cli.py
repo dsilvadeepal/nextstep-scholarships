@@ -124,7 +124,7 @@ def main(argv=None):
         chunks = []
         model = PaidModel(settings, ledger)
         for doc in docs:
-            key = f"extracted/{doc.source_id}/{doc.content_hash}-{settings.answer_model}-v1.json"
+            key = f"extracted/{doc.source_id}/{doc.content_hash}-{settings.answer_model}-units-v6.json"
             try:
                 try:
                     extracted = [

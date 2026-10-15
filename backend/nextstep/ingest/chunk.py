@@ -50,6 +50,7 @@ def make_chunks(document, records, corpus_version):
                 url=document.url,
                 fetched_at=document.fetched_at,
                 title=section.heading,
+                cycle=programs[section.program_id].cycle,
             )
             section_chunks.append(
                 Chunk(
@@ -63,6 +64,10 @@ def make_chunks(document, records, corpus_version):
                     token_count=count(piece),
                     evidence=[ref],
                     indivisible=indivisible and count(piece) > 500,
+                    cycle=programs[section.program_id].cycle,
+                    cycle_metadata=programs[section.program_id].cycle_metadata,
+                    information_status=programs[section.program_id].information_status,
+                    source_checked_at=programs[section.program_id].source_checked_at,
                 )
             )
         for i, chunk in enumerate(section_chunks):

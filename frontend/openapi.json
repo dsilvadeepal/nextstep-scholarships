@@ -656,6 +656,46 @@
             "default": false,
             "title": "Indivisible",
             "type": "boolean"
+          },
+          "cycle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Cycle"
+          },
+          "cycle_metadata": {
+            "$ref": "#/components/schemas/CycleMetadata"
+          },
+          "information_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Information Status"
+          },
+          "source_checked_at": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Checked At"
           }
         },
         "required": [
@@ -777,6 +817,73 @@
           "note"
         ],
         "title": "Coverage"
+      },
+      "CycleMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "application_cycle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Application Cycle"
+          },
+          "college_entry_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "College Entry Year"
+          },
+          "award_academic_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Award Academic Year"
+          },
+          "regulation_academic_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Regulation Academic Year"
+          },
+          "high_school_graduation_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "High School Graduation Year"
+          }
+        },
+        "title": "CycleMetadata",
+        "type": "object"
       },
       "EvidenceRef": {
         "additionalProperties": false,
@@ -1069,10 +1176,11 @@
             "title": "Corpus Version"
           },
           "method": {
-            "default": "semantic",
+            "default": "hybrid",
             "enum": [
               "semantic",
-              "hybrid"
+              "hybrid",
+              "hybrid_60_40"
             ],
             "title": "Method",
             "type": "string"
@@ -1205,6 +1313,22 @@
             ],
             "default": null,
             "title": "Cycle"
+          },
+          "cycle_metadata": {
+            "$ref": "#/components/schemas/CycleMetadata"
+          },
+          "source_checked_at": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Checked At"
           },
           "conditions": {
             "items": {
@@ -1489,6 +1613,11 @@
             },
             "title": "Expected Claims",
             "type": "array"
+          },
+          "expects_evidence_gap": {
+            "default": false,
+            "title": "Expects Evidence Gap",
+            "type": "boolean"
           },
           "critical": {
             "default": false,

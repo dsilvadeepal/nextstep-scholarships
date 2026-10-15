@@ -18,6 +18,8 @@ test("synthetic scholarship print includes unresolved conditions and source", as
             evidence: [
               {
                 id: "e",
+              source_id: "synthetic",
+              document_version: "synthetic-fixture-hash",
                 quote: "Seniors may apply.",
                 url: "https://example.org/fixture",
                 title: "Synthetic fixture",

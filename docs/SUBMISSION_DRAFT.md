@@ -1,7 +1,7 @@
 # NextStep Scholarships — Week 2 Project Submission
 
 **Author:** Deepal Silva
-**Status:** Working submission draft, October 14, 2026. A reviewed corpus and local live evaluation exist; final live student-journey checks, Replit source transfer and public release remain pending. The linked Google Doc has been synchronized with this interim checkpoint. Distinguish raw held-out results from later rubric rescoring below.
+**Status:** Working submission draft, October 14, 2026. A reviewed corpus and local live evaluation exist; local live student-journey checks are complete; Replit source transfer and hosted preview checks are complete; public release remains pending. Distinguish raw held-out results from later rubric rescoring below.
 **Project repository:** https://github.com/dsilvadeepal/nextstep-scholarships (private; creation/verification recorded separately).
 **Google Doc:** https://docs.google.com/document/d/1Nn_ZbfUnSVDwCozP7RpaeimTY08WvDCH0MwjedAYRts/edit
 
@@ -75,7 +75,7 @@ These are discovery candidates from SOURCE_INVENTORY.md, not a claim of current 
 
 | Actual collection evidence | Current local reviewed pilot |
 | --- | --- |
-| Active corpus ID and review date | `verified-2026-10-14-v2`, reviewed October 14, 2026; active locally, not yet hosted |
+| Active corpus ID and review date | `verified-2026-10-14-v2`, reviewed October 14, 2026; active locally and in the Replit development preview |
 | Unique source documents / award records / families / chunks | 19 contributing official documents / 18 records / 10 families / 174 chunks |
 | Formats and category/geography coverage | Official HTML/PDF; state, university, corporate, foundation and credit-union awards. The admitted pilot is narrower than the Georgia and five-neighbor-state discovery audit. |
 | Source review outcome | First audit: 65 official URLs re-fetched, 63 parsed and two failed; 16 linked official documents followed, 15 parsed and one failed. Only 19 documents contribute selected sections to the pilot. |
@@ -103,7 +103,7 @@ Assess the answer against the checked reference evidence and rubric. Identify su
 
 ### AI coding instructions and workflow used so far
 
-The owner brainstormed scope with Codex, approved the PRD/design and chose Native execution. Codex implemented the 12-task plan locally with tests, a reviewed source pass and bounded live calls under the shared $5 ledger. A coordinated LangChain review retained the existing splitter, structured ChatOpenAI calls and LCEL flow, and removed obsolete evidence code without adding packages. Replit development database, App Storage and preview startup were checked separately; final hosted source transfer and student smoke tests remain.
+The owner brainstormed scope with Codex, approved the PRD/design and chose Native execution. Codex implemented the 12-task plan locally with tests, a reviewed source pass and bounded live calls under the shared $5 ledger. A coordinated LangChain review retained the existing splitter, structured ChatOpenAI calls and LCEL flow, and removed obsolete evidence code without adding packages. Replit development source transfer, PostgreSQL catalog import, App Storage readback and student preview were checked separately. Hosted paid-answer testing and public release remain.
 
 **Actual prompt appendix:** [TO COMPLETE with exact executed extraction/answer/judge prompt files, hashes/versions, model settings and sanitized examples]
 **Coding prompt/response screenshots:** [TO COMPLETE with actual examples and secrets removed]
@@ -117,7 +117,7 @@ The owner brainstormed scope with Codex, approved the PRD/design and chose Nativ
 | Georgia juniors/seniors first, including national awards | Focus the student journey while keeping discovery broad | Owner-approved scope, not user-research evidence |
 | Guided profile followed by results-led conversation | Let students skip unknown details and ask contextual follow-ups | Approved UX direction, not usability-test findings |
 | Automatically extracted conditions plus deterministic checks and standard RAG | Make unknowns explainable without full-catalog human review | Approved design; accuracy not measured yet |
-| Compare dense and keyword+dense retrieval | Scholarship names and affiliations may benefit from exact-term search | Both methods passed 26/26 post-fix regression cases; no superiority conclusion from this alone. Final paired quality and latency report pending. |
+| Compare dense and keyword+dense retrieval | Scholarship names and affiliations may benefit from exact-term search | Semantic and equal-weight hybrid each passed 26/26 saved tuning cases. A later 60/40 weighted hybrid completed 25/26; the baseline was not rerun concurrently, so latency is not a paired comparison. |
 | One web service, manual ingestion and bounded eval requests | Reduce deployment/worker complexity for the demo | Approved architecture; hosting behavior not tested yet |
 | Energetic blue/violet with playful accents | Reflect owner's visual preference | Approved direction; contrast and screens not tested yet |
 
@@ -134,7 +134,7 @@ Do not fill this log with hypothetical bugs or improvements. Preserve failed att
 
 ## 6. Evaluation and observed results
 
-**Interim local result, before final live student-journey signoff:** Reviewed corpus `verified-2026-10-14-v2` is active locally with 18 award records, 174 chunks and 19 contributing official documents. Metadata readback matched all 174 vectors. Post-fix regression cases passed 26/26 for semantic and 26/26 for hybrid retrieval. A held-out test exposed a real failure: a HOPE question received Georgia Southern merit rules. The versioned coverage guard now makes absent-program questions return a gap; that formerly held-out example became a regression test. The later six-case held-out run gave five factual answers and a correct Clemson coverage gap. The original automated grader reported 5/6 for each method because it expected unavailable rules; a unit-tested gap rubric rescored those **saved outputs** 6/6. This is not a fresh held-out success claim. Final latency, claim-support, cost and live browser results are pending the ingestion report.
+**Local reviewed-pilot result:** Reviewed corpus `verified-2026-10-14-v2` is active locally with 18 award records, 174 chunks and 19 contributing official documents. Metadata readback matched all 174 vectors. Post-fix regression cases passed 26/26 for semantic and 26/26 for hybrid retrieval. A held-out test exposed a real failure: a HOPE question received Georgia Southern merit rules. The versioned coverage guard now makes absent-program questions return a gap; that formerly held-out example became a regression test. The later six-case held-out run gave five factual answers and a correct Clemson coverage gap. The original automated grader reported 5/6 for each method because it expected unavailable rules; a unit-tested gap rubric rescored those **saved outputs** 6/6. This is not a fresh held-out success claim. Six real local phone/desktop/API/print checks passed, alongside 18 mocked browser regressions. The cumulative OpenAI ledger was $0.81145530 of the approved $5 ceiling after these checks. Claim-level support and timed-run metrics are not established in the final checkpoint.
 
 The local admin screen shows run progress, comparable semantic/hybrid results, errors and timings, and an inspector with profile/question, checked expectation, actual answer, retrieved evidence, citations and score reasons. Critical cases cover unknowns, eligibility/date claims, closed/unpublished cycles, conflicts, multi-program answers and consistent corpus updates.
 
@@ -153,6 +153,10 @@ The local admin screen shows run progress, comparable semantic/hybrid results, e
 **Controlled update:** [TO COMPLETE before/after matching and answer, explicitly synthetic]
 **Run metadata / usage / limitations:** [TO COMPLETE with run ID, source/config versions, denominators, errors, timeouts, cost estimates and spot-check method]
 
+### Bounded 60/40 hybrid experiment — tuning only
+
+A separate `hybrid_60_40` method applies actual numeric RRF contributions of 0.6 semantic and 0.4 keyword with the same reviewed corpus, 20+20 candidates, eight passages and 5,000-token ceiling. Its weights are frozen and validated in run configuration. Saved run `e9154c90-d94e-4598-9c07-23d182dd295c` passed 25/26 tuning cases; one case failed on three attempts when the model selected an evidence-unit ID that had not been supplied. The citation gate rejected the answer. Historical same-corpus semantic and equal-weight hybrid tuning runs each passed 26/26. The 60/40 run's observed claim support (33/33) and evidence recall (24/24) cover completed answers only; its 2.71-second completed-answer p95 is not comparable as a fresh paired speed result. No held-out questions were run for this experiment. The 60/40 variant is not a release candidate. The student-app default was subsequently set to the existing equal-weight hybrid method for the five-case demo. See `docs/EVAL_REPORT.md` for denominators and run IDs.
+
 ## 7. Learnings and observations
 
 ### Planning observations
@@ -167,12 +171,12 @@ These design observations were tested in a local app, but do not by themselves e
 - Chunking/retrieval lesson: A valid citation can still answer the wrong program. The HOPE question that returned Georgia Southern passages required a versioned coverage guard, not merely stricter citation formatting.
 - Faithfulness/unknown-handling lesson: Unpublished 2027–28 HOPE rules and unspecified Park GPA scale must remain unknown; past-year rules and a student-entered GPA cannot be promoted into confirmed eligibility.
 - UX/AI coding lesson: The course-focused LangChain review found existing splitter, structured ChatOpenAI and LCEL use sufficient; removing a contradictory extraction path made the demo easier to explain than adding wrappers.
-- Cost/latency/deployment lesson: The cumulative local ledger remained below the approved $5 ceiling during this interim run; exact final spend and latency remain pending. Replit development database, bucket and preview startup were verified without enabling hosted paid calls.
-- Next improvement supported by evidence: Finish source-grounded browser/print checks and the final per-claim evaluation report before deciding whether the reviewed corpus is suitable for the recorded demo.
+- Cost/latency/deployment lesson: The cumulative local ledger was $0.81145530 after local checks, below the approved $5 ceiling; a completed-answer latency result is still unreported. Replit development database, bucket and preview startup were verified without enabling hosted paid calls.
+- Next improvement supported by evidence: Record the source-grounded local demo, then finish the claim-level and latency report before making broader quality claims.
 
 ## 8. Demonstration and submission checklist
 
-**Suggested recording examples:** Use the fictional Georgia Southern senior to show a normal cited answer about one-time merit and recalculated core GPA, then the fictional Park applicant with a 3.79 unweighted GPA to show the non-rounded 3.80 rule and unknowns. If time permits after final verification, ask about unpublished 2027–28 HOPE rules to show an explicit evidence gap. The copy-ready five-case script is in `docs/DEMO_TEST_SCENARIOS.md`; these are planned demonstration inputs, not evidence of a recorded video.
+**Suggested recording examples:** Use the fictional Georgia Southern senior to show a normal cited answer about one-time merit and recalculated core GPA, then the fictional Park applicant with a 3.79 unweighted GPA to show the non-rounded 3.80 rule. Park's public rule omits the numeric GPA scale, so the structured match remains unresolved; do not present the profile as deterministically ineligible. If time permits, ask about unpublished 2027–28 HOPE rules to show an explicit evidence gap. The copy-ready five-case script is in `docs/DEMO_TEST_SCENARIOS.md`; these are planned demonstration inputs, not evidence of a recorded video.
 
 - [ ] Working application verified; public link recorded.
 - [ ] Actual corpus manifest and processing outcomes recorded.
@@ -194,14 +198,30 @@ The Week 2 handout records an October 18, 2026, 11:59 p.m. Pacific Builder of th
 - LangChain retrieval architectures: https://docs.langchain.com/oss/python/deepagents/retrieval
 - LangChain text-splitter reference: https://reference.langchain.com/python/langchain-text-splitters
 
-## Interim implementation and live checkpoint — October 14, 2026
+## Local implementation and live checkpoint — October 14, 2026
 
-The student app and local evaluation tools are implemented. Reviewed corpus `verified-2026-10-14-v2` is active locally with 18 award records across 10 families, 174 chunks and 19 contributing official documents. Pinecone metadata readback matched all 174 vectors. This corpus is not yet transferred to the hosted Replit preview. No public deployment, recording or submission has occurred.
+The student app and local evaluation tools are implemented. Reviewed corpus `verified-2026-10-14-v2` is active locally with 18 award records across 10 families, 174 chunks and 19 contributing official documents. Pinecone metadata readback matched all 174 vectors. The same reviewed catalog is imported into the Replit development preview, with 18 records and 174 chunks. No public deployment, recording or submission has occurred.
 
-Latest reported local verification: 84 backend tests passed with two default PostgreSQL skips; two PostgreSQL integration checks passed separately; six frontend unit tests and the production build passed. Existing mocked browser checks and new live phone/desktop/API checks were reported passing by the ingestion chat. A real-data print-layout correction is underway, so final print signoff remains pending. Docker was not used.
+Latest reported local verification: 85 backend tests passed with two default PostgreSQL skips; two PostgreSQL integration checks passed separately; seven frontend unit tests, TypeScript and the production build passed. Eighteen mocked browser regressions and six real local phone/desktop/API/print checks passed. One-award printouts were visually inspected at phone and desktop widths after a duplicate-quote and blank-first-page fix; each fit one readable page. Docker was not used.
 
 Source review re-fetched 65 official URLs (63 parsed), followed 16 additional official links (15 parsed), and admitted selected sections from 19 documents. The selected corpus is a bounded pilot, not comprehensive scholarship coverage. Missing 2027–28 HOPE/Zell Miller rules and incomplete Clemson first-year rules remain explicit gaps.
 
-Post-fix regression cases passed 26/26 for both semantic and hybrid retrieval. The original held-out HOPE question incorrectly received Georgia Southern rules; a versioned coverage guard fixed that behavior and the case became a regression test. A later held-out run produced five factual answers and a correct Clemson coverage gap. The original automated grader returned 5/6 per method because it demanded rules unavailable from the corpus. A unit-tested expected-gap rubric rescored the **saved outputs** 6/6; this is not a fresh held-out success claim. Final claim-support, latency and total-cost figures will come from the ingestion report.
+Post-fix regression cases passed 26/26 for both semantic and hybrid retrieval. The original held-out HOPE question incorrectly received Georgia Southern rules; a versioned coverage guard fixed that behavior and the case became a regression test. A later held-out run produced five factual answers and a correct Clemson coverage gap. The original automated grader returned 5/6 per method because it demanded rules unavailable from the corpus. A unit-tested expected-gap rubric rescored the **saved outputs** 6/6; this is not a fresh held-out success claim. Cumulative recorded OpenAI cost after these checks was $0.81145530 of $5; no ledger reset. Claim-level support and completed-answer latency have not been established in this checkpoint.
 
-Replit development PostgreSQL, App Storage and student preview startup are verified with hosted paid calls disabled. Admin evaluation stays local by owner choice; hosted admin access remains fail-closed. Remaining gates are stable-source transfer, final live browser/print and evaluation report review, public student smoke tests, owner publication approval, recording and course submission.
+Replit development transfer is verified: 149 source files, locked dependency install, TypeScript/Vite build, exact 18-record/174-chunk SQL import, App Storage readback, and a preview of the polished UI with a Georgia Southern cited checklist. Health returned 200 and anonymous admin returned 401. Hosted paid calls remain disabled; no hosted keys or shared spending ledger were transferred. Admin evaluation stays local by owner choice; hosted admin access remains fail-closed. Remaining gates are claim-level/latency evaluation review, public student smoke tests, owner publication approval, recording and course submission.
+
+## Five local demo questions — run October 14, reported October 15, 2026
+
+The student app now defaults to the existing equal-weight (50/50) hybrid retrieval method. Five separate local requests used the exact fictional homepage profiles and questions in `docs/DEMO_TEST_SCENARIOS.md`, with no chat history or additional questions. All five requests returned a server response; that only means the request completed, not that every answer met the intended demo check. Full returned answer blocks, gaps, and official citation links are in `docs/DEMO_RUN_RESULTS_2026-10-15.md` and the linked Google Doc.
+
+| Demo case | Observed response | OpenAI cost for this query |
+| --- | --- | ---: |
+| Georgia Southern | Cited one-time/non-renewable, recalculated core GPA and February 1, 2027; withheld a tier decision from self-entered GPA despite showing a tier excerpt. | $0.00156330 |
+| Park | Cited non-rounded 3.80, separate applications, November 1 timing and two recommendations; GPA-scale uncertainty remained. | $0.00297960 |
+| Coolidge | Returned Fall 2028 junior-cycle and deadline passages, but a leading “No” fragment could mislead this junior and the response omitted the explicit two-letter count. Not ready as a clean demo. | $0.00540200 |
+| Alabama versus Auburn | Cited UA no-superscore, Auburn superscore and a no-guarantee warning, but gave a partial comparison rather than a direct complete answer. | $0.00192922 |
+| 2027–28 HOPE | Returned the correct missing-rule gap with no model call; it did not provide the planned GSFC/GAfutures link. | $0.00000000 |
+
+The five queries added **$0.01187412** to the existing ledger, bringing cumulative recorded OpenAI spend to **$0.82332942 of $5**. Query costs are measured ledger differences; later live questions cost extra. For the recording, Georgia Southern and Park are the best-supported examples from this run. Do not portray the Coolidge or Alabama/Auburn response as a complete answer. No extra question was asked in these runs; the app displayed unresolved requirements as gaps rather than prompting for more input.
+
+An independent check against freshly searched official public pages is in `docs/EXTERNAL_DEMO_AUDIT_2026-10-15.md` and the linked Google Doc. It did not use the app corpus or Pinecone. It found the Coolidge answer contextually misleading and the Alabama/Auburn answer materially incomplete; these two cases should be fixed and retested before being used as correct-answer demonstrations.

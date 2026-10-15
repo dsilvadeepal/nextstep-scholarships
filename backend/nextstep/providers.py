@@ -240,20 +240,46 @@ class PineconeStore:
                 {
                     "id": c.id,
                     "values": v,
-                    "metadata": {
-                        "program_id": c.program_id,
-                        "source_id": c.source_id,
-                        "corpus_version": version,
-                        "text": c.text,
-                        "heading": c.heading,
-                        "section_ids": c.section_ids,
-                    },
+                    "metadata": self.metadata_for(version, c),
                 }
                 for c, v in zip(
                     chunks[start : start + 50], vectors[start : start + 50], strict=True
                 )
             ]
             self.index.upsert(vectors=batch, namespace=version)
+
+    @staticmethod
+    def metadata_for(version, chunk):
+        if chunk.corpus_version != version:
+            raise ValueError("Vector metadata must match the corpus namespace")
+        result = {
+            "program_id": chunk.program_id,
+            "source_id": chunk.source_id,
+            "corpus_version": version,
+            "text": chunk.text,
+            "heading": chunk.heading,
+            "section_ids": chunk.section_ids,
+            "cycle": chunk.cycle,
+            "information_status": chunk.information_status,
+            "source_checked_at": chunk.source_checked_at.isoformat()
+            if chunk.source_checked_at
+            else None,
+            **chunk.cycle_metadata.model_dump(exclude_none=True),
+        }
+        if chunk.evidence:
+            ref = chunk.evidence[0]
+            result.update(
+                source_url=ref.url,
+                document_hash=ref.document_version,
+                fetched_at=ref.fetched_at.isoformat(),
+                source_title=ref.title,
+                page_number=ref.page,
+                quote_start=ref.start,
+                quote_end=ref.end,
+                evidence_ids=[r.id for r in chunk.evidence],
+            )
+        # Pinecone metadata has no null type. Omission represents unknown facts.
+        return {key: value for key, value in result.items() if value is not None}
 
     def ready(self, version, ids):
         # Eventual consistency is not guessed: failed readiness is explicitly retried by the operator.

@@ -1,0 +1,236 @@
+{
+  "id": "source-32:cec265ab4315eb6b15e351e72f63562dd654e21b9e922f25e0b949a81c946c7f",
+  "content_hash": "cec265ab4315eb6b15e351e72f63562dd654e21b9e922f25e0b949a81c946c7f",
+  "source_id": "source-32",
+  "url": "https://www.georgiasouthern.edu/admissions-aid/tuition-and-scholarships/types-of-aid/scholarships",
+  "fetched_at": "2026-10-15T02:57:54.989761Z",
+  "sections": [
+    {
+      "id": "s1",
+      "heading": "Document",
+      "page": null,
+      "text": "html\nScholarships - Georgia Southern University\nSkip to main content",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s2",
+      "heading": "Contact Info",
+      "page": null,
+      "text": "Office of Financial Aid\nGeorgia Southern University\nPost Office Box 8065\r\nStatesboro, Georgia 30460-8065\nfinaid@georgiasouthern.edu\n912-478-5413\nRecipient of Georgia Southern Honors College’s 1906 Scholarship\nGeorgia Southern University’s scholarship programs for incoming and current students unlock opportunities for academic excellence and financial support.\nWe understand the importance of easing the financial burden associated with pursuing higher education. To build a path to social mobility for all students, we extend scholarships that recognize and reward outstanding achievement, leadership and potential.\nOur scholarship programs support learners at every stage of their academic journey, and through the generosity of donors, we are able to financially assist students across various fields of study. At the same time, we offer recommendations for additional external funding opportunities.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s3",
+      "heading": "Explore Georgia Southern Scholarships",
+      "page": null,
+      "text": "Discover the array of scholarship opportunities available to new and current Georgia Southern students. To apply, review eligibility criteria, application requirements and deadlines.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s4",
+      "heading": "New Incoming Students",
+      "page": null,
+      "text": "Incoming first-year and transfer students have access to a range of scholarship opportunities administered by the Office of Admissions at Georgia Southern, including institutional, foundation and academic scholarships designed to support their educational journey from the beginning.\nHave questions about available scholarships, their requirements or deadlines?\nEmail your admissions counselor\nto learn more.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s5",
+      "heading": "Merit-Based Aid",
+      "page": null,
+      "text": "First-Year Merit Scholarships (Fall 2027)\nNo Separate Application Needed!\nAll incoming\nfirst-year Georgia residents\napplying for Fall 2027 are automatically evaluated for merit scholarships when they submit their completed admission application by February 1st, 2027.\nKey Details at a Glance:\nEligible Term:\nFall 2027 entry only\n(merit aid is not awarded for spring entry)\nPriority Application Deadline:\nFebruary 1st, 2027\nAward Structure:\nOne-time award\nfor your first academic year\n(non-renewable)\nNotification:\nSent to admitted students in the\nSpring\nResidency Requirement:\nGeorgia residents only\n(in-state tuition status required)\nFall 2027 Award Tiers\nxml encoding=\"utf-8\" ?",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s6",
+      "heading": "Merit-Based Aid",
+      "page": null,
+      "text": "Calculated Admissions GPA | Annual Award Amount (One – Time)\n4.00 + | $1000\n3.80 – 3.99 | $750\n3.50 – 3.79 | $500\nBelow 3.50 | Not eligible for automatic merit aid",
+      "table_headers": [],
+      "table_rows": [
+        [
+          "Calculated Admissions GPA",
+          "Annual Award Amount (One – Time)"
+        ],
+        [
+          "4.00 +",
+          "$1000"
+        ],
+        [
+          "3.80 – 3.99",
+          "$750"
+        ],
+        [
+          "3.50 – 3.79",
+          "$500"
+        ],
+        [
+          "Below 3.50",
+          "Not eligible for automatic merit aid"
+        ]
+      ],
+      "program_id": null,
+      "kind": "table",
+      "warnings": [
+        "Table has no explicit header; verify column relationships"
+      ],
+      "start_offset": 0
+    },
+    {
+      "id": "s7",
+      "heading": "Merit-Based Aid",
+      "page": null,
+      "text": "H\now is your GPA evaluated?\nMerit scholarship eligibility is determined using the\nrecalculated core GPA\nestablished during your admissions review. This calculated GPA focuses on core academic coursework and may differ from the cumulative GPA on your high school transcript.\nImportant Policy Notes:\nAward Terms:\nFirst-year merit awards are\none-time grants distributed across your first academic year\nand are not renewable for subsequent years.\nAnnual Policy Review:\nCriteria and funding levels apply strictly to first-time, full-time students enrolling in\nFall 2027\nand are subject to change for future entry cycles.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s8",
+      "heading": "The Honors College",
+      "page": null,
+      "text": "In Georgia Southern’s multi-campus Honors College, a community of driven, curious scholars engages in an elite set of meaningful learning opportunities both inside and outside the classroom. Incoming first-year students interview for several Honors College scholarship opportunities, including full tuition and comprehensive package scholarships.\nWe will invite select applicants who apply by January 15th to campus for scholarship interviews.\nThe priority deadline for Honors College scholarship consideration: January 15\nFinal deadline for Honors College consideration: April 15\nLearn More About the Honors College\nApply for Honors College Scholarships",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s9",
+      "heading": "Southern Leaders",
+      "page": null,
+      "text": "Southern Leaders students participate in dynamic leadership courses, actively address community issues through service initiatives and craft special projects designed to make a lasting positive impact. They also have the potential to earn scholarships for their contributions to the organization.\nScholarship deadline: Feb. 1\nAbout the Southern Leaders Program\nFreshmen can apply to the Southern Leaders Program on their\nAdmissions Status Portal\n.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s10",
+      "heading": "Current Students",
+      "page": null,
+      "text": "Explore a variety of scholarship options tailored to current students’ academic achievements, extracurricular involvement and individual circumstances, providing valuable support as they continue their educational pursuits.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s11",
+      "heading": "MyScholarships/ScholarshipUniverse",
+      "page": null,
+      "text": "Currently enrolled students at Georgia Southern can explore and apply for both internal and external scholarships through our\nMyScholarships portal\n, powered by Scholarship Universe. Discover opportunities based on your major, campus involvement, academic merit, and more.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s12",
+      "heading": "How to Apply:",
+      "page": null,
+      "text": "Log in with your Georgia Southern Student Credentials –\nClick the Login link on the Top Right\n.\nAnswer as many questions as you can in the\nQuestions tab\nto be matched with Georgia Southern Scholarships and External Scholarships.\nReview the scholarships you are eligible for in the\nScholarships tab.\nComplete any Scholarship Applications available under the\nApplications tab\n.\nThe Georgia Southern Scholarship\ndeadline\nto apply is\nFebruary 1, 2026.\nExternal scholarship deadlines vary.\nIf you have any scholarship questions, feel free to contact the MyScholarships Help Team at:\nmyscholarships@georgiasouthern.edu\n.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s13",
+      "heading": "Military-Affiliated Scholarships",
+      "page": null,
+      "text": "Georgia Southern honors your or your loved one’s service through scholarships empowering the next stage of your personal and professional journey. Explore awards geared toward current military personnel, veterans, Georgia National Guard members, U.S. Military Reservists and their families.\nThe Georgia HERO (Helping Educate Reservists and their Offspring) Scholarship Program was created to provide financial aid to students seeking a post-secondary education, who are:\nCurrent members of the Georgia National Guard or United States Military Reserves who were deployed overseas on active service, on or after February 1, 2003, to a location designated as a combat zone; or\nThe children of Georgia National Guard members or United States Military Reservists who were deployed overseas on active service, on or after February 1, 2003, to a location designated as a combat zone; or\nThe spouses of Georgia National Guard members or United States Military Reservists who were deployed overseas on active service, on or after February 1, 2003, to a location designated as a combat zone, and who were killed in the combat zone, or died as a result of injuries received in the combat zone, or became 100 percent disabled as a result of injuries received in the combat zone.\nThe Georgia HERO Scholarship Program is funded by state appropriations. The maximum amount awarded to an eligible student is $2,000 per Award Year. The award amount is subject to change during the Award Year.\nLearn More and Apply for the HERO Scholarship\nAll Military-Affiliated Scholarships",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s14",
+      "heading": "External Scholarships",
+      "page": null,
+      "text": "In addition to the scholarships Georgia Southern offers, we encourage you to explore external scholarship opportunities to further aid your academic journey.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s15",
+      "heading": "Where to Search for External Scholarships",
+      "page": null,
+      "text": "External scholarships can cover a wide range of criteria, including academic achievement, leadership, community involvement and specific fields of study. Additionally, you can reach out to your high school counselor for information about scholarship opportunities in your community.\nAcademic Invest\nChegg\nGAfutures\nScholly",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s16",
+      "heading": "Other External Sources of Funding",
+      "page": null,
+      "text": "We also recommend that you\nreview additional Office of Financial Aid resources\nconcerning external student grants, loans and VA benefits. For military-affiliated students, you can combine\nMOST\nscholarships with the HOPE and Zell Miller Scholarships.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s17",
+      "heading": "Disbursement",
+      "page": null,
+      "text": "Checks for any external scholarships should be mailed to:\nGeorgia Southern University\nP.O. Box 106099\nAtlanta, GA 30348-60990\nPayment Address for Courier, Overnight, Express, Priority Mail, etc.:\nDeluxe\nAttn: Georgia Southern University\nBox 6099\n2068 Weems Road\nTucker, GA 30084\nPlease include a memo that includes the student’s name and Eagle ID.  If you have more than one student receiving the scholarship, you can send separate checks or include them all in one check. As long as you identify the student name, Eagle ID, and the amount due to each student, we can process it to disburse to the students.  All scholarships of $500 or more will be split into two semesters (example: $250 Fall 2023 and $250 Spring 2024) unless otherwise noted on the memo.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    }
+  ]
+}

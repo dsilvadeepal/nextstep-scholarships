@@ -148,13 +148,17 @@ class EvaluationService:
 def validate_configuration(settings, config):
     from nextstep.evals.suite import snapshot
 
-    current = snapshot(settings, config["corpus_version"], config["split"])
+    current = snapshot(
+        settings, config["corpus_version"], config["split"], config["methods"]
+    )
     fields = [
         "model",
         "embedding_model",
         "embedding_dimensions",
         "pinecone_index",
         "prompt_version",
+        "scoring_version",
+        "coverage_register_hash",
         "chunking",
         "retrieval",
         "pricing_date",
@@ -168,6 +172,10 @@ def validate_configuration(settings, config):
         raise ValueError(
             "Execution settings differ from frozen run; restore configuration or start a new comparison"
         )
+    if "retrieval_weights" in current and current["retrieval_weights"] != config.get(
+        "retrieval_weights"
+    ):
+        raise ValueError("Retrieval weights differ from frozen run")
 
 
 def case_request(case, version, method):

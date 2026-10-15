@@ -1,5 +1,19 @@
 # Build status — October 14, 2026
 
+## Current checkpoint: verified local corpus active
+
+The second-pass research, local ingestion, metadata verification and local application tests are complete. Active corpus: **`verified-2026-10-14-v2`**, with **18 award records / 10 award families / 174 chunks / 19 contributing official documents**. Every Pinecone vector's metadata was fetched and compared exactly with its canonical manifest. Older namespaces are retained but no longer queried by the active local application. See [second-pass review](SECOND_PASS_REVIEW_2026-10-14.md) for admitted/deferred sources and limitations.
+
+- **84 backend tests passed**; the two PostgreSQL tests skipped in that default invocation **also passed separately** against the dedicated native Unix-socket PostgreSQL instance. No Docker.
+- **7 frontend unit tests**, TypeScript and production build passed. **18 mocked browser regressions** passed. **6 real local browser/API checks** passed across phone and desktop, including two live cited answers, unknown requirements, removed-program rejection, server-side version pinning, coverage gaps and compact printing. Printed output was visually inspected after fixing repeated quotes and a blank first page.
+- **26 source-grounded fictional regression cases passed for each retrieval method**, semantic and hybrid. Original held-out answers were **5/6 per method under the old automated rubric**: the correct Clemson evidence-gap response was penalized for not supplying unavailable rules. The rubric now explicitly supports predeclared evidence gaps; rescoring those saved outputs yields **6/6 per method**, without new provider calls. Original grades remain unchanged; this is **not a fresh held-out run**. Rubric-only edits cannot reset question exposure.
+- Live tests caught and fixed a real error: absent HOPE rules could be substituted with Georgia Southern merit rules. A versioned coverage register and explicit program/cycle scope now prevent that substitution. Metadata distinguishes application cycle, college entry, award academic year and graduation year; unspecified fields remain null/omitted.
+- Cumulative recorded OpenAI spend after tests: **$0.72160134 of $5**, with approximately **$4.28 remaining**. `artifacts/nextstep-live.db` remains authoritative and was not reset. The local app is running on port 8014 with process-scoped live settings via `scripts/start_reviewed_local.py`; `.env` was not rewritten. Subsequent live user questions accrue to the same ledger.
+
+This verifies the **local pilot**, not hosted production readiness or comprehensive scholarship coverage. Hosted paid calls remain disabled; setup must preserve one cumulative budget ledger before enabling another instance. Hosted admin/evaluation authentication remains fail-closed and outside this checkpoint.
+
+## Earlier checkpoints (historical)
+
 **Credential-free implementation and local verification are complete; the live demo is not release-ready.** Native execution remains on `feat/nextstep-native`. Main stays at `679c49e`. No merge, push, deployment, recording or submission performed. Live OpenAI access was briefly verified; see the live checkpoint below for spending and the current credential blocker. **Do not use Docker.**
 
 ## Verified evidence

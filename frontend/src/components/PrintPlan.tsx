@@ -24,6 +24,28 @@ export function PrintPlan({
       )}
       {scholarships.map((s) => {
         const match = matches.find((m) => m.scholarship_id === s.id);
+        const sources = new Map<
+          string,
+          {
+            url: string;
+            fetchedAt: string;
+            version: string;
+            sections: Set<string>;
+          }
+        >();
+        for (const ref of s.evidence || []) {
+          const key = `${ref.url}:${ref.document_version}`;
+          const source = sources.get(key) || {
+            url: ref.url,
+            fetchedAt: ref.fetched_at.slice(0, 10),
+            version: ref.document_version,
+            sections: new Set<string>(),
+          };
+          source.sections.add(
+            ref.page ? `page ${ref.page} / ${ref.section_id}` : ref.section_id,
+          );
+          sources.set(key, source);
+        }
         return (
           <article key={s.id}>
             <h2>{s.name}</h2>
@@ -46,13 +68,13 @@ export function PrintPlan({
                 <li key={m}>☐ {m}</li>
               ))}
             </ul>
-            <h3>Source evidence</h3>
-            {s.evidence?.map((ref) => (
-              <p key={ref.id}>
-                {ref.quote}
+            <h3>Official sources</h3>
+            {[...sources].map(([key, source]) => (
+              <p key={key}>
+                <a href={source.url}>{source.url}</a>
                 <br />
-                <a href={ref.url}>{ref.url}</a> · {ref.section_id} · Retrieved{" "}
-                {ref.fetched_at.slice(0, 10)}
+                Sections: {[...source.sections].join(", ")} · Retrieved{" "}
+                {source.fetchedAt} · Document {source.version.slice(0, 12)}
               </p>
             ))}
           </article>

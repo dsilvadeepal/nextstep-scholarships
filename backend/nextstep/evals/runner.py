@@ -1,5 +1,7 @@
 """Transactional, request-driven evaluation execution; never automatically retry paid work."""
 
+import hashlib
+import json
 import time
 import uuid
 
@@ -15,6 +17,21 @@ def key_for(run_id, case_id, method):
     )
 
 
+def exposure_key(config):
+    cases = config.get("case_snapshots")
+    if not cases:
+        return config.get("suite_hash")
+    inputs = [
+        {
+            key: case.get(key)
+            for key in ("question", "profile", "program_ids", "frozen_date")
+        }
+        for case in cases.values()
+    ]
+    encoded = sorted(json.dumps(case, sort_keys=True) for case in inputs)
+    return hashlib.sha256(json.dumps(encoded).encode()).hexdigest()
+
+
 class EvalRunner:
     def __init__(self, engine):
         self.engine = engine
@@ -27,7 +44,10 @@ class EvalRunner:
         with serialized(self.engine) as conn:
             if config.get("split") == "heldout" and any(
                 old.get("split") == "heldout"
-                and old.get("suite_hash") == config.get("suite_hash")
+                and (
+                    old.get("suite_hash") == config.get("suite_hash")
+                    or exposure_key(old) == exposure_key(config)
+                )
                 for old in conn.execute(select(eval_runs.c.config)).scalars()
             ):
                 raise ValueError(

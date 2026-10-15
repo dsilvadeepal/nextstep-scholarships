@@ -1,6 +1,6 @@
 # NextStep Scholarships — five fictional test journeys
 
-Prepared October 14, 2026 for the reviewed Fall 2027 pilot. Use these only after the new reviewed corpus is active and the student app passes its live smoke checks. These are **fictional inputs**, not student records or a claim that an award is open or guaranteed. The homepage fields are optional; leave any field not listed blank. After exploring, select the named award card(s) before asking the question so the chat is scoped to the intended sources. Open a citation and compare its quoted passage, source title, applicable cycle and link with the answer.
+Prepared October 14, 2026 for the reviewed Fall 2027 pilot. The reviewed corpus is active locally and the student app passed its local live smoke checks. All five questions were run with equal-weight hybrid retrieval on October 14 and documented October 15; see `docs/DEMO_RUN_RESULTS_2026-10-15.md` for exact outputs, measured per-query costs, and incomplete answers. Confirm the hosted transfer before recording against a public link. These are **fictional inputs**, not student records or a claim that an award is open or guaranteed. The homepage fields are optional; leave any field not listed blank. After exploring, select the named award card(s) before asking the question so the chat is scoped to the intended sources. Open a citation and compare its quoted passage, source title, applicable cycle and link with the answer.
 
 ## Recommended short recording: 1 normal case + 1 edge case
 
@@ -58,4 +58,4 @@ Prepared October 14, 2026 for the reviewed Fall 2027 pilot. Use these only after
 
 ## Recording check
 
-Use only one or two journeys in a five-minute recording. A clear sequence is **Case 1** (profile → one award → citation) followed by **Case 2** (3.79 edge → exact 3.80 rule → unresolved requirements). If the missing-source guard passes the final live check, briefly add Case 5 to demonstrate when the app declines to guess. Do not describe these expected behaviors as verified live results until the final app check is recorded.
+Use only one or two journeys in a five-minute recording. The live local run supports **Case 1** (profile → one award → citation) followed by **Case 2** (3.79 edge → exact 3.80 rule → unresolved requirements). Case 3 returned a potentially misleading leading “No” fragment and omitted the two-letter count; Case 4 gave a partial comparison. Do not use either as a clean answer demo without a fix and retest. Case 5 correctly declined to guess at no OpenAI cost, but lacked a direct GSFC/GAfutures link. For Park, the source gives a non-rounded 3.80 unweighted rule but no numeric GPA scale, so the structured match remains unknown; show the citation without claiming deterministic ineligibility.

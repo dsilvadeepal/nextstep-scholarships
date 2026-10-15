@@ -68,6 +68,8 @@ def evaluate_condition(
     elif c.kind in ("state", "county", "city"):
         value = profile.residence.get(c.kind)
     elif c.kind == "college" and c.operator in ("accepted", "enrolled"):
+        if not isinstance(expected, str) or not expected.strip():
+            return unknown
         entries = profile.context.get(c.operator + "_colleges")
         if entries is None:
             return unknown

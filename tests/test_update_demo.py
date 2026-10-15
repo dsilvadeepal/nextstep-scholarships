@@ -11,7 +11,6 @@ from nextstep.ingest.publish import Publisher
 from nextstep.matching import match_catalog
 from nextstep.models import (
     GPA,
-    AnswerBlock,
     Condition,
     RetrievalRequest,
     Scholarship,
@@ -74,9 +73,7 @@ def test_synthetic_update_changes_matching_and_cited_answer_together(tmp_path):
         class Model:
             def invoke(self, schema, instructions, payload, max_output):
                 return schema(
-                    blocks=[
-                        AnswerBlock(text=chunks[0].text, evidence_ids=[chunks[0].id])
-                    ]
+                    evidence_unit_ids=[unit["id"] for unit in payload["evidence"]]
                 ), {}
 
         answer = AnswerService(
@@ -90,7 +87,7 @@ def test_synthetic_update_changes_matching_and_cited_answer_together(tmp_path):
         return match_catalog(records, profile, date(2026, 10, 14))[0], answer
 
     before, answer = read()
-    assert before.group == "matches" and "3.0" in answer.blocks[0].text
+    assert before.group == "matches" and any("3.0" in b.text for b in answer.blocks)
     vectors.fail = True
     with pytest.raises(RuntimeError):
         publisher.publish_corpus("synthetic-new", "synthetic-old")
@@ -99,6 +96,7 @@ def test_synthetic_update_changes_matching_and_cited_answer_together(tmp_path):
     publisher.publish_corpus("synthetic-new", "synthetic-old")
     after, answer = read()
     assert after.group == "unmet" and after.timing == "closed"
-    assert "3.5" in answer.blocks[0].text and answer.corpus_version == "synthetic-new"
+    assert any("3.5" in b.text for b in answer.blocks)
+    assert answer.corpus_version == "synthetic-new"
     publisher.rollback("synthetic-old", "synthetic-new")
     assert read()[0].group == "matches"
