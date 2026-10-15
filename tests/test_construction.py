@@ -17,7 +17,7 @@ def payload():
 
 
 class Model:
-    quote = "Only juniors may apply."
+    evidence_id = "c"
     program = "p"
     supported = True
     incomplete_review = False
@@ -42,7 +42,9 @@ class Model:
                 {
                     "text": "The junior-year condition fits your stated grade; other conditions still need checking.",
                     "program_id": self.program,
-                    "supports": [{"evidence_id": "c", "quote": self.quote}],
+                    "supports": [
+                        {"evidence_id": self.evidence_id, "quote": "ignored model text"}
+                    ],
                 }
             ]
         ), {"input_tokens": 20, "output_tokens": 8}
@@ -51,15 +53,15 @@ class Model:
 def test_whole_faq_and_supported_synthesis_with_usage():
     blocks, gaps, usage, review = construct(Model(), payload())
     assert blocks[0].kind == "explanation"
-    assert blocks[0].supporting_quotes == ["Only juniors may apply."]
+    assert blocks[0].supporting_quotes == [payload()["evidence"][0]["text"]]
     assert not gaps and review["accepted"] == 1
     assert usage["input_tokens"] == 30 and usage["output_tokens"] == 13
 
 
 @pytest.mark.parametrize(
-    "field,value", [("quote", "Seniors are eligible."), ("program", "another-award")]
+    "field,value", [("evidence_id", "invented"), ("program", "another-award")]
 )
-def test_fabricated_quote_or_cross_award_citation_withheld(field, value):
+def test_unknown_id_or_cross_award_citation_withheld(field, value):
     model = Model()
     setattr(model, field, value)
     blocks, gaps, _, review = construct(model, payload())
@@ -70,7 +72,7 @@ def test_review_rejection_is_withheld_without_retry():
     model = Model()
     model.supported = False
     blocks, gaps, _, review = construct(model, payload())
-    assert not blocks and "unsupported" in gaps[0]
+    assert not blocks and "withheld" in gaps[0]
     assert review["accepted"] == 0
 
 
@@ -81,13 +83,56 @@ def test_incomplete_review_fails_closed():
         construct(model, payload())
 
 
-def test_whitespace_normalization_preserves_source_without_changing_facts():
-    from nextstep.rag.construction import exact_quote
+def test_score_acceptance_cannot_establish_numeric_qualification():
+    from nextstep.rag.construction import Claim, unsupported_score_conclusion
 
-    source = "Application due\nDecember 1, 2026 at 5:00 PM\nPacific Time."
-    assert (
-        exact_quote(source, "due December 1, 2026 at 5:00 PM Pacific Time.")
-        == source[12:]
+    claim = Claim(
+        text="A superscore of 27 can satisfy the award score rule.",
+        program_id="p",
+        supports=[{"evidence_id": "c"}],
     )
-    assert exact_quote(source, "due December 2, 2026") is None
-    assert exact_quote("not eligible", "eligible for all awards") is None
+    assert unsupported_score_conclusion(
+        claim, {"c": {"text": "We accept ACT superscores."}}
+    )
+    assert not unsupported_score_conclusion(
+        claim, {"c": {"text": "ACT Required | 27–28"}}
+    )
+
+
+def test_cross_award_text_and_affirmative_guarantees_rejected():
+    from nextstep.rag.construction import Claim, claim_boundary_error
+
+    data = {
+        "catalog_scope": [
+            {"program_id": "a", "name": "Alabama Capstone"},
+            {"program_id": "b", "name": "Auburn Heritage"},
+        ]
+    }
+    claim = Claim(
+        text="Alabama is automatic, Auburn depends on funding.",
+        program_id="a",
+        supports=[{"evidence_id": "x"}],
+    )
+    assert claim_boundary_error(claim, data)
+    claim.text = "Alabama is guaranteed if your GPA qualifies."
+    assert claim_boundary_error(claim, data)
+    claim.text = "Alabama is automatic; this is not a guaranteed award for you."
+    assert claim_boundary_error(claim, data) is None
+
+
+def test_absence_of_information_is_a_gap_not_a_cited_fact():
+    class MissingModel:
+        def invoke(self, schema, instructions, data, max_output):
+            assert "claims" not in data  # no review call for a gap-only answer
+            return schema(
+                claims=[
+                    {
+                        "text": "The evidence does not provide a bank routing number.",
+                        "program_id": "p",
+                        "supports": [{"evidence_id": "c"}],
+                    }
+                ]
+            ), {}
+
+    blocks, gaps, _, _ = construct(MissingModel(), payload())
+    assert not blocks and "routing" in gaps[0]

@@ -577,6 +577,12 @@ export interface components {
         };
         /** RetrievedEvidence */
         RetrievedEvidence: {
+            /** Selection Details */
+            selection_details?: {
+                [key: string]: {
+                    [key: string]: string;
+                };
+            };
             /** Chunks */
             chunks: components["schemas"]["Chunk"][];
             /** Ranks */

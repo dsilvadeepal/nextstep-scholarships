@@ -39,6 +39,7 @@ from langchain_core.runnables import RunnableLambda
 from langsmith import tracing_context
 from nextstep.matching import match_catalog
 from nextstep.models import AnswerResult, RetrievedEvidence
+from nextstep.rag.comparisons import award_classification, score_comparisons
 from nextstep.rag.construction import construct
 
 
@@ -144,7 +145,11 @@ class AnswerService:
                 profile,
                 as_of or datetime.now(ZoneInfo("America/New_York")).date(),
             )
+            comparisons = score_comparisons(
+                request.question, evidence, relevant
+            ) + award_classification(request.question, evidence, relevant)
             payload = {
+                "computed_comparisons": [b.model_dump() for b in comparisons],
                 "question": request.question,
                 "profile": profile.model_dump(mode="json"),
                 "history": [t.model_dump() for t in history if t.role == "user"],
@@ -166,7 +171,7 @@ class AnswerService:
                 ],
             }
             blocks, gaps, usage, review = construct(self.model, payload)
-            return blocks, gaps, usage, review, evidence
+            return comparisons + blocks, gaps, usage, review, evidence
 
         chain = RunnableLambda(retrieve) | RunnableLambda(generate)
         with tracing_context(enabled=False):

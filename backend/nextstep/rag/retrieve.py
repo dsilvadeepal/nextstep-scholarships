@@ -2,6 +2,7 @@ import re
 import time
 
 from nextstep.models import RetrievedEvidence
+from nextstep.rag.target import targeted_ranking
 from rank_bm25 import BM25Okapi
 
 HYBRID_WEIGHTS = {"hybrid": (1.0, 1.0), "hybrid_60_40": (0.6, 0.4)}
@@ -23,6 +24,7 @@ class Retriever:
         groups = request.program_ids or [None]
         rankings = []
         scores = {}
+        coverage = {}
         for program in groups:
             corpus = [
                 c
@@ -48,7 +50,9 @@ class Retriever:
                     )[:limit]
                 ]
                 fused = {}
-                for ranking, weight in zip((dense, keyword), HYBRID_WEIGHTS[request.method]):
+                for ranking, weight in zip(
+                    (dense, keyword), HYBRID_WEIGHTS[request.method]
+                ):
                     for rank, i in enumerate(ranking, 1):
                         fused[i] = fused.get(i, 0) + weight / (60 + rank)
                 ordered = sorted(fused, key=lambda i: (-fused[i], i))
@@ -56,7 +60,12 @@ class Retriever:
             else:
                 ordered = dense
                 scores.update({i: 1 / (60 + r) for r, i in enumerate(dense, 1)})
-            rankings.append([by_id[i] for i in ordered])
+            ranking = [by_id[i] for i in ordered]
+            if request.retrieval_policy == "targeted" and program is not None:
+                ranking, coverage[program] = targeted_ranking(
+                    request.question, corpus, ranking
+                )
+            rankings.append(ranking)
         selected = []
         used = 0
         seen = set()
@@ -75,6 +84,7 @@ class Retriever:
                     break
         return RetrievedEvidence(
             chunks=selected,
-            ranks={c.id: scores[c.id] for c in selected},
+            ranks={c.id: scores.get(c.id, 0.0) for c in selected},
+            selection_details=coverage,
             timings={"retrieval_seconds": time.monotonic() - started},
         )

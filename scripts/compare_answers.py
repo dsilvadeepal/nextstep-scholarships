@@ -2,23 +2,28 @@
 
 import argparse
 import json
+import time
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
-import time
 
-from sqlalchemy import create_engine
+from nextstep.db import usage_ledger
 from nextstep.limits import BudgetLedger
-from nextstep.models import StudentProfile, RetrievalRequest, ChatTurn
-from nextstep.providers import PaidModel, OpenAIEmbeddingProvider, PineconeStore
+from nextstep.models import ChatTurn, RetrievalRequest, StudentProfile
+from nextstep.providers import OpenAIEmbeddingProvider, PaidModel, PineconeStore
 from nextstep.rag.answer import AnswerService
 from nextstep.rag.retrieve import Retriever
 from reviewed_runtime import ROOT, live_settings, load_bundle
+from sqlalchemy import create_engine, func, select
 
 
 class RecordedModel:
     def __init__(self, model, directory):
-        self.model, self.directory, self.calls = model, directory, 0
+        self.model, self.directory = model, directory
+        self.calls = max(
+            [int(p.name.split("-")[1]) for p in directory.glob("model-*-*.json")],
+            default=0,
+        )
 
     def invoke(self, schema, instructions, payload, max_output):
         self.calls += 1
@@ -81,7 +86,17 @@ def main():
         request = RetrievalRequest.model_validate(
             {**data["request"], "retrieval_policy": args.policy}
         )
+
+        def run_spent():
+            with engine.connect() as conn:
+                return conn.execute(
+                    select(func.coalesce(func.sum(usage_ledger.c.amount), 0)).where(
+                        usage_ledger.c.run_id == args.run
+                    )
+                ).scalar_one()
+
         before, start = ledger.spent(), time.monotonic()
+        run_before = run_spent()
         result = {
             "case": case["case"],
             "input": data,
@@ -98,7 +113,7 @@ def main():
                 as_of=date(2026, 10, 15),
             )
             result["output"] = answer.model_dump(mode="json")
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - persist sanitized failure without credential text
             # Never persist provider payloads or credential-bearing exception strings.
             result["error_type"] = type(exc).__name__
             import traceback
@@ -115,7 +130,7 @@ def main():
                 result["error_detail"] = str(exc)
         result.update(
             ledger_after_usd=str(ledger.spent()),
-            query_cost_usd=str(ledger.spent() - before),
+            query_cost_usd=str(run_spent() - run_before),
             seconds=round(time.monotonic() - start, 3),
         )
         target.write_text(json.dumps(result, indent=2) + "\n")

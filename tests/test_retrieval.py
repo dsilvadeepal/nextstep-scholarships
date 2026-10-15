@@ -61,6 +61,7 @@ def test_weighted_hybrid_changes_rank_without_changing_limits(monkeypatch):
 
     monkeypatch.setattr("nextstep.rag.retrieve.BM25Okapi", OppositeBM25)
     retriever = Retriever([chunk(0, "a"), chunk(1, "a")], OppositeDense())
+
     def retrieve(method):
         return retriever.retrieve(
             RetrievalRequest(question="science", corpus_version="v", method=method)
@@ -73,3 +74,56 @@ def test_weighted_hybrid_changes_rank_without_changing_limits(monkeypatch):
     assert equal.ranks["0"] == equal.ranks["1"]
     assert weighted.ranks["1"] > weighted.ranks["0"]
     assert len(weighted.chunks) <= 8
+
+
+def test_targeted_retrieval_recovers_award_table_with_same_dense_calls_and_budget():
+    class MisleadingDense:
+        def __init__(self):
+            self.calls = []
+
+        def search(self, question, version, program_id, limit):
+            self.calls.append((question, version, program_id, limit))
+            return [str(i) for i in range(14)]
+
+    corpus = [chunk(i, "a") for i in range(14)]
+    for c in corpus:
+        c.text = "ACT superscore scholarship consideration."
+    table = chunk("table", "a")
+    table.heading = "Example Heritage Scholarship — Heritage Scholarship"
+    table.text = "Minimum GPA | 3.5\nACT Required | 31–32"
+    corpus.append(table)
+    stale = table.model_copy(update={"id": "stale-table", "corpus_version": "old"})
+    corpus.append(stale)
+    dense = MisleadingDense()
+    service = Retriever(corpus, dense)
+    request = RetrievalRequest(
+        question="Does my ACT superscore satisfy this award?",
+        program_ids=["a"],
+        corpus_version="v",
+    )
+    baseline = service.retrieve(request)
+    targeted = service.retrieve(
+        request.model_copy(update={"retrieval_policy": "targeted"})
+    )
+    assert table.id not in {c.id for c in baseline.chunks}
+    assert table.id in {c.id for c in targeted.chunks}
+    assert "stale-table" not in {c.id for c in targeted.chunks}
+    assert len(targeted.chunks) <= 8
+    assert sum(c.token_count for c in targeted.chunks) <= 5000
+    assert dense.calls[0] == dense.calls[1]
+    assert targeted.selection_details["a"]["threshold"] == "table"
+
+
+def test_targeted_policy_keeps_selected_program_boundaries():
+    corpus = [chunk(i, "a" if i < 10 else "b") for i in range(20)]
+    result = Retriever(corpus, Dense()).retrieve(
+        RetrievalRequest(
+            question="What GPA and deadline?",
+            program_ids=["a", "b"],
+            corpus_version="v",
+            retrieval_policy="targeted",
+        )
+    )
+    assert len(result.chunks) == 8
+    assert [c.program_id for c in result.chunks].count("a") == 4
+    assert [c.program_id for c in result.chunks].count("b") == 4

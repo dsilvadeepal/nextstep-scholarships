@@ -75,17 +75,17 @@ def test_synthetic_update_changes_matching_and_cited_answer_together(tmp_path):
                 if "claims" in payload:
                     return schema(
                         verdicts=[
-                            dict(claim_index=i, supported=True, reason="fixture")
+                            {"claim_index": i, "supported": True, "reason": "fixture"}
                             for i, _ in enumerate(payload["claims"])
                         ]
                     ), {}
                 return schema(
                     claims=[
-                        dict(
-                            text=u["text"],
-                            program_id=u["program_id"],
-                            supports=[dict(evidence_id=u["id"], quote=u["text"])],
-                        )
+                        {
+                            "text": u["text"],
+                            "program_id": u["program_id"],
+                            "supports": [{"evidence_id": u["id"], "quote": u["text"]}],
+                        }
                         for u in payload["evidence"]
                     ]
                 ), {}

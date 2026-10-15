@@ -43,7 +43,7 @@ def snapshot(settings, version, split, methods=None):
         "embedding_model": settings.embedding_model,
         "embedding_dimensions": settings.embedding_dimensions,
         "pinecone_index": settings.pinecone_index,
-        "prompt_version": "source-unit-answer-v3-coverage/judge-v1",
+        "prompt_version": "grounded-answer-v1-review-v1/judge-v1",
         "scoring_version": "explicit-evidence-gap-v2",
         "coverage_register_hash": hashlib.sha256(
             (ROOT.parent / "data/reviewed-coverage-2026-10-14.json").read_bytes()

@@ -59,7 +59,7 @@ def test_answer_flow_preserves_deterministic_unknowns_and_uses_lcel():
             if "claims" in payload:
                 return schema(
                     verdicts=[
-                        dict(claim_index=i, supported=True, reason="fixture")
+                        {"claim_index": i, "supported": True, "reason": "fixture"}
                         for i, _ in enumerate(payload["claims"])
                     ]
                 ), {}
@@ -67,11 +67,13 @@ def test_answer_flow_preserves_deterministic_unknowns_and_uses_lcel():
             assert "profile" in payload and "condition_checks" in payload
             return schema(
                 claims=[
-                    dict(
-                        text=unit["text"],
-                        program_id=unit["program_id"],
-                        supports=[dict(evidence_id=unit["id"], quote=unit["text"])],
-                    )
+                    {
+                        "text": unit["text"],
+                        "program_id": unit["program_id"],
+                        "supports": [
+                            {"evidence_id": unit["id"], "quote": unit["text"]}
+                        ],
+                    }
                 ]
             ), {}
 
@@ -151,21 +153,25 @@ def test_answer_selection_rejects_invented_units_and_preserves_unicode():
         def invoke(self, schema, instructions, payload, max_output):
             if "claims" in payload:
                 return schema(
-                    verdicts=[dict(claim_index=0, supported=True, reason="fixture")]
+                    verdicts=[
+                        {"claim_index": 0, "supported": True, "reason": "fixture"}
+                    ]
                 ), {}
             unit = payload["evidence"][0]
             return schema(
                 claims=[
-                    dict(
-                        text=unit["text"],
-                        program_id=unit["program_id"],
-                        supports=[
-                            dict(
-                                evidence_id="invented" if self.invalid else unit["id"],
-                                quote=unit["text"],
-                            )
+                    {
+                        "text": unit["text"],
+                        "program_id": unit["program_id"],
+                        "supports": [
+                            {
+                                "evidence_id": "invented"
+                                if self.invalid
+                                else unit["id"],
+                                "quote": unit["text"],
+                            }
                         ],
-                    )
+                    }
                 ]
             ), {}
 
