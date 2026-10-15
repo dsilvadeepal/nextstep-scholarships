@@ -54,7 +54,7 @@ The handout's chunk-size/embedding-dimension example is a heuristic, not a mathe
 | Embeddings | A budget-aware OpenAI SDK adapter creates text-embedding-3-small passage/query vectors at 1536 dimensions and reuses unchanged embeddings. OpenAIEmbeddings was evaluated but deferred because the existing adapter preserves actual usage accounting and the $5 cumulative cap. |
 | VectorStores | Pinecone holds versioned passage vectors, evidence text and metadata; PostgreSQL remains the structured catalog. |
 | Retrievers | Dense and hybrid retrieval adapters enforce corpus/program filters, budgets, and balanced evidence across compared scholarships. |
-| LCEL chains | A fixed Runnable/LCEL sequence composes retrieval/context preparation, prompt, structured answer model and validation; ordinary Python handles eligibility rules and persistence. |
+| LCEL chains | ChatPromptTemplate composes with ChatOpenAI structured output through LCEL for extraction, answer drafting and claim review. Ordinary Python handles scoped retrieval, eligibility, citation validation, budget accounting and persistence. |
 | LangGraph state machines | Intentionally omitted from this first demo: it has a fixed retrieval/answer flow and no agent-selected tool loops or multi-step graph orchestration requirement. |
 | LangSmith tracing and evals | The local runner stores fictional-case results and can upload per-case traces when configured. A saved trace is not itself a LangSmith Experiment; the course demo uses the local comparison and inspector. Real student conversations are not traced by default. |
 

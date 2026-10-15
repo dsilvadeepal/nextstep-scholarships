@@ -6,6 +6,7 @@ from typing import Protocol
 from uuid import uuid4
 
 import tiktoken
+from langchain_core.prompts import ChatPromptTemplate
 from nextstep.models import Condition, Scholarship
 from pydantic import BaseModel, Field, model_validator
 
@@ -65,6 +66,11 @@ class UnitRecords(ExtractedRecords):
     records: list[UnitScholarship]
 
 
+STRUCTURED_PROMPT = ChatPromptTemplate.from_messages(
+    [("system", "{instructions}"), ("human", "{payload}")]
+)
+
+
 class PaidModel:
     def __init__(self, settings, ledger, client_factory=None):
         self.settings, self.ledger, self.client_factory = (
@@ -118,10 +124,11 @@ class PaidModel:
                 structured_options = {"method": "function_calling", "include_raw": True}
                 if getattr(schema, "native_schema", False):
                     structured_options.update(method="json_schema", strict=True)
-                output = client.with_structured_output(
+                chain = STRUCTURED_PROMPT | client.with_structured_output(
                     schema, **structured_options
-                ).invoke(
-                    [("system", instructions), ("human", encoded)],
+                )
+                output = chain.invoke(
+                    {"instructions": instructions, "payload": encoded},
                     config={"callbacks": []},
                 )
             usage = output["raw"].usage_metadata

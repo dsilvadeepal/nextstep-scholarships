@@ -35,7 +35,6 @@ from functools import lru_cache
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from langchain_core.runnables import RunnableLambda
 from langsmith import tracing_context
 from nextstep.matching import match_catalog
 from nextstep.models import AnswerResult, RetrievedEvidence
@@ -51,13 +50,12 @@ def _coverage_register():
     return json.loads(path.read_text())
 
 
-def deferred_coverage(question, version):
+def _deferred_entries(question, version):
     register = _coverage_register()
     if register["corpus_version"] != version:
-        return []
-    gaps = []
+        return
     for entry in register["deferred"]:
-        matches = [
+        aliases = [
             alias
             for alias in entry["aliases"]
             if re.search(
@@ -66,27 +64,21 @@ def deferred_coverage(question, version):
                 flags=0 if alias == "HOPE" else re.IGNORECASE,
             )
         ]
-        if matches:
-            name = max(matches, key=len)
-            gaps.append(f"{name} is not in this verified corpus. {entry['reason']}")
-    return gaps
+        if aliases:
+            yield entry, max(aliases, key=len)
+
+
+def deferred_coverage(question, version):
+    return [
+        f"{name} is not in this verified corpus. {entry['reason']}"
+        for entry, name in _deferred_entries(question, version)
+    ]
 
 
 def coverage_links(question, version):
-    register = _coverage_register()
-    if register["corpus_version"] != version:
-        return []
     return [
         link
-        for entry in register["deferred"]
-        if any(
-            re.search(
-                r"(?<!\w)" + re.escape(alias) + r"(?!\w)",
-                question,
-                flags=0 if alias == "HOPE" else re.IGNORECASE,
-            )
-            for alias in entry["aliases"]
-        )
+        for entry, _ in _deferred_entries(question, version)
         for link in entry.get("official_links", [])
     ]
 
@@ -124,58 +116,54 @@ class AnswerService:
             if not request.program_ids or r.id in request.program_ids
         ]
 
-        def retrieve(_):
+        blocks, answer_gaps, usage, review = [], [], {}, {}
+        with tracing_context(enabled=False):
             prior = " ".join(t.content for t in history if t.role == "user")[-600:]
             question = request.question
             remaining = 2000 - len(question) - 20
             if prior and remaining > 0:
                 question = f"{prior[-remaining:]}\nFollow-up: {question}"
-            return self.retriever.retrieve(
+            evidence = self.retriever.retrieve(
                 request.model_copy(update={"question": question})
             )
 
-        def generate(evidence):
-            if not evidence.chunks:
-                return [], [], {}, {}, evidence
-            relevant = [
-                r for r in records if r.id in {c.program_id for c in evidence.chunks}
-            ]
-            checks = match_catalog(
-                relevant,
-                profile,
-                as_of or datetime.now(ZoneInfo("America/New_York")).date(),
-            )
-            comparisons = score_comparisons(
-                request.question, evidence, relevant
-            ) + award_classification(request.question, evidence, relevant)
-            payload = {
-                "computed_comparisons": [b.model_dump() for b in comparisons],
-                "question": request.question,
-                "profile": profile.model_dump(mode="json"),
-                "history": [t.model_dump() for t in history if t.role == "user"],
-                "condition_checks": [r.model_dump(mode="json") for r in checks],
-                "catalog_scope": [
-                    {"program_id": r.id, "name": r.name, "cycle": r.cycle}
-                    for r in relevant
-                ],
-                "evidence": [
-                    {
-                        "id": c.id,
-                        "text": c.text,
-                        "heading": c.heading,
-                        "program_id": c.program_id,
-                        "cycle": c.cycle,
-                        "cycle_metadata": c.cycle_metadata.model_dump(),
-                    }
-                    for c in evidence.chunks
-                ],
-            }
-            blocks, gaps, usage, review = construct(self.model, payload)
-            return comparisons + blocks, gaps, usage, review, evidence
-
-        chain = RunnableLambda(retrieve) | RunnableLambda(generate)
-        with tracing_context(enabled=False):
-            blocks, answer_gaps, usage, review, evidence = chain.invoke(None)
+            if evidence.chunks:
+                relevant = [
+                    r for r in records if r.id in {c.program_id for c in evidence.chunks}
+                ]
+                checks = match_catalog(
+                    relevant,
+                    profile,
+                    as_of or datetime.now(ZoneInfo("America/New_York")).date(),
+                )
+                comparisons = score_comparisons(
+                    request.question, evidence, relevant
+                ) + award_classification(request.question, evidence, relevant)
+                payload = {
+                    "computed_comparisons": [b.model_dump() for b in comparisons],
+                    "question": request.question,
+                    "profile": profile.model_dump(mode="json"),
+                    "history": [t.model_dump() for t in history if t.role == "user"],
+                    "condition_checks": [r.model_dump(mode="json") for r in checks],
+                    "catalog_scope": [
+                        {"program_id": r.id, "name": r.name, "cycle": r.cycle}
+                        for r in relevant
+                    ],
+                    "evidence": [
+                        {
+                            "id": c.id,
+                            "text": c.text,
+                            "heading": c.heading,
+                            "program_id": c.program_id,
+                            "cycle": c.cycle,
+                            "cycle_metadata": c.cycle_metadata.model_dump(),
+                        }
+                        for c in evidence.chunks
+                    ],
+                }
+                blocks, gaps, usage, review = construct(self.model, payload)
+                blocks = comparisons + blocks
+                answer_gaps = gaps
         cited_chunks = {i for block in blocks for i in block.evidence_ids}
         relevant_programs = set(request.program_ids) or {
             c.program_id for c in evidence.chunks if c.id in cited_chunks

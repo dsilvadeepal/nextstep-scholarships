@@ -104,3 +104,35 @@ Native build committed `29aa2dd` (`Simplify extraction around evidence unit IDs`
 Build-chat verification reported 17 targeted tests passing, touched-file Ruff lint/format passing, and a clean whitespace check. The initial full-suite failure was a stale synthetic-update fake returning legacy answer blocks instead of evidence-unit IDs. Ingestion chat owns its separate fixture correction, which preserves checks for changed GPA, deadlines, corpus version, failed publication and rollback; setup inspected that diff. After correction, Native reported a fresh full backend run of **76 passed, 2 skipped**, frontend **6 tests passed across 3 files**, and a successful frontend build. Setup independently confirmed `git diff --check` passes. These are local code checks, not live corpus-quality evaluation results.
 
 No dependencies, paid calls, ledger resets, namespace changes, Docker use, hosted restart, merge or publication were performed by the cleanup. Existing cumulative $5 controls remain in force. Ingestion retains ownership of its separate uncommitted work and ongoing source processing; cleanup file ownership has been released back to it. The two skipped backend tests remain skipped and are not represented as passing.
+
+
+## Implemented follow-up — 2026-10-15
+
+After ingestion completed, the runtime cleanup consolidated all PaidModel calls
+(extraction, draft and review) onto one `ChatPromptTemplate | structured_model`
+LCEL pipeline. Template values preserve the original system/user messages,
+including JSON, braces and Unicode. Raw provider usage still reconciles the ledger
+before parsed-output validation. Native strict schemas and extraction's function
+calling schema remain distinct.
+
+Removed the answer service's nested retrieve/generate RunnableLambda wrappers and
+five-value tuple handoff; the domain workflow now reads sequentially. Consolidated
+duplicate deferred-program alias matching so gaps and official links share the same
+version-aware match. This supersedes the earlier recommendation to retain the
+outer Runnable sequence. LangChain composition now lives at the model boundary.
+
+The existing LangChain splitter, dense/BM25 weighting, targeted retrieval, chunk
+caps, provenance, claim review and eligibility gates are retained. No dependencies,
+ingested records, vectors or embedding jobs changed. Corpus embedding completion
+does not eliminate query-time embeddings; their metered adapter remains required.
+A broader vector-store or embedding migration was not implemented in this pass.
+
+Validation: 102 backend tests passed; two PostgreSQL-only tests skipped. New
+model-boundary checks cover literal prompt values, tracing disabled, native schema
+selection, actual charging after parse failure and reservation retention without
+retry after an ambiguous transport failure. No paid calls were made. This is a
+behavior-preserving refactor, not a new answer-quality measurement.
+
+Rollback: `checkpoint/pre-langchain-cleanup-2026-10-15` points to `cfb4043`.
+Revert the cleanup commit to undo code changes; do not roll back the runtime usage
+ledger or overwrite `.env`.

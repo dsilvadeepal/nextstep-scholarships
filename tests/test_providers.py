@@ -2,6 +2,7 @@ from decimal import Decimal
 from types import SimpleNamespace
 
 import pytest
+from langchain_core.runnables import RunnableLambda
 from nextstep.config import Settings
 from nextstep.db import metadata
 from nextstep.limits import BudgetLedger
@@ -27,14 +28,17 @@ def test_no_global_trace_leak_and_usage_reconciled(tmp_path, monkeypatch):
             pass
 
         def with_structured_output(self, *args, **kwargs):
-            return self
+            assert kwargs == {"method": "function_calling", "include_raw": True}
+            return RunnableLambda(self.invoke)
 
-        def invoke(self, *args, **kwargs):
+        def invoke(self, prompt):
             from langsmith.run_helpers import get_tracing_context
 
             assert get_tracing_context()["enabled"] is False
-            assert "student’s" in args[0][1][1]
-            assert "\\u2019" not in args[0][1][1]
+            messages = prompt.to_messages()
+            assert messages[0].content == "source instructions {literal}"
+            assert messages[0].type == "system" and messages[1].type == "human"
+            assert messages[1].content == '{"text": "student’s {literal}"}'
             return {
                 "parsed": ExtractedRecords(records=[]),
                 "raw": SimpleNamespace(
@@ -43,7 +47,7 @@ def test_no_global_trace_leak_and_usage_reconciled(tmp_path, monkeypatch):
             }
 
     PaidModel(settings, ledger, Client).invoke(
-        ExtractedRecords, "source instructions", {"text": "student’s"}
+        ExtractedRecords, "source instructions {literal}", {"text": "student’s {literal}"}
     )
     assert ledger.spent() == Decimal(".000020")
 
@@ -195,3 +199,55 @@ def test_vector_metadata_keeps_cycle_and_exact_source_provenance():
     assert metadata["source_checked_at"] == "2026-10-14"
     assert metadata["fetched_at"] == ref.fetched_at.isoformat()
     assert all(value is not None for value in metadata.values())
+
+
+@pytest.mark.parametrize("failure", [None, "parse", "transport"])
+def test_structured_chain_native_schema_and_failure_accounting(tmp_path, failure):
+    from nextstep.rag.construction import Draft
+
+    engine = create_engine(f"sqlite:///{tmp_path}/budget.db")
+    metadata.create_all(engine)
+    settings = Settings(
+        _env_file=None,
+        live_calls_enabled=True,
+        openai_api_key="fixture",
+        pricing_effective_date="fixture-only",
+        input_usd_per_million=Decimal(1),
+        output_usd_per_million=Decimal(1),
+    )
+    ledger = BudgetLedger(engine, Decimal(1), Decimal(1), enabled=True)
+    calls = []
+
+    class Client:
+        def __init__(self, **kwargs):
+            assert kwargs["max_retries"] == 0
+
+        def with_structured_output(self, schema, **kwargs):
+            assert schema is Draft
+            assert kwargs == {
+                "method": "json_schema", "strict": True, "include_raw": True
+            }
+            return RunnableLambda(self.invoke)
+
+        def invoke(self, prompt):
+            calls.append(prompt)
+            if failure == "transport":
+                raise TimeoutError("ambiguous provider response")
+            return {
+                "parsed": None if failure else Draft(claims=[], unanswered=[]),
+                "parsing_error": ValueError("invalid") if failure else None,
+                "raw": SimpleNamespace(
+                    usage_metadata={"input_tokens": 10, "output_tokens": 10}
+                ),
+            }
+
+    model = PaidModel(settings, ledger, Client)
+    if failure:
+        with pytest.raises(TimeoutError if failure == "transport" else ValueError):
+            model.invoke(Draft, "instructions", {})
+    else:
+        parsed, usage = model.invoke(Draft, "instructions", {})
+        assert isinstance(parsed, Draft)
+        assert usage["input_tokens"] == 10
+    assert len(calls) == 1
+    assert ledger.spent() == Decimal(".025200" if failure == "transport" else ".000020")
