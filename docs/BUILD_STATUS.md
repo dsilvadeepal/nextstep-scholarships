@@ -1,6 +1,6 @@
 # Build status — October 14, 2026
 
-**Credential-free implementation and local verification are complete; the live demo is not release-ready.** Native execution remains on `feat/nextstep-native`. Main stays at `679c49e`. No merge, push, deployment, recording or submission performed. No OpenAI calls or spending enabled. **Do not use Docker.**
+**Credential-free implementation and local verification are complete; the live demo is not release-ready.** Native execution remains on `feat/nextstep-native`. Main stays at `679c49e`. No merge, push, deployment, recording or submission performed. Live OpenAI access was briefly verified; see the live checkpoint below for spending and the current credential blocker. **Do not use Docker.**
 
 ## Verified evidence
 
@@ -53,3 +53,13 @@ Pinecone setup is already supplied; do not ask for its key again. `LIVE_CALLS_EN
 Collection and preprocessing have already happened without credentials. The remaining corpus-quality decisions must be based on actual extracted output and measured model behavior; fixture tests cannot substitute for them. See `ENVIRONMENT.md` for exact setup order and commands, `RELEASE_CHECKLIST.md` for approval gates, and `SOURCE_INSPECTION.md` for known coverage limitations.
 
 The execution ledger is retained because live Tasks 11–12 and integration acceptance remain unfinished. Main/worktree are retained; no automatic merge/push/cleanup. Native implementation remains the owner-selected approach. No measured evidence establishes a parallel-execution time saving.
+
+## Live checkpoint — October 14, 2026
+
+The owner supplied both keys and approved a $5 total ceiling. Presence was verified without printing secrets, and four OpenAI extraction calls completed. The dedicated local SQLite ledger at ignored `artifacts/nextstep-live.db` records **$0.00711080** across those calls, including failed validation. No corpus was activated and no live model quality score is claimed. This local database does not replace hosted PostgreSQL verification.
+
+Live output exposed nullable-list/schema mistakes and unreliable citation metadata/offsets. The extraction prompt now distinguishes nullable scalars from empty collections and describes supported matching operators. Exact, unique quotes are anchored deterministically to their supplied source section; invented or ambiguous quotes still fail validation. A regression covers that boundary. The updated extraction has not yet produced a fully validated live record.
+
+During this work the local `.env` changed again: both previously present API keys disappeared, as did the appended local database/pricing settings. No key values were displayed or copied into tracked files. The responsible editor/process has not been identified. Paid execution is stopped until the owner saves the keys durably. Preserve this ledger for all resumed work so the $5 total ceiling remains cumulative.
+
+Pricing used: GPT-4.1 mini input $0.40/output $1.60 per million tokens, and text-embedding-3-small $0.02 per million, checked against https://developers.openai.com/api/docs/models/gpt-4.1-mini and https://developers.openai.com/api/docs/models/text-embedding-3-small on October 14, 2026. Live enablement was command-scoped; no hosted deployment occurred.

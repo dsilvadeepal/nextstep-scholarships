@@ -100,12 +100,19 @@ class PaidModel:
         return output["parsed"], {"model": settings.answer_model, **usage}
 
     def extract(self, section_text):
-        from nextstep.ingest.extract import EXTRACTION_INSTRUCTIONS
+        from nextstep.ingest.extract import (
+            EXTRACTION_INSTRUCTIONS,
+            anchor_extracted_evidence,
+        )
+        from nextstep.models import NormalizedDocument
 
         result, _ = self.invoke(
             ExtractedRecords, EXTRACTION_INSTRUCTIONS, json.loads(section_text), 4000
         )
-        return result.model_dump(mode="json")
+        return anchor_extracted_evidence(
+            NormalizedDocument.model_validate_json(section_text),
+            result.model_dump(mode="json"),
+        )
 
 
 class OpenAIEmbeddingProvider:

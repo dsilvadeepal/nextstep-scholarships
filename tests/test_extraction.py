@@ -174,3 +174,33 @@ def test_reviewed_program_partition_preserves_original_offsets():
     assert chunks[1].evidence[0].start == 18
     with pytest.raises(ValueError, match="hash"):
         associate_sections(doc, records, partitions=plans, expected_hash="old")
+
+
+def test_extracted_quotes_are_anchored_only_when_exact_and_unambiguous():
+    from nextstep.ingest.extract import anchor_extracted_evidence
+
+    doc = NormalizedDocument(
+        id="d",
+        source_id="s",
+        content_hash="hash",
+        url="https://example.org",
+        fetched_at=datetime.now(UTC),
+        sections=[
+            Section(id="one", heading="Rules", text="Juniors only. Repeat Repeat")
+        ],
+    )
+    ref = {
+        "id": "e",
+        "section_id": "one",
+        "quote": "Juniors only.",
+        "start": 999,
+        "end": 1000,
+        "document_version": "invented",
+    }
+    output = {"records": [{"evidence": [ref], "conditions": []}]}
+    anchor_extracted_evidence(doc, output)
+    validate_evidence(doc, EvidenceRef(**ref))
+    for quote in ["Seniors only.", "Repeat"]:
+        ref["quote"] = quote
+        with pytest.raises(ValueError, match="exact|ambiguous"):
+            anchor_extracted_evidence(doc, output)
