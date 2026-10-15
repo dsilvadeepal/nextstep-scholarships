@@ -156,9 +156,11 @@ class RetrievalRequest(Model):
     program_ids: list[str] = Field(default_factory=list, max_length=4)
     corpus_version: str | None = None
     method: Literal["semantic", "hybrid", "hybrid_60_40"] = "hybrid"
+    retrieval_policy: Literal["baseline", "targeted"] = "baseline"
 
 
 class RetrievedEvidence(Model):
+    selection_details: dict[str, dict[str, str]] = Field(default_factory=dict)
     chunks: list[Chunk]
     ranks: dict[str, float] = Field(default_factory=dict)
     timings: dict[str, float] = Field(default_factory=dict)
@@ -167,9 +169,21 @@ class RetrievedEvidence(Model):
 class AnswerBlock(Model):
     text: str
     evidence_ids: list[str] = Field(default_factory=list)
+    program_id: str | None = None
+    kind: Literal["quote", "explanation"] = "quote"
+    supporting_quotes: list[str] = Field(default_factory=list)
+
+
+class SourceLink(Model):
+    title: str
+    url: str
 
 
 class AnswerResult(Model):
+    construction_version: str = "grounded-v1"
+    retrieval_policy: str = "baseline"
+    source_links: list[SourceLink] = Field(default_factory=list)
+    review: dict[str, Any] = Field(default_factory=dict)
     blocks: list[AnswerBlock]
     gaps: list[str] = Field(default_factory=list)
     corpus_version: str

@@ -253,9 +253,38 @@ export interface components {
             text: string;
             /** Evidence Ids */
             evidence_ids?: string[];
+            /**
+             * Program Id
+             * @default null
+             */
+            program_id: string | null;
+            /**
+             * Kind
+             * @default quote
+             * @enum {string}
+             */
+            kind: "quote" | "explanation";
+            /** Supporting Quotes */
+            supporting_quotes?: string[];
         };
         /** AnswerResult */
         AnswerResult: {
+            /**
+             * Construction Version
+             * @default grounded-v1
+             */
+            construction_version: string;
+            /**
+             * Retrieval Policy
+             * @default baseline
+             */
+            retrieval_policy: string;
+            /** Source Links */
+            source_links?: components["schemas"]["SourceLink"][];
+            /** Review */
+            review?: {
+                [key: string]: unknown;
+            };
             /** Blocks */
             blocks: components["schemas"]["AnswerBlock"][];
             /** Gaps */
@@ -539,6 +568,12 @@ export interface components {
              * @enum {string}
              */
             method: "semantic" | "hybrid" | "hybrid_60_40";
+            /**
+             * Retrieval Policy
+             * @default baseline
+             * @enum {string}
+             */
+            retrieval_policy: "baseline" | "targeted";
         };
         /** RetrievedEvidence */
         RetrievedEvidence: {
@@ -651,6 +686,13 @@ export interface components {
             conflicts?: {
                 [key: string]: unknown[];
             };
+        };
+        /** SourceLink */
+        SourceLink: {
+            /** Title */
+            title: string;
+            /** Url */
+            url: string;
         };
         /** StudentProfile */
         StudentProfile: {

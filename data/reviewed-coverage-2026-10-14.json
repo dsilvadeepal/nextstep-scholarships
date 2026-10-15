@@ -2,19 +2,132 @@
   "corpus_version": "verified-2026-10-14-v2",
   "reviewed_on": "2026-10-14",
   "deferred": [
-    {"aliases": ["HOPE Scholarship", "HOPE", "Zell Miller"], "reason": "Confirmed 2027–28 state regulations were not located; the retained 2026–27 regulations cannot establish later-year rules."},
-    {"aliases": ["Georgia Tech", "Stamps President"], "reason": "Official citizenship and interview wording conflicts across the FAQ, application-review page, and dated calendar."},
-    {"aliases": ["Chick-fil-A Team Member", "Remarkable Futures", "True Inspiration"], "reason": "Team Member high-school eligibility and cycle/service wording need administrator clarification; Community Scholars is a separate admitted program."},
-    {"aliases": ["Delta Community annual", "Delta Community Credit Union Scholarship"], "reason": "Only closed 2026–27 annual-program rules were verified. The HBCU award is a separate admitted program."},
-    {"aliases": ["Amicalola"], "reason": "Only a closed 2026 application cycle was located."},
-    {"aliases": ["Georgia's Own", "Georgia’s Own"], "reason": "The newest inspected application is a closed 2026–27 cycle; 2027–28 terms are unconfirmed."},
-    {"aliases": ["Community Foundation for Greater Atlanta", "Jim Kennedy Scholarship", "Nancy Penn Lyons"], "reason": "Official listings still describe closed 2026–27 awards; later-cycle conditions are unconfirmed."},
-    {"aliases": ["Community Foundation of Central Georgia", "Jones County"], "reason": "Current named-award criteria were not established from the public directory and older lead PDF."},
-    {"aliases": ["Georgia State", "Kennesaw", "Emory", "Morehouse", "Spelman", "Clark Atlanta", "North Georgia", "BOLD Scholarship", "Mercer"], "reason": "These university leads are outside the admitted named-award pilot; current complete award-level rules were not established."},
-    {"aliases": ["Clemson", "College of Charleston", "University of South Carolina"], "reason": "A complete, explicitly applicable Fall 2027 named first-year award cycle was not established in the inspected official material."},
-    {"aliases": ["UAB", "Alabama at Birmingham"], "reason": "Official rules pages were access-limited or returned an error page; search-index text was not ingested."},
-    {"aliases": ["University of Florida", "Florida State", "UCF", "University of Central Florida", "USF", "University of South Florida"], "reason": "Current Fall 2027 named nonresident award terms were not established from the inspected pages; Florida-resident aid does not establish a Georgia student's eligibility."},
-    {"aliases": ["Morehead-Cain", "UNC", "Chapel Hill", "Duke", "Wake Forest"], "reason": "These leads are outside the admitted named-award pilot; route-specific or current award-level requirements remain unresolved."},
-    {"aliases": ["UT Knoxville", "University of Tennessee", "Out-of-State Volunteer", "University of Memphis"], "reason": "The inspected material contains conflicting deadlines or previous-cycle amounts; current-cycle terms are unconfirmed."}
+    {
+      "aliases": [
+        "HOPE Scholarship",
+        "HOPE",
+        "Zell Miller"
+      ],
+      "reason": "Confirmed 2027\u201328 state regulations were not located; the retained 2026\u201327 regulations cannot establish later-year rules.",
+      "official_links": [
+        {
+          "title": "GSFC regulations index \u2014 check for the applicable academic year",
+          "url": "https://gsfc.georgia.gov/programs-and-regulations"
+        },
+        {
+          "title": "GAfutures HOPE application guidance \u2014 not confirmation of 2027\u201328 rules",
+          "url": "https://gafutures.org/hope-state-aid-programs/hope-zell-miller-scholarships/hope-scholarship/application-and-deadline/"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "Georgia Tech",
+        "Stamps President"
+      ],
+      "reason": "Official citizenship and interview wording conflicts across the FAQ, application-review page, and dated calendar."
+    },
+    {
+      "aliases": [
+        "Chick-fil-A Team Member",
+        "Remarkable Futures",
+        "True Inspiration"
+      ],
+      "reason": "Team Member high-school eligibility and cycle/service wording need administrator clarification; Community Scholars is a separate admitted program."
+    },
+    {
+      "aliases": [
+        "Delta Community annual",
+        "Delta Community Credit Union Scholarship"
+      ],
+      "reason": "Only closed 2026\u201327 annual-program rules were verified. The HBCU award is a separate admitted program."
+    },
+    {
+      "aliases": [
+        "Amicalola"
+      ],
+      "reason": "Only a closed 2026 application cycle was located."
+    },
+    {
+      "aliases": [
+        "Georgia's Own",
+        "Georgia\u2019s Own"
+      ],
+      "reason": "The newest inspected application is a closed 2026\u201327 cycle; 2027\u201328 terms are unconfirmed."
+    },
+    {
+      "aliases": [
+        "Community Foundation for Greater Atlanta",
+        "Jim Kennedy Scholarship",
+        "Nancy Penn Lyons"
+      ],
+      "reason": "Official listings still describe closed 2026\u201327 awards; later-cycle conditions are unconfirmed."
+    },
+    {
+      "aliases": [
+        "Community Foundation of Central Georgia",
+        "Jones County"
+      ],
+      "reason": "Current named-award criteria were not established from the public directory and older lead PDF."
+    },
+    {
+      "aliases": [
+        "Georgia State",
+        "Kennesaw",
+        "Emory",
+        "Morehouse",
+        "Spelman",
+        "Clark Atlanta",
+        "North Georgia",
+        "BOLD Scholarship",
+        "Mercer"
+      ],
+      "reason": "These university leads are outside the admitted named-award pilot; current complete award-level rules were not established."
+    },
+    {
+      "aliases": [
+        "Clemson",
+        "College of Charleston",
+        "University of South Carolina"
+      ],
+      "reason": "A complete, explicitly applicable Fall 2027 named first-year award cycle was not established in the inspected official material."
+    },
+    {
+      "aliases": [
+        "UAB",
+        "Alabama at Birmingham"
+      ],
+      "reason": "Official rules pages were access-limited or returned an error page; search-index text was not ingested."
+    },
+    {
+      "aliases": [
+        "University of Florida",
+        "Florida State",
+        "UCF",
+        "University of Central Florida",
+        "USF",
+        "University of South Florida"
+      ],
+      "reason": "Current Fall 2027 named nonresident award terms were not established from the inspected pages; Florida-resident aid does not establish a Georgia student's eligibility."
+    },
+    {
+      "aliases": [
+        "Morehead-Cain",
+        "UNC",
+        "Chapel Hill",
+        "Duke",
+        "Wake Forest"
+      ],
+      "reason": "These leads are outside the admitted named-award pilot; route-specific or current award-level requirements remain unresolved."
+    },
+    {
+      "aliases": [
+        "UT Knoxville",
+        "University of Tennessee",
+        "Out-of-State Volunteer",
+        "University of Memphis"
+      ],
+      "reason": "The inspected material contains conflicting deadlines or previous-cycle amounts; current-cycle terms are unconfirmed."
+    }
   ]
 }

@@ -459,6 +459,34 @@
             },
             "title": "Evidence Ids",
             "type": "array"
+          },
+          "program_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Program Id"
+          },
+          "kind": {
+            "default": "quote",
+            "enum": [
+              "quote",
+              "explanation"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "supporting_quotes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supporting Quotes",
+            "type": "array"
           }
         },
         "required": [
@@ -470,6 +498,28 @@
       "AnswerResult": {
         "additionalProperties": false,
         "properties": {
+          "construction_version": {
+            "default": "grounded-v1",
+            "title": "Construction Version",
+            "type": "string"
+          },
+          "retrieval_policy": {
+            "default": "baseline",
+            "title": "Retrieval Policy",
+            "type": "string"
+          },
+          "source_links": {
+            "items": {
+              "$ref": "#/components/schemas/SourceLink"
+            },
+            "title": "Source Links",
+            "type": "array"
+          },
+          "review": {
+            "additionalProperties": true,
+            "title": "Review",
+            "type": "object"
+          },
           "blocks": {
             "items": {
               "$ref": "#/components/schemas/AnswerBlock"
@@ -1184,6 +1234,15 @@
             ],
             "title": "Method",
             "type": "string"
+          },
+          "retrieval_policy": {
+            "default": "baseline",
+            "enum": [
+              "baseline",
+              "targeted"
+            ],
+            "title": "Retrieval Policy",
+            "type": "string"
           }
         },
         "required": [
@@ -1195,6 +1254,16 @@
       "RetrievedEvidence": {
         "additionalProperties": false,
         "properties": {
+          "selection_details": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "title": "Selection Details",
+            "type": "object"
+          },
           "chunks": {
             "items": {
               "$ref": "#/components/schemas/Chunk"
@@ -1450,6 +1519,25 @@
           "name"
         ],
         "title": "Scholarship",
+        "type": "object"
+      },
+      "SourceLink": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "SourceLink",
         "type": "object"
       },
       "StudentProfile": {

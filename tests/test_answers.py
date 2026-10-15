@@ -56,7 +56,24 @@ def test_answer_flow_preserves_deterministic_unknowns_and_uses_lcel():
     class Model:
         def invoke(self, schema, instructions, payload, max_output):
             # Model cannot replace deterministic fit outcomes; output contains only cited claims.
-            return schema(evidence_unit_ids=[payload["evidence"][0]["id"]]), {}
+            if "claims" in payload:
+                return schema(
+                    verdicts=[
+                        dict(claim_index=i, supported=True, reason="fixture")
+                        for i, _ in enumerate(payload["claims"])
+                    ]
+                ), {}
+            unit = payload["evidence"][0]
+            assert "profile" in payload and "condition_checks" in payload
+            return schema(
+                claims=[
+                    dict(
+                        text=unit["text"],
+                        program_id=unit["program_id"],
+                        supports=[dict(evidence_id=unit["id"], quote=unit["text"])],
+                    )
+                ]
+            ), {}
 
     records = [
         Scholarship(
@@ -132,9 +149,23 @@ def test_answer_selection_rejects_invented_units_and_preserves_unicode():
         invalid = False
 
         def invoke(self, schema, instructions, payload, max_output):
+            if "claims" in payload:
+                return schema(
+                    verdicts=[dict(claim_index=0, supported=True, reason="fixture")]
+                ), {}
+            unit = payload["evidence"][0]
             return schema(
-                evidence_unit_ids=[
-                    "invented" if self.invalid else payload["evidence"][0]["id"]
+                claims=[
+                    dict(
+                        text=unit["text"],
+                        program_id=unit["program_id"],
+                        supports=[
+                            dict(
+                                evidence_id="invented" if self.invalid else unit["id"],
+                                quote=unit["text"],
+                            )
+                        ],
+                    )
                 ]
             ), {}
 
@@ -143,11 +174,11 @@ def test_answer_selection_rejects_invented_units_and_preserves_unicode():
     request = RetrievalRequest(question="What is it?", corpus_version="v")
     assert (
         service.answer_question(StudentProfile(), request, []).blocks[0].text
-        == "A student’s award."
+        == "A student’s award. Juniors only."
     )
     model.invalid = True
-    with pytest.raises(ValueError, match="Unknown answer evidence unit"):
-        service.answer_question(StudentProfile(), request, [])
+    result = service.answer_question(StudentProfile(), request, [])
+    assert not result.blocks and any("withheld" in g for g in result.gaps)
 
 
 def test_deferred_named_program_never_substitutes_related_university_rules():

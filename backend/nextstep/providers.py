@@ -115,8 +115,11 @@ class PaidModel:
             from langsmith import tracing_context
 
             with tracing_context(enabled=False):
+                structured_options = {"method": "function_calling", "include_raw": True}
+                if getattr(schema, "native_schema", False):
+                    structured_options.update(method="json_schema", strict=True)
                 output = client.with_structured_output(
-                    schema, method="function_calling", include_raw=True
+                    schema, **structured_options
                 ).invoke(
                     [("system", instructions), ("human", encoded)],
                     config={"callbacks": []},

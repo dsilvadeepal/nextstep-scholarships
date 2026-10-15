@@ -72,8 +72,22 @@ def test_synthetic_update_changes_matching_and_cited_answer_together(tmp_path):
 
         class Model:
             def invoke(self, schema, instructions, payload, max_output):
+                if "claims" in payload:
+                    return schema(
+                        verdicts=[
+                            dict(claim_index=i, supported=True, reason="fixture")
+                            for i, _ in enumerate(payload["claims"])
+                        ]
+                    ), {}
                 return schema(
-                    evidence_unit_ids=[unit["id"] for unit in payload["evidence"]]
+                    claims=[
+                        dict(
+                            text=u["text"],
+                            program_id=u["program_id"],
+                            supports=[dict(evidence_id=u["id"], quote=u["text"])],
+                        )
+                        for u in payload["evidence"]
+                    ]
                 ), {}
 
         answer = AnswerService(

@@ -96,7 +96,7 @@ export function ChatPanel({
           · {hypothetical ? "Hypothetical profile" : "Current profile"} ·
           Conversation stays in this visit.
         </p>
-        <p>Answers quote source passages. They do not certify eligibility.</p>
+        <p>Answers explain cited source passages. They do not certify eligibility.</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -133,7 +133,7 @@ export function ChatPanel({
             </p>
             {answer.blocks.map((block, i) => (
               <div key={i}>
-                <blockquote>{block.text}</blockquote>
+                {block.kind === "explanation" ? <p>{block.text}</p> : <blockquote>{block.text}</blockquote>}
                 {block.evidence_ids?.map((id) => {
                   const chunk = answer.evidence.chunks.find(
                     (c) => c.id === id || c.evidence?.some((e) => e.id === id),
@@ -162,6 +162,7 @@ export function ChatPanel({
                 })}
               </div>
             ))}
+            {answer.source_links?.map((link) => <p key={link.url}><a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
             {answer.gaps?.map((gap, i) => (
               <p key={i} className="question">
                 {gap}
@@ -170,7 +171,7 @@ export function ChatPanel({
             <details>
               <summary>How this answer was assembled</summary>
               <p>
-                {answer.method} retrieval · {answer.evidence.chunks.length}{" "}
+                {answer.method} retrieval · {answer.retrieval_policy} selection · {answer.evidence.chunks.length}{" "}
                 passages. Matching checks the full catalog separately. Retrieval
                 is not a complete eligibility audit.
               </p>
