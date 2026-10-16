@@ -1,4 +1,30 @@
 import { test, expect } from "@playwright/test";
+test("short intake confirms named plans before matching", async ({ page }) => {
+  let submitted: Record<string, unknown> | null = null;
+  await page.route("**/api/matches", (route) => {
+    submitted = route.request().postDataJSON().profile;
+    return route.fulfill({
+      json: { corpus_version: "synthetic", scholarships: [], matches: [] },
+    });
+  });
+  await page.goto("/");
+  await page.getByRole("combobox", { name: "School year" }).selectOption("11");
+  await page.getByRole("combobox", { name: "Georgia resident?" }).selectOption("yes");
+  await page.getByLabel(/Tell us a little about your plans/).fill(
+    "I am considering Auburn for engineering, but I have not been accepted.",
+  );
+  await expect(page.getByText(/Detected mentions: Auburn; engineering/)).toBeVisible();
+  await page.getByRole("button", { name: "Find my matches" }).click();
+  expect(submitted).toMatchObject({ prospective_colleges: [], interests: [] });
+  await page.getByLabel("Use these colleges and interests in my matches").check();
+  await page.getByRole("button", { name: "Find my matches" }).click();
+  expect(submitted).toMatchObject({
+    residence: { state: "GA" },
+    prospective_colleges: ["Auburn"],
+    interests: ["engineering"],
+  });
+  expect((submitted as { context: Record<string, unknown> }).context.accepted_colleges).toBeUndefined();
+});
 test("skippable profile and honest unavailable catalog", async ({ page }) => {
   await page.route("**/api/matches", (route) =>
     route.fulfill({ status: 503, body: "{}" }),
@@ -7,7 +33,7 @@ test("skippable profile and honest unavailable catalog", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: /Big possibilities/ }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await page.getByRole("button", { name: "Find my matches" }).click();
   await expect(page.getByRole("alert")).toContainText("not available");
   expect(
     await page.evaluate(
@@ -152,6 +178,6 @@ test("new corpus replaces shortlist records and announces source changes", async
   );
   await page.goto("/");
   await page.getByRole("button", { name: "Fictional senior" }).click();
-  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await page.getByRole("button", { name: "Find my matches" }).click();
   await expect(page.getByText(/Sources changed from old to new/)).toBeVisible();
 });

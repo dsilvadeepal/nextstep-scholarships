@@ -38,6 +38,13 @@ def test_prospective_is_not_admission():
     )
 
 
+def test_explicit_non_georgia_resident_is_unmet_only_for_georgia_rule():
+    profile = StudentProfile(context={"georgia_resident": False})
+    assert evaluate_condition(rule("state", "eq", "GA"), profile, TODAY).status == "unmet"
+    assert evaluate_condition(rule("state", "eq", "AL"), profile, TODAY).status == "unknown"
+    assert evaluate_condition(rule("state", "eq", "GA"), StudentProfile(), TODAY).status == "unknown"
+
+
 @pytest.mark.parametrize(
     "operator,children,want",
     [

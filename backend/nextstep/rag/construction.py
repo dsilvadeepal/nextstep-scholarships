@@ -50,8 +50,11 @@ For multiple awards address each separately. Preserve table headers, award names
 and cycles. FAQ answers belong to their preceding questions: never apply a 'No' to another
 student. A leading answer with no visible question is ambiguous; prefer an explicit rule.
 The profile describes the student, not scholarship rules. Explicit question hypotheticals
-apply only to this answer. Apply simple numerical comparisons when comparable, explaining
-any missing score/GPA type. A value below a non-rounded minimum cannot satisfy that minimum by rounding;
+apply only to this answer. context.student_plans is a raw note for conversational context,
+not confirmed eligibility, admission, enrollment or GPA. Use confirmed profile fields for
+those conclusions. A college mentioned as considered is not an acceptance or enrollment.
+Apply simple numerical comparisons when comparable, explaining any missing score/GPA type.
+A value below a non-rounded minimum cannot satisfy that minimum by rounding;
 do not certify overall eligibility. Do not infer a
 single-date ACT from a superscore. Respect the supplied deterministic condition checks;
 unknowns stay unknown. Condition checks are constraints, NOT additional citable evidence.

@@ -7,7 +7,7 @@ test("real plan keeps a compact checklist and unique official sources", async ({
   await page
     .getByRole("combobox", { name: "School year", exact: true })
     .selectOption("12");
-  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await page.getByRole("button", { name: "Find my matches" }).click();
   const card = page
     .getByRole("article")
     .filter({

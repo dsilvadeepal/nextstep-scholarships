@@ -82,10 +82,11 @@ test("synthetic complete student journey shows citations, survives chat errors a
     .getByRole("combobox", { name: "School year", exact: true })
     .selectOption("12");
   await page.getByLabel("GPA value", { exact: true }).fill("3.65");
+  await page.getByText("Add more details", { exact: true }).click();
   await page
     .getByRole("combobox", { name: "GPA scale", exact: true })
     .selectOption("4");
-  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await page.getByRole("button", { name: "Find my matches" }).click();
   await expect(
     page.getByRole("heading", { name: "SYNTHETIC scholarship" }),
   ).toBeVisible();

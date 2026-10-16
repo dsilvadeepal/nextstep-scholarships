@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { components } from "../types";
 import { RouteIllustration } from "./BrandAssets";
+import { planHints } from "../plans";
 export type StudentProfile = components["schemas"]["StudentProfile"];
 const list = (value: string) =>
   value
@@ -13,7 +14,12 @@ export function ProfileForm({
   onSubmit: (profile: StudentProfile) => void;
 }) {
   const [fields, setFields] = useState<Record<string, string>>({});
+  const [showDetails, setShowDetails] = useState(false);
+  const [useHints, setUseHints] = useState(false);
   const value = (key: string) => fields[key] || "";
+  const hints = planHints(value("plans"));
+  const colleges = value("colleges") ? list(value("colleges")) : useHints ? hints.colleges : [];
+  const interests = value("interests") ? list(value("interests")) : useHints ? hints.interests : [];
   const input = (
     key: string,
     label: string,
@@ -75,17 +81,18 @@ export function ProfileForm({
             if (value(key)) context[key] = value(key);
           for (const key of ["accepted_colleges", "enrolled_colleges"])
             if (value(key)) context[key] = list(value(key));
+          if (value("residency") === "no") context.georgia_resident = false;
+          if (value("plans")) context.student_plans = value("plans");
+          const residence = Object.fromEntries(
+            ["state", "county", "city"]
+              .filter((k) => value(k))
+              .map((k) => [k, k === "state" ? value(k).toUpperCase() : value(k)]),
+          );
+          if (value("residency") === "yes") residence.state = "GA";
           onSubmit({
             grade: value("grade") ? (Number(value("grade")) as 11 | 12) : null,
             graduation_year: value("year") ? Number(value("year")) : null,
-            residence: Object.fromEntries(
-              ["state", "county", "city"]
-                .filter((k) => value(k))
-                .map((k) => [
-                  k,
-                  k === "state" ? value(k).toUpperCase() : value(k),
-                ]),
-            ),
+            residence,
             gpa: value("gpa")
               ? {
                   value: Number(value("gpa")),
@@ -98,14 +105,14 @@ export function ProfileForm({
                   as_of: value("date") || null,
                 }
               : null,
-            interests: list(value("interests")).slice(0, 20),
-            prospective_colleges: list(value("colleges")).slice(0, 3),
+            interests: interests.slice(0, 20),
+            prospective_colleges: colleges.slice(0, 3),
             context,
           });
         }}
       >
         <p className="hint">
-          Every question is optional. Your profile lasts for this visit. Do not
+          Start with what you know. Your profile lasts for this visit. Do not
           enter names, account numbers or other identifying details.
         </p>
         <div className="fields">
@@ -113,9 +120,57 @@ export function ProfileForm({
             ["11", "Junior"],
             ["12", "Senior"],
           ])}
+          {select("residency", "Georgia resident?", [
+            ["yes", "Yes"],
+            ["no", "No"],
+          ])}
+          {input("gpa", "GPA value", "number")}
+          {value("gpa") && select("documentation", "GPA documentation", [
+            ["estimated", "Estimated"],
+            ["documented", "Final / school record"],
+          ])}
+        </div>
+        <label className="plans-field">
+          Tell us a little about your plans (optional)
+          <textarea
+            value={value("plans")}
+            maxLength={500}
+            placeholder="I'm interested in engineering, considering Georgia Tech and Auburn, and I volunteer."
+            onChange={(e) => {
+              setFields({ ...fields, plans: e.target.value });
+              setUseHints(false);
+            }}
+          />
+        </label>
+        <div className="understood" aria-live="polite">
+          <strong>What we understood</strong>
+          <p>
+            {value("grade") === "11" ? "Junior" : value("grade") === "12" ? "Senior" : "School year unknown"}
+            {" · "}
+            {value("residency") === "yes" ? "Georgia resident" : value("residency") === "no" ? "Not a Georgia resident" : "Georgia residency unknown"}
+            {" · "}
+            {value("gpa") ? `${value("documentation") === "documented" ? "Final" : value("documentation") === "estimated" ? "Estimated" : "Unconfirmed"} GPA ${value("gpa")}` : "GPA unknown"}
+          </p>
+          {(hints.colleges.length > 0 || hints.interests.length > 0) && (
+            <p>
+              Detected mentions: {hints.colleges.join(", ")}{hints.colleges.length > 0 && hints.interests.length > 0 ? "; " : ""}{hints.interests.join(", ")}.
+            </p>
+          )}
+          {(hints.colleges.length > 0 || hints.interests.length > 0) && (
+            <label className="hint">
+              <input type="checkbox" checked={useHints} onChange={(e) => setUseHints(e.target.checked)} />
+              Use these colleges and interests in my matches
+            </label>
+          )}
+          {value("plans") && <p className="hint">Your full note stays with this visit's profile for follow-up questions. Only confirmed mentions affect matching. A college you are considering is not treated as an acceptance.</p>}
+          <button type="button" onClick={() => setShowDetails(true)}>Edit details</button>
+        </div>
+        <details className="optional-fields" open={showDetails} onToggle={(e) => setShowDetails(e.currentTarget.open)}>
+          <summary>Add more details</summary>
+          <p>Leave uncertain answers blank. A GPA without its scale and type cannot establish a score threshold.</p>
+          <div className="fields">
           {input("year", "Graduation year", "number")}
           {input("state", "State of residence", "text", "e.g. GA")}
-          {input("gpa", "GPA value", "number")}
           {select("scale", "GPA scale", [
             ["4", "4-point"],
             ["5", "5-point"],
@@ -124,10 +179,6 @@ export function ProfileForm({
           {select("type", "GPA type", [
             ["unweighted", "Unweighted"],
             ["weighted", "Weighted"],
-          ])}
-          {select("documentation", "GPA documentation", [
-            ["estimated", "My estimate"],
-            ["documented", "From my school record"],
           ])}
           {input("date", "GPA as of", "date")}
           {input(
@@ -142,14 +193,10 @@ export function ProfileForm({
             "text",
             "e.g. engineering, business",
           )}
-        </div>
-        <details className="optional-fields">
-          <summary>Optional details for more specific requirements</summary>
           <p>
             Considering a college does not mean you have been accepted. Add only
             facts you know; leave uncertain answers blank.
           </p>
-          <div className="fields">
             {input("county", "County")}
             {input("city", "City")}
             {input(
@@ -171,7 +218,7 @@ export function ProfileForm({
           </div>
         </details>
         <button className="primary">
-          Explore scholarships
+          Find my matches
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
             <path d="M3 10h13m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

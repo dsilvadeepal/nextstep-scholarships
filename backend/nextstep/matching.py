@@ -66,6 +66,12 @@ def evaluate_condition(
     elif c.kind == "graduation_year":
         value = profile.graduation_year
     elif c.kind in ("state", "county", "city"):
+        if (
+            c.kind == "state"
+            and expected == "GA"
+            and profile.context.get("georgia_resident") is False
+        ):
+            return result("unmet", "Student reported not being a Georgia resident")
         value = profile.residence.get(c.kind)
     elif c.kind == "college" and c.operator in ("accepted", "enrolled"):
         if not isinstance(expected, str) or not expected.strip():

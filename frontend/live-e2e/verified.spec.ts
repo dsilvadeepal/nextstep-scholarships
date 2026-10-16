@@ -10,7 +10,7 @@ test("actual verified corpus, cited live answer and printed plan", async ({
     .getByRole("combobox", { name: "School year", exact: true })
     .selectOption("12");
   const matches = page.waitForResponse("**/api/matches");
-  await page.getByRole("button", { name: "Explore scholarships" }).click();
+  await page.getByRole("button", { name: "Find my matches" }).click();
   const catalog = await (await matches).json();
   expect(catalog.corpus_version).toBe(version);
   expect(catalog.scholarships).toHaveLength(18);
