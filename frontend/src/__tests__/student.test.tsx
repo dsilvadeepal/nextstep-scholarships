@@ -99,3 +99,15 @@ test("detected mentions do not become profile facts before confirmation", () => 
   expect(submit.mock.calls[0][0].interests).toEqual([]);
   expect(submit.mock.calls[0][0].context?.student_plans).toContain("sister");
 });
+
+test("fictional starter updates the visible editable intake", () => {
+  const submit = vi.fn();
+  render(<ProfileForm onSubmit={submit} />);
+  fireEvent.click(screen.getByRole("button", { name: "Fictional senior" }));
+  expect(screen.getByLabelText("School year")).toHaveValue("12");
+  expect(screen.getByLabelText("Georgia resident?")).toHaveValue("yes");
+  expect(screen.getByLabelText("GPA value")).toHaveValue(3.5);
+  expect(screen.getByText(/Senior · Georgia resident · Estimated GPA 3.5/)).toBeVisible();
+  fireEvent.click(screen.getByRole("button", { name: "Find my matches" }));
+  expect(submit.mock.calls[1][0]).toMatchObject(submit.mock.calls[0][0]);
+});

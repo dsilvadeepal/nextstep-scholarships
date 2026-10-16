@@ -20,6 +20,19 @@ export function ProfileForm({
   const hints = planHints(value("plans"));
   const colleges = value("colleges") ? list(value("colleges")) : useHints ? hints.colleges : [];
   const interests = value("interests") ? list(value("interests")) : useHints ? hints.interests : [];
+  const submitStarter = (profile: StudentProfile) => {
+    setFields({
+      grade: profile.grade ? String(profile.grade) : "",
+      residency: profile.residence?.state === "GA" ? "yes" : "",
+      gpa: profile.gpa ? String(profile.gpa.value) : "",
+      documentation: profile.gpa?.estimated === true ? "estimated" : "",
+      scale: profile.gpa?.scale ? String(profile.gpa.scale) : "",
+      type: profile.gpa?.type === "unknown" ? "" : profile.gpa?.type || "",
+    });
+    setUseHints(false);
+    setShowDetails(false);
+    onSubmit(profile);
+  };
   const input = (
     key: string,
     label: string,
@@ -228,7 +241,7 @@ export function ProfileForm({
         <span>Just looking? Try a fictional profile</span>
         <button
           onClick={() =>
-            onSubmit({
+            submitStarter({
               graduation_year: null,
               grade: 11,
               residence: { state: "GA" },
@@ -240,7 +253,7 @@ export function ProfileForm({
         </button>
         <button
           onClick={() =>
-            onSubmit({
+            submitStarter({
               graduation_year: null,
               grade: 12,
               residence: { state: "GA" },
@@ -258,7 +271,7 @@ export function ProfileForm({
         </button>
         <button
           onClick={() =>
-            onSubmit({ graduation_year: null, grade: null, gpa: null })
+            submitStarter({ graduation_year: null, grade: null, gpa: null })
           }
         >
           Fictional undecided student
