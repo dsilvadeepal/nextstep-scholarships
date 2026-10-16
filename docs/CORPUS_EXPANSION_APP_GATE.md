@@ -32,6 +32,15 @@ This document does not authorize activation or paid evaluation.
   selected IDs absent from the active version, and the student interface
   refreshes its shortlist when a new version is returned. Renames may affect
   saved evaluation case IDs even when a source is otherwise unchanged.
+- Packed chunks may contain multiple exact `EvidenceRef` entries from one
+  source. Every reference's `source_id` must match the chunk's single
+  `source_id`, its `section_id` must appear in `section_ids`, and its quote must
+  occur exactly in the chunk text. Keep rule headings, question context, dates,
+  and table labels in that text. The answer UI links all references, while the
+  model and deterministic comparison cite the chunk ID and display the full
+  chunk. Pinecone metadata records all `evidence_ids` but only the first
+  reference's quote offsets; the canonical manifest retains every reference.
+  Verify the multi-reference display and evaluation mapping before activation.
 - Supply source-checked fictional cases for added or materially changed
   programs. Existing evaluation files contain checked source hashes, section
   IDs, quotes, program IDs, and cycle-specific expected answers; a candidate
