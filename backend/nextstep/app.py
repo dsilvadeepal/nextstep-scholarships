@@ -46,27 +46,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(chat_router)
     if settings.database_url and settings.live_calls_enabled:
-        from nextstep.limits import BudgetLedger
         from nextstep.providers import OpenAIEmbeddingProvider, PaidModel, PineconeStore
         from nextstep.rag.answer import AnswerService
         from nextstep.rag.retrieve import Retriever
 
-        ledger = BudgetLedger(
-            engine,
-            settings.openai_run_budget_usd,
-            settings.openai_total_budget_usd,
-            enabled=settings.live_calls_enabled,
-            run_id="public-chat",
-        )
-
         def answer_factory(version, records):
-            embeddings = OpenAIEmbeddingProvider(settings, ledger)
+            embeddings = OpenAIEmbeddingProvider(settings)
             return AnswerService(
                 Retriever(
                     app.state.repository.get_chunks(version),
                     PineconeStore(settings, embeddings),
                 ),
-                PaidModel(settings, ledger),
+                PaidModel(settings),
                 records,
             )
 

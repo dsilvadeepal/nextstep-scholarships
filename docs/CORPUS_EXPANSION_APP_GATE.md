@@ -4,6 +4,10 @@ This is a handoff checklist for the next scholarship corpus version. Source rese
 extraction, chunking, embedding, and staging belong to the ingestion workstream.
 This document does not authorize activation or paid evaluation.
 
+October 16 implementation and executed candidate checks are recorded in the
+[build/test report](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md). The checklist below
+defines the gate; it is not a claim of hosted deployment or independent accuracy.
+
 ## Candidate contract
 
 - Supply one immutable candidate `version`, its normalized award records, chunk
@@ -24,8 +28,8 @@ This document does not authorize activation or paid evaluation.
   so the handoff ledger is necessary for a reliable audit.
 - Supply the candidate coverage decision for named programs that remain out of
   scope, including their official handoff links. The current guard in
-  `rag/answer.py` reads `data/reviewed-coverage-2026-10-14.json` only when its
-  `corpus_version` matches. Without a candidate coverage file and app update,
+  `rag/answer.py` now reads the reviewed or expanded coverage register only when
+  its `corpus_version` matches. Without a candidate coverage file and app update,
   deferred-program questions would enter retrieval and might cite a different
   program's rules.
 - Identify retained, renamed, removed, and added award IDs. The app rejects
@@ -38,15 +42,14 @@ This document does not authorize activation or paid evaluation.
   occur exactly in the chunk text. Keep rule headings, question context, dates,
   and table labels in that text. The answer UI links all references, while the
   model and deterministic comparison cite the chunk ID and display the full
-  chunk. Pinecone metadata records all `evidence_ids` but only the first
-  reference's quote offsets; the canonical manifest retains every reference.
+  chunk. Candidate Pinecone metadata records every reference and its offsets in
+  `evidence_refs_json`; first-reference scalar offsets remain for compatibility.
   Verify the multi-reference display and evaluation mapping before activation.
 - Supply source-checked fictional cases for added or materially changed
   programs. Existing evaluation files contain checked source hashes, section
   IDs, quotes, program IDs, and cycle-specific expected answers; a candidate
-  run cannot assume they remain valid. The snapshot in `evals/suite.py` also
-  hashes the old coverage file, so its metadata must be updated with the
-  candidate register before a new-version run.
+  run cannot assume they remain valid. The snapshot in `evals/suite.py` now hashes
+  the applicable versioned coverage register, candidate bundle and content policy.
 
 ## App verification after handoff
 

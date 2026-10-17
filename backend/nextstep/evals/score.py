@@ -34,8 +34,11 @@ def score_case(case, answer, judgment, actual_conditions=None):
         b.evidence_ids and set(b.evidence_ids) <= evidence_ids for b in answer.blocks
     )
     claims = judgment.claims if judgment else []
+    claim_alignment = [c.text for c in claims] == [b.text for b in answer.blocks]
+    # Rubric constraints are not answer claims. They cannot lower support rate
+    # or substitute for an actually checked factual answer claim.
     supported = sum(c.supported and c.scorable for c in claims)
-    checked = len(claims)
+    checked = sum(c.scorable for c in claims)
     rubric = bool(
         judgment
         and all(
@@ -61,13 +64,24 @@ def score_case(case, answer, judgment, actual_conditions=None):
         )
         rubric = expected_gap_pass
     # A judge omitting claims from a factual answer cannot manufacture N/A or a pass.
-    claim_coverage = not answer.blocks or checked > 0
+    reviewed_conflict_answer = any(
+        "conflict" in expected.lower() for expected in case.expected_claims
+    ) and any(
+        "conflicting" in gap.lower() and " versus " in gap.lower()
+        for gap in answer.gaps
+    )
+    claim_coverage = (
+        checked > 0
+        if answer.blocks
+        else case.expects_evidence_gap or reviewed_conflict_answer
+    )
     return {
         "passed": bool(
             rubric
             and condition_ok
             and citation_ok
             and required <= evidence_ids
+            and claim_alignment
             and claim_coverage
             and supported == checked
         ),
@@ -83,8 +97,18 @@ def score_case(case, answer, judgment, actual_conditions=None):
         "supported_claims": supported,
         "checked_claims": checked,
         "unscorable_claims": sum(not c.scorable for c in claims),
-        "support_rate": supported / checked if checked else None,
-        "judge_error": None if judgment else "Judge unavailable; case fails",
+        "claim_alignment": claim_alignment,
+        "answer_present": claim_coverage,
+        "support_rate": supported / checked if checked else 0.0 if claims else None,
+        "judge_error": (
+            "Judge unavailable; case fails"
+            if judgment is None
+            else "Judge claims differ from answer blocks"
+            if not claim_alignment
+            else "Judge omitted factual answer claims"
+            if answer.blocks and not checked
+            else None
+        ),
         "judge": judgment.model_dump() if judgment else None,
         "assessment_label": "Correlated automated assessment; source spot-check still required",
     }

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     openai_total_budget_usd: Decimal = Field(default=Decimal(0), ge=0)
     environment: str = "development"
     database_url: str | None = None
+    hosted_admin_enabled: bool = False
     session_secret: str | None = None
     public_origin: str = "http://127.0.0.1:8014"
     oidc_client_id: str | None = None
@@ -33,6 +34,10 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_production(self):
+        if self.database_url and self.database_url.startswith("postgresql://"):
+            self.database_url = self.database_url.replace(
+                "postgresql://", "postgresql+psycopg://", 1
+            )
         if self.environment == "production":
             if not self.database_url or not self.database_url.startswith("postgresql"):
                 raise ValueError(
@@ -46,7 +51,7 @@ class Settings(BaseSettings):
                 raise ValueError(
                     "Production requires HTTPS public origin and stable rate secret"
                 )
-            if (
+            if self.hosted_admin_enabled and (
                 not self.session_secret
                 or len(self.session_secret) < 32
                 or not self.oidc_client_id

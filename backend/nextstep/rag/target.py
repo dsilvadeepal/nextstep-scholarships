@@ -14,7 +14,7 @@ FACETS = (
     ("score_policy", r"score|act|sat", r"superscore|single.test.date|single test date"),
     (
         "eligibility",
-        r"eligib|cycle|junior|senior|before applying|qualif",
+        r"eligib|cycle|junior|senior|before applying|qualif|requirements",
         r"eligib|must intend|juniors|citizen|permanent residen",
     ),
     (
@@ -24,8 +24,8 @@ FACETS = (
     ),
     (
         "materials",
-        r"letter|reference|recommendation|document",
-        r"letters? of|recommendation|reference",
+        r"letter|reference|recommendation|document|prepare|materials",
+        r"letters? of|recommendation|reference|transcript|documents",
     ),
     ("application", r"separate|application|apply", r"application|apply"),
     (
@@ -90,6 +90,7 @@ def targeted_ranking(question, corpus, ranked):
                 )
             if name == "eligibility":
                 score += ("eligibility requirements" in text) * 2
+                score += (section.lower() == "eligibility") * 3
             if name == "application":
                 score += ("separate" in text) * 2
             candidates.append(

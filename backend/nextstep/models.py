@@ -3,7 +3,7 @@
 from datetime import date, datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class Model(BaseModel):
@@ -145,6 +145,7 @@ class MatchResult(Model):
     conditions: list[ConditionResult]
     group: Literal["matches", "prepare", "explore", "unmet"]
     fit: str
+    fit_reason: str
     timing: str
     evidence_label: str
     followups: list[str] = Field(default_factory=list)
@@ -157,6 +158,13 @@ class RetrievalRequest(Model):
     corpus_version: str | None = None
     method: Literal["semantic", "hybrid", "hybrid_60_40"] = "hybrid"
     retrieval_policy: Literal["baseline", "targeted"] = "targeted"
+
+    @field_validator("question")
+    @classmethod
+    def reject_blank_question(cls, value):
+        if not value.strip():
+            raise ValueError("Question must contain non-whitespace text")
+        return value
 
 
 class RetrievedEvidence(Model):

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { components } from "../types";
 import { RouteIllustration } from "./BrandAssets";
-import { planHints } from "../plans";
+import { planHints, normalizeCitizenship } from "../plans";
 export type StudentProfile = components["schemas"]["StudentProfile"];
 const list = (value: string) =>
   value
@@ -18,8 +18,13 @@ export function ProfileForm({
   const [useHints, setUseHints] = useState(false);
   const value = (key: string) => fields[key] || "";
   const hints = planHints(value("plans"));
-  const colleges = value("colleges") ? list(value("colleges")) : useHints ? hints.colleges : [];
-  const interests = value("interests") ? list(value("interests")) : useHints ? hints.interests : [];
+  const [review, setReview] = useState<Record<string, string>>({});
+  const suggested = {colleges: hints.colleges.join(", "), interests: hints.interests.join(", "), citizenship: hints.citizenship, residency: hints.residency, volunteer: hints.volunteer, activities: hints.activities};
+  const reviewed = (key: keyof typeof suggested) => review[key] ?? suggested[key];
+  const hasHints = Object.values(suggested).some(Boolean);
+  const reviewInput = (key: keyof typeof suggested, label: string) => <label>{label}<input value={reviewed(key)} onChange={e => {setReview({...review, [key]: e.target.value}); setUseHints(false);}} /></label>;
+  const colleges = value("colleges") ? list(value("colleges")) : useHints ? list(reviewed("colleges")) : [];
+  const interests = value("interests") ? list(value("interests")) : useHints ? list(reviewed("interests")) : [];
   const submitStarter = (profile: StudentProfile) => {
     setFields({
       grade: profile.grade ? String(profile.grade) : "",
@@ -95,13 +100,19 @@ export function ProfileForm({
           for (const key of ["accepted_colleges", "enrolled_colleges"])
             if (value(key)) context[key] = list(value(key));
           if (value("residency") === "no") context.georgia_resident = false;
+          if (!value("citizenship") && useHints && reviewed("citizenship")) context.citizenship = reviewed("citizenship");
+          if (typeof context.citizenship === "string") context.citizenship = normalizeCitizenship(context.citizenship);
+          if (useHints && reviewed("activities")) context.activities = list(reviewed("activities"));
+          if (useHints && reviewed("volunteer")) context.volunteer_experience = reviewed("volunteer");
+          const residency = value("residency") || (useHints ? reviewed("residency") : "");
+          if (residency === "no") context.georgia_resident = false;
           if (value("plans")) context.student_plans = value("plans");
           const residence = Object.fromEntries(
             ["state", "county", "city"]
               .filter((k) => value(k))
               .map((k) => [k, k === "state" ? value(k).toUpperCase() : value(k)]),
           );
-          if (value("residency") === "yes") residence.state = "GA";
+          if (residency === "yes") residence.state = "GA";
           onSubmit({
             grade: value("grade") ? (Number(value("grade")) as 11 | 12) : null,
             graduation_year: value("year") ? Number(value("year")) : null,
@@ -152,6 +163,7 @@ export function ProfileForm({
             onChange={(e) => {
               setFields({ ...fields, plans: e.target.value });
               setUseHints(false);
+              setReview({});
             }}
           />
         </label>
@@ -169,10 +181,19 @@ export function ProfileForm({
               Detected mentions: {hints.colleges.join(", ")}{hints.colleges.length > 0 && hints.interests.length > 0 ? "; " : ""}{hints.interests.join(", ")}.
             </p>
           )}
-          {(hints.colleges.length > 0 || hints.interests.length > 0) && (
+          {hasHints && <div className="fields">
+            {reviewInput("colleges", "Review colleges")}
+            {reviewInput("interests", "Review interests")}
+            {reviewInput("citizenship", "Review citizenship")}
+            <label>Review Georgia residency<select value={reviewed("residency")} onChange={e => {setReview({...review, residency: e.target.value}); setUseHints(false);}}><option value="">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+            {reviewInput("volunteer", "Review volunteer experience")}
+            {reviewInput("activities", "Review activities")}
+          </div>}
+          {hasHints && <p className="hint">Review these suggestions and confirm below. Explicit fields in your profile take priority. Activities do not establish leadership or scholarship eligibility.</p>}
+          {hasHints && (
             <label className="hint">
               <input type="checkbox" checked={useHints} onChange={(e) => setUseHints(e.target.checked)} />
-              Use these colleges and interests in my matches
+              Use these reviewed details in my matches
             </label>
           )}
           {value("plans") && <p className="hint">Your full note stays with this visit's profile for follow-up questions. Only confirmed mentions affect matching. A college you are considering is not treated as an acceptance.</p>}

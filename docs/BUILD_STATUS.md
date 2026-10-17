@@ -1,4 +1,64 @@
-# Build status — October 14, 2026
+# Build status — October 16, 2026
+
+## Local activation — October 16, 2026, 9:03 p.m. ET
+
+Following explicit user approval, `candidate-2026-10-16-v4` is now the active local
+catalog: **39 records / 31 families / 201 chunks / 63 official documents**.
+The version name retains its immutable staging identifier. The previous
+`verified-2026-10-14-v2` catalog (18 records / 174 chunks) and Pinecone namespace
+remain intact and ready for rollback. Both namespaces passed fresh ID/count/query
+readiness checks before the transactional active-pointer switch.
+
+Post-activation checks against the actual app on port 8014 passed: 39-record
+matching; cited UAB no-superscore answer; Cooke transcript/income source distinctions
+with explicit sponsor-confirmation caveats; HOPE 2027–28 coverage gap without paid
+calls; invalid-program rejection; and server-side version pinning despite a stale
+client version. Phone and desktop rendered 39 awards without page errors or
+horizontal overflow. These are smoke checks, not a new 47-case evaluation run.
+
+Activation cost $0. Testing added **$0.00807484**; cumulative ledger total is
+**$2.08153838 / $5**, including four previously recorded ambiguous-call liabilities.
+There are zero outstanding reservations. The original live ledger remains authoritative.
+No Docker, hosted deployment, namespace deletion, or `.env` edits occurred.
+
+Receipts: `artifacts/reports/local-activation-2026-10-16.json` and
+`artifacts/reports/local-activation-smoke-2026-10-16.json`.
+The frozen bundle and vector metadata preserve their staging-time
+`inactive_candidate` label; runtime activation is determined solely by the SQL
+active-corpus pointer and namespace, not that historical metadata field. Evidence,
+source hashes, cycle metadata, and all source references were preserved unchanged.
+
+Rollback from the repository root (does not reset or restore the spend ledger):
+
+```sh
+PYTHONPATH=backend:scripts .venv/bin/python - <<'PYROLLBACK'
+from sqlalchemy import create_engine
+from reviewed_runtime import live_settings
+from nextstep.repository import Repository
+repo = Repository(create_engine(live_settings().database_url))
+repo.activate_version('candidate-2026-10-16-v4', 'verified-2026-10-14-v2')
+print(repo.active_version())
+PYROLLBACK
+```
+
+The checkpoints below describe pre-activation work and remain historical evidence.
+
+The expanded candidate has completed local testing: **39 records / 31 families /
+201 chunks / 63 official documents**. Its 21 source cases passed, as did the 26
+known regressions on the candidate. The final implementation suite passed 131
+backend tests, with both native PostgreSQL checks passing separately; 12 frontend
+tests, 20 mocked browser checks, TypeScript/build, and real candidate API/browser/
+print checks also passed. Cumulative OpenAI spend is **$2.07346354 of $5**.
+
+The active catalog remains `verified-2026-10-14-v2` (18 records / 174 chunks);
+`candidate-2026-10-16-v4` is staged and inactive. Activation was excluded from the
+ingestion scope. No Docker or secret-file edits occurred. See the
+[complete current evidence and limitations](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
+
+The checkpoints below are historical; their counts and stop points are superseded
+by this dated update.
+
+## Historical October 14 checkpoint
 
 ## Current checkpoint: verified local corpus active
 

@@ -1,4 +1,58 @@
-# Evaluation status — October 14, 2026
+# Evaluation status
+
+## Local activation — October 16, 2026, 9:03 p.m. ET
+
+Following explicit user approval, `candidate-2026-10-16-v4` is now the active local
+catalog: **39 records / 31 families / 201 chunks / 63 official documents**.
+The version name retains its immutable staging identifier. The previous
+`verified-2026-10-14-v2` catalog (18 records / 174 chunks) and Pinecone namespace
+remain intact and ready for rollback. Both namespaces passed fresh ID/count/query
+readiness checks before the transactional active-pointer switch.
+
+Post-activation checks against the actual app on port 8014 passed: 39-record
+matching; cited UAB no-superscore answer; Cooke transcript/income source distinctions
+with explicit sponsor-confirmation caveats; HOPE 2027–28 coverage gap without paid
+calls; invalid-program rejection; and server-side version pinning despite a stale
+client version. Phone and desktop rendered 39 awards without page errors or
+horizontal overflow. These are smoke checks, not a new 47-case evaluation run.
+
+Activation cost $0. Testing added **$0.00807484**; cumulative ledger total is
+**$2.08153838 / $5**, including four previously recorded ambiguous-call liabilities.
+There are zero outstanding reservations. The original live ledger remains authoritative.
+No Docker, hosted deployment, namespace deletion, or `.env` edits occurred.
+
+Receipts: `artifacts/reports/local-activation-2026-10-16.json` and
+`artifacts/reports/local-activation-smoke-2026-10-16.json`.
+The frozen bundle and vector metadata preserve their staging-time
+`inactive_candidate` label; runtime activation is determined solely by the SQL
+active-corpus pointer and namespace, not that historical metadata field. Evidence,
+source hashes, cycle metadata, and all source references were preserved unchanged.
+
+Rollback from the repository root (does not reset or restore the spend ledger):
+
+```sh
+PYTHONPATH=backend:scripts .venv/bin/python - <<'PYROLLBACK'
+from sqlalchemy import create_engine
+from reviewed_runtime import live_settings
+from nextstep.repository import Repository
+repo = Repository(create_engine(live_settings().database_url))
+repo.activate_version('candidate-2026-10-16-v4', 'verified-2026-10-14-v2')
+print(repo.active_version())
+PYROLLBACK
+```
+
+The checkpoints below describe pre-activation work and remain historical evidence.
+
+## October 16: expanded candidate
+
+The staged v4 candidate passed its 21 exposed source cases and 26 known regression
+cases using equal-weight hybrid retrieval. The complete saved-run results,
+reference corrections, source spot-check limits, and provider failures are in
+the [October 16 build/test report](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
+Cumulative spend is **$2.07346354 of $5**, including ambiguous-call liabilities.
+The candidate is inactive. These are tuning results, not fresh held-out accuracy.
+
+## Historical October 14 evaluation
 
 The reviewed local corpus is `verified-2026-10-14-v2`: 18 award records across 10 families, 174 chunks, and 19 contributing official documents. Metadata readback matched 174/174 Pinecone vectors. The cumulative OpenAI ledger is **$0.81145530 of the approved $5 cap** after the tuning-only 60/40 experiment; it was not reset. Semantic remained the student-app default at this checkpoint. The owner later selected the existing equal-weight hybrid method for the demo.
 

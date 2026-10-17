@@ -11,7 +11,7 @@ test("chat failure leaves profile and browsing intact and never persists convers
       profile={{ grade: 11, graduation_year: null, gpa: null }}
       programIds={[]}
       corpusVersion="v"
-      hypothetical={false}
+      promptRequest={null}
     />,
   );
   fireEvent.click(

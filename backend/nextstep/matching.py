@@ -19,7 +19,18 @@ def evaluate_condition(
     def result(status, reason):
         return ConditionResult(condition_id=c.id, status=status, reason=reason)
 
-    unknown = result("unknown", c.reason or f"Please confirm {c.kind}: {c.value}")
+    prompt = f"Please confirm {c.kind}: {c.value}"
+    if c.kind == "gpa" and isinstance(c.value, dict):
+        threshold = c.value.get("value", "the published threshold")
+        scale = c.value.get("scale")
+        basis = c.value.get("type")
+        prompt = f"Confirm the GPA requirement ({threshold}"
+        if scale:
+            prompt += f" on a {scale}-point scale"
+        if basis and basis != "unknown":
+            prompt += f", {basis}"
+        prompt += "). The GPA scale and type must be comparable before we can assess it."
+    unknown = result("unknown", c.reason or prompt)
     if c.kind == "group":
         statuses = [
             evaluate_condition(child, profile, as_of).status for child in c.children
@@ -130,29 +141,70 @@ def match_catalog(
         mandatory = [r for c, r in zip(record.conditions, evaluated) if c.required]
         unresolved = [r for r in mandatory if r.status == "unknown"]
         unmet = [r for r in mandatory if r.status == "unmet"]
+        met = [r for r in mandatory if r.status == "met"]
         senior_rule = any(
             c.required and c.kind == "grade" and c.operator == "eq" and c.value == 12
             for c in record.conditions
         )
         group = "unmet" if unmet else "matches"
-        fit = (
-            "Condition unmet"
-            if unmet
-            else "Missing profile information"
-            if unresolved
-            else "Potential match"
-        )
+        if unmet:
+            fit = "Not currently eligible"
+            fit_reason = f"Does not currently meet: {unmet[0].reason}"
+            tier_rank = 3
+        elif not mandatory:
+            fit = "Explore"
+            fit_reason = (
+                "Published eligibility rules are not detailed enough to assess "
+                "this profile."
+            )
+            tier_rank = 2
+        elif not unresolved:
+            fit = "Strong match"
+            fit_reason = (
+                f"All {len(met)} reviewed required "
+                f"{'requirement matches' if len(met) == 1 else 'requirements match'} "
+                "the information provided."
+            )
+            tier_rank = 0
+        elif met:
+            fit = "Possible match"
+            fit_reason = (
+                f"{len(met)} reviewed required "
+                f"{'requirement matches' if len(met) == 1 else 'requirements match'}; "
+                f"{len(unresolved)} important "
+                f"{'detail needs' if len(unresolved) == 1 else 'details need'} confirmation."
+            )
+            tier_rank = 1
+        else:
+            fit = "Explore"
+            fit_reason = (
+                "More profile information is needed to assess the published "
+                "requirements."
+            )
+            tier_rank = 2
         if profile.grade == 11 and senior_rule:
-            group, fit = (
+            group, fit, fit_reason, tier_rank = (
                 "prepare",
-                "Conditional senior-year preparation; future rules must be checked",
+                "Explore",
+                "Future senior-year opportunity; recheck the rules when the next cycle opens.",
+                2,
             )
         if record.information_status in ("incomplete", "conflicting", "historical"):
-            group = (
-                "prepare"
-                if group == "prepare" and record.information_status == "historical"
-                else "explore"
+            group = "prepare" if group == "prepare" else "explore"
+            if not unmet:
+                fit = "Explore"
+                fit_reason = (
+                    "Eligibility information has not completed source review, "
+                    "so this result needs manual verification."
+                )
+                tier_rank = 2
+        elif record.information_status == "automatically_extracted" and not unmet:
+            fit = "Explore"
+            fit_reason = (
+                "Eligibility information has not completed source review, "
+                "so this result needs manual verification."
             )
+            tier_rank = 2
         timing = "unknown"
         if record.deadline and record.deadline < as_of:
             timing = "closed"
@@ -175,11 +227,12 @@ def match_catalog(
                 conditions=evaluated,
                 group=group,
                 fit=fit,
+                fit_reason=fit_reason,
                 timing=timing,
                 evidence_label=record.information_status,
                 followups=[r.reason for r in unresolved],
                 sort_key=(
-                    len(unresolved),
+                    tier_rank,
                     -preferences,
                     record.name.casefold(),
                     record.id,

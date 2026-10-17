@@ -16,7 +16,7 @@ test("short intake confirms named plans before matching", async ({ page }) => {
   await expect(page.getByText(/Detected mentions: Auburn; engineering/)).toBeVisible();
   await page.getByRole("button", { name: "Find my matches" }).click();
   expect(submitted).toMatchObject({ prospective_colleges: [], interests: [] });
-  await page.getByLabel("Use these colleges and interests in my matches").check();
+  await page.getByLabel("Use these reviewed details in my matches").check();
   await page.getByRole("button", { name: "Find my matches" }).click();
   expect(submitted).toMatchObject({
     residence: { state: "GA" },
@@ -47,93 +47,19 @@ test("skippable profile and honest unavailable catalog", async ({ page }) => {
   });
 });
 
-test("failed reset preserves the label of displayed hypothetical results", async ({
-  page,
-}) => {
-  let calls = 0;
-  await page.route("**/api/matches", (route) => {
-    calls++;
-    return calls === 3
-      ? route.fulfill({ status: 503, body: "{}" })
-      : route.fulfill({
-          json: { corpus_version: "synthetic", scholarships: [], matches: [] },
-        });
-  });
-  await page.goto("/");
-  await page.getByRole("button", { name: "Fictional senior" }).click();
-  await page.getByText("What if my GPA or college plans change?").click();
-  await page.getByRole("button", { name: "Try scenario" }).click();
-  await expect(
-    page.getByText(
-      "Hypothetical results — your original profile is preserved.",
-    ),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Restore original profile" }).click();
-  await expect(page.getByRole("alert")).toBeVisible();
-  await expect(
-    page.getByText(
-      "Hypothetical results — your original profile is preserved.",
-    ),
-  ).toBeVisible();
-});
-
-test("late scenario response cannot replace restored original results", async ({
-  page,
-}) => {
-  let calls = 0;
-  let pending: import("@playwright/test").Route | undefined;
-  const payload = (name: string) => ({
-    corpus_version: "synthetic",
-    scholarships: [
-      {
-        id: "a",
-        name,
-        information_status: "incomplete",
-        materials: [],
-        evidence: [],
-      },
-    ],
-    matches: [
-      {
-        scholarship_id: "a",
-        group: "matches",
-        fit: "Potential match",
-        timing: "unknown",
-        evidence_label: "incomplete",
-        conditions: [],
-        followups: [],
-      },
-    ],
-  });
-  await page.route("**/api/matches", (route) => {
-    calls++;
-    if (calls === 2) {
-      pending = route;
-      return;
-    }
-    return route.fulfill({ json: payload("Original award") });
-  });
-  await page.goto("/");
-  await page.getByRole("button", { name: "Fictional senior" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Original award" }),
-  ).toBeVisible();
-  await page.getByText("What if my GPA or college plans change?").click();
-  await page.getByRole("button", { name: "Try scenario" }).click();
-  await expect.poll(() => Boolean(pending)).toBe(true);
-  await page.getByRole("button", { name: "Restore original profile" }).click();
-  await expect(page.getByRole("status")).toHaveCount(0);
-  const responseArrived = page.waitForResponse((response) =>
-    response.url().endsWith("/api/matches"),
+test("results use the shorter planning experience", async ({ page }) => {
+  await page.route("**/api/matches", (route) =>
+    route.fulfill({
+      json: { corpus_version: "synthetic", scholarships: [], matches: [] },
+    }),
   );
-  await pending!.fulfill({ json: payload("Obsolete scenario award") });
-  await responseArrived;
+  await page.goto("/");
+  await page.getByRole("button", { name: "Fictional senior" }).click();
+  await expect(page.getByText("What if my GPA or college plans change?")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Edit details" })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Original award" }),
+    page.getByRole("button", { name: "Ask about scholarships" }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Obsolete scenario award" }),
-  ).toHaveCount(0);
 });
 
 test("chat is keyboard accessible and service failure preserves catalog", async ({
@@ -180,4 +106,27 @@ test("new corpus replaces shortlist records and announces source changes", async
   await page.getByRole("button", { name: "Fictional senior" }).click();
   await page.getByRole("button", { name: "Find my matches" }).click();
   await expect(page.getByText(/Sources changed from old to new/)).toBeVisible();
+});
+
+test('cards and chat receive the same confirmed profile', async ({page}) => {
+  let matched: unknown;
+  let chatted: unknown;
+  await page.route('**/api/matches', route => {
+    matched = route.request().postDataJSON().profile;
+    return route.fulfill({json:{corpus_version:'fixture',scholarships:[],matches:[]}});
+  });
+  await page.route('**/api/chat', route => {
+    chatted = route.request().postDataJSON().profile;
+    return route.fulfill({status:503,body:'{}'});
+  });
+  await page.goto('/');
+  await page.getByLabel(/Tell us a little/).fill('I am a Georgia resident and a United States citizen. I want Georgia Tech and Kennesaw State.');
+  await page.getByLabel('Use these reviewed details in my matches').check();
+  await page.getByRole('button',{name:'Find my matches'}).click();
+  await page.getByRole('button',{name:'Ask about scholarships'}).click();
+  await page.getByLabel('Your question').fill('What should I prepare?');
+  await page.getByRole('button',{name:'Ask',exact:true}).click();
+  await expect(page.getByRole('alert')).toBeVisible();
+  expect(chatted).toEqual(matched);
+  expect(matched).toMatchObject({residence:{state:'GA'},context:{citizenship:'US citizen'}});
 });

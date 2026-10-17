@@ -5,19 +5,15 @@ import { Results } from "./components/Results";
 import type { components } from "./types";
 import { request } from "./api";
 import "./styles.css";
-import { ScenarioPanel } from "./components/ScenarioPanel";
 import { PrintPlan } from "./components/PrintPlan";
 import { ChatPanel } from "./components/ChatPanel";
 import { EvalDashboard } from "./admin/EvalDashboard";
-import { applyScenario } from "./scenarios";
 import { BrandMark } from "./components/BrandAssets";
 type Catalog = components["schemas"]["CatalogResponse"];
+type Scholarship = components["schemas"]["Scholarship"];
 export default function App() {
-  const [original, setOriginal] = useState<StudentProfile | null>(null);
   const requestSequence = useRef(0);
-  const [catalog, setCatalog] = useState<
-    (Catalog & { hypothetical: boolean }) | null
-  >(null);
+  const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [activeProfile, setActiveProfile] = useState<StudentProfile | null>(
     null,
   );
@@ -25,12 +21,10 @@ export default function App() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  const hypothetical = catalog?.hypothetical ?? false;
-  async function explore(
-    profile: StudentProfile,
-    isHypothetical = false,
-    baseProfile = profile,
-  ) {
+  const [chatRequest, setChatRequest] = useState<
+    (Pick<Scholarship, "id" | "name"> & { nonce: number }) | null
+  >(null);
+  async function explore(profile: StudentProfile) {
     const sequence = ++requestSequence.current;
     setLoading(true);
     setError("");
@@ -45,9 +39,8 @@ export default function App() {
           `Sources changed from ${catalog.corpus_version} to ${next.corpus_version}. Saved records were refreshed; ${removed.length} removed from this collection. Recheck requirements before printing.`,
         );
       }
-      setCatalog({ ...next, hypothetical: isHypothetical });
+      setCatalog(next);
       setActiveProfile(profile);
-      setOriginal(baseProfile);
       setSelected((old) =>
         old.filter((id) => next.scholarships.some((s) => s.id === id)),
       );
@@ -79,22 +72,6 @@ export default function App() {
             void explore(profile);
           }}
         />
-        {original && (
-          <ScenarioPanel
-            profile={original}
-            onApply={(overrides) => {
-              void explore(applyScenario(original, overrides), true, original);
-            }}
-            onReset={() => {
-              void explore(original);
-            }}
-          />
-        )}
-        {hypothetical && (
-          <p className="notice">
-            Hypothetical results — your original profile is preserved.
-          </p>
-        )}
         {loading && <p role="status">Finding possibilities…</p>}
         {error && (
           <p role="alert" className="notice">
@@ -107,7 +84,16 @@ export default function App() {
           </p>
         )}
         {sourceChange && <p className="notice">{sourceChange}</p>}
+        {catalog && activeProfile && (
+          <ChatPanel
+            profile={activeProfile}
+            programIds={selected}
+            corpusVersion={catalog.corpus_version}
+            promptRequest={chatRequest}
+          />
+        )}
         <Results
+          collegeChoices={activeProfile?.prospective_colleges || []}
           scholarships={catalog?.scholarships || []}
           matches={catalog?.matches || []}
           selected={selected}
@@ -116,15 +102,14 @@ export default function App() {
               old.includes(id) ? old.filter((x) => x !== id) : [...old, id],
             )
           }
+          onAsk={(scholarship) =>
+            setChatRequest({
+              id: scholarship.id,
+              name: scholarship.name,
+              nonce: Date.now(),
+            })
+          }
         />
-        {catalog && activeProfile && (
-          <ChatPanel
-            profile={activeProfile}
-            programIds={selected}
-            corpusVersion={catalog.corpus_version}
-            hypothetical={hypothetical}
-          />
-        )}
         <button
           className="print-button"
           disabled={!selected.length}
@@ -137,7 +122,7 @@ export default function App() {
             catalog?.scholarships.filter((s) => selected.includes(s.id)) || []
           }
           matches={catalog?.matches || []}
-          hypothetical={hypothetical}
+          hypothetical={false}
           generatedAt={new Date().toLocaleDateString("en-CA", {
             timeZone: "America/New_York",
           })}

@@ -84,7 +84,8 @@ def test_full_catalog_closed_and_junior_groups():
     assert len(results) == 12  # Matching is independent of any top-8 retrieval.
     assert by_id["0"].timing == "closed"
     assert by_id["1"].group == "prepare"
-    assert "conditional" in by_id["1"].fit.lower()
+    assert by_id["1"].fit == "Explore"
+    assert "senior-year" in by_id["1"].fit_reason
     assert by_id["11"].group == "matches"
 
 
@@ -103,7 +104,53 @@ def test_incomplete_and_unknown_followup():
         r.scholarship_id: r for r in match_catalog(records, StudentProfile(), TODAY)
     }
     assert results["a"].group == "explore"
+    assert results["a"].fit == "Explore"
     assert "Club" in results["b"].followups[0]
+
+
+def test_match_tiers_come_from_reviewed_rules():
+    records = [
+        Scholarship(
+            id="strong",
+            name="Strong",
+            corpus_version="v",
+            information_status="source_checked",
+            conditions=[rule("grade", "eq", 12)],
+        ),
+        Scholarship(
+            id="possible",
+            name="Possible",
+            corpus_version="v",
+            information_status="source_checked",
+            conditions=[
+                rule("grade", "eq", 12),
+                rule("citizenship", "eq", "US citizen"),
+            ],
+        ),
+        Scholarship(
+            id="explore",
+            name="Explore",
+            corpus_version="v",
+            information_status="source_checked",
+        ),
+        Scholarship(
+            id="unmet",
+            name="Unmet",
+            corpus_version="v",
+            information_status="source_checked",
+            conditions=[rule("grade", "eq", 11)],
+        ),
+    ]
+    results = {
+        result.scholarship_id: result
+        for result in match_catalog(records, StudentProfile(grade=12), TODAY)
+    }
+    assert results["strong"].fit == "Strong match"
+    assert results["possible"].fit == "Possible match"
+    assert results["explore"].fit == "Explore"
+    assert results["unmet"].fit == "Not currently eligible"
+    assert results["strong"].sort_key < results["possible"].sort_key
+    assert results["possible"].sort_key < results["explore"].sort_key
 
 
 def test_unspecified_college_requirement_cannot_be_marked_unmet():

@@ -6,6 +6,46 @@ from nextstep.evals.runner import EvalRunner
 from sqlalchemy import create_engine
 
 
+def test_judge_cannot_pass_an_unanswered_available_rule():
+    from nextstep.evals.score import Judgment, score_case
+    from nextstep.models import (
+        AnswerResult,
+        EvalCase,
+        RetrievedEvidence,
+        StudentProfile,
+    )
+
+    case = EvalCase(
+        id="score-policy",
+        question="Does UAB superscore?",
+        profile=StudentProfile(),
+        frozen_date="2026-10-16",
+    )
+    answer = AnswerResult(
+        blocks=[],
+        gaps=["An unsupported restriction was withheld."],
+        corpus_version="v",
+        method="hybrid",
+        evidence=RetrievedEvidence(chunks=[]),
+    )
+    judge = Judgment(
+        required_facts_addressed=True,
+        no_contradiction=True,
+        unknowns_preserved=True,
+        responsive=True,
+        reason="Incorrectly optimistic judge",
+        claims=[],
+    )
+    assert score_case(case, answer, judge)["passed"] is False
+    # Explicitly displaying both reviewed conflict variants is a useful uncertainty answer.
+    case.question = "Does Cooke use gross income or AGI?"
+    case.expected_claims = ["Official sources conflict on gross income versus AGI."]
+    answer.gaps = [
+        "Cooke: conflicting income instructions: gross income versus AGI. Confirm with sponsor."
+    ]
+    assert score_case(case, answer, judge)["passed"] is True
+
+
 def test_expected_evidence_gap_does_not_require_invented_eligibility_rules():
     from nextstep.evals.score import Judgment, score_case
     from nextstep.models import (
@@ -44,6 +84,163 @@ def test_expected_evidence_gap_does_not_require_invented_eligibility_rules():
     assert score_case(case, answer, judgment)["passed"] is False
     answer.blocks = []
     answer.gaps = []
+    assert score_case(case, answer, judgment)["passed"] is False
+
+
+def test_expanded_cases_are_tuning_only_and_bound_to_candidate():
+    import json
+    from pathlib import Path
+
+    from nextstep.evals.suite import load_suite
+
+    root = Path(__file__).resolve().parents[1]
+    reference = json.loads(
+        (root / "data/expanded-eval-reference-2026-10-16.json").read_text()
+    )
+    cases, digest = load_suite("tuning", "expanded", reference["corpus_version"])
+    assert len(cases) == 21 and len(digest) == 64
+    assert all(c.synthetic and c.critical and c.checked_sources for c in cases)
+    assert all(c.expected_claims and c.expected_evidence for c in cases)
+    bundle = json.loads((root / "data/expanded-corpus-2026-10-16.json").read_text())
+    for case in cases:
+        admitted_refs = {
+            ref["id"]
+            for chunk in bundle["chunks"]
+            if chunk["program_id"] in case.program_ids
+            for ref in chunk["evidence"]
+        }
+        assert admitted_refs <= {ref.id for ref in case.checked_sources}
+    with pytest.raises(ValueError, match="tuning"):
+        load_suite("heldout", "expanded", reference["corpus_version"])
+    with pytest.raises(ValueError, match="frozen candidate"):
+        load_suite("tuning", "expanded", "different-version")
+
+
+def test_known_regressions_bind_to_candidate_without_becoming_heldout():
+    import sys
+    from pathlib import Path
+
+    from nextstep.evals.suite import load_suite
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from expanded_runtime import load_candidate
+
+    data, _, chunks = load_candidate()
+    original, _ = load_suite("tuning")
+    cases, digest = load_suite("tuning", "expanded_regression", data["version"])
+    assert len(cases) == 26 and len(digest) == 64
+    assert [case.model_dump(exclude={"checked_sources"}) for case in cases] == [
+        case.model_dump(exclude={"checked_sources"}) for case in original
+    ]
+    first = cases[0]
+    expected_refs = {
+        e.id for c in chunks if c.program_id in first.program_ids for e in c.evidence
+    }
+    assert expected_refs <= {e.id for e in first.checked_sources}
+    for case in cases:
+        for ref in case.checked_sources:
+            assert any(
+                c.source_id == ref.source_id
+                and ref.section_id in c.section_ids
+                and ref.quote in c.text
+                and any(e.document_version == ref.document_version for e in c.evidence)
+                for c in chunks
+            )
+    with pytest.raises(ValueError, match="tuning"):
+        load_suite("heldout", "expanded_regression", data["version"])
+
+
+def test_retrieved_non_rule_span_fails_content_policy_even_if_uncited():
+    from types import SimpleNamespace
+
+    from nextstep.evals.source_policy import retrieval_exclusion_violations
+
+    excluded = {
+        "source_id": "story",
+        "section_id": "s2",
+        "document_version": "hash",
+        "start": 10,
+        "end": 100,
+        "reason": "Recipient profile",
+    }
+    chunk = SimpleNamespace(
+        id="c",
+        evidence=[
+            SimpleNamespace(
+                source_id="story",
+                section_id="s2",
+                document_version="hash",
+                start=50,
+                end=60,
+            )
+        ],
+    )
+    assert retrieval_exclusion_violations([chunk], [excluded]) == [
+        {"chunk_id": "c", "reason": "Recipient profile"}
+    ]
+    chunk.evidence[0].start = 101
+    chunk.evidence[0].end = 110
+    assert not retrieval_exclusion_violations([chunk], [excluded])
+
+
+def test_extra_rubric_claim_is_rejected_even_when_supported():
+    from nextstep.evals.score import ClaimAssessment, Judgment, score_case
+    from nextstep.models import (
+        AnswerBlock,
+        AnswerResult,
+        Chunk,
+        EvalCase,
+        RetrievedEvidence,
+        StudentProfile,
+    )
+
+    case = EvalCase(
+        id="rule", profile=StudentProfile(), question="Rule?", frozen_date="2026-10-16"
+    )
+    answer = AnswerResult(
+        blocks=[AnswerBlock(text="The rule applies.", evidence_ids=["c"])],
+        corpus_version="v",
+        method="hybrid",
+        evidence=RetrievedEvidence(
+            chunks=[
+                Chunk(
+                    id="c",
+                    program_id="p",
+                    source_id="s",
+                    corpus_version="v",
+                    text="The rule applies.",
+                    heading="Rule",
+                    section_ids=["s1"],
+                    token_count=4,
+                )
+            ]
+        ),
+    )
+    judgment = Judgment(
+        required_facts_addressed=True,
+        no_contradiction=True,
+        unknowns_preserved=True,
+        responsive=True,
+        reason="fixture",
+        claims=[
+            ClaimAssessment(
+                text="The rule applies.", supported=True, scorable=True, reason="source"
+            ),
+            ClaimAssessment(
+                text="Must not invent facts",
+                supported=True,
+                scorable=False,
+                reason="rubric",
+            ),
+        ],
+    )
+    scores = score_case(case, answer, judgment)
+    assert scores["passed"] is False
+    assert scores["checked_claims"] == 1 and scores["support_rate"] == 1.0
+    assert scores["judge_error"] == "Judge claims differ from answer blocks"
+    judgment.claims = judgment.claims[:1]
+    assert score_case(case, answer, judgment)["passed"] is True
+    judgment.required_facts_addressed = False
     assert score_case(case, answer, judgment)["passed"] is False
 
 
@@ -230,6 +427,7 @@ def test_score_missing_conditions_and_unscorable_claims_fail():
     )
     score = score_case(case, answer, judge)
     assert score["passed"] is False and score["support_rate"] == 0
+    assert score["judge_error"] == "Judge omitted factual answer claims"
     assert score["condition_pass"] is False and score["citation_pass"] is False
 
 
@@ -341,3 +539,30 @@ def test_heldout_exposure_guard_is_transactional(tmp_path):
     r.execute_case(run, "a", "semantic", lambda: {"done": True})
     with pytest.raises(ValueError, match="heldout"):
         r.start_run(config)
+
+
+def test_judge_schema_cannot_omit_or_add_factual_answer_blocks():
+    from nextstep.evals.service import judgment_schema
+    from pydantic import ValidationError
+
+    result = {
+        "required_facts_addressed": True,
+        "no_contradiction": True,
+        "unknowns_preserved": True,
+        "responsive": True,
+        "reason": "Checked source.",
+    }
+    claim = {
+        "text": "Source-grounded answer.",
+        "supported": True,
+        "scorable": True,
+        "reason": "Supported.",
+    }
+    with pytest.raises(ValidationError):
+        judgment_schema(1)(**result, claims=[])
+    with pytest.raises(ValidationError):
+        judgment_schema(1)(**result, claims=[claim, claim])
+    assert len(judgment_schema(1)(**result, claims=[claim]).claims) == 1
+    assert judgment_schema(0)(**result, claims=[]).claims == []
+    # Do not ask the provider to decode an array constrained to maxItems=0.
+    assert "claims" not in judgment_schema(0).model_json_schema()["properties"]

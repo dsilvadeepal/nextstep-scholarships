@@ -79,3 +79,68 @@ def test_automatic_consideration_is_not_an_automatic_award():
         records,
     )
     assert result and "does not confirm an award" in result[0].text
+    assert not award_classification(
+        "If I miss the priority deadline, is there no possibility of automatic merit?",
+        evidence("Automatic merit scholarships are awarded based on scores and GPA."),
+        records,
+    )
+
+
+def test_reviewed_conflict_explanation_requires_both_retrieved_source_variants():
+    from nextstep.models import Chunk, RetrievedEvidence, Scholarship
+    from nextstep.rag.comparisons import reviewed_conflict_explanations
+
+    record = Scholarship(
+        id="cooke",
+        name="Cooke",
+        corpus_version="v",
+        information_status="conflicting",
+        conflicts={
+            "transcript_requirement": [
+                "How-to-apply: unofficial transcript",
+                "FAQ: official transcript via counselor",
+            ],
+            "income_measure": ["annual gross income", "adjusted gross income"],
+        },
+    )
+    chunks = [
+        Chunk(
+            id="apply",
+            program_id="cooke",
+            corpus_version="v",
+            source_id="application",
+            text="Submit an unofficial transcript. Annual gross income must be below the published limit.",
+            heading="How to apply",
+            section_ids=["s1"],
+            token_count=20,
+        ),
+        Chunk(
+            id="faq",
+            program_id="cooke",
+            corpus_version="v",
+            source_id="faq",
+            text="Counselors submit an official transcript. Adjusted gross income is used.",
+            heading="FAQ",
+            section_ids=["s2"],
+            token_count=20,
+        ),
+    ]
+    result = reviewed_conflict_explanations(
+        "Official or unofficial transcript? Is income AGI?",
+        RetrievedEvidence(chunks=chunks),
+        [record],
+    )
+    assert len(result) == 2
+    assert all(set(block.evidence_ids) == {"apply", "faq"} for block in result)
+    assert all(
+        "distinction" in block.text.lower() and "sponsor" in block.text.lower()
+        for block in result
+    )
+    assert not reviewed_conflict_explanations(
+        "Official or unofficial transcript?",
+        RetrievedEvidence(chunks=chunks[:1]),
+        [record],
+    )
+    assert not reviewed_conflict_explanations(
+        "What is the deadline?", RetrievedEvidence(chunks=chunks), [record]
+    )

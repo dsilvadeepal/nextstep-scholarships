@@ -17,7 +17,7 @@ test("explanations are separate from original sources and deferred official link
       {
         text: "Your number is below the published minimum.",
         kind: "explanation",
-        evidence_ids: ["c"],
+        evidence_ids: ["c", "c2"],
       },
     ],
     gaps: ["Confirm the GPA scale."],
@@ -34,7 +34,28 @@ test("explanations are separate from original sources and deferred official link
           heading: "Official minimum",
           source_id: "source",
           text: "The minimum is 3.80.",
-          evidence: [],
+          evidence: [
+            {
+              id: "r1",
+              url: "https://example.org/rules",
+              section_id: "minimum",
+              quote: "The minimum is 3.80.",
+            },
+          ],
+        },
+        {
+          id: "c2",
+          heading: "Another rule",
+          source_id: "source",
+          text: "Official scores are required.",
+          evidence: [
+            {
+              id: "r2",
+              url: "https://example.org/rules",
+              section_id: "scores",
+              quote: "Official scores are required.",
+            },
+          ],
         },
       ],
     },
@@ -44,10 +65,12 @@ test("explanations are separate from original sources and deferred official link
       profile={{ grade: null, graduation_year: null, gpa: null }}
       programIds={["p"]}
       corpusVersion="v"
-      hypothetical={false}
+      promptRequest={null}
     />,
   );
-  fireEvent.click(screen.getByText("Ask about scholarships"));
+  fireEvent.click(
+    screen.getByRole("button", { name: "Ask about scholarships" }),
+  );
   fireEvent.change(screen.getByLabelText("Your question"), {
     target: { value: "Does my GPA meet the rule?" },
   });
@@ -60,9 +83,12 @@ test("explanations are separate from original sources and deferred official link
   expect(
     screen.getByText("Your number is below the published minimum.").tagName,
   ).toBe("P");
+  expect(screen.queryByText("The minimum is 3.80.")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Sources (2)" }));
   expect(screen.getByText("The minimum is 3.80.")).toBeInTheDocument();
   expect(
-    screen.getByRole("link", { name: "Official regulations" }),
+    screen.getAllByRole("link", { name: "Open official source" })[1],
   ).toHaveAttribute("href", "https://example.org/regulations");
   expect(screen.getByText("Confirm the GPA scale.")).toBeVisible();
+  expect(screen.getByText("Official scores are required.")).toBeVisible();
 });

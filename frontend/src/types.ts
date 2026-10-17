@@ -537,6 +537,8 @@ export interface components {
             group: "matches" | "prepare" | "explore" | "unmet";
             /** Fit */
             fit: string;
+            /** Fit Reason */
+            fit_reason: string;
             /** Timing */
             timing: string;
             /** Evidence Label */

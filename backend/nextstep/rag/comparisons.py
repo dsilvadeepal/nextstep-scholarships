@@ -9,6 +9,52 @@ import re
 from nextstep.models import AnswerBlock
 
 
+def reviewed_conflict_explanations(question, evidence, records):
+    topics = {
+        "transcript_requirement": (
+            r"transcript",
+            (
+                r"\bunofficial\b.{0,40}\btranscripts?\b",
+                r"\bofficial\b.{0,40}\btranscripts?\b",
+            ),
+        ),
+        "income_measure": (
+            r"income|\bagi\b",
+            (r"annual gross income", r"adjusted gross income"),
+        ),
+    }
+    output = []
+    for record in records:
+        if record.information_status != "conflicting":
+            continue
+        own = [c for c in evidence.chunks if c.program_id == record.id]
+        for field, (trigger, patterns) in topics.items():
+            variants = record.conflicts.get(field)
+            if not variants or not re.search(trigger, question, re.IGNORECASE):
+                continue
+            groups = [
+                [c for c in own if re.search(pattern, c.text, re.IGNORECASE)]
+                for pattern in patterns
+            ]
+            pair = next(
+                ((a, b) for a in groups[0] for b in groups[1] if a.id != b.id), None
+            )
+            if pair is None:
+                continue
+            output.append(
+                AnswerBlock(
+                    text=f"{record.name}: the reviewed sources use different instructions or terms for {field.replace('_', ' ')}: "
+                    + " versus ".join(str(value) for value in variants)
+                    + ". This source distinction remains unresolved here; confirm which instructions apply with the official sponsor before applying.",
+                    evidence_ids=[c.id for c in pair],
+                    program_id=record.id,
+                    kind="explanation",
+                    supporting_quotes=[c.text for c in pair],
+                )
+            )
+    return output
+
+
 def score_comparisons(question, evidence, records):
     matches = re.findall(
         r"\bACT\s+(?:super)?score\s+(?:is|of|=|:)\s*(\d{1,2})\b",
@@ -69,6 +115,10 @@ def score_comparisons(question, evidence, records):
 
 
 def award_classification(question, evidence, records):
+    if re.search(r"deadline|priority", question, re.IGNORECASE) and not re.search(
+        r"guarantee|competitive|award type", question, re.IGNORECASE
+    ):
+        return []
     if not re.search(r"guarantee|automatic|competitive", question, re.IGNORECASE):
         return []
     output, seen = [], set()

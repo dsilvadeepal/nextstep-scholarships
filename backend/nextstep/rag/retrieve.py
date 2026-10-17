@@ -2,6 +2,7 @@ import re
 import time
 
 from nextstep.models import RetrievedEvidence
+from nextstep.rag.scope import scope_chunk
 from nextstep.rag.target import targeted_ranking
 from rank_bm25 import BM25Okapi
 
@@ -27,10 +28,11 @@ class Retriever:
         coverage = {}
         for program in groups:
             corpus = [
-                c
+                scoped
                 for c in self.chunks
                 if c.corpus_version == request.corpus_version
                 and (program is None or c.program_id == program)
+                and (scoped := scope_chunk(c)) is not None
             ]
             by_id = {c.id: c for c in corpus}
             limit = (40 if request.method == "semantic" else 20) // len(groups)

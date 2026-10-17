@@ -1,0 +1,42 @@
+{
+  "policy": "operational-scholarship-content-only",
+  "baseline_version": "verified-2026-10-14-v2",
+  "exclusions": [
+    {
+      "source_id": "source-21",
+      "section_id": "s1",
+      "document_version": "7ddfed6492bd69996207f36c6151695d85dea4bb0ac09ecff8e244d7bc3cd366",
+      "start": 55,
+      "end": 149,
+      "quote": "We are excited to share the\nlist of the 2027 Semifinalists\nfor the Coca-Cola Scholars Program!",
+      "reason": "Recipient-list promotion"
+    },
+    {
+      "source_id": "coolidge-faq",
+      "section_id": "s1",
+      "document_version": "90f3a515b69b3c4614af1d28a52575d00d1de64ea025bc453ae2a47806774ae1",
+      "start": 767,
+      "end": 1522,
+      "quote": "Why Coolidge?\nThe only modern president who translated Dante from the Italian for amusement, Coolidge prized undergraduate education and believed it established men and women for life. \u201cNo question can be adequately comprehended without knowing its historical background,\u201d Coolidge wrote. Mrs. Coolidge, the first professional first lady, graduated from the University of Vermont and also prized education.\nWhat is the Calvin Coolidge Presidential Foundation and Calvin Coolidge Presidential Fund?\nThe Coolidge Scholarship is a program of the Calvin Coolidge Presidential Fund, a supporting organization of the\nCalvin Coolidge Presidential Foundation\n. Both the Coolidge Fund and the Coolidge Foundation are 501(c)(3) nonprofit educational organizations.\n",
+      "reason": "Historical and organization background"
+    },
+    {
+      "source_id": "coolidge-faq",
+      "section_id": "s1",
+      "document_version": "90f3a515b69b3c4614af1d28a52575d00d1de64ea025bc453ae2a47806774ae1",
+      "start": 2712,
+      "end": 3141,
+      "quote": "How old is the Coolidge Scholars Program?\nThe Coolidge Scholars Program launched in the winter of 2016 and the inaugural class was formally inducted in July 2016. The 2026-27 application cycle will mark the twelfth year of the Coolidge Scholarship.\nHow many Coolidge Scholars are selected each year?\nThe number of new Coolidge Scholarships is determined annually. To view recent classes of Coolidge Scholars, please click\nhere\n.\n",
+      "reason": "Program history and recipient-class promotion"
+    },
+    {
+      "source_id": "coolidge-criteria",
+      "section_id": "s1",
+      "document_version": "b3d16d8b885d457172814229a67a9115934359961fa7cfce11e18b24952e424d",
+      "start": 548,
+      "end": 810,
+      "quote": "Jonas Salk, the father of the polio vaccine, provides a good example. Salk so excelled in school that he skipped grades. However, he was also intellectually curious, writing: \u201cAs a child I was not interested in science. I was merely interested in things human.\u201d\n",
+      "reason": "Illustrative biography rather than selection rule"
+    }
+  ]
+}

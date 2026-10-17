@@ -1148,6 +1148,10 @@
             "title": "Fit",
             "type": "string"
           },
+          "fit_reason": {
+            "title": "Fit Reason",
+            "type": "string"
+          },
           "timing": {
             "title": "Timing",
             "type": "string"
@@ -1189,6 +1193,7 @@
           "conditions",
           "group",
           "fit",
+          "fit_reason",
           "timing",
           "evidence_label",
           "sort_key"

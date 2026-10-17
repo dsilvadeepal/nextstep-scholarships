@@ -94,10 +94,11 @@ test("synthetic complete student journey shows citations, survives chat errors a
   await page.getByRole("button", { name: "Ask about scholarships" }).click();
   await page.getByLabel("Your question").fill("What do I need?");
   await page.getByRole("button", { name: "Ask", exact: true }).click();
-  await page.getByText("Source: SYNTHETIC rules").click();
+  await page.getByRole("button", { name: "Sources (1)" }).click();
   await expect(
-    page.getByRole("link", { name: "SYNTHETIC source" }),
+    page.getByRole("link", { name: "Open official source" }),
   ).toBeVisible();
+  await page.getByRole("button", { name: "Close sources" }).click();
   await page.screenshot({
     path: `/tmp/nextstep-chat-${test.info().project.name}.png`,
     fullPage: true,

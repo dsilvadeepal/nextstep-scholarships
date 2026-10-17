@@ -1,0 +1,1738 @@
+{
+  "corpus_version": "candidate-2026-10-16-v4",
+  "reviewed_on": "2026-10-16",
+  "sources": [
+    {
+      "id": "exp-watson-brown-1",
+      "family": "watson-brown",
+      "url": "https://watson-brown.org/scholarship/",
+      "format": "html",
+      "sponsor": "Watson-Brown Foundation",
+      "category": "georgia-foundation",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 7,
+      "characters": 2320,
+      "content_hash": "3d0b42858231857812381767c518610a6aae33354ee9f15b7e9acaffe401a8c6",
+      "final_url": "https://watson-brown.org/scholarship/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "watson-brown"
+      ]
+    },
+    {
+      "id": "exp-watson-brown-2",
+      "family": "watson-brown",
+      "url": "https://watson-brown.org/scholarship/guidelines-faq/",
+      "format": "html",
+      "sponsor": "Watson-Brown Foundation",
+      "category": "georgia-foundation",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 1,
+      "characters": 6184,
+      "content_hash": "14980f08875534f0c656883196e311e9abfb63e7d565a41b02ddcbe5460b0c05",
+      "final_url": "https://watson-brown.org/scholarship/guidelines-faq/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "watson-brown"
+      ]
+    },
+    {
+      "id": "exp-elks-mvs-1",
+      "family": "elks-mvs",
+      "url": "https://www.elks.org/scholars/scholarships/mvs.cfm",
+      "format": "html",
+      "sponsor": "Elks National Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 4,
+      "characters": 3489,
+      "content_hash": "5265726fc9337328d02f67d30730123a1be9e6c4c731057c8773ab4d6d73fba6",
+      "final_url": "https://www.elks.org/scholars/scholarships/mvs.cfm",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "elks-mvs"
+      ]
+    },
+    {
+      "id": "exp-elks-mvs-2",
+      "family": "elks-mvs",
+      "url": "https://hq.elks.org/scholarWeb/resources/mvsFAQ.cfm",
+      "format": "html",
+      "sponsor": "Elks National Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 15,
+      "characters": 6038,
+      "content_hash": "1f2176ca2c28324ea0fe76ba61bdd3486919a700a41016f25dfd93194520a95d",
+      "final_url": "https://hq.elks.org/scholarWeb/resources/mvsFAQ.cfm",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "elks-mvs"
+      ]
+    },
+    {
+      "id": "exp-elks-legacy-1",
+      "family": "elks-legacy",
+      "url": "https://hq.elks.org/scholars/scholarships/legacy.cfm",
+      "format": "html",
+      "sponsor": "Elks National Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 7,
+      "characters": 5526,
+      "content_hash": "284debf130c039be1ae8375fdf93ca9b1a765e72e38397160a5a30a18e124cfc",
+      "final_url": "https://hq.elks.org/scholars/scholarships/legacy.cfm",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "elks-legacy"
+      ]
+    },
+    {
+      "id": "exp-cooke-1",
+      "family": "cooke",
+      "url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/how-to-apply/",
+      "format": "html",
+      "sponsor": "Jack Kent Cooke Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 13,
+      "characters": 14408,
+      "content_hash": "3e2ce25ba11554010b43d3d8ec36c3ded4f03cdb068c11b95b12d8a3f025c610",
+      "final_url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/how-to-apply/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "cooke-college"
+      ]
+    },
+    {
+      "id": "exp-cooke-2",
+      "family": "cooke",
+      "url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/faqs/",
+      "format": "html",
+      "sponsor": "Jack Kent Cooke Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 49,
+      "characters": 15648,
+      "content_hash": "5c79feb4f2f9ea54c1d63017207201ecb584361d60d1f51d2ac5b43db8059c0b",
+      "final_url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/faqs/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "cooke-college"
+      ]
+    },
+    {
+      "id": "exp-geicc-1",
+      "family": "geicc",
+      "url": "https://getintoenergyga.com/initiatives-and-programs/scholarships/",
+      "format": "html",
+      "sponsor": "Georgia Energy Workforce Consortium",
+      "category": "georgia-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 1147,
+      "content_hash": "d73f23b30a63e33080c88836f846718c91baafd5fc1bb6447467a21d5394596d",
+      "final_url": "https://getintoenergyga.com/initiatives-and-programs/scholarships/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "geicc"
+      ]
+    },
+    {
+      "id": "exp-cobb-emc-1",
+      "family": "cobb-emc",
+      "url": "https://www.cobbemc.com/cobb-emc-foundation-scholarship",
+      "format": "html",
+      "sponsor": "Cobb EMC Foundation",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 4853,
+      "content_hash": "75a58ead094f5b8dedd0c0c10352e2817c59815014b75d349e9727adb0a56f32",
+      "final_url": "https://www.cobbemc.com/cobb-emc-foundation-scholarship",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "cobb-emc"
+      ]
+    },
+    {
+      "id": "exp-sawnee-1",
+      "family": "sawnee",
+      "url": "https://sawnee.coop/scholarships",
+      "format": "html",
+      "sponsor": "Sawnee Electric Membership Foundation",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 1436,
+      "content_hash": "2fa7694049e819c9466c0ce3fd9bb447be4e34c02bd6d15eb2d7ba2fc914c5f4",
+      "final_url": "https://sawnee.coop/scholarships",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "sawnee-youth"
+      ]
+    },
+    {
+      "id": "exp-gsu-scholars-1",
+      "family": "gsu-scholars",
+      "url": "https://honors.gsu.edu/scholars/",
+      "format": "html",
+      "sponsor": "Georgia State University",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 44,
+      "characters": 22598,
+      "content_hash": "86043210e9ecbdf1f112dd43c43a4a33797bae4103db097ba4f4081156a9ebc2",
+      "final_url": "https://honors.gsu.edu/scholars/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gsu-stamps-presidential"
+      ]
+    },
+    {
+      "id": "exp-gsu-scholars-2",
+      "family": "gsu-scholars",
+      "url": "https://admissions.gsu.edu/timeline/",
+      "format": "html",
+      "sponsor": "Georgia State University",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 30,
+      "characters": 3066,
+      "content_hash": "59f6b8071fdbd8d63296ffbe9a130d5217e245dfdba1db9e8bd2c923c3aa3833",
+      "final_url": "https://admissions.gsu.edu/timeline/",
+      "admission": "deferred",
+      "reason": "General admissions calendar conflicts with program-specific notification sequence; program rules/FAQ retained.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-burger-king-1",
+      "family": "burger-king",
+      "url": "https://www.burgerkingfoundation.org/programs/burger-king-sm-scholars",
+      "format": "html",
+      "sponsor": "Burger King Foundation",
+      "category": "national-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 1,
+      "characters": 73,
+      "content_hash": "4765903e2178ecd779149691726f4acde3ee3dbe713ddf88a0aecb92b202204d",
+      "final_url": "https://www.burgerkingfoundation.org/programs/burger-king-sm-scholars",
+      "admission": "deferred",
+      "reason": "Non-contributing duplicate overview or no additional verified operational material; excluded from counts.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-burger-king-2",
+      "family": "burger-king",
+      "url": "https://burgerking.scholarsapply.org/",
+      "format": "html",
+      "sponsor": "Burger King Foundation",
+      "category": "national-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 24,
+      "characters": 19846,
+      "content_hash": "9f9501d311c3aaa5a0b8eeabec1f8f14a0f9edd97eb58cb737895d8e262b98c7",
+      "final_url": "https://scholarshipamerica.org:443/scholarship/burgerking/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "burger-king-general"
+      ]
+    },
+    {
+      "id": "exp-live-mas-1",
+      "family": "live-mas",
+      "url": "https://tacobellfoundation.org/live-mas-scholarship/",
+      "format": "html",
+      "sponsor": "Taco Bell Foundation",
+      "category": "national-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 7,
+      "characters": 2250,
+      "content_hash": "00220c51c87001caa32bfba06499a3b257d8282d57187488157061a0ef5b705c",
+      "final_url": "https://tacobellfoundation.org/live-mas-scholarship/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "live-mas-new"
+      ]
+    },
+    {
+      "id": "exp-live-mas-2",
+      "family": "live-mas",
+      "url": "https://tacobellfoundation.org/live-mas-scholarship/eligibilityfaq/",
+      "format": "html",
+      "sponsor": "Taco Bell Foundation",
+      "category": "national-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 5,
+      "characters": 10039,
+      "content_hash": "ba2e41f2bea6ff9c5f81678990e18849f2d42c1e09c3c0e1bc167f65ada9989a",
+      "final_url": "https://tacobellfoundation.org/live-mas-scholarship/eligibilityfaq/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "live-mas-new"
+      ]
+    },
+    {
+      "id": "exp-gates-1",
+      "family": "gates",
+      "url": "https://www.thegatesscholarship.org/scholarship/",
+      "format": "html",
+      "sponsor": "The Gates Scholarship",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 5,
+      "characters": 1562,
+      "content_hash": "8c25c928802032f631349a64a499cad96641afbd95227fc9a3674f172bb37e72",
+      "final_url": "https://www.thegatesscholarship.org/scholarship/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gates"
+      ]
+    },
+    {
+      "id": "exp-gates-2",
+      "family": "gates",
+      "url": "https://www.thegatesscholarship.org/help-center/student/eligibility/",
+      "format": "html",
+      "sponsor": "The Gates Scholarship",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 1057,
+      "content_hash": "83496c1b1712d641ff8fb84c58dfd5509b48f27fb4a0d94ea608e8b249afa8af",
+      "final_url": "https://www.thegatesscholarship.org/help-center/student/eligibility/",
+      "admission": "deferred",
+      "reason": "Help pages contain question lists without answers; no additional operational evidence.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-gates-3",
+      "family": "gates",
+      "url": "https://www.thegatesscholarship.org/help-center/student/application-process/",
+      "format": "html",
+      "sponsor": "The Gates Scholarship",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 341,
+      "content_hash": "9698c8ba33d7956829d61e2fd0a79a822c01f8bded271375cc2828ca39706d92",
+      "final_url": "https://www.thegatesscholarship.org/help-center/student/application-process/",
+      "admission": "deferred",
+      "reason": "Help pages contain question lists without answers; no additional operational evidence.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-hagan-1",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/application/",
+      "format": "html",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 3501,
+      "content_hash": "1bc2271ed0c42d02af40eb4d5f6f3e5f72bde572cbe04ab5946372ca072257cb",
+      "final_url": "https://haganscholarships.org/application/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-hagan-2",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/q-a/",
+      "format": "html",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 7919,
+      "content_hash": "a0577b85464f6a8b92af5af135c31d8f654c755accf553f9d2e5e08e2abd9f3b",
+      "final_url": "https://haganscholarships.org/q-a/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-ron-brown-1",
+      "family": "ron-brown",
+      "url": "https://ronbrown.org/ron-brown-scholarship/",
+      "format": "html",
+      "sponsor": "Ron Brown Scholar Program",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 6,
+      "characters": 12395,
+      "content_hash": "2c6f27d10972422fb8abb674ddca16dd930a34567f158f7a90087d74618b02e5",
+      "final_url": "https://ronbrown.org/ron-brown-scholarship/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "ron-brown"
+      ]
+    },
+    {
+      "id": "exp-levine-1",
+      "family": "levine",
+      "url": "https://levinescholars.charlotte.edu/apply/",
+      "format": "html",
+      "sponsor": "UNC Charlotte",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 7051,
+      "content_hash": "930842b32171218c834d3da9bc25252d35ac64022a362334b37b00455c31a7bb",
+      "final_url": "https://levinescholars.charlotte.edu/apply/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "levine"
+      ]
+    },
+    {
+      "id": "exp-levine-2",
+      "family": "levine",
+      "url": "https://levinescholars.charlotte.edu/apply/important-dates/",
+      "format": "html",
+      "sponsor": "UNC Charlotte",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 1,
+      "characters": 1511,
+      "content_hash": "270e1be2de78fe0bb479896626b74699da7896f96cede439eaf9607c0cb10f6f",
+      "final_url": "https://levinescholars.charlotte.edu/apply/important-dates/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "levine"
+      ]
+    },
+    {
+      "id": "exp-levine-3",
+      "family": "levine",
+      "url": "https://levinescholars.charlotte.edu/apply/faq/",
+      "format": "html",
+      "sponsor": "UNC Charlotte",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 8492,
+      "content_hash": "2c6c16bf4a085cfb1d5c145265e0aa4d7f6588d1c1afa232509a08b68be26ce8",
+      "final_url": "https://levinescholars.charlotte.edu/apply/faq/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "levine"
+      ]
+    },
+    {
+      "id": "exp-davidson-fellows-1",
+      "family": "davidson-fellows",
+      "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/how-to-apply/",
+      "format": "html",
+      "sponsor": "Davidson Institute",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 16,
+      "characters": 5178,
+      "content_hash": "9bcb4668294e2db0c9e6bfae8ed900b14786289e3ddca5b951cd1434e600efad",
+      "final_url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/how-to-apply/",
+      "admission": "deferred",
+      "reason": "2027 application described as forthcoming; category forms still identify older cycles. Keep as unpublished-cycle lead.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-emory-1",
+      "family": "emory",
+      "url": "https://apply.emory.edu/financial-aid/scholar-program.html",
+      "format": "html",
+      "sponsor": "Emory University",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 3113,
+      "content_hash": "06c905ebb321e2ccd28d8e1b8e96657165bddb219997f994a211b9f0b455ccba",
+      "final_url": "https://apply.emory.edu/financial-aid/scholar-program",
+      "admission": "deferred",
+      "reason": "Useful evergreen instructions, but current entry-cycle applicability not explicitly established in collected program page.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-clemson-1",
+      "family": "clemson",
+      "url": "https://www.clemson.edu/financial-aid/types-of-aid/clemson-scholarships/first-year-recruiting-scholarships.html",
+      "format": "html",
+      "sponsor": "Clemson University",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 13,
+      "characters": 5650,
+      "content_hash": "cd4a2f987fe7263e85298377df51319839a4efe363a48241701acc91e52f0b0a",
+      "final_url": "https://www.clemson.edu/financial-aid/types-of-aid/clemson-scholarships/first-year-recruiting-scholarships.html",
+      "admission": "deferred",
+      "reason": "Evergreen first-year instructions do not establish a complete 2027\u201328 award schedule; prior cycle costs cannot establish new awards.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-clemson-2",
+      "family": "clemson",
+      "url": "https://www.clemson.edu/financial-aid/policies/scholarship-terms-and-conditions.html",
+      "format": "html",
+      "sponsor": "Clemson University",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 6152,
+      "content_hash": "34f4b690ac173bce78b0f2ff135373c352f0f20ec37db9deb3e7fb8f5b93431a",
+      "final_url": "https://www.clemson.edu/financial-aid/policies/scholarship-terms-and-conditions.html",
+      "admission": "deferred",
+      "reason": "Evergreen first-year instructions do not establish a complete 2027\u201328 award schedule; prior cycle costs cannot establish new awards.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-uab-1",
+      "family": "uab",
+      "url": "https://www.uab.edu/admissions/cost/scholarships/out-of-state-students",
+      "format": "html",
+      "sponsor": "University of Alabama at Birmingham",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 3605,
+      "content_hash": "fbec64b25daa4829cddb141c99869f45ae19aef64b0c145e07ae55c979248401",
+      "final_url": "https://www.uab.edu/admissions/cost/scholarships/out-of-state-students",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "uab-out-of-state"
+      ]
+    },
+    {
+      "id": "exp-mercer-1",
+      "family": "mercer",
+      "url": "https://undergrad.mercer.edu/stamps/",
+      "format": "html",
+      "sponsor": "Mercer University",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 6,
+      "characters": 2880,
+      "content_hash": "bfe5a06b692ad8e0450089799635b3c55c0e980924e0a65831e8f3923f1ad48a",
+      "final_url": "https://undergrad.mercer.edu/stamps/",
+      "admission": "deferred",
+      "reason": "Undated program overview mixed with biographies; no current cycle eligibility/deadline established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-mercer-2",
+      "family": "mercer",
+      "url": "https://undergrad.mercer.edu/mercer-scholarships/",
+      "format": "html",
+      "sponsor": "Mercer University",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 26,
+      "characters": 9155,
+      "content_hash": "1749088c62ec818cdc4e9c090c33b865856426fc360437bc61a820a227534985",
+      "final_url": "https://undergrad.mercer.edu/mercer-scholarships/",
+      "admission": "deferred",
+      "reason": "Undated program overview mixed with biographies; no current cycle eligibility/deadline established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-horatio-alger-1",
+      "family": "horatio-alger",
+      "url": "https://horatioalger.org/undergraduate-applicant-faq/",
+      "format": "html",
+      "sponsor": "Horatio Alger Association",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 12537,
+      "content_hash": "fbf181d3a1a1ad6e8879a12596782b1b4f1a358d545ca7072b8b7630df9043e9",
+      "final_url": "https://horatioalger.org/undergraduate-applicant-faq/",
+      "admission": "deferred",
+      "reason": "Evergreen junior/senior rules and specialized awards; dated 2027 applicability not established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-horatio-alger-2",
+      "family": "horatio-alger",
+      "url": "https://horatioalger.org/scholarships/",
+      "format": "html",
+      "sponsor": "Horatio Alger Association",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 5,
+      "characters": 2176,
+      "content_hash": "9c6e6db4f22aea22f48bab56163f7661ffb74fe026a15bf0f82f1031e068a42e",
+      "final_url": "https://horatioalger.org/scholarships/",
+      "admission": "deferred",
+      "reason": "Evergreen junior/senior rules and specialized awards; dated 2027 applicability not established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-walton-emc-1",
+      "family": "walton-emc",
+      "url": "https://www.waltonemc.com/community/youth-programs-and-scholarships/walton-electric-trust-scholarship/",
+      "format": "html",
+      "sponsor": "Walton EMC",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 1474,
+      "content_hash": "8044ce11739a38556e6ddc3b6515fdb7be2ade625a7a1ed0c9bef87422c60648",
+      "final_url": "https://www.waltonemc.com/community/youth-programs-and-scholarships/walton-electric-trust-scholarship/",
+      "admission": "deferred",
+      "reason": "2027 applications coming soon; complete new application not available.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-georgia-united-1",
+      "family": "georgia-united",
+      "url": "https://gucufoundation.org/programs/scholarship-high-school-seniors",
+      "format": "html",
+      "sponsor": "Georgia United Foundation",
+      "category": "georgia-credit-union",
+      "review_status": "candidate",
+      "collection_status": "failed",
+      "error": "SSLError",
+      "admission": "deferred",
+      "reason": "Download failed; sponsor search result indicates January 2027 details forthcoming; no snippet ingestion.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-jackson-emc-1",
+      "family": "jackson-emc",
+      "url": "https://www.jacksonemc.com/community/youth-education/walter-harrison-scholarship",
+      "format": "html",
+      "sponsor": "Jackson EMC",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 8,
+      "characters": 10309,
+      "content_hash": "d7b7c99ab905a277ce9556e896ecfc8d3296460af636b15aa668245eb943ad36",
+      "final_url": "https://www.jacksonemc.com/community/youth-education/walter-harrison-scholarship",
+      "admission": "deferred",
+      "reason": "Closed 2026 Walter Harrison route; current 2027 terms not established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-sawnee-2",
+      "family": "sawnee",
+      "url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Foundation-Youth-Scholarship-Application.pdf",
+      "format": "pdf",
+      "sponsor": "Sawnee Electric Membership Foundation",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 5897,
+      "content_hash": "782b10aebff3274d9a2c16ecdece265fbb20b84de8ae06dc73034aa1b5e8d714",
+      "final_url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Foundation-Youth-Scholarship-Application.pdf",
+      "admission": "deferred",
+      "reason": "Linked PDF has stale 2025/2026 dates; only current webpage admitted.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-sawnee-3",
+      "family": "sawnee",
+      "url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Youth-Scholarship-Criteria-and-Conditions.pdf",
+      "format": "pdf",
+      "sponsor": "Sawnee Electric Membership Foundation",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 1,
+      "characters": 1172,
+      "content_hash": "f4c5baee0b94edb93019403f63d749a64383c6ff07b8f4b5fb077ec8748ddd7a",
+      "final_url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Youth-Scholarship-Criteria-and-Conditions.pdf",
+      "admission": "deferred",
+      "reason": "Linked PDF has stale 2025/2026 dates; only current webpage admitted.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-cobb-emc-2",
+      "family": "cobb-emc",
+      "url": "https://www.cobbemc.com/sites/default/files/documents/youth/2027%20College_University.pdf",
+      "format": "pdf",
+      "sponsor": "Cobb EMC Foundation",
+      "category": "georgia-utility",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 6301,
+      "content_hash": "828d28b77f50755c40a4c41f7be87ab8e617985ade730ea2a57a2ea7ad3f59b3",
+      "final_url": "https://www.cobbemc.com/sites/default/files/documents/youth/2027%20College_University.pdf",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "cobb-emc"
+      ]
+    },
+    {
+      "id": "exp-hagan-3",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/wp-content/uploads/2026/08/3-Scholarship_Particulars_83126-su3.pdf",
+      "format": "pdf",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 7,
+      "characters": 24551,
+      "content_hash": "b6abacda34638d495f96e6d198d28b729224d95f7185002b372330d9cf97eb3d",
+      "final_url": "https://haganscholarships.org/wp-content/uploads/2026/08/3-Scholarship_Particulars_83126-su3.pdf",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-hagan-4",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/wp-content/uploads/2026/10/10-2-26-FALL-Website-HSF-U.S.-BROCHURE-su3.pdf",
+      "format": "pdf",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 7218,
+      "content_hash": "fdb2b100bdfbb9973167cf5a6015f0925d06761dba326b6a778c641030d9d4e1",
+      "final_url": "https://haganscholarships.org/wp-content/uploads/2026/10/10-2-26-FALL-Website-HSF-U.S.-BROCHURE-su3.pdf",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-hagan-5",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/wp-content/uploads/2026/10/HSF-U.S.-Application-Tips-10-2-26-su3-.pdf",
+      "format": "pdf",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 5575,
+      "content_hash": "60890d947c0dc0611af936c1d2b2a2055aa3ced7932c39b279f89a685438376b",
+      "final_url": "https://haganscholarships.org/wp-content/uploads/2026/10/HSF-U.S.-Application-Tips-10-2-26-su3-.pdf",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-hagan-6",
+      "family": "hagan",
+      "url": "https://haganscholarships.org/timeline/",
+      "format": "html",
+      "sponsor": "Hagan Scholarship Foundation",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 1501,
+      "content_hash": "0c523986179feacd2c3716fd372f60cf092923403ab9d31bdeb315e7b0ed39c3",
+      "final_url": "https://haganscholarships.org/timeline/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "hagan"
+      ]
+    },
+    {
+      "id": "exp-live-mas-3",
+      "family": "live-mas",
+      "url": "https://tacobellfoundation.org/wp-content/uploads/2027_Live_Mas_Scholarship_New_Applicant_TC.pdf",
+      "format": "pdf",
+      "sponsor": "Taco Bell Foundation",
+      "category": "national-employer",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 33681,
+      "content_hash": "de50803c8495a3d21e597188bee98980cbe01ab780913e143f3494093d324c53",
+      "final_url": "https://tacobellfoundation.org/wp-content/uploads/2027_Live_Mas_Scholarship_New_Applicant_TC.pdf",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "live-mas-new"
+      ]
+    },
+    {
+      "id": "exp-levine-4",
+      "family": "levine",
+      "url": "https://levinescholars.charlotte.edu/nomination-application-process/applicant-profile/",
+      "format": "html",
+      "sponsor": "UNC Charlotte",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 4,
+      "characters": 1408,
+      "content_hash": "f2840cd01f6fdeda8918613c60ee20732c65926af2b970cba4bb9fe39795ec0d",
+      "final_url": "https://levinescholars.charlotte.edu/nomination-application-process/applicant-profile/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "levine"
+      ]
+    },
+    {
+      "id": "exp-levine-5",
+      "family": "levine",
+      "url": "https://levinescholars.charlotte.edu/apply/for-recommenders/",
+      "format": "html",
+      "sponsor": "UNC Charlotte",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 2471,
+      "content_hash": "e70a2f0b2b5c9203ee65abb1a9c2716a467f87b5e728311e1cd7c7e426e179f2",
+      "final_url": "https://levinescholars.charlotte.edu/apply/for-recommenders/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "levine"
+      ]
+    },
+    {
+      "id": "exp-davidson-fellows-2",
+      "family": "davidson-fellows",
+      "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility-and-application/",
+      "format": "html",
+      "sponsor": "Davidson Institute",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 44,
+      "characters": 13439,
+      "content_hash": "1a8e860ffe8f3034148748d84687ecdc7a07c5983cc7ca1716766e3433390788",
+      "final_url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/",
+      "admission": "deferred",
+      "reason": "2027 application described as forthcoming; category forms still identify older cycles. Keep as unpublished-cycle lead.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-davidson-fellows-3",
+      "family": "davidson-fellows",
+      "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/rules-and-regulations/",
+      "format": "html",
+      "sponsor": "Davidson Institute",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 5,
+      "characters": 6634,
+      "content_hash": "4634124ad7bd9c54c9f8052223baa4d77c64a02257d563af055d832c086d6f33",
+      "final_url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/rules-and-regulations/",
+      "admission": "deferred",
+      "reason": "2027 application described as forthcoming; category forms still identify older cycles. Keep as unpublished-cycle lead.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-horatio-alger-3",
+      "family": "horatio-alger",
+      "url": "https://horatioalger.org/scholarships-and-services/undergraduate-scholarships/",
+      "format": "html",
+      "sponsor": "Horatio Alger Association",
+      "category": "national",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 18,
+      "characters": 9260,
+      "content_hash": "0d9a5172cd7a1241833f0ded95e9fbcaa2bc9d859bc18965c1b435e30ba5063e",
+      "final_url": "https://horatioalger.org/scholarships-and-services/undergraduate-scholarships/",
+      "admission": "deferred",
+      "reason": "Evergreen junior/senior rules and specialized awards; dated 2027 applicability not established.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-gatech-1",
+      "family": "gatech",
+      "url": "https://stampsps.gatech.edu/apply/",
+      "format": "html",
+      "sponsor": "Georgia Tech",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 3,
+      "characters": 2046,
+      "content_hash": "a5e600c150916aea8b9045c6e869f4f402b9335bb3cb28f72d5b55dbf791f2a2",
+      "final_url": "https://stampsps.gatech.edu/apply/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gatech-stamps-gold"
+      ]
+    },
+    {
+      "id": "exp-gatech-2",
+      "family": "gatech",
+      "url": "https://stampsps.gatech.edu/apply/calendar",
+      "format": "html",
+      "sponsor": "Georgia Tech",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 1,
+      "characters": 1523,
+      "content_hash": "0251d6231ccc8950e814bb046fe8e13b6c37af7549b58c62a8ea8f3832bd787d",
+      "final_url": "https://stampsps.gatech.edu/apply/calendar",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gatech-stamps-gold"
+      ]
+    },
+    {
+      "id": "exp-gatech-3",
+      "family": "gatech",
+      "url": "https://stampsps.gatech.edu/apply/application-review",
+      "format": "html",
+      "sponsor": "Georgia Tech",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 1350,
+      "content_hash": "b3a304a203de57e12fcc307b5c2704fda7b9dd1b4544bc80ef17381334dff93d",
+      "final_url": "https://stampsps.gatech.edu/apply/application-review",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gatech-stamps-gold"
+      ]
+    },
+    {
+      "id": "exp-gatech-4",
+      "family": "gatech",
+      "url": "https://stampsps.gatech.edu/about/program-pillars",
+      "format": "html",
+      "sponsor": "Georgia Tech",
+      "category": "georgia-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 6,
+      "characters": 2732,
+      "content_hash": "72d8acff532d0de8a26fc0f14586999b04454b47d936b6162ac80b1d10e94a6a",
+      "final_url": "https://stampsps.gatech.edu/about/program-pillars",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "gatech-stamps-gold"
+      ]
+    },
+    {
+      "id": "exp-morehead-cain-1",
+      "family": "morehead-cain",
+      "url": "https://www.moreheadcain.org/application-eligibility/",
+      "format": "html",
+      "sponsor": "Morehead-Cain Foundation",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 11,
+      "characters": 3857,
+      "content_hash": "fe3217f94041fc67a44ac28cad59ceb62dccc10875039bc098fc054aba09ce55",
+      "final_url": "https://www.moreheadcain.org/application-eligibility/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "morehead-cain"
+      ]
+    },
+    {
+      "id": "exp-morehead-cain-2",
+      "family": "morehead-cain",
+      "url": "https://www.moreheadcain.org/application-eligibility/deadlines/",
+      "format": "html",
+      "sponsor": "Morehead-Cain Foundation",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 8,
+      "characters": 310,
+      "content_hash": "a9606d6c93c78e7aac4fdbe10b6b0e5a32a54d1cb096cdf7fcad9b15cda5de59",
+      "final_url": "https://www.moreheadcain.org/application-eligibility/deadlines/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "morehead-cain"
+      ]
+    },
+    {
+      "id": "exp-jefferson-1",
+      "family": "jefferson",
+      "url": "https://www.jeffersonscholars.org/scholarships/selection",
+      "format": "html",
+      "sponsor": "Jefferson Scholars Foundation",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 11,
+      "characters": 3955,
+      "content_hash": "d7caa31e4d7ae9f484315d649ffcd237ee827b186920bcb6c893200f8336068e",
+      "final_url": "https://www.jeffersonscholars.org/scholarships/selection",
+      "admission": "deferred",
+      "reason": "Regional nomination timing not public and no explicit current cycle; request school/office verification.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-robertson-1",
+      "family": "robertson",
+      "url": "https://robertsonscholars.org/applying/",
+      "format": "html",
+      "sponsor": "Robertson Scholars Leadership Program",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 1501,
+      "content_hash": "3121f1d47ae12d6bc25dad7dbb362db73efb03e43eb1c5cad85940c17b2d7e1e",
+      "final_url": "https://robertsonscholars.org/applying/",
+      "admission": "deferred",
+      "reason": "Non-contributing duplicate overview or no additional verified operational material; excluded from counts.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-fsu-presidential-1",
+      "family": "fsu-presidential",
+      "url": "https://presidentialscholars.fsu.edu/application-process",
+      "format": "html",
+      "sponsor": "Florida State University",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 3739,
+      "content_hash": "241b1009196cd58e7f3769d85ded56294a94f8b1ce7309223d1d5a971f9e5d9f",
+      "final_url": "https://presidentialscholars.fsu.edu/application-process",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "fsu-presidential"
+      ]
+    },
+    {
+      "id": "exp-fsu-presidential-2",
+      "family": "fsu-presidential",
+      "url": "https://presidentialscholars.fsu.edu/benefits",
+      "format": "html",
+      "sponsor": "Florida State University",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "failed",
+      "error": "ValueError",
+      "admission": "deferred",
+      "reason": "Guessed secondary benefits URL failed; complete current application-process page retained.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-south-alabama-1",
+      "family": "south-alabama",
+      "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/freshman.html",
+      "format": "html",
+      "sponsor": "University of South Alabama",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "failed",
+      "error": "ValueError",
+      "admission": "deferred",
+      "reason": "Initial URL failed; official linked canonical freshman page and dated landing calendar succeeded.",
+      "selected_program_ids": []
+    },
+    {
+      "id": "exp-uah-1",
+      "family": "uah",
+      "url": "https://www.uah.edu/admissions/undergraduate/financial-aid/scholarships/freshmen/freshman-out-of-state-academic-scholarships",
+      "format": "html",
+      "sponsor": "University of Alabama in Huntsville",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 4,
+      "characters": 3024,
+      "content_hash": "a1776286bc049e78d63059b9109be5868132adc66728802795f614952c2c6b3d",
+      "final_url": "https://www.uah.edu/admissions/undergraduate/financial-aid/scholarships/freshmen/freshman-out-of-state-academic-scholarships",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "uah-out-of-state"
+      ]
+    },
+    {
+      "id": "exp-robertson-2",
+      "family": "robertson",
+      "url": "https://robertsonscholars.org/high-school-students-2/",
+      "format": "html",
+      "sponsor": "Robertson Scholars Leadership Program",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 5,
+      "characters": 4299,
+      "content_hash": "56d3f1dd49b242e3e69180217c20251066783b3f2762bf5aac07fbddcd8c6a18",
+      "final_url": "https://robertsonscholars.org/high-school-students-2/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "robertson"
+      ]
+    },
+    {
+      "id": "exp-robertson-3",
+      "family": "robertson",
+      "url": "https://robertsonscholars.org/application-faqs/",
+      "format": "html",
+      "sponsor": "Robertson Scholars Leadership Program",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 5576,
+      "content_hash": "a59d14d02edf7aa40e21e9838a06ca953723b8854859442d4b68af9b06eee582",
+      "final_url": "https://robertsonscholars.org/application-faqs/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "robertson"
+      ]
+    },
+    {
+      "id": "exp-morehead-cain-3",
+      "family": "morehead-cain",
+      "url": "https://www.moreheadcain.org/application-eligibility/eligibility-information/us",
+      "format": "html",
+      "sponsor": "Morehead-Cain Foundation",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 10,
+      "characters": 2401,
+      "content_hash": "003bdf7b496d2b2b236f7c0dd80c778501048acd9857abe48a4bbd2a0f122cd6",
+      "final_url": "https://www.moreheadcain.org/application-eligibility/eligibility-information/us/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "morehead-cain"
+      ]
+    },
+    {
+      "id": "exp-morehead-cain-4",
+      "family": "morehead-cain",
+      "url": "https://www.moreheadcain.org/application-eligibility/faqs/",
+      "format": "html",
+      "sponsor": "Morehead-Cain Foundation",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 3914,
+      "content_hash": "829b25507f51a8b05cf2fdfd7bf7995a5c4cf93615c076496ca3f6452e2cd2b7",
+      "final_url": "https://www.moreheadcain.org/application-eligibility/faqs/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "morehead-cain"
+      ]
+    },
+    {
+      "id": "exp-south-alabama-2",
+      "family": "south-alabama",
+      "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/freshscholarships/",
+      "format": "html",
+      "sponsor": "University of South Alabama",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 21,
+      "characters": 23299,
+      "content_hash": "a971002f42aaff40b98e663d9c9dc27a0b7c04a7c0d3d62c45247bc5eeb4fc70",
+      "final_url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/freshscholarships/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "south-alabama-out-of-state"
+      ]
+    },
+    {
+      "id": "exp-south-alabama-3",
+      "family": "south-alabama",
+      "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/",
+      "format": "html",
+      "sponsor": "University of South Alabama",
+      "category": "regional-university",
+      "review_status": "candidate",
+      "collection_status": "collected",
+      "error": null,
+      "parsed": true,
+      "sections": 2,
+      "characters": 2772,
+      "content_hash": "8999ea9b1eb59162ae8b6a0a5880a5c83b2f5bdd7c373a653bd92c19f382cb30",
+      "final_url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/",
+      "admission": "admitted_spans_only",
+      "reason": "Only reviewed operational spans selected; raw page may include excluded navigation, promotion, biographies or older material.",
+      "selected_program_ids": [
+        "south-alabama-out-of-state"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "source_id": "source-21",
+      "section_id": "s1",
+      "start": 55,
+      "end": 149,
+      "reason": "Recipient-list promotion"
+    },
+    {
+      "source_id": "coolidge-faq",
+      "section_id": "s1",
+      "start": 767,
+      "end": 16946,
+      "reason": "Historical and organization background"
+    },
+    {
+      "source_id": "coolidge-faq",
+      "section_id": "s1",
+      "start": 2712,
+      "end": 16946,
+      "reason": "Program history and recipient-class promotion"
+    },
+    {
+      "source_id": "coolidge-criteria",
+      "section_id": "s1",
+      "start": 548,
+      "end": 3093,
+      "reason": "Illustrative biography rather than selection rule"
+    },
+    {
+      "source_id": "coolidge-faq",
+      "section_id": "s1",
+      "start": 5045,
+      "end": 5474,
+      "reason": "Applicant testimonial/promotion"
+    },
+    {
+      "program_id": "watson-brown",
+      "family": "watson-brown",
+      "notes": []
+    },
+    {
+      "source_id": "exp-watson-brown-2",
+      "section_id": "s1",
+      "start": 0,
+      "end": 86,
+      "reason": "Navigation"
+    },
+    {
+      "program_id": "elks-mvs",
+      "family": "elks-mvs",
+      "notes": []
+    },
+    {
+      "source_id": "exp-elks-mvs-1",
+      "section_id": "s1",
+      "start": 0,
+      "end": 382,
+      "reason": "Navigation"
+    },
+    {
+      "source_id": "exp-elks-mvs-1",
+      "section_id": "s2",
+      "start": 1209,
+      "end": 1365,
+      "reason": "Winner-list promotion"
+    },
+    {
+      "source_id": "exp-elks-mvs-2",
+      "section_id": "s11",
+      "start": 126,
+      "end": 404,
+      "reason": "Conflicts with current Legacy page allowing both ENF awards; stacking needs manual verification"
+    },
+    {
+      "program_id": "elks-legacy",
+      "family": "elks-legacy",
+      "notes": [
+        "Deadline is 11:59 AM Pacific, not midnight. ENF cross-award stacking statements conflict; do not assert stacking."
+      ]
+    },
+    {
+      "source_id": "exp-elks-legacy-1",
+      "section_id": "s3",
+      "start": 1218,
+      "end": 1466,
+      "reason": "Cross-award stacking conflict with MVS FAQ; manual verification"
+    },
+    {
+      "program_id": "cooke-college",
+      "family": "cooke",
+      "notes": [
+        "Gross-income and AGI wording varies within sponsor text; retain financial review requirement, do not equate the two measures."
+      ]
+    },
+    {
+      "program_id": "geicc",
+      "family": "geicc",
+      "notes": []
+    },
+    {
+      "source_id": "exp-geicc-1",
+      "section_id": "s1",
+      "start": 0,
+      "end": 299,
+      "reason": "Program history/promotion"
+    },
+    {
+      "program_id": "cobb-emc",
+      "family": "cobb-emc",
+      "notes": [
+        "College route only. Acceptance evidence may follow at award time. Teachers/relatives excluded as recommenders. AI essay development prohibited."
+      ]
+    },
+    {
+      "source_id": "exp-cobb-emc-2",
+      "section_id": "p1",
+      "start": 1755,
+      "end": 2401,
+      "reason": "Blank personal-information form fields"
+    },
+    {
+      "source_id": "exp-cobb-emc-2",
+      "section_id": "p2",
+      "start": 1223,
+      "end": 2522,
+      "reason": "Blank personal-information form fields"
+    },
+    {
+      "program_id": "sawnee-youth",
+      "family": "sawnee",
+      "notes": [
+        "Linked form/conditions contain 2025/2026 dates and are excluded; verify current packet with scholarships@sawnee.coop."
+      ]
+    },
+    {
+      "source_id": "exp-sawnee-1",
+      "section_id": "s3",
+      "start": 478,
+      "end": 880,
+      "reason": "Winner link and unrelated navigation"
+    },
+    {
+      "program_id": "gsu-stamps-presidential",
+      "family": "gsu-scholars",
+      "notes": [
+        "Stamps requires GA residency and HOPE/Zell eligibility; Presidential also allows out-of-state/international. Recommendation due November 20. Interview date unconfirmed; stale February 2026 sentence excluded."
+      ]
+    },
+    {
+      "source_id": "exp-gsu-scholars-1",
+      "section_id": "s3",
+      "start": 1120,
+      "end": 1304,
+      "reason": "Stale February 2026 notification sentence in current 2027 page"
+    },
+    {
+      "program_id": "burger-king-general",
+      "family": "burger-king",
+      "notes": [
+        "General track only; employee tracks and James W. McLamore eligibility are separate. First 30,000 community applications reviewed."
+      ]
+    },
+    {
+      "source_id": "exp-burger-king-2",
+      "section_id": "s24",
+      "start": 242,
+      "end": 417,
+      "reason": "Unrelated promotion"
+    },
+    {
+      "program_id": "live-mas-new",
+      "family": "live-mas",
+      "notes": [
+        "Age 16\u201326; no previous award for new-applicant route. AI may assist organization/grammar but cannot substantially author responses; disclosure required."
+      ]
+    },
+    {
+      "program_id": "gates",
+      "family": "gates",
+      "notes": [
+        "Deadline has passed despite stale Open label; date governs closed status."
+      ]
+    },
+    {
+      "source_id": "exp-gates-1",
+      "section_id": "s1",
+      "start": 0,
+      "end": 44,
+      "reason": "Open label contradicts elapsed September 2026 deadline; retain dated timeline"
+    },
+    {
+      "program_id": "hagan",
+      "family": "hagan",
+      "notes": [
+        "Fall deadline stored; spring application March 15, 2027 is a separate opportunity. Apply once only. U.S. high-school attendance required, not U.S. citizenship. GPA scale/type unspecified."
+      ]
+    },
+    {
+      "program_id": "ron-brown",
+      "family": "ron-brown",
+      "notes": [
+        "Application December 1; supporting recommendations/transcript December 15; eligibility includes Black/African American identity and financial need."
+      ]
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s2",
+      "start": 496,
+      "end": 641,
+      "reason": "Alumni/career promotion"
+    },
+    {
+      "program_id": "levine",
+      "family": "levine",
+      "notes": [
+        "Nomination deadline October 15 has passed for new entrants. Existing nominees: university application November 1; supplement and three recommendations November 15. Finalist averages are excluded, not thresholds."
+      ]
+    },
+    {
+      "program_id": "morehead-cain",
+      "family": "morehead-cain",
+      "notes": [
+        "Direct application deadline passed. ARP nomination possible via UNC Early Action October 15, also passed. Do not treat Class of 2031 as college-entry year."
+      ]
+    },
+    {
+      "program_id": "robertson",
+      "family": "robertson",
+      "notes": [
+        "Separate Duke/UNC admission applications. Early-notification deadline October 15; regular November 15. Exclude stale 2025 group-activity sentence."
+      ]
+    },
+    {
+      "source_id": "exp-robertson-2",
+      "section_id": "s4",
+      "start": 994,
+      "end": 1135,
+      "reason": "Stale November 2025 reference in 2026\u201327 timeline"
+    },
+    {
+      "program_id": "fsu-presidential",
+      "family": "fsu-presidential",
+      "notes": [
+        "University Honors admission and essay required. Video responses February 28, 2027; required campus interviews April 2\u20133. No separate Stamps guarantee."
+      ]
+    },
+    {
+      "program_id": "uah-out-of-state",
+      "family": "uah",
+      "notes": [
+        "May 15, 2027 is an upgrade cutoff, not an asserted application deadline. GPA scale/type unspecified. ACT superscore accepted; ACT science no longer considered. Alabama/Tennessee residents use another chart."
+      ]
+    },
+    {
+      "program_id": "gatech-stamps-gold",
+      "family": "gatech",
+      "notes": [
+        "GA deadline October 15; non-GA November 2. Current dated calendar governs April 9\u201310, 2027 interviews; undated March sentence excluded. Citizenship from application review, no broader exception inferred."
+      ]
+    },
+    {
+      "source_id": "exp-gatech-1",
+      "section_id": "s1",
+      "start": 418,
+      "end": 742,
+      "reason": "Undated March timing conflicts with dated April 2027 calendar"
+    },
+    {
+      "program_id": "uab-out-of-state",
+      "family": "uab",
+      "notes": [
+        "Current official page now downloads successfully; prior coverage gap can be retired for candidate. No superscore; merit tables and test-optional route kept separate. GPA scale/type unspecified."
+      ]
+    },
+    {
+      "program_id": "south-alabama-out-of-state",
+      "family": "south-alabama",
+      "notes": [
+        "Priority deadline for Fall 2027 anchored by official scholarship landing-page calendar. Table is evergreen current guidance; amounts not labeled a 2027\u201328 guarantee. No institutional cap inferred from old 2024\u201325 policy."
+      ]
+    },
+    {
+      "source_id": "exp-cooke-1",
+      "section_id": "s7",
+      "start": 911,
+      "end": 1024,
+      "reason": "Past-recipient income statistic is not an eligibility threshold"
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s1",
+      "start": 1465,
+      "end": 1984,
+      "reason": "Recipient statistics and named alumni testimonial"
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s1",
+      "start": 1143,
+      "end": 1239,
+      "reason": "Historical recipient counts"
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s5",
+      "start": 603,
+      "end": 667,
+      "reason": "Historical recipient count"
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s5",
+      "start": 840,
+      "end": 1110,
+      "reason": "Alumni relationship promotion"
+    },
+    {
+      "source_id": "exp-ron-brown-1",
+      "section_id": "s5",
+      "start": 6766,
+      "end": 7105,
+      "reason": "Alumni outcomes and promotional statistics"
+    },
+    {
+      "source_id": "exp-hagan-2",
+      "section_id": "s3",
+      "start": 126,
+      "end": 446,
+      "reason": "Recipient attendance statistics"
+    },
+    {
+      "source_id": "exp-hagan-2",
+      "section_id": "s3",
+      "start": 2418,
+      "end": 2930,
+      "reason": "Recipient outcome statistic and background advice"
+    },
+    {
+      "source_id": "exp-hagan-2",
+      "section_id": "s3",
+      "start": 6688,
+      "end": 6892,
+      "reason": "Grantor biography/rationale; work requirement retained separately"
+    },
+    {
+      "source_id": "exp-hagan-2",
+      "section_id": "s3",
+      "start": 7130,
+      "end": 7272,
+      "reason": "Administrative rationale"
+    },
+    {
+      "source_id": "exp-hagan-2",
+      "section_id": "s3",
+      "start": 7358,
+      "end": 7440,
+      "reason": "Navigation/footer"
+    },
+    {
+      "source_id": "exp-hagan-4",
+      "section_id": "p1",
+      "start": 465,
+      "end": 588,
+      "reason": "Recipient attendance statistics"
+    }
+  ]
+}

@@ -1,0 +1,614 @@
+[
+  {
+    "id": "exp-watson-brown-1",
+    "family": "watson-brown",
+    "url": "https://watson-brown.org/scholarship/",
+    "format": "html",
+    "sponsor": "Watson-Brown Foundation",
+    "category": "georgia-foundation",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-watson-brown-2",
+    "family": "watson-brown",
+    "url": "https://watson-brown.org/scholarship/guidelines-faq/",
+    "format": "html",
+    "sponsor": "Watson-Brown Foundation",
+    "category": "georgia-foundation",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-elks-mvs-1",
+    "family": "elks-mvs",
+    "url": "https://www.elks.org/scholars/scholarships/mvs.cfm",
+    "format": "html",
+    "sponsor": "Elks National Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-elks-mvs-2",
+    "family": "elks-mvs",
+    "url": "https://hq.elks.org/scholarWeb/resources/mvsFAQ.cfm",
+    "format": "html",
+    "sponsor": "Elks National Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-elks-legacy-1",
+    "family": "elks-legacy",
+    "url": "https://hq.elks.org/scholars/scholarships/legacy.cfm",
+    "format": "html",
+    "sponsor": "Elks National Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-cooke-1",
+    "family": "cooke",
+    "url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/how-to-apply/",
+    "format": "html",
+    "sponsor": "Jack Kent Cooke Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-cooke-2",
+    "family": "cooke",
+    "url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/faqs/",
+    "format": "html",
+    "sponsor": "Jack Kent Cooke Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-geicc-1",
+    "family": "geicc",
+    "url": "https://getintoenergyga.com/initiatives-and-programs/scholarships/",
+    "format": "html",
+    "sponsor": "Georgia Energy Workforce Consortium",
+    "category": "georgia-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-cobb-emc-1",
+    "family": "cobb-emc",
+    "url": "https://www.cobbemc.com/cobb-emc-foundation-scholarship",
+    "format": "html",
+    "sponsor": "Cobb EMC Foundation",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-sawnee-1",
+    "family": "sawnee",
+    "url": "https://sawnee.coop/scholarships",
+    "format": "html",
+    "sponsor": "Sawnee Electric Membership Foundation",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gsu-scholars-1",
+    "family": "gsu-scholars",
+    "url": "https://honors.gsu.edu/scholars/",
+    "format": "html",
+    "sponsor": "Georgia State University",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gsu-scholars-2",
+    "family": "gsu-scholars",
+    "url": "https://admissions.gsu.edu/timeline/",
+    "format": "html",
+    "sponsor": "Georgia State University",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-burger-king-1",
+    "family": "burger-king",
+    "url": "https://www.burgerkingfoundation.org/programs/burger-king-sm-scholars",
+    "format": "html",
+    "sponsor": "Burger King Foundation",
+    "category": "national-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-burger-king-2",
+    "family": "burger-king",
+    "url": "https://burgerking.scholarsapply.org/",
+    "format": "html",
+    "sponsor": "Burger King Foundation",
+    "category": "national-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-live-mas-1",
+    "family": "live-mas",
+    "url": "https://tacobellfoundation.org/live-mas-scholarship/",
+    "format": "html",
+    "sponsor": "Taco Bell Foundation",
+    "category": "national-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-live-mas-2",
+    "family": "live-mas",
+    "url": "https://tacobellfoundation.org/live-mas-scholarship/eligibilityfaq/",
+    "format": "html",
+    "sponsor": "Taco Bell Foundation",
+    "category": "national-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gates-1",
+    "family": "gates",
+    "url": "https://www.thegatesscholarship.org/scholarship/",
+    "format": "html",
+    "sponsor": "The Gates Scholarship",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gates-2",
+    "family": "gates",
+    "url": "https://www.thegatesscholarship.org/help-center/student/eligibility/",
+    "format": "html",
+    "sponsor": "The Gates Scholarship",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gates-3",
+    "family": "gates",
+    "url": "https://www.thegatesscholarship.org/help-center/student/application-process/",
+    "format": "html",
+    "sponsor": "The Gates Scholarship",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-1",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/application/",
+    "format": "html",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-2",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/q-a/",
+    "format": "html",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-ron-brown-1",
+    "family": "ron-brown",
+    "url": "https://ronbrown.org/ron-brown-scholarship/",
+    "format": "html",
+    "sponsor": "Ron Brown Scholar Program",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-levine-1",
+    "family": "levine",
+    "url": "https://levinescholars.charlotte.edu/apply/",
+    "format": "html",
+    "sponsor": "UNC Charlotte",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-levine-2",
+    "family": "levine",
+    "url": "https://levinescholars.charlotte.edu/apply/important-dates/",
+    "format": "html",
+    "sponsor": "UNC Charlotte",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-levine-3",
+    "family": "levine",
+    "url": "https://levinescholars.charlotte.edu/apply/faq/",
+    "format": "html",
+    "sponsor": "UNC Charlotte",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-davidson-fellows-1",
+    "family": "davidson-fellows",
+    "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/how-to-apply/",
+    "format": "html",
+    "sponsor": "Davidson Institute",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-emory-1",
+    "family": "emory",
+    "url": "https://apply.emory.edu/financial-aid/scholar-program.html",
+    "format": "html",
+    "sponsor": "Emory University",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-clemson-1",
+    "family": "clemson",
+    "url": "https://www.clemson.edu/financial-aid/types-of-aid/clemson-scholarships/first-year-recruiting-scholarships.html",
+    "format": "html",
+    "sponsor": "Clemson University",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-clemson-2",
+    "family": "clemson",
+    "url": "https://www.clemson.edu/financial-aid/policies/scholarship-terms-and-conditions.html",
+    "format": "html",
+    "sponsor": "Clemson University",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-uab-1",
+    "family": "uab",
+    "url": "https://www.uab.edu/admissions/cost/scholarships/out-of-state-students",
+    "format": "html",
+    "sponsor": "University of Alabama at Birmingham",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-mercer-1",
+    "family": "mercer",
+    "url": "https://undergrad.mercer.edu/stamps/",
+    "format": "html",
+    "sponsor": "Mercer University",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-mercer-2",
+    "family": "mercer",
+    "url": "https://undergrad.mercer.edu/mercer-scholarships/",
+    "format": "html",
+    "sponsor": "Mercer University",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-horatio-alger-1",
+    "family": "horatio-alger",
+    "url": "https://horatioalger.org/undergraduate-applicant-faq/",
+    "format": "html",
+    "sponsor": "Horatio Alger Association",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-horatio-alger-2",
+    "family": "horatio-alger",
+    "url": "https://horatioalger.org/scholarships/",
+    "format": "html",
+    "sponsor": "Horatio Alger Association",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-walton-emc-1",
+    "family": "walton-emc",
+    "url": "https://www.waltonemc.com/community/youth-programs-and-scholarships/walton-electric-trust-scholarship/",
+    "format": "html",
+    "sponsor": "Walton EMC",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-georgia-united-1",
+    "family": "georgia-united",
+    "url": "https://gucufoundation.org/programs/scholarship-high-school-seniors",
+    "format": "html",
+    "sponsor": "Georgia United Foundation",
+    "category": "georgia-credit-union",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-jackson-emc-1",
+    "family": "jackson-emc",
+    "url": "https://www.jacksonemc.com/community/youth-education/walter-harrison-scholarship",
+    "format": "html",
+    "sponsor": "Jackson EMC",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-sawnee-2",
+    "family": "sawnee",
+    "url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Foundation-Youth-Scholarship-Application.pdf",
+    "format": "pdf",
+    "sponsor": "Sawnee Electric Membership Foundation",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-sawnee-3",
+    "family": "sawnee",
+    "url": "https://file.sawnee.coop/web-docs/round-up/Sawnee-Electric-Membership-Youth-Scholarship-Criteria-and-Conditions.pdf",
+    "format": "pdf",
+    "sponsor": "Sawnee Electric Membership Foundation",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-cobb-emc-2",
+    "family": "cobb-emc",
+    "url": "https://www.cobbemc.com/sites/default/files/documents/youth/2027%20College_University.pdf",
+    "format": "pdf",
+    "sponsor": "Cobb EMC Foundation",
+    "category": "georgia-utility",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-3",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/wp-content/uploads/2026/08/3-Scholarship_Particulars_83126-su3.pdf",
+    "format": "pdf",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-4",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/wp-content/uploads/2026/10/10-2-26-FALL-Website-HSF-U.S.-BROCHURE-su3.pdf",
+    "format": "pdf",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-5",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/wp-content/uploads/2026/10/HSF-U.S.-Application-Tips-10-2-26-su3-.pdf",
+    "format": "pdf",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-hagan-6",
+    "family": "hagan",
+    "url": "https://haganscholarships.org/timeline/",
+    "format": "html",
+    "sponsor": "Hagan Scholarship Foundation",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-live-mas-3",
+    "family": "live-mas",
+    "url": "https://tacobellfoundation.org/wp-content/uploads/2027_Live_Mas_Scholarship_New_Applicant_TC.pdf",
+    "format": "pdf",
+    "sponsor": "Taco Bell Foundation",
+    "category": "national-employer",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-levine-4",
+    "family": "levine",
+    "url": "https://levinescholars.charlotte.edu/nomination-application-process/applicant-profile/",
+    "format": "html",
+    "sponsor": "UNC Charlotte",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-levine-5",
+    "family": "levine",
+    "url": "https://levinescholars.charlotte.edu/apply/for-recommenders/",
+    "format": "html",
+    "sponsor": "UNC Charlotte",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-davidson-fellows-2",
+    "family": "davidson-fellows",
+    "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility-and-application/",
+    "format": "html",
+    "sponsor": "Davidson Institute",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-davidson-fellows-3",
+    "family": "davidson-fellows",
+    "url": "https://www.davidsongifted.org/gifted-programs/fellows-scholarship/eligibility/rules-and-regulations/",
+    "format": "html",
+    "sponsor": "Davidson Institute",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-horatio-alger-3",
+    "family": "horatio-alger",
+    "url": "https://horatioalger.org/scholarships-and-services/undergraduate-scholarships/",
+    "format": "html",
+    "sponsor": "Horatio Alger Association",
+    "category": "national",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gatech-1",
+    "family": "gatech",
+    "url": "https://stampsps.gatech.edu/apply/",
+    "format": "html",
+    "sponsor": "Georgia Tech",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gatech-2",
+    "family": "gatech",
+    "url": "https://stampsps.gatech.edu/apply/calendar",
+    "format": "html",
+    "sponsor": "Georgia Tech",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gatech-3",
+    "family": "gatech",
+    "url": "https://stampsps.gatech.edu/apply/application-review",
+    "format": "html",
+    "sponsor": "Georgia Tech",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-gatech-4",
+    "family": "gatech",
+    "url": "https://stampsps.gatech.edu/about/program-pillars",
+    "format": "html",
+    "sponsor": "Georgia Tech",
+    "category": "georgia-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-morehead-cain-1",
+    "family": "morehead-cain",
+    "url": "https://www.moreheadcain.org/application-eligibility/",
+    "format": "html",
+    "sponsor": "Morehead-Cain Foundation",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-morehead-cain-2",
+    "family": "morehead-cain",
+    "url": "https://www.moreheadcain.org/application-eligibility/deadlines/",
+    "format": "html",
+    "sponsor": "Morehead-Cain Foundation",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-jefferson-1",
+    "family": "jefferson",
+    "url": "https://www.jeffersonscholars.org/scholarships/selection",
+    "format": "html",
+    "sponsor": "Jefferson Scholars Foundation",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-robertson-1",
+    "family": "robertson",
+    "url": "https://robertsonscholars.org/applying/",
+    "format": "html",
+    "sponsor": "Robertson Scholars Leadership Program",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-fsu-presidential-1",
+    "family": "fsu-presidential",
+    "url": "https://presidentialscholars.fsu.edu/application-process",
+    "format": "html",
+    "sponsor": "Florida State University",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-fsu-presidential-2",
+    "family": "fsu-presidential",
+    "url": "https://presidentialscholars.fsu.edu/benefits",
+    "format": "html",
+    "sponsor": "Florida State University",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-south-alabama-1",
+    "family": "south-alabama",
+    "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/freshman.html",
+    "format": "html",
+    "sponsor": "University of South Alabama",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-uah-1",
+    "family": "uah",
+    "url": "https://www.uah.edu/admissions/undergraduate/financial-aid/scholarships/freshmen/freshman-out-of-state-academic-scholarships",
+    "format": "html",
+    "sponsor": "University of Alabama in Huntsville",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-robertson-2",
+    "family": "robertson",
+    "url": "https://robertsonscholars.org/high-school-students-2/",
+    "format": "html",
+    "sponsor": "Robertson Scholars Leadership Program",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-robertson-3",
+    "family": "robertson",
+    "url": "https://robertsonscholars.org/application-faqs/",
+    "format": "html",
+    "sponsor": "Robertson Scholars Leadership Program",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-morehead-cain-3",
+    "family": "morehead-cain",
+    "url": "https://www.moreheadcain.org/application-eligibility/eligibility-information/us",
+    "format": "html",
+    "sponsor": "Morehead-Cain Foundation",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-morehead-cain-4",
+    "family": "morehead-cain",
+    "url": "https://www.moreheadcain.org/application-eligibility/faqs/",
+    "format": "html",
+    "sponsor": "Morehead-Cain Foundation",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-south-alabama-2",
+    "family": "south-alabama",
+    "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/freshscholarships/",
+    "format": "html",
+    "sponsor": "University of South Alabama",
+    "category": "regional-university",
+    "review_status": "candidate"
+  },
+  {
+    "id": "exp-south-alabama-3",
+    "family": "south-alabama",
+    "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/",
+    "format": "html",
+    "sponsor": "University of South Alabama",
+    "category": "regional-university",
+    "review_status": "candidate"
+  }
+]

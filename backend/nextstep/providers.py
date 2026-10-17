@@ -72,7 +72,7 @@ STRUCTURED_PROMPT = ChatPromptTemplate.from_messages(
 
 
 class PaidModel:
-    def __init__(self, settings, ledger, client_factory=None):
+    def __init__(self, settings, ledger=None, client_factory=None):
         self.settings, self.ledger, self.client_factory = (
             settings,
             ledger,
@@ -83,7 +83,7 @@ class PaidModel:
         settings = self.settings
         if not settings.live_calls_enabled or not settings.openai_api_key:
             raise ValueError("Live OpenAI calls are disabled or unconfigured")
-        if (
+        if self.ledger is not None and (
             not settings.pricing_effective_date
             or settings.input_usd_per_million is None
             or settings.output_usd_per_million is None
@@ -97,12 +97,13 @@ class PaidModel:
         )
         if count > 22000:
             raise ValueError("Model input exceeds bounded context")
-        # Reserve the entire bounded input allowance, including tool/message framing.
-        estimate = (
-            Decimal(24000) * settings.input_usd_per_million
-            + Decimal(max_output) * settings.output_usd_per_million
-        ) / Decimal(1000000)
-        reservation = self.ledger.reserve_budget(str(uuid4()), estimate)
+        reservation = None
+        if self.ledger is not None:
+            estimate = (
+                Decimal(24000) * settings.input_usd_per_million
+                + Decimal(max_output) * settings.output_usd_per_million
+            ) / Decimal(1000000)
+            reservation = self.ledger.reserve_budget(str(uuid4()), estimate)
         try:
             if self.client_factory is None:
                 from langchain_openai import ChatOpenAI
@@ -132,15 +133,17 @@ class PaidModel:
                     config={"callbacks": []},
                 )
             usage = output["raw"].usage_metadata
-            actual = (
-                Decimal(usage["input_tokens"]) * settings.input_usd_per_million
-                + Decimal(usage["output_tokens"]) * settings.output_usd_per_million
-            ) / Decimal(1000000)
-            self.ledger.reconcile_budget(reservation.id, actual)
+            if reservation is not None:
+                actual = (
+                    Decimal(usage["input_tokens"]) * settings.input_usd_per_million
+                    + Decimal(usage["output_tokens"]) * settings.output_usd_per_million
+                ) / Decimal(1000000)
+                self.ledger.reconcile_budget(reservation.id, actual)
         except Exception:
             # Reconcile only if still pending; completed calls remain charged even if parsing fails.
             try:
-                self.ledger.reconcile_budget(reservation.id, None)
+                if reservation is not None:
+                    self.ledger.reconcile_budget(reservation.id, None)
             except ValueError:
                 pass
             raise
@@ -168,7 +171,7 @@ class PaidModel:
 
 
 class OpenAIEmbeddingProvider:
-    def __init__(self, settings, ledger):
+    def __init__(self, settings, ledger=None):
         self.settings, self.ledger = settings, ledger
         self.model, self.dimensions = (
             settings.embedding_model,
@@ -180,8 +183,13 @@ class OpenAIEmbeddingProvider:
         if (
             not settings.live_calls_enabled
             or not settings.openai_api_key
-            or settings.embedding_usd_per_million is None
-            or not settings.pricing_effective_date
+            or (
+                self.ledger is not None
+                and (
+                    settings.embedding_usd_per_million is None
+                    or not settings.pricing_effective_date
+                )
+            )
         ):
             raise ValueError("Embedding access/pricing/budget not enabled")
         from openai import OpenAI
@@ -192,29 +200,33 @@ class OpenAIEmbeddingProvider:
         )
         if tokens > 20000:
             raise ValueError("Embedding batch exceeds limit")
-        reserve = self.ledger.reserve_budget(
-            str(uuid4()),
-            Decimal(tokens) * settings.embedding_usd_per_million / Decimal(1000000),
-        )
+        reserve = None
+        if self.ledger is not None:
+            reserve = self.ledger.reserve_budget(
+                str(uuid4()),
+                Decimal(tokens) * settings.embedding_usd_per_million / Decimal(1000000),
+            )
         try:
             result = OpenAI(
                 api_key=settings.openai_api_key, max_retries=0, timeout=30
             ).embeddings.create(
                 model=self.model, input=texts, dimensions=self.dimensions
             )
-            self.ledger.reconcile_budget(
-                reserve.id,
-                Decimal(result.usage.total_tokens)
-                * settings.embedding_usd_per_million
-                / Decimal(1000000),
-            )
+            if reserve is not None:
+                self.ledger.reconcile_budget(
+                    reserve.id,
+                    Decimal(result.usage.total_tokens)
+                    * settings.embedding_usd_per_million
+                    / Decimal(1000000),
+                )
             return [
                 item.embedding
                 for item in sorted(result.data, key=lambda item: item.index)
             ]
         except Exception:
             try:
-                self.ledger.reconcile_budget(reserve.id, None)
+                if reserve is not None:
+                    self.ledger.reconcile_budget(reserve.id, None)
             except ValueError:
                 pass
             raise

@@ -38,21 +38,32 @@ from zoneinfo import ZoneInfo
 from langsmith import tracing_context
 from nextstep.matching import match_catalog
 from nextstep.models import AnswerResult, RetrievedEvidence
-from nextstep.rag.comparisons import award_classification, score_comparisons
+from nextstep.rag.comparisons import (
+    award_classification,
+    reviewed_conflict_explanations,
+    score_comparisons,
+)
 from nextstep.rag.construction import construct
 
 
-@lru_cache(maxsize=1)
-def _coverage_register():
-    path = (
-        Path(__file__).resolve().parents[3] / "data/reviewed-coverage-2026-10-14.json"
-    )
-    return json.loads(path.read_text())
+@lru_cache(maxsize=4)
+def _coverage_register(version):
+    data_dir = Path(__file__).resolve().parents[3] / "data"
+    for name in (
+        "reviewed-coverage-2026-10-14.json",
+        "expanded-coverage-2026-10-16.json",
+    ):
+        path = data_dir / name
+        if path.exists():
+            register = json.loads(path.read_text())
+            if register["corpus_version"] == version:
+                return register
+    return None
 
 
 def _deferred_entries(question, version):
-    register = _coverage_register()
-    if register["corpus_version"] != version:
+    register = _coverage_register(version)
+    if register is None:
         return
     for entry in register["deferred"]:
         aliases = [
@@ -110,18 +121,58 @@ class AnswerService:
                     ),
                 )
             )
+        if not request.program_ids:
+            explicit = []
+            for record in self.records:
+                acronym = re.match(r"^([A-Z]{2,5})\b", record.name)
+                if acronym and re.search(
+                    r"\b" + re.escape(acronym[1]) + r"\b",
+                    request.question,
+                    re.IGNORECASE,
+                ):
+                    explicit.append(record.id)
+            if 0 < len(explicit) <= 4:
+                request = request.model_copy(update={"program_ids": explicit})
         records = [
             r
             for r in self.records
             if not request.program_ids or r.id in request.program_ids
         ]
 
+        # A focused follow-up overrides a previously saved comparison set.
+        # Use distinctive leading institution/sponsor names, never residency words.
+        focused_followup = False
+        if history and len(request.program_ids) > 1:
+            named = []
+            for record in records:
+                lead = record.name.split()[0]
+                if (
+                    len(lead) >= 4
+                    and lead.lower()
+                    not in {
+                        "georgia",
+                        "university",
+                        "college",
+                        "the",
+                        "north",
+                        "south",
+                    }
+                    and re.search(
+                        r"\b" + re.escape(lead) + r"\b", request.question, re.IGNORECASE
+                    )
+                ):
+                    named.append(record.id)
+            if named:
+                focused_followup = True
+                request = request.model_copy(update={"program_ids": named})
+                records = [r for r in records if r.id in named]
+
         blocks, answer_gaps, usage, review = [], [], {}, {}
         with tracing_context(enabled=False):
             prior = " ".join(t.content for t in history if t.role == "user")[-600:]
             question = request.question
             remaining = 2000 - len(question) - 20
-            if prior and remaining > 0:
+            if prior and remaining > 0 and not focused_followup:
                 question = f"{prior[-remaining:]}\nFollow-up: {question}"
             evidence = self.retriever.retrieve(
                 request.model_copy(update={"question": question})
@@ -129,24 +180,38 @@ class AnswerService:
 
             if evidence.chunks:
                 relevant = [
-                    r for r in records if r.id in {c.program_id for c in evidence.chunks}
+                    r
+                    for r in records
+                    if r.id in {c.program_id for c in evidence.chunks}
                 ]
                 checks = match_catalog(
                     relevant,
                     profile,
                     as_of or datetime.now(ZoneInfo("America/New_York")).date(),
                 )
-                comparisons = score_comparisons(
-                    request.question, evidence, relevant
-                ) + award_classification(request.question, evidence, relevant)
+                comparisons = (
+                    score_comparisons(request.question, evidence, relevant)
+                    + award_classification(request.question, evidence, relevant)
+                    + reviewed_conflict_explanations(
+                        request.question, evidence, relevant
+                    )
+                )
                 payload = {
+                    "as_of_date": str(
+                        as_of or datetime.now(ZoneInfo("America/New_York")).date()
+                    ),
                     "computed_comparisons": [b.model_dump() for b in comparisons],
                     "question": request.question,
                     "profile": profile.model_dump(mode="json"),
                     "history": [t.model_dump() for t in history if t.role == "user"],
                     "condition_checks": [r.model_dump(mode="json") for r in checks],
                     "catalog_scope": [
-                        {"program_id": r.id, "name": r.name, "cycle": r.cycle}
+                        {
+                            "program_id": r.id,
+                            "name": r.name,
+                            "cycle": r.cycle,
+                            "reviewed_conflicts": r.conflicts,
+                        }
                         for r in relevant
                     ],
                     "evidence": [
@@ -181,6 +246,13 @@ class AnswerService:
             f"{r.name}: {r.information_status} evidence; confirm current rules with the official sponsor."
             for r in relevant
             if r.information_status in ("incomplete", "historical", "conflicting")
+        )
+        gaps.extend(
+            f"{r.name}: conflicting {field.replace('_', ' ')} instructions: "
+            + " versus ".join(str(value) for value in values)
+            + ". Confirm this point with the official sponsor before applying."
+            for r in relevant
+            for field, values in r.conflicts.items()
         )
         if not blocks:
             gaps.append(

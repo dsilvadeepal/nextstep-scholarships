@@ -20,6 +20,7 @@ test("empty catalog explains collection limits", () => {
       matches={[]}
       onSelect={() => {}}
       selected={[]}
+      onAsk={() => {}}
     />,
   );
   expect(screen.getByText(/outside this collection/i)).toBeVisible();
@@ -62,7 +63,7 @@ test("short intake uses only reviewed named plan hints and explicit Georgia resi
     target: { value: "I'm interested in engineering, considering Georgia Tech and Auburn, and I volunteer." },
   });
   expect(screen.getByText(/Detected mentions: Georgia Tech, Auburn/)).toBeVisible();
-  fireEvent.click(screen.getByLabelText("Use these colleges and interests in my matches"));
+  fireEvent.click(screen.getByLabelText("Use these reviewed details in my matches"));
   fireEvent.click(screen.getByRole("button", { name: "Find my matches" }));
   expect(submit.mock.calls[0][0]).toMatchObject({
     grade: 11,
@@ -110,4 +111,22 @@ test("fictional starter updates the visible editable intake", () => {
   expect(screen.getByText(/Senior · Georgia resident · Estimated GPA 3.5/)).toBeVisible();
   fireEvent.click(screen.getByRole("button", { name: "Find my matches" }));
   expect(submit.mock.calls[1][0]).toMatchObject(submit.mock.calls[0][0]);
+});
+
+test('reviewed note supplies identity and activities only after confirmation, and edits invalidate confirmation', () => {
+  const submit = vi.fn();
+  render(<ProfileForm onSubmit={submit} />);
+  fireEvent.change(screen.getByLabelText(/Tell us a little/), {target:{value:'I am interested in engineering; I want Georgia Tech and maybe Kennesaw State. I do not have any volunteer experience. But I am part of the Science Olympiad School. I am a Georgia resident and a United States citizen.'}});
+  expect(screen.getByLabelText('Review citizenship')).toHaveValue('US citizen');
+  expect(screen.getByLabelText('Review colleges')).toHaveValue('Kennesaw State, Georgia Tech');
+  expect(screen.getByLabelText('Review volunteer experience')).toHaveValue('none');
+  expect(screen.getByLabelText('Review interests')).toHaveValue('engineering');
+  expect(screen.getByLabelText('Review activities')).toHaveValue('Science Olympiad');
+  fireEvent.click(screen.getByRole('button',{name:'Find my matches'}));
+  expect(submit.mock.calls[0][0].context.citizenship).toBeUndefined();
+  fireEvent.click(screen.getByLabelText('Use these reviewed details in my matches'));
+  fireEvent.click(screen.getByRole('button',{name:'Find my matches'}));
+  expect(submit.mock.calls[1][0]).toMatchObject({residence:{state:'GA'},prospective_colleges:['Kennesaw State','Georgia Tech'],interests:['engineering'],context:{citizenship:'US citizen',volunteer_experience:'none',activities:['Science Olympiad']}});
+  fireEvent.change(screen.getByLabelText('Review citizenship'),{target:{value:'permanent resident'}});
+  expect(screen.getByLabelText('Use these reviewed details in my matches')).not.toBeChecked();
 });

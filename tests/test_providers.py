@@ -47,7 +47,9 @@ def test_no_global_trace_leak_and_usage_reconciled(tmp_path, monkeypatch):
             }
 
     PaidModel(settings, ledger, Client).invoke(
-        ExtractedRecords, "source instructions {literal}", {"text": "student’s {literal}"}
+        ExtractedRecords,
+        "source instructions {literal}",
+        {"text": "student’s {literal}"},
     )
     assert ledger.spent() == Decimal(".000020")
 
@@ -225,7 +227,9 @@ def test_structured_chain_native_schema_and_failure_accounting(tmp_path, failure
         def with_structured_output(self, schema, **kwargs):
             assert schema is Draft
             assert kwargs == {
-                "method": "json_schema", "strict": True, "include_raw": True
+                "method": "json_schema",
+                "strict": True,
+                "include_raw": True,
             }
             return RunnableLambda(self.invoke)
 
@@ -251,3 +255,29 @@ def test_structured_chain_native_schema_and_failure_accounting(tmp_path, failure
         assert usage["input_tokens"] == 10
     assert len(calls) == 1
     assert ledger.spent() == Decimal(".025200" if failure == "transport" else ".000020")
+
+
+def test_app_model_without_ledger_needs_no_prices_or_budget():
+    settings = Settings(
+        _env_file=None, live_calls_enabled=True, openai_api_key="fixture"
+    )
+
+    class Client:
+        def __init__(self, **kwargs):
+            pass
+
+        def with_structured_output(self, *args, **kwargs):
+            return RunnableLambda(
+                lambda _: {
+                    "parsed": ExtractedRecords(records=[]),
+                    "raw": SimpleNamespace(
+                        usage_metadata={"input_tokens": 10, "output_tokens": 10}
+                    ),
+                }
+            )
+
+    result, usage = PaidModel(settings, client_factory=Client).invoke(
+        ExtractedRecords, "test", {}
+    )
+    assert result.records == []
+    assert usage["input_tokens"] == 10

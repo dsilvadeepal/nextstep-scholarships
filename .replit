@@ -4,7 +4,7 @@ run = ["sh", "scripts/start.sh"]
 [deployment]
 deploymentTarget = "cloudrun"
 build = ["sh", "scripts/build.sh"]
-run = ["sh", "scripts/start.sh"]
+run = ["sh", "scripts/start_hosted.sh"]
 
 [[ports]]
 localPort = 8000

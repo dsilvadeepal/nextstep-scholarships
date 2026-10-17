@@ -50,7 +50,10 @@ def install_auth(app, settings):
     from starlette.middleware.sessions import SessionMiddleware
 
     configured = bool(
-        settings.oidc_client_id and settings.session_secret and settings.admin_subjects
+        (settings.environment != "production" or settings.hosted_admin_enabled)
+        and settings.oidc_client_id
+        and settings.session_secret
+        and settings.admin_subjects
     )
     app.state.auth_configured = configured
     if configured:

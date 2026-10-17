@@ -2,7 +2,13 @@
 
 NextStep Scholarships is a cited RAG demo that helps Georgia high-school juniors and seniors find potential scholarships, understand why an opportunity may fit, and identify what they need to prepare next.
 
-The current reviewed corpus contains **18 award records across 10 award families**, represented by **174 chunks from 19 official documents**. It includes Georgia opportunities and selected national or company-sponsored awards. The collection is intentionally a course-demo corpus, not a comprehensive scholarship directory or a final eligibility determination.
+The active local reviewed corpus contains **39 award records across 31 award families**, represented by **201 chunks from 63 official documents**. It includes Georgia opportunities, selected neighboring-state universities, and national or company-sponsored awards. This is a course-demo corpus, not a comprehensive directory or a final eligibility determination.
+
+The expanded catalog was activated locally on October 16 after user approval.
+Its 21 source cases and 26 known regressions passed earlier live testing; post-activation
+API and phone/desktop smoke checks also passed. The previous 18-record / 174-chunk
+catalog and Pinecone namespace remain available for rollback. See the
+[build and activation report](docs/EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
 
 Repository: [dsilvadeepal/nextstep-scholarships](https://github.com/dsilvadeepal/nextstep-scholarships) (private).
 
@@ -17,7 +23,7 @@ The main page now starts with a shorter guided intake:
 
 The app recognizes a small reviewed set of college and interest mentions locally. It shows those as suggestions and requires the student to confirm them before they affect matching. A college under consideration is never treated as an acceptance or enrollment. Unrecognized text remains available as conversational context, and missing information produces a potential match with follow-up questions rather than a fabricated eligibility decision.
 
-Additional profile fields remain under **Add more details**. Students can review matches, switch to upcoming deadlines or senior-year preparation, inspect sourced requirements and checklists, ask follow-up questions, build a shortlist, and print a plan. Fictional junior, senior, and undecided profiles are included for demonstrations.
+Additional profile fields remain under **Add more details**. Students can review matches, filter by scholarship group or upcoming deadlines, expand Explore for options needing more checks, inspect compact Sources popups, ask follow-up questions, build a shortlist, and print a plan. Fictional junior, senior, and undecided profiles are included for demonstrations.
 
 ## How the RAG pipeline works
 
@@ -33,21 +39,25 @@ LangChain is used narrowly for document splitting, OpenAI integration, structure
 
 - React and TypeScript responsive frontend
 - FastAPI backend serving the API and production frontend
-- PostgreSQL for the structured catalog, evaluation records, and spend controls
+- PostgreSQL for the structured catalog, evaluation records, and evaluation state
 - Pinecone for vector retrieval
 - Replit App Storage for corpus and receipt artifacts
 - OpenAI for extraction, embeddings, and grounded answer selection
 - Local admin evaluation dashboard and case inspector
 
-The Replit development environment contains the reviewed catalog and renders the shorter intake and scholarship cards. Hosted paid model calls remain disabled until the local cumulative spending ledger is reconciled with one authoritative hosted ledger. Admin evaluations remain local and hosted admin access stays fail-closed.
+The Replit development environment contains the reviewed catalog and renders the shorter intake and scholarship cards. Hosted chat is prepared for final publication checks. Admin evaluations remain local and hosted admin access stays fail-closed.
 
 ## Evaluation
 
 The project compares semantic retrieval with equal-weight hybrid retrieval on the same reviewed corpus and evidence budget. The 26-case source-grounded regression suite passed for both methods. A separate 60/40 semantic-keyword experiment completed 25 of 26 cases and did not justify replacing the equal-weight hybrid default.
 
-The cumulative local OpenAI ledger records **$0.98378638 of the approved $5 ceiling** after the five-case answer comparison and boundary checks on October 15, 2026. This is the measured checkpoint, not a promise that the balance will remain unchanged after future calls. Raw held-out results and saved-output rescoring are reported separately so rescoring is not presented as a fresh model run.
+Raw held-out results and saved-output rescoring are reported separately so rescoring is not presented as a fresh model run.
 
 See [evaluation report](docs/EVAL_REPORT.md), [demo run results](docs/DEMO_RUN_RESULTS_2026-10-15.md), and [RAG comparison](docs/RAG_COMPARISON_2026-10-15.md).
+
+## Instructor recording
+
+Use the [4–5 minute talk track and click path](docs/DEMO_VIDEO_SCRIPT.md), alongside the [two verified local rehearsals](docs/DEMO_REHEARSAL_2026-10-17.md). Hosted publication is still pending publication approval and final hosted checks.
 
 ## Run locally
 
@@ -62,7 +72,7 @@ sh scripts/start.sh
 
 The application is then available on `${PORT:-8000}`.
 
-Keep secrets only in the ignored local `.env` file or Replit Secrets. Do not commit or paste API keys into prompts. Live calls are disabled by default and require explicit pricing and budget configuration.
+Keep secrets only in the ignored local `.env` file or Replit Secrets. Do not commit or paste API keys into prompts. Live calls are disabled by default and require configured provider keys.
 
 ## Verify the build
 
@@ -87,3 +97,9 @@ PostgreSQL integration and browser-test instructions are documented in [environm
 - [Source inventory](SOURCE_INVENTORY.md)
 
 Current local work is on `feat/rag-answer-comparison`. Merging to `main`, publishing the Replit deployment, recording the demonstration, and submitting the course project remain separate owner decisions.
+
+### Browsing scholarship results
+
+Results show the filtered Strong/Possible match count separately from Explore opportunities. Explore starts collapsed. Expand the college, company-sponsored, or foundation/community groups to browse cards; filter by scholarship type or college location. Confirmed college choices narrow college-specific awards (common aliases are supported); portable company and foundation awards remain available. Uncheck the college-choice filter to browse other colleges. College location filters show only college-specific awards. Routine source-checked badges are hidden, while source conflicts and verification gaps remain visible. This is relevance filtering, not an admission or eligibility determination. The current catalog's grouping metadata is maintained in `frontend/src/scholarshipGroups.ts`; new unclassified programs appear under Other scholarships.
+
+The intake now suggests editable citizenship, Georgia residency, college choices (including Kennesaw State), interests, explicit absence of volunteer experience, and Science Olympiad participation from supported phrases. Review the suggestions and select **Use these reviewed details in my matches** before submitting. Editing the note or a suggestion clears confirmation; explicit profile fields take precedence. Matching and chat share the same submitted profile. Extraction uses bounded local rules, incurs no model calls, and does not interpret every possible wording or infer admission, leadership, or eligibility from an activity.

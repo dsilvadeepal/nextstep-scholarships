@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 from nextstep.app import create_app
 from nextstep.config import Settings
@@ -146,3 +147,21 @@ def test_admin_reads_configured_app_storage_report(tmp_path, monkeypatch):
                 "characters": 20,
             }
         ]
+
+
+@pytest.mark.parametrize("question", ["   ", chr(9) + chr(10), chr(8195) * 2])
+def test_blank_chat_question_rejected_before_provider_work(tmp_path, question):
+    from fastapi.testclient import TestClient
+    from nextstep.app import create_app
+    from nextstep.config import Settings
+
+    app = create_app(Settings(database_url=f"sqlite:///{tmp_path / 'blank.db'}"))
+    calls = []
+    app.state.answer_factory = lambda *args: calls.append(args)
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/chat",
+            json={"profile": {}, "request": {"question": question}, "history": []},
+        )
+    assert response.status_code == 422
+    assert calls == []

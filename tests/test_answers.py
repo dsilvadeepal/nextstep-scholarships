@@ -3,6 +3,43 @@ from nextstep.models import AnswerBlock, AnswerResult, RetrievedEvidence
 from nextstep.rag.answer import validate_answer
 
 
+def test_explicit_catalog_acronym_narrows_unselected_search():
+    from nextstep.models import RetrievalRequest, Scholarship, StudentProfile
+    from nextstep.rag.answer import AnswerService
+
+    class CaptureRetriever:
+        def retrieve(self, request):
+            self.request = request
+            return RetrievedEvidence(chunks=[])
+
+    retriever = CaptureRetriever()
+    records = [
+        Scholarship(id="uab", name="UAB Freshman Scholarships", corpus_version="v"),
+        Scholarship(id="uah", name="UAH Freshman Scholarships", corpus_version="v"),
+    ]
+    service = AnswerService(retriever, None, records)
+    service.answer_question(
+        StudentProfile(),
+        RetrievalRequest(question="Does UAB superscore ACT?", corpus_version="v"),
+        [],
+    )
+    assert retriever.request.program_ids == ["uab"]
+    service.answer_question(
+        StudentProfile(),
+        RetrievalRequest(question="Compare UAB and UAH", corpus_version="v"),
+        [],
+    )
+    assert retriever.request.program_ids == ["uab", "uah"]
+    service.answer_question(
+        StudentProfile(),
+        RetrievalRequest(
+            question="Does UAB superscore ACT?", corpus_version="v", program_ids=["uah"]
+        ),
+        [],
+    )
+    assert retriever.request.program_ids == ["uah"]
+
+
 def test_unknown_citations_and_uncited_facts_rejected():
     for refs in [[], ["invented"]]:
         answer = AnswerResult(
@@ -219,4 +256,65 @@ def test_coverage_guard_is_versioned_and_does_not_match_ordinary_hope():
     assert not deferred_coverage("HOPE Scholarship", "synthetic-fixture")
     assert deferred_coverage(
         "Can I get a Clemson scholarship?", "verified-2026-10-14-v2"
+    )
+
+    assert deferred_coverage(
+        "Can I get a Clemson scholarship?", "candidate-2026-10-16-v4"
+    )
+    assert not deferred_coverage(
+        "What are Georgia Tech's Stamps rules?", "candidate-2026-10-16-v4"
+    )
+    assert not deferred_coverage(
+        "What are Florida State Presidential Scholars rules?",
+        "candidate-2026-10-16-v4",
+    )
+    assert deferred_coverage(
+        "What are University of Florida scholarships?",
+        "candidate-2026-10-16-v4",
+    )
+
+
+def test_reviewed_conflicts_identify_each_unresolved_field_in_answer_gaps():
+    from nextstep.models import (
+        RetrievalRequest,
+        RetrievedEvidence,
+        Scholarship,
+        StudentProfile,
+    )
+    from nextstep.rag.answer import AnswerService
+
+    class EmptyRetriever:
+        def retrieve(self, request):
+            return RetrievedEvidence(chunks=[])
+
+    record = Scholarship(
+        id="p",
+        name="Award",
+        corpus_version="v",
+        information_status="conflicting",
+        conflicts={
+            "transcript_requirement": [
+                "Unofficial initially",
+                "Official via counselor",
+            ],
+            "income_measure": ["Gross income", "Adjusted gross income"],
+        },
+    )
+    answer = AnswerService(EmptyRetriever(), None, [record]).answer_question(
+        StudentProfile(),
+        RetrievalRequest(
+            question="Which transcript and income definition should I use?",
+            program_ids=["p"],
+            corpus_version="v",
+        ),
+        [],
+    )
+    text = " ".join(answer.gaps).lower()
+    assert (
+        "transcript" in text
+        and "unofficial" in text
+        and "official via counselor" in text
+    )
+    assert (
+        "income" in text and "gross income" in text and "adjusted gross income" in text
     )
