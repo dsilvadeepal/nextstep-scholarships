@@ -1,0 +1,165 @@
+{
+  "id": "auburn-sat:bf4f6d241b7ed57acc26debb9518b148d6285756c249e6f51a07d849b808aec6",
+  "content_hash": "bf4f6d241b7ed57acc26debb9518b148d6285756c249e6f51a07d849b808aec6",
+  "source_id": "auburn-sat",
+  "url": "https://www.auburn.edu/admissions/testscores.php",
+  "fetched_at": "2026-10-15T02:59:41.877337Z",
+  "sections": [
+    {
+      "id": "s1",
+      "heading": "Document",
+      "page": null,
+      "text": "Test Scores | Office of Undergraduate Admissions 2025\nCookie Acknowledgement\nThis website uses cookies to collect information to improve your browsing experience. Please review our\nPrivacy Statement\nfor more information.\nI Understand\nSkip to Resources Navigation\nSkip to Primary Navigation\nSkip to Main Content\nAuburn\nUniversity\nInfo for\ndropdown\nProspective Students\nCurrent Students\nFaculty and Staff\nParents and Families\nAlumni\nCommunity Members\nApply\nVisit\nGive\nto Office of Undergraduate Admissions 2025\nAU Access\nToggle search and resources panel\nApply\nVisit\nGive\nAU Access\nQuick Links\nCampus Map\nPeople Finder\nLibraries\nTigerMail\nAuburn Today\nEmployment\nEvents\nInformation for\nProspective Students\nCurrent Students\nFaculty and Staff\nParents and Families\nAlumni\nCommunity Members\nContact Us\nUse our website feedback form\nCall Auburn University\nAuburn University Facebook\nAuburn University X\nAuburn University Instagram\nAuburn University LinkedIn\nAuburn University YouTube\nToggle the mobile navigation pane\nToggle the Resources navigation popup\nAbout\nToggle About dropdown\nAbout Us\nLearn about our history, traditions, community and leadership.\nLeadership\nAdministrative Offices\nBoard of Trustees\nFacts and Figures\nSpirit and Traditions\nAuburn Today\nAdmissions\nToggle Admissions dropdown\nBecome a Student\nBegin your Auburn journey here.\nUndergraduate Admissions\nGraduate Admissions\nScholarships and Aid\nStudent Experience\nFind Your Community\nAcademics\nToggle Academics dropdown\nAcademics\nFind programs, tools and resources for academic success.\nColleges\nUndergraduate Majors\nGraduate Programs\nOffice of the Provost\nAcademic Resources\nAcademic Calendar\nResearch\nToggle Research dropdown\nResearch & Innovation\nExplore the real-world solutions we help discover.\nUniversity Research\nResearch Magazine\nInnovation & Partnerships\nCenters & Institutes\nThe Park at Auburn\nAlabama Agricultural Experiment Station\nExtension and Outreach\nToggle Extension and Outreach dropdown\nExtension and Outreach\nDiscover practical knowledge and research-driven solutions.\nAlabama Cooperative Extension System\nUniversity Outreach\nAthletics\nAbout\nAbout Auburn\nLeadership\nAdministrative Offices\nBoard of Trustees\nFacts and Figures\nSpirit and Traditions\nAuburn Today\nAdmissions\nBecome a Student\nGraduate Admissions\nScholarships and Aid\nStudent Experience\nFind Your Community\nAcademics\nColleges\nUndergraduate Majors\nGraduate Programs\nOffice of the Provost\nAcademic Resources\nAcademic Calendar\nResearch\nResearch & Innovation\nUniversity Research\nResearch Magazine\nInnovation & Partnerships\nCenters & Institutes\nThe Park at Auburn\nAlabama Agricultural Experiment Station\nExtension and Outreach\nExtension and Outreach\nAlabama Cooperative Extension System\nUniversity Outreach\nAthletics",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s2",
+      "heading": "ACT and SAT Score Equivalencies",
+      "page": null,
+      "text": "Starting fall 2024, Auburn University will accept the ACT Superscore Report. Auburn will calculate a superscore for the SAT and any individual score reports from ACT. Only your best testing result will be used for admissions and scholarship consideration.\nSAT equivalencies will be evaluated for test scores received after June 2018.\nMore information on SAT and ACT Concordance is available\n.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s3",
+      "heading": "row2",
+      "page": null,
+      "text": "ACT | SAT\n36 | 1570-1600\n35 | 1530-1560\n34 | 1490-1520\n33 | 1450-1480\n32 | 1420-1440\n31 | 1390-1410\n30 | 1360-1380\n29 | 1330-1350\n28 | 1300-1320\n27 | 1260-1290\n26 | 1230-1250\n25 | 1200-1220\n24 | 1160-1190\n23 | 1130-1150\n22 | 1100-1120\n21 | 1060-1090\n20 | 1030-1050\n19 | 990-1020\n18 | 960-980\n17 | 920-950\n16 | 880-910\n15 | 830-870\n14 | 780-820\n13 | 730-770\n12 | 690-720\n11 | 650-680",
+      "table_headers": [
+        "ACT",
+        "SAT"
+      ],
+      "table_rows": [
+        [
+          "36",
+          "1570-1600"
+        ],
+        [
+          "35",
+          "1530-1560"
+        ],
+        [
+          "34",
+          "1490-1520"
+        ],
+        [
+          "33",
+          "1450-1480"
+        ],
+        [
+          "32",
+          "1420-1440"
+        ],
+        [
+          "31",
+          "1390-1410"
+        ],
+        [
+          "30",
+          "1360-1380"
+        ],
+        [
+          "29",
+          "1330-1350"
+        ],
+        [
+          "28",
+          "1300-1320"
+        ],
+        [
+          "27",
+          "1260-1290"
+        ],
+        [
+          "26",
+          "1230-1250"
+        ],
+        [
+          "25",
+          "1200-1220"
+        ],
+        [
+          "24",
+          "1160-1190"
+        ],
+        [
+          "23",
+          "1130-1150"
+        ],
+        [
+          "22",
+          "1100-1120"
+        ],
+        [
+          "21",
+          "1060-1090"
+        ],
+        [
+          "20",
+          "1030-1050"
+        ],
+        [
+          "19",
+          "990-1020"
+        ],
+        [
+          "18",
+          "960-980"
+        ],
+        [
+          "17",
+          "920-950"
+        ],
+        [
+          "16",
+          "880-910"
+        ],
+        [
+          "15",
+          "830-870"
+        ],
+        [
+          "14",
+          "780-820"
+        ],
+        [
+          "13",
+          "730-770"
+        ],
+        [
+          "12",
+          "690-720"
+        ],
+        [
+          "11",
+          "650-680"
+        ]
+      ],
+      "program_id": null,
+      "kind": "table",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s4",
+      "heading": "row2",
+      "page": null,
+      "text": "Auburn, Alabama\n334-844-6425\nWebsite feedback\nFacebook\nX\nInstagram\nLinkedIn\nYoutube\nResources\nContinuing Education\nOffice of Information Technology\nEmployment\nLibraries\nAuburn Today\nEvents\nCampus Links\nCampus Map\nPeople Finder\nWorking for Auburn\nAcademic Calendar\nCampus Safety and Security\nEqual Opportunity Compliance\nAccessibility\nPrivacy Statement\nA-Z Index\nCopyright ©  2026\nSite page list\nBack to Top",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    }
+  ]
+}

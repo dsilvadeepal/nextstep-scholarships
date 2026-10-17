@@ -1,0 +1,744 @@
+{
+  "corpus_version": "candidate-2026-10-16-v3",
+  "bundle_sha256": "2e544cc324131651768cd4629a6beb2fae2e3bf9fdb82e8a0ef937feaf9b309e",
+  "split": "tuning",
+  "not_held_out": true,
+  "status": "reference_prepared_not_live_evaluated",
+  "cases": [
+    {
+      "id": "expansion-tuning-01",
+      "program_ids": [
+        "watson-brown"
+      ],
+      "question": "Is Watson-Brown renewal GPA also an entry minimum?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Do not apply the renewal 3.0 GPA as a new-applicant minimum. Preserve county and eligible institution restrictions.",
+      "checked_references": [
+        {
+          "chunk_id": "59b400100be53a682c7c6261",
+          "evidence": {
+            "id": "59b400100be53a682c7c6261-0",
+            "source_id": "exp-watson-brown-2",
+            "document_version": "14980f08875534f0c656883196e311e9abfb63e7d565a41b02ddcbe5460b0c05",
+            "section_id": "s1",
+            "page": null,
+            "quote": "When Will My Scholarship Eligibility End?\nA recipient will have a period of five consecutive years to use all eligible semesters of funding. This period begins with the first semester of attendance following acceptance as a Watson-Brown Scholarship recipient. This period ends if one of the following criteria is met:\nA recipient attends college for the total number of eligible semesters awarded.\nA recipient exceeds the five consecutive year period available to use their scholarship funds.\nA recipient graduates from an undergraduate academic program.\nScholarship funds cannot be used for any period of time in which a recipient attends an academic institution that does not meet eligibility requirements. This includes, but is not limited to:\nCommunity or technical colleges, with the exception of Abraham Baldwin Agricultural College in Tifton, GA\nFour-year academic institutions that are not accredited by the six regional accrediting bodies.\nBridge programs.\nMaintaining the Scholarship\nTo maintain eligibility of the Watson-Brown Foundation Scholarship a recipient must meet the following requirements each semester:\nAttend a four-year non-profit college or university accredited by one of the six regional accreditation agencies. A list of these agencies can be found\nhere.\nPlease note that the ACCJC is responsible for the accreditation of junior/technical colleges, all of which are institutions deemed ineligible for the Watson-Brown Foundation Scholarship.\nMaintain at least a 3.0 cumulative GPA.\nComplete each semester (Fall/Spring) with at least 12 credit hours (or the institution\u2019s equivalent). Recipients must receive a letter grade in each course to be considered as complete. A course will not be considered complete if any of the following occur:\nA student withdraws from a course prior to the end of the semester.\nA student receives an Incomplete grade for a course.\nComplete the Watson-Brown Foundation Scholarship Renewal Form at the end of each Fall and Spring semester. For details on the Renewal Form, please see the \u201cRenewal Process and Guidelines\u201d panel.\nNotify the Foundation if they transfer colleges, plan to study abroad, plan on taking time off from school, or are considering dropping a course that will place them below full-time status.",
+            "start": 2145,
+            "end": 4418,
+            "url": "https://watson-brown.org/scholarship/guidelines-faq/",
+            "fetched_at": "2026-10-16T20:19:53.988375Z",
+            "title": "Document",
+            "cycle": "2027\u201328"
+          },
+          "fact_locator": "Maintaining the Scholarship"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-02",
+      "program_ids": [
+        "elks-mvs"
+      ],
+      "question": "Can a permanent resident apply for Elks MVS?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "US citizenship is required at application; permanent resident status does not qualify. Elks membership is not required.",
+      "checked_references": [
+        {
+          "chunk_id": "3ffd4c5287eff5ff600145ff",
+          "evidence": {
+            "id": "3ffd4c5287eff5ff600145ff-0",
+            "source_id": "exp-elks-mvs-1",
+            "document_version": "5265726fc9337328d02f67d30730123a1be9e6c4c731057c8773ab4d6d73fba6",
+            "section_id": "s1",
+            "page": null,
+            "quote": "If prompted, the program code is: ElksMVS\nApplicants will be judged on scholarship, leadership, and financial need.\nEligibility:\nCurrent high school seniors, or the equivalent, who are citizens of the United States are eligible to apply.\nApplicants\ndo not\nneed to be related to a member of the Elks.\nHigh school graduates are not eligible to apply.\nApplicants must be citizens of the United States on the date their applications are submitted; permanent legal resident status does not qualify.\nScholarships are available only to students who enroll in four-year undergraduate degree programs at accredited U.S. American colleges or universities.\nIf prompted, the program code is: ElksMVS",
+            "start": 382,
+            "end": 1069,
+            "url": "https://www.elks.org/scholars/scholarships/mvs.cfm",
+            "fetched_at": "2026-10-16T20:19:53.988311Z",
+            "title": "Document",
+            "cycle": "2027 contest"
+          },
+          "fact_locator": "permanent legal resident status does not qualify"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-03",
+      "program_ids": [
+        "elks-legacy"
+      ],
+      "question": "Is the February 1 Elks Legacy deadline at midnight?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No: February 1, 2027 at 11:59 AM Pacific, approximately noon. Verify conflicting ENF stacking guidance rather than promise both awards.",
+      "checked_references": [
+        {
+          "chunk_id": "dbda587c8ae611d4c7e7c99a",
+          "evidence": {
+            "id": "dbda587c8ae611d4c7e7c99a-0",
+            "source_id": "exp-elks-legacy-1",
+            "document_version": "284debf130c039be1ae8375fdf93ca9b1a765e72e38397160a5a30a18e124cfc",
+            "section_id": "s3",
+            "page": null,
+            "quote": "Legacy Awards are scholarships available to children and grandchildren of Elks members. Eligibility requirements are outlined below.\nApplication deadline is February 1, 2027, 11:59 a.m. Pacific Time. NOTE: This is NOON, mid-day, Pacific time.\nRead below for eligibility information and answers to Frequently Asked Questions.",
+            "start": 0,
+            "end": 324,
+            "url": "https://hq.elks.org/scholars/scholarships/legacy.cfm",
+            "fetched_at": "2026-10-16T20:19:53.988548Z",
+            "title": "Document",
+            "cycle": "2027 contest"
+          },
+          "fact_locator": "11:59 a.m. Pacific Time"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-04",
+      "program_ids": [
+        "cooke-college"
+      ],
+      "question": "Does Cooke want official or unofficial transcripts? Is income measured as AGI?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Official pages conflict on transcript stage and gross income versus AGI. Explicitly surface ambiguity and require sponsor verification.",
+      "checked_references": [
+        {
+          "chunk_id": "45020e144b4d0f1a30baea78",
+          "evidence": {
+            "id": "45020e144b4d0f1a30baea78-0",
+            "source_id": "exp-cooke-1",
+            "document_version": "3e2ce25ba11554010b43d3d8ec36c3ded4f03cdb068c11b95b12d8a3f025c610",
+            "section_id": "s7",
+            "page": null,
+            "quote": "Transcripts:\nYou must submit unofficial transcripts and self-report your courses/grades accurately in Common App. If you are chosen as a semifinalist, we may request an official copy of your transcript later in the review process.\nTest Score(s):\nYou must submit standardized test score(s) from one of the following: SAT, ACT, AP, or IB exam. There is no minimum score requirement to apply, however, applicants must have taken one (or more) of these tests and submit the score.",
+            "start": 3137,
+            "end": 3613,
+            "url": "https://www.jkcf.org/our-scholarships/college-scholarship-program/how-to-apply/",
+            "fetched_at": "2026-10-16T20:19:53.988608Z",
+            "title": "Selection Criteria",
+            "cycle": "2027 college scholarship"
+          },
+          "fact_locator": "unofficial transcripts"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-05",
+      "program_ids": [
+        "geicc"
+      ],
+      "question": "Can I apply to GEICC today, October 16, 2026?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Not yet: opens October 19, 2026; closes March 7, 2027. Requires GA graduating senior pursuing STEM career in energy.",
+      "checked_references": [
+        {
+          "chunk_id": "69c0a11fa06ae605e3b352ab",
+          "evidence": {
+            "id": "69c0a11fa06ae605e3b352ab-0",
+            "source_id": "exp-geicc-1",
+            "document_version": "d73f23b30a63e33080c88836f846718c91baafd5fc1bb6447467a21d5394596d",
+            "section_id": "s1",
+            "page": null,
+            "quote": "The 2027 scholarship will be open from October 19, 2026 - March 7, 2027\nRegistration Opens October 19",
+            "start": 299,
+            "end": 400,
+            "url": "https://getintoenergyga.com/initiatives-and-programs/scholarships/",
+            "fetched_at": "2026-10-16T20:19:54.240264Z",
+            "title": "GEICC Scholarship Program",
+            "cycle": "2027 scholarship"
+          },
+          "fact_locator": "October 19, 2026"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-06",
+      "program_ids": [
+        "cobb-emc"
+      ],
+      "question": "Can my teacher recommend me for Cobb EMC and can AI write the essay?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Teachers and relatives are excluded as recommenders. AI essay development is prohibited. Acceptance evidence can follow at award time.",
+      "checked_references": [
+        {
+          "chunk_id": "5db1ff768f8327309d10ad55",
+          "evidence": {
+            "id": "5db1ff768f8327309d10ad55-1",
+            "source_id": "exp-cobb-emc-2",
+            "document_version": "828d28b77f50755c40a4c41f7be87ab8e617985ade730ea2a57a2ea7ad3f59b3",
+            "section_id": "p2",
+            "page": 2,
+            "quote": "Page 2  \n \nD. Provide one letter of recommendation (LOR), teachers and relatives excluded, to explain why you \nshould be considered a scholarship recipient. LOR Examples: Professional, Community Leader, Church \nYouth Group Leader, etc. Please enclose the LOR with your application. Do not include a photo or \nresume with your application.  \n \nI certify that I am currently a High School Senior, and this is the first time I have applied for the Cobb \nEMC Foundation Scholarship. The information reported on this application is correct to the best of my \nknowledge. Furthermore, I understand that this scholarship application will be shared in its entirety with \nthe Cobb EMC Foundation Scholarship Selection Committee. \nI certify that AI tools were not used to produce my Foundation Scholarship application essay. \n \n            ___________________________________________________________________________________ \n                               Applicant\u2019s Signature                                Date \n \n                _______________________________________________________________________________________________________________ \n             Parent/Legal Guardian Signature                                 Date",
+            "start": 0,
+            "end": 1216,
+            "url": "https://www.cobbemc.com/sites/default/files/documents/youth/2027%20College_University.pdf",
+            "fetched_at": "2026-10-16T20:20:50.086309Z",
+            "title": "Page 2",
+            "cycle": "2027 scholarship"
+          },
+          "fact_locator": "teachers and relatives excluded"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-07",
+      "program_ids": [
+        "sawnee-youth"
+      ],
+      "question": "What is the current Sawnee deadline?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Current webpage: January 8, 2027, 5 PM. Linked 2025/2026 forms are stale and excluded; verify current packet with sponsor.",
+      "checked_references": [
+        {
+          "chunk_id": "433bd481e52f87ca0e54d6f7",
+          "evidence": {
+            "id": "433bd481e52f87ca0e54d6f7-1",
+            "source_id": "exp-sawnee-1",
+            "document_version": "2fa7694049e819c9466c0ce3fd9bb447be4e34c02bd6d15eb2d7ba2fc914c5f4",
+            "section_id": "s3",
+            "page": null,
+            "quote": "The completed\napplication\nand all other required documents\nmust\nbe received no later than 5:00\u00a0P.M. on Friday, January 8, 2027.\u00a0 Applications received after this deadline will\nnot\nbe considered.\nPlease email\nor\nmail completed application packet to:\nSawnee Electric Membership Foundation\nAttn:\u00a0Marketing Department - Youth Scholarship Program\nP.O. Box 1174\nCumming, GA 30028\nEmail -\nscholarships@sawnee.coop\nYouth Scholarship Application Form\nScholarship Criteria and Conditions",
+            "start": 0,
+            "end": 477,
+            "url": "https://sawnee.coop/scholarships",
+            "fetched_at": "2026-10-16T20:19:54.261102Z",
+            "title": "Application Deadline",
+            "cycle": "2027 scholarship"
+          },
+          "fact_locator": "January 8, 2027"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-08",
+      "program_ids": [
+        "gsu-stamps-presidential"
+      ],
+      "question": "Does dual enrollment exclude Georgia State Stamps applicants? Can out-of-state students get Stamps?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Dual enrollment is not transfer. Stamps requires GA residence plus HOPE/Zell eligibility; non-GA/international applicants have the Presidential route only.",
+      "checked_references": [
+        {
+          "chunk_id": "16190c63e87790c0fba785c1",
+          "evidence": {
+            "id": "16190c63e87790c0fba785c1-1",
+            "source_id": "exp-gsu-scholars-1",
+            "document_version": "86043210e9ecbdf1f112dd43c43a4a33797bae4103db097ba4f4081156a9ebc2",
+            "section_id": "s3",
+            "page": null,
+            "quote": "To be considered for these scholarships you must:\nBe an incoming first-year student, planning to attend Georgia State in Fall 2027.\nEligibility Requirements:\nYou must be pursuing your first Bachelor\u2019s degree at the Atlanta Campus.\nTransfer students are not eligible. (Dual enrollment does not count as transfer.)\nTo be eligible for both the Stamps and Presidential Scholarships, you must:\nLive in Georgia, and be eligible for either the HOPE or Zell Miller Scholarship.\nOut-of-State and International students are eligible only for the Presidential Scholarship.\nSubmit the following:\nYour complete Stamps and Presidential Scholarship application by 11:59 p.m. EST on November 15, 2026.\nA complete application to Georgia State University (including high school transcripts) by the priority deadline of November 15, 2026.\nEnsure your recommender submits their Letter of Recommendation by 11:59 p.m. on November 20, 2026.\nAttend Scholarship Day interviews, if selected as a finalist. Scholarship Day will be held in early Spring 2027. International Students will have the opportunity to interview virtually in Spring 2027.",
+            "start": 0,
+            "end": 1119,
+            "url": "https://honors.gsu.edu/scholars/",
+            "fetched_at": "2026-10-16T20:19:54.284033Z",
+            "title": "Scholarship Benefits and Eligibility",
+            "cycle": "Fall 2027 entry"
+          },
+          "fact_locator": "Dual enrollment does not count as transfer"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-09",
+      "program_ids": [
+        "burger-king-general"
+      ],
+      "question": "Does submitting Burger King before deadline guarantee my application gets reviewed?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No: first 30,000 community applications only. Employee tracks are separate.",
+      "checked_references": [
+        {
+          "chunk_id": "482dc565c5043c328b1f8d0e",
+          "evidence": {
+            "id": "482dc565c5043c328b1f8d0e-0",
+            "source_id": "exp-burger-king-2",
+            "document_version": "9f9501d311c3aaa5a0b8eeabec1f8f14a0f9edd97eb58cb737895d8e262b98c7",
+            "section_id": "s1",
+            "page": null,
+            "quote": ".\nApplications Open\t\t\t\t\t- Deadline December 15, 2026 11:59 PM CT\nAccess to the application will remain open until the deadline. However, Scholarship America will only review the first 30,000 community applications received and will review all Employee applicants across all tracks. Any additional applications will not be reviewed or considered, even if submitted by the deadline.\nApply",
+            "start": 0,
+            "end": 386,
+            "url": "https://scholarshipamerica.org:443/scholarship/burgerking/",
+            "fetched_at": "2026-10-16T20:19:54.472427Z",
+            "title": "BURGER KING\u2120 Scholars",
+            "cycle": "2027\u201328"
+          },
+          "fact_locator": "first 30,000 community applications"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-10",
+      "program_ids": [
+        "live-mas-new"
+      ],
+      "question": "Can AI write my Live Mas essay, and do I need both video and essay?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "One response: video OR essay/photo. AI may assist organization, clarity or grammar but cannot substantially author it or invent experiences. Disclosure required.",
+      "checked_references": [
+        {
+          "chunk_id": "ca3d58ccd8c97e4b04140b52",
+          "evidence": {
+            "id": "ca3d58ccd8c97e4b04140b52-0",
+            "source_id": "exp-live-mas-3",
+            "document_version": "de50803c8495a3d21e597188bee98980cbe01ab780913e143f3494093d324c53",
+            "section_id": "p3",
+            "page": 3,
+            "quote": "Sponsor, or developed by its employees, or obtained from sources other than you. Sponsor reserves the \nright to, and may or may not, monitor/screen applications. By applying, you acknowledge that Sponsor \nhas no obligation to use or post any application you submit.   \nEach application (Video, Essay, and Photo) must be the applicant\u2019s own original work, and must reflect \nthe applicant\u2019s own experiences, ideas, and voice. Generative artificial intelligence tools may be used for \nlimited assistance with organization, clarity, or grammar, but may not be used to generate or \nsubstantially author the applicant\u2019s response or to fabricate experiences, actions, people, or outcomes. \nGhostwriting or substantive authorship by any third party is prohibited. Applicants must accurately \ndisclose whether generative artificial intelligence tools were used in preparing their application and, if \nso, the nature of that assistance. By submitting an application, the applicant confirms that the \nexperiences, ideas, judgment, and information presented in the application are their own and accurately \nrepresent them, and comply with the AI usage guidelines in these Terms and Conditions. Limited \ntechnical assistance is permitted (e.g., spell-check, basic grammar correction, captioning/subtitles, file \ncompression, trimming, color correction, microphone noise reduction, or someone pressing \u201crecord\u201d). \nSponsor may, in its sole discretion, require an interview or supervised writing sample, request working \ndrafts, and/or use plagiarism or AI-detection tools. Any violation or refusal to cooperate may result in \ndisqualification or revocation of an award.  \nBy submitting an application, you warrant and represent that: (a) it is your original work, reflects your \nown experiences, ideas, and voice, and does not contain plagiarized or improperly copied content, \nexcept for limited assistance as expressly permitted above; (b) it has not been previously published, \n(c) it has not won previous awards, (d) it does not infringe upon the copyrights, trademarks, rights of",
+            "start": 1504,
+            "end": 3573,
+            "url": "https://tacobellfoundation.org/wp-content/uploads/2027_Live_Mas_Scholarship_New_Applicant_TC.pdf",
+            "fetched_at": "2026-10-16T20:20:50.865633Z",
+            "title": "Page 3",
+            "cycle": "2026\u201327 application / 2027\u201328 funding"
+          },
+          "fact_locator": "organization, clarity, or grammar"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-11",
+      "program_ids": [
+        "gates"
+      ],
+      "question": "Is Gates still open on October 16, 2026?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No: stated deadline September 15, 2026 has passed despite stale Open label.",
+      "checked_references": [
+        {
+          "chunk_id": "69b6b2f89f5dc7bfdefd0c7e",
+          "evidence": {
+            "id": "69b6b2f89f5dc7bfdefd0c7e-0",
+            "source_id": "exp-gates-1",
+            "document_version": "8c25c928802032f631349a64a499cad96641afbd95227fc9a3674f172bb37e72",
+            "section_id": "s1",
+            "page": null,
+            "quote": "Available\nJuly 15\n2026\nDeadline\nSept 15\n2026\nSemifinalist Phase\nDec - Jan\n2027\nFinalist Interviews\nMarch\n2027\nSelection\nApril\n2027\nAwards\nJuly-Sept\n2027",
+            "start": 44,
+            "end": 196,
+            "url": "https://www.thegatesscholarship.org/scholarship/",
+            "fetched_at": "2026-10-16T20:19:54.680925Z",
+            "title": "The Gates Scholarship",
+            "cycle": "2027 selection"
+          },
+          "fact_locator": "Sept 15"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-12",
+      "program_ids": [
+        "hagan"
+      ],
+      "question": "Can a homeschooled noncitizen apply to Hagan?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Citizenship is not the restriction; eligible US high-school attendance is required. FAQ excludes homeschooled applicants. Do not conflate the two conditions.",
+      "checked_references": [
+        {
+          "chunk_id": "3840d95baf548adc9ebf1ce7",
+          "evidence": {
+            "id": "3840d95baf548adc9ebf1ce7-9",
+            "source_id": "exp-hagan-2",
+            "document_version": "a0577b85464f6a8b92af5af135c31d8f654c755accf553f9d2e5e08e2abd9f3b",
+            "section_id": "s3",
+            "page": null,
+            "quote": "Can home schooled students apply for a scholarship?\nNo.",
+            "start": 7074,
+            "end": 7129,
+            "url": "https://haganscholarships.org/q-a/",
+            "fetched_at": "2026-10-16T20:19:55.010568Z",
+            "title": "Q & A",
+            "cycle": "2027\u201328"
+          },
+          "fact_locator": "Can home schooled students"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-13",
+      "program_ids": [
+        "ron-brown"
+      ],
+      "question": "How many Ron Brown essays are required and when are recommendations due?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Three approximately 500-word essays. Application December 1; supporting documents December 15.",
+      "checked_references": [
+        {
+          "chunk_id": "63caeb822513802717826894",
+          "evidence": {
+            "id": "63caeb822513802717826894-1",
+            "source_id": "exp-ron-brown-1",
+            "document_version": "2c6f27d10972422fb8abb674ddca16dd930a34567f158f7a90087d74618b02e5",
+            "section_id": "s5",
+            "page": null,
+            "quote": "10. What essays are required?\nThe application says to submit an essay that I wrote for my college applications. What if my selected college or university did not require any? We require three essays, each approximately 500 words. In the first two essays, we ask that you answer specific questions. The third essay can be on any topic. If you haven\u2019t written one for a college application, you may submit an essay that you wrote for one of your classes, or write a new essay. Keep in mind that the essays are an opportunity for you to tell us something about yourself that we cannot learn from your application, transcript or test scores.",
+            "start": 3537,
+            "end": 4174,
+            "url": "https://ronbrown.org/ron-brown-scholarship/",
+            "fetched_at": "2026-10-16T20:19:55.211828Z",
+            "title": "faqs",
+            "cycle": "2027 competition"
+          },
+          "fact_locator": "three essays"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-14",
+      "program_ids": [
+        "levine"
+      ],
+      "question": "Can I newly self-nominate for Levine on October 16, 2026?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "October 15 nomination deadline passed. Already-nominated students still face November 1 admission and November 15 supplement/recommendation deadlines.",
+      "checked_references": [
+        {
+          "chunk_id": "3580f1c7b4f6995a1eaf04c1",
+          "evidence": {
+            "id": "3580f1c7b4f6995a1eaf04c1-0",
+            "source_id": "exp-levine-2",
+            "document_version": "270e1be2de78fe0bb479896626b74699da7896f96cede439eaf9607c0cb10f6f",
+            "section_id": "s1",
+            "page": null,
+            "quote": "Aug. 1, 202 6 | The general application for admission to UNC Charlotte opens.\nAug. 15, 202 6 | Nomination and Application process opens. The nomination form is available online for high school counselors and college advisors. The self-nomination form is available to students via the Apply page.\nOct. 15, 202 6 | Deadline for school counselors to nominate students for the Levine Scholars Program. Deadline for students to submit a self-nomination form via the Apply page.\nNov. 1, 202 6 | Deadline for nominees to submit a complete first-year admissions application to UNC Charlotte Undergraduate Admissions . Visit the link to review the materials required to complete an Undergraduate Admissions application.\nNov. 15, 202 6 | Deadline for nominees to complete the Levine Scholars supplemental application through the online portal. All recommendations must also be submitted online by this date.\nDec. 7, 202 6 | Semifinalists and all other applicants are notified of their status through the Levine Scholars portal during this week.\nJan. 8, 202 7 | Finalists and all other applicants are notified of their status through the Levine Scholars portal. Finalists are invited to the on-campus Finalist Program in Feb.\nFeb. 21-22, 2027 | Levine Scholars Finalist Program is held on campus.\nMar. 1, 202 7 | Recipients and all other candidates are notified of their status through the Levine Scholars portal.\nApr. 1, 202 7 | Deadline for recipients to notify the Levine Scholars office if they accept the scholarship.",
+            "start": 0,
+            "end": 1511,
+            "url": "https://levinescholars.charlotte.edu/apply/important-dates/",
+            "fetched_at": "2026-10-16T20:19:55.306422Z",
+            "title": "Important Dates",
+            "cycle": "2026\u201327 selection"
+          },
+          "fact_locator": "Oct.15,2026"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-15",
+      "program_ids": [
+        "morehead-cain"
+      ],
+      "question": "Can a Georgia student use the NC self-nomination route for Morehead-Cain?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No. Out-of-state nomination/program or possible ARP referral through UNC Early Action. Referral is not guaranteed; relevant October deadlines passed.",
+      "checked_references": [
+        {
+          "chunk_id": "1a32caa7b64d34acb983afa3",
+          "evidence": {
+            "id": "1a32caa7b64d34acb983afa3-2",
+            "source_id": "exp-morehead-cain-1",
+            "document_version": "fe3217f94041fc67a44ac28cad59ceb62dccc10875039bc098fc054aba09ce55",
+            "section_id": "s9",
+            "page": null,
+            "quote": "Students outside of North Carolina, Canada, or the United Kingdom who are not attending a nominating school or affiliate program may be eligible for nomination through the Admissions Referral Program (ARP).\nLearn More About the Admissions Referral Program",
+            "start": 0,
+            "end": 255,
+            "url": "https://www.moreheadcain.org/application-eligibility/",
+            "fetched_at": "2026-10-16T20:20:51.805186Z",
+            "title": "Admissions Referral Program",
+            "cycle": "2026\u201327 selection / Class of 2031"
+          },
+          "fact_locator": "Admissions Referral Program"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-16",
+      "program_ids": [
+        "robertson"
+      ],
+      "question": "Do I need a Robertson nomination? Can I apply in November after missing October 15?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No nomination. Early notification October 15; regular deadline November 15, 2026. Duke/UNC admission applications are separate.",
+      "checked_references": [
+        {
+          "chunk_id": "b9821bdce29f61ea8f9fed88",
+          "evidence": {
+            "id": "b9821bdce29f61ea8f9fed88-0",
+            "source_id": "exp-robertson-3",
+            "document_version": "a59d14d02edf7aa40e21e9838a06ca953723b8854859442d4b68af9b06eee582",
+            "section_id": "s1",
+            "page": null,
+            "quote": "Do I need to be nominated to apply?\nNo. The Robertson Scholars Leadership Program no longer uses a nomination process. All students are welcome to apply.",
+            "start": 0,
+            "end": 153,
+            "url": "https://robertsonscholars.org/application-faqs/",
+            "fetched_at": "2026-10-16T20:22:39.966972Z",
+            "title": "Document",
+            "cycle": "2026\u201327 selection"
+          },
+          "fact_locator": "no longer uses a nomination process"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-17",
+      "program_ids": [
+        "fsu-presidential"
+      ],
+      "question": "Is ordinary FSU admission application enough for Presidential Scholars?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No. Indicate Honors interest and complete supplemental Honors/Presidential essay by December 1, 2026, 11:59 PM Eastern; later video and required campus interview stages.",
+      "checked_references": [
+        {
+          "chunk_id": "95a72359ecc23af0b5fdbb62",
+          "evidence": {
+            "id": "95a72359ecc23af0b5fdbb62-0",
+            "source_id": "exp-fsu-presidential-1",
+            "document_version": "241b1009196cd58e7f3769d85ded56294a94f8b1ce7309223d1d5a971f9e5d9f",
+            "section_id": "s2",
+            "page": null,
+            "quote": "11:59 p.m. EST on Dec. 1, 2026\n, to be considered for the University Honors Program and the Presidential Scholars Program.\nIncoming prospective first-year students will be notified of their admission status to FSU and to University Honors on Feb. 18, 2027.\nApplicants will also be notified on this date if they are selected to be semi-finalists for the Presidential Scholars Program.\n3. Semi-finalists complete the supplemental video responses.\nSemi-finalists will be required to submit video responses to two prompts to be considered finalists for Presidential Scholars. These are due\nFeb. 28, 2027, by 11:59 p.m. EST\n.\nThe following informational video addresses frequently asked questions about how to create your applicant videos:\n4. Finalists attend interview and recruitment weekend in Tallahassee.\nFinalists for the Presidential Scholars Program will receive notification and an invitation in early March to a required on-campus interview during Recruitment Weekend,\nApril 2-3, 2027\n.\nAll finalists for Presidential Scholars are also admitted into the University Honors Program.\n5. Students are notified about invitation into Presidential Scholars.\nStudents will be notified by email shortly after Recruitment Weekend about their admittance into the Presidential Scholars Program. Students will be provided a participation agreement, which they should sign to be officially enrolled in the program.\nPresidential Scholars nominated for the Stamps Scholarship will be invited to interview with a member of the Stamps Scholars Program\u2019s national leadership team as the final step in the selection process.",
+            "start": 2035,
+            "end": 3644,
+            "url": "https://presidentialscholars.fsu.edu/application-process",
+            "fetched_at": "2026-10-16T20:22:27.370274Z",
+            "title": "Application Process",
+            "cycle": "Fall 2027 entry"
+          },
+          "fact_locator": "supplemental video responses"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-18",
+      "program_ids": [
+        "uah-out-of-state"
+      ],
+      "question": "Does UAH superscore ACT and use science? Is May 15 the application deadline?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Superscore accepted; ACT Science no longer considered for 2027 admissions/scholarships. May 15 is an upgrade cutoff, not an asserted application deadline.",
+      "checked_references": [
+        {
+          "chunk_id": "ecc497cc90b7b4040ce0790e",
+          "evidence": {
+            "id": "ecc497cc90b7b4040ce0790e-1",
+            "source_id": "exp-uah-1",
+            "document_version": "a1776286bc049e78d63059b9109be5868132adc66728802795f614952c2c6b3d",
+            "section_id": "s2",
+            "page": null,
+            "quote": "ACT has recently implemented\nseveral changes to the ACT Test\n, including making the Science section of the test optional. In light of this, UAH has decided it will no longer consider the Science section of the ACT for admissions or scholarships. Our Admissions Team wants to clarify how this change affects students applying for the Summer and Fall 2027 terms. Please read our\nACT FAQs\nto help you understand how this change may impact you.\nThe scholarships below indicate the amount awarded per academic year for students who do not reside in\nAlabama\nor\nTennessee\n. International students currently residing in the United States are also eligible for the scholarships below.",
+            "start": 0,
+            "end": 675,
+            "url": "https://www.uah.edu/admissions/undergraduate/financial-aid/scholarships/freshmen/freshman-out-of-state-academic-scholarships",
+            "fetched_at": "2026-10-16T20:22:27.732407Z",
+            "title": "ACT REQUIREMENT CHANGES",
+            "cycle": "2027\u201328"
+          },
+          "fact_locator": "no longer consider the Science section"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-19",
+      "program_ids": [
+        "gatech-stamps-gold"
+      ],
+      "question": "Is Georgia Tech Stamps still open for a GA applicant on October 16? Is finalist weekend in March?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "GA deadline October 15 passed. Non-GA November 2 is a different route. Dated calendar gives April 9-10, 2027; ignore undated March wording.",
+      "checked_references": [
+        {
+          "chunk_id": "5b52243dadc16ccdfc2a0283",
+          "evidence": {
+            "id": "5b52243dadc16ccdfc2a0283-0",
+            "source_id": "exp-gatech-2",
+            "document_version": "0251d6231ccc8950e814bb046fe8e13b6c37af7549b58c62a8ea8f3832bd787d",
+            "section_id": "s1",
+            "page": null,
+            "quote": "Date | Event | Details\nOctober 15, 2026 | Application Deadline (GA residents) | This is the early action 1 application deadline for Georgia residents only . Georgia residents must apply by this date to be considered for the Stamps President\u2019s Scholars Program.\nNovember 2, 2026 | Application Deadline (Non-GA residents) | This is the early action 2 application deadline for non-Georgia residents only . Non-Georgia residents must apply by this date to be considered for the Stamps President\u2019s and Georgia Tech Gold Scholarships.\nLate January 2027 | Status Update | All applicants will be notified of their semifinalist status via the admission portal.\nEarly February 2027 | Semifinalist Interviews | All applicants who advance to the semifinalist stage must participate in a virtual, asynchronous interview during this timeframe. In keeping with best practices of the nation's most prestigious scholarship programs, we regret that no interviews will be scheduled outside this date range.\nApril 9-10, 2027 | Stamps Scholars Weekend Activities | Students who are named as finalists will be invited to attend Stamp's Scholars Weekend on Georgia Tech\u2019s campus, April 2027. Attendance at all Stamps Scholars Weekend activities is required for a finalist to continue as a candidate in the selection process. We anticipate offering Stamps President\u2019s Scholarship (SPS) awards to 50 finalists and the Gold Scholarship awards to at least 20 finalists. Remaining finalists will be given priority consideration for other scholarships.",
+            "start": 0,
+            "end": 1523,
+            "url": "https://stampsps.gatech.edu/apply/calendar",
+            "fetched_at": "2026-10-16T20:20:51.796170Z",
+            "title": "Scholarship Calendar",
+            "cycle": "Fall 2027 entry"
+          },
+          "fact_locator": "April9-10,2027"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-20",
+      "program_ids": [
+        "uab-out-of-state"
+      ],
+      "question": "Does UAB superscore ACT for merit scholarships?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "No. Preserve tested versus test-optional routes and unknown GPA scale/type; no guaranteed personal award.",
+      "checked_references": [
+        {
+          "chunk_id": "8ca54bc3488c8a970fd3332c",
+          "evidence": {
+            "id": "8ca54bc3488c8a970fd3332c-1",
+            "source_id": "exp-uab-1",
+            "document_version": "fbec64b25daa4829cddb141c99869f45ae19aef64b0c145e07ae55c979248401",
+            "section_id": "s3",
+            "page": null,
+            "quote": "Current high school seniors admitted with test scores are automatically considered for ACT- and GPA-based merit scholarships.\nUAB does not consider superscores for admission or scholarship purposes\n. February ACT or March SAT scores taken in their senior year will be the final scores considered for automatic merit scholarship review.",
+            "start": 0,
+            "end": 335,
+            "url": "https://www.uab.edu/admissions/cost/scholarships/out-of-state-students",
+            "fetched_at": "2026-10-16T20:19:55.626319Z",
+            "title": "ADMITTED WITH A TEST SCORE",
+            "cycle": "2027\u201328"
+          },
+          "fact_locator": "does not consider superscores"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    },
+    {
+      "id": "expansion-tuning-21",
+      "program_ids": [
+        "south-alabama-out-of-state"
+      ],
+      "question": "Should a Georgia student use the Alabama-resident chart at South Alabama?",
+      "as_of": "2026-10-16",
+      "fictional_profile": {},
+      "expected_behavior": "Use out-of-state route. Eligible merit award provides in-state tuition treatment. February 15 is Fall 2027 priority deadline; table is not a guaranteed personal offer.",
+      "checked_references": [
+        {
+          "chunk_id": "3e332e756719fc2207127b78",
+          "evidence": {
+            "id": "3e332e756719fc2207127b78-0",
+            "source_id": "exp-south-alabama-3",
+            "document_version": "8999ea9b1eb59162ae8b6a0a5880a5c83b2f5bdd7c373a653bd92c19f382cb30",
+            "section_id": "s2",
+            "page": null,
+            "quote": "Dates and Deadlines\nSeptember 1\nThe 2027-2028 Scholarship Application Cycle Opens in JagSPOT\nFebruary 15\nUSA Freshman Admission Scholarship\n- Priority Deadline for Fall 2027",
+            "start": 834,
+            "end": 1007,
+            "url": "https://www.southalabama.edu/departments/financialaffairs/scholarships/",
+            "fetched_at": "2026-10-16T20:25:47.010900Z",
+            "title": "Scholarships",
+            "cycle": "Fall 2027 entry"
+          },
+          "fact_locator": "Priority Deadline for Fall 2027"
+        }
+      ],
+      "prohibited_behavior": [
+        "Invent missing eligibility",
+        "Substitute another program rules",
+        "Treat recipient profiles as eligibility evidence"
+      ]
+    }
+  ]
+}

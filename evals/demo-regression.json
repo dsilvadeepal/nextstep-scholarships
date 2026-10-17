@@ -1,0 +1,179 @@
+[
+  {
+    "case": "Georgia Southern",
+    "input": {
+      "profile": {
+        "residence": {
+          "state": "GA"
+        },
+        "interests": [],
+        "context": {},
+        "grade": 12,
+        "graduation_year": 2027,
+        "gpa": {
+          "value": 3.6,
+          "scale": 4,
+          "type": "unweighted",
+          "estimated": false,
+          "as_of": null
+        },
+        "prospective_colleges": [
+          "Georgia Southern"
+        ]
+      },
+      "request": {
+        "question": "For a Georgia resident entering Georgia Southern in Fall 2027, is the first-year merit scholarship renewable? Is my 3.60 transcript GPA enough to know the award tier, and when should I complete the admission application?",
+        "program_ids": [
+          "georgia-southern-merit"
+        ],
+        "corpus_version": "verified-2026-10-14-v2",
+        "method": "hybrid"
+      },
+      "history": []
+    },
+    "rubric": [
+      "one-time and nonrenewable",
+      "transcript GPA cannot determine tier; university recalculates core GPA",
+      "Feb 1 2027 application priority"
+    ]
+  },
+  {
+    "case": "Park",
+    "input": {
+      "profile": {
+        "residence": {
+          "state": "GA"
+        },
+        "interests": [],
+        "context": {},
+        "grade": 12,
+        "graduation_year": 2027,
+        "gpa": {
+          "value": 3.79,
+          "scale": 4,
+          "type": "unweighted",
+          "estimated": false,
+          "as_of": null
+        },
+        "prospective_colleges": [
+          "NC State"
+        ]
+      },
+      "request": {
+        "question": "Park lists a 3.80 unweighted minimum. Can my 3.79 be rounded up? Do I need separate NC State and Park applications, and when are the applications and recommendations due?",
+        "program_ids": [
+          "park"
+        ],
+        "corpus_version": "verified-2026-10-14-v2",
+        "method": "hybrid"
+      },
+      "history": []
+    },
+    "rubric": [
+      "3.79 cannot round to non-rounded 3.80",
+      "separate NC State and Park applications",
+      "Nov 1 application deadline",
+      "recommendation deadline Nov 1, or explicit gap if absent"
+    ]
+  },
+  {
+    "case": "Coolidge",
+    "input": {
+      "profile": {
+        "residence": {
+          "state": "GA"
+        },
+        "interests": [],
+        "context": {},
+        "grade": 11,
+        "graduation_year": 2028,
+        "gpa": null,
+        "prospective_colleges": []
+      },
+      "request": {
+        "question": "I am a junior graduating in spring 2028. Is this the Coolidge cycle for me? What is the deadline for the application and two reference letters, and what should I check before applying?",
+        "program_ids": [
+          "coolidge"
+        ],
+        "corpus_version": "verified-2026-10-14-v2",
+        "method": "hybrid"
+      },
+      "history": []
+    },
+    "rubric": [
+      "junior fits grade and Fall2028 entry cohort, subject to other requirements",
+      "Dec 1 2026 at 5pm Pacific for application and letters",
+      "two reference letters",
+      "citizenship or permanent residency remains to check"
+    ]
+  },
+  {
+    "case": "Alabama versus Auburn",
+    "input": {
+      "profile": {
+        "residence": {
+          "state": "GA"
+        },
+        "interests": [],
+        "context": {},
+        "grade": 12,
+        "graduation_year": 2027,
+        "gpa": {
+          "value": 3.6,
+          "scale": 4,
+          "type": "unweighted",
+          "estimated": false,
+          "as_of": null
+        },
+        "prospective_colleges": [
+          "University of Alabama",
+          "Auburn"
+        ]
+      },
+      "request": {
+        "question": "My ACT superscore is 27, but neither single test date was 27. Could that satisfy Alabama's Capstone score rule? Does Auburn handle scores the same way, and are these awards guaranteed?",
+        "program_ids": [
+          "ua-capstone",
+          "auburn-heritage"
+        ],
+        "corpus_version": "verified-2026-10-14-v2",
+        "method": "hybrid"
+      },
+      "history": []
+    },
+    "rubric": [
+      "27 superscore alone cannot satisfy UA Capstone single-test-date requirement",
+      "Auburn accepts superscores",
+      "27 is below Heritage ACT31\u201332 range",
+      "UA automatic subject to criteria; Auburn competitive, no guarantee"
+    ]
+  },
+  {
+    "case": "2027\u201328 HOPE gap",
+    "input": {
+      "profile": {
+        "residence": {
+          "state": "GA"
+        },
+        "interests": [],
+        "context": {},
+        "grade": 12,
+        "graduation_year": 2027,
+        "gpa": null,
+        "prospective_colleges": []
+      },
+      "request": {
+        "question": "What are the confirmed 2027\u201328 HOPE Scholarship rules for a student entering college in Fall 2027? Can you confirm my required GPA and application deadline?",
+        "program_ids": [],
+        "corpus_version": "verified-2026-10-14-v2",
+        "method": "hybrid"
+      },
+      "history": []
+    },
+    "rubric": [
+      "no confirmed 2027\u201328 rules",
+      "no fabricated GPA or deadline",
+      "official GSFC/GAfutures handoff"
+    ]
+  }
+]

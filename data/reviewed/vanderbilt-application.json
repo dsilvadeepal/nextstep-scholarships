@@ -1,0 +1,57 @@
+{
+  "id": "vanderbilt-application:3e0048f4f27bc74b0ec24803213c785ac45075128b6d398420132520a64dcae6",
+  "content_hash": "3e0048f4f27bc74b0ec24803213c785ac45075128b6d398420132520a64dcae6",
+  "source_id": "vanderbilt-application",
+  "url": "https://www.vanderbilt.edu/scholarships/application/",
+  "fetched_at": "2026-10-15T02:59:42.239949Z",
+  "sections": [
+    {
+      "id": "s1",
+      "heading": "Scholarship Application Deadlines - (to electronically submit applications)",
+      "page": null,
+      "text": "Ingram Scholars Program - December 1, 2026\nCornelius Vanderbilt Scholarship - December 1, 2026\nFor our signature scholarships, the application is strongly encouraged; preference is given to those who apply. Students who wish to be considered for additional merit scholarships are encouraged to complete the Cornelius Vanderbilt Scholarship application and scholarship specific questions.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s2",
+      "heading": "Merit Scholarship Essay Prompts",
+      "page": null,
+      "text": "To be considered for merit scholarships, students must first apply for admission separately by submitting the Common Application, Coalition Application, or the QuestBridge Application to Vanderbilt. Within 2-3 business days of submitting your application for admission to Vanderbilt, you will receive an email from the Office of Undergraduate Admissions explaining how to create your online\nMyAppVU\naccount. Under the Scholarship tab in MyAppVU, you will be able to select the signature scholarship(s) to which you wish to apply. Through your MyAppVU portal, you will upload your responses for the scholarship applications as a PDF or Word document and submit online. Once you submit your scholarship application online, you will receive immediate confirmation indicating the date of submission. You will also see a green check mark which indicates the application was submitted successfully.\nIf you do not see a green check mark or date of submission within 24 hours, your application was not successfully submitted.\nPlease review your file carefully before uploading as we do not accept post-submission corrections.\nStudents interested in being considered for the Additional Merit Scholarships (Carell Family, Curb Leadership, and Fred Russell-Grantland Rice) are encouraged to submit the Cornelius Vanderbilt Scholarship application and should answer any additional scholarship specific questions.\nApplications for all scholarships must be submitted by\nDecember 1, 2026\nfor prospective first year students.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s3",
+      "heading": "To submit Vanderbilt Merit Scholarship Application(s)",
+      "page": null,
+      "text": "Upload your Scholarship Application(s) via your\nMyAppVU\naccount in\nPDF or Word format only\n. You should receive immediate confirmation that your application was successfully submitted indicating the date of submission. A green check mark will also indicate the application was submitted successfully.",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    },
+    {
+      "id": "s4",
+      "heading": "Office of Student Financial Aid and Scholarships",
+      "page": null,
+      "text": "PMB 407810\n2309 West End Avenue\nNashville, TN 37240-7810\nTel:\n(615) 322-3591\nE-mail:\nscholarships@vanderbilt.edu",
+      "table_headers": [],
+      "table_rows": [],
+      "program_id": null,
+      "kind": "text",
+      "warnings": [],
+      "start_offset": 0
+    }
+  ]
+}

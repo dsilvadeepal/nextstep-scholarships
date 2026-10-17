@@ -1,0 +1,11 @@
+entrypoint = "backend/nextstep/app.py"
+run = ["sh", "scripts/start.sh"]
+
+[deployment]
+deploymentTarget = "cloudrun"
+build = ["sh", "scripts/build.sh"]
+run = ["sh", "scripts/start_hosted.sh"]
+
+[[ports]]
+localPort = 8000
+externalPort = 80
