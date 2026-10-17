@@ -232,3 +232,10 @@ An independent check against freshly searched official public pages is in `docs/
 The local default is phase 1 + phase 2. Phase 1 constructs profile-aware answers from original passages and source IDs, then checks support and blocks unsupported claims. Phase 2 selects existing eligibility, score, deadline and application passages for the question while keeping 50/50 hybrid search and the same passage budget. We kept the combination because it recovered Auburn Heritage's ACT 31–32 tier, which phase 1 alone missed, and explicitly placed ACT 27 below that threshold. Requested-answer coverage rose from 4/5 to 5/5 exposed demo cases.
 
 We ran both versions on the same five fictional inputs, corpus, date, profiles, construction code and cached dense candidates, then inspected answers, retrieved passages, citations, gaps and latency case by case. Three separate boundary checks covered cohort timing, missing source details and prompt injection. At the comparison checkpoint, 99 backend tests passed (2 PostgreSQL checks skipped), 8 frontend tests and 18 phone/desktop browser tests passed, along with the frontend build, Ruff and Git whitespace checks. These are exposed regression results, not a held-out accuracy estimate. Exact Capstone-tier and Auburn-superscore wording remain limitations; see [the complete comparison](RAG_COMPARISON_2026-10-15.md) for outputs and rollback checkpoints. Hosted transfer of this revision is separate.
+
+
+## Published application
+
+Live instructor demo: https://nextstep-scholarships.replit.app/
+
+Recording walkthrough: [Senior, then junior — 4–5 minute talk track](DEMO_VIDEO_SCRIPT.md).

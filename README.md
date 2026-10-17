@@ -45,7 +45,7 @@ LangChain is used narrowly for document splitting, OpenAI integration, structure
 - OpenAI for extraction, embeddings, and grounded answer selection
 - Local admin evaluation dashboard and case inspector
 
-The Replit development environment contains the reviewed catalog and renders the shorter intake and scholarship cards. Hosted chat is prepared for final publication checks. Admin evaluations remain local and hosted admin access stays fail-closed.
+The Replit development environment contains the reviewed catalog and renders the shorter intake and scholarship cards. The student app is published with chat enabled. Admin evaluations remain local and hosted admin access stays fail-closed.
 
 ## Evaluation
 
@@ -55,9 +55,13 @@ Raw held-out results and saved-output rescoring are reported separately so resco
 
 See [evaluation report](docs/EVAL_REPORT.md), [demo run results](docs/DEMO_RUN_RESULTS_2026-10-15.md), and [RAG comparison](docs/RAG_COMPARISON_2026-10-15.md).
 
+## Live demo
+
+Open [NextStep Scholarships](https://nextstep-scholarships.replit.app/) without an account. Hosted admin is disabled; the evaluation tools remain local.
+
 ## Instructor recording
 
-Use the [4–5 minute talk track and click path](docs/DEMO_VIDEO_SCRIPT.md), alongside the [two verified local rehearsals](docs/DEMO_REHEARSAL_2026-10-17.md). Hosted publication is still pending publication approval and final hosted checks.
+Use the [4–5 minute talk track and click path](docs/DEMO_VIDEO_SCRIPT.md), alongside the [two verified local rehearsals](docs/DEMO_REHEARSAL_2026-10-17.md). The app is published; see the [hosted rehearsal report](docs/PUBLISHED_DEMO_CHECK_2026-10-17.md) for the release checks.
 
 ## Run locally
 

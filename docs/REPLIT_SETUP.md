@@ -93,3 +93,8 @@ Latest local backend verification: 141 passed, 2 skipped. See [recording script]
 ### Superseding owner decision — remove app spending enforcement
 
 The owner explicitly requested removing cost details and the app's spending cap/ledger. Current student chat and admin evaluation services now construct providers without a ledger; production startup no longer requires a ledger transfer or pricing settings. No new usage-ledger entries are written by those app paths. Historical records and legacy offline experiment utilities remain as inactive history; no database rows were destroyed. Rate limiting, corpus readiness, context bounds and admin denial remain. The Google submission document, local submission draft, README and timed video script have had cost discussion removed. Installed cleanup archive `cca58a6a42c4e0a350f1cfac36b1743a803e42708ddbf7d31e7306bb7291a048` on Replit. Prior instructions in this setup log about mandatory budget reconciliation are superseded. Publication remains pending owner approval and post-publication validation.
+
+
+## Published release verified — October 17, 2026
+
+Owner approved hosting, publication and merging. PR #1 merged into main at `1d404568d37513ea2279669993a103116cb4025d`. Replit successfully published https://nextstep-scholarships.replit.app/ and both exact demo journeys ran against it with real chat and inspected citations. See [published verification](PUBLISHED_DEMO_CHECK_2026-10-17.md). The earlier publication-pending entries are historical. No app-level spending cap/ledger is used. Repository remains private.
