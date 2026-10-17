@@ -1,6 +1,6 @@
 # NextStep Scholarships — 3–4 minute recording script
 
-Target: **3:30**, including two answer waits. Based on the verified senior journey in [October 17 rehearsal](DEMO_REHEARSAL_2026-10-17.md). Published app: https://nextstep-scholarships.replit.app/. This journey was verified on the published app; see [the hosted check](PUBLISHED_DEMO_CHECK_2026-10-17.md). Do not show keys, Secrets, billing screens or the terminal during the recording.
+Target: **3:50**, including two answer waits. Based on the verified senior journey in [October 17 rehearsal](DEMO_REHEARSAL_2026-10-17.md). Published app: https://nextstep-scholarships.replit.app/. This journey was verified on the published app; see [the hosted check](PUBLISHED_DEMO_CHECK_2026-10-17.md). Do not show keys, Secrets, billing screens or the terminal during the recording.
 
 Before recording: open the app and this script side by side; each step includes its paste-ready text, so you can follow this script from top to bottom. Start with a fresh app tab and an empty saved plan. Paste instead of typing. Keep sources open only long enough to show the evidence. Allow 10–15 seconds for each generated answer; if necessary trim waiting time in the recording, without implying faster measured latency. The hosted senior scenario passed its recording check.
 
@@ -54,7 +54,13 @@ I haven’t provided SAT or ACT scores. How does that affect what you can conclu
 
 **Say:** “I can keep the conversation going. I haven’t entered SAT or ACT scores, so I’ll ask what that means for Auburn. I want the answer to explain what’s missing here, without assuming the student hasn’t sent scores to the university. I included that distinction in my testing.”
 
-## 3:10–3:30 — Wrap up
+## 3:10–3:30 — Show the printable plan
+
+**Click:** close the conversation and scroll to **Print my plan (2)**. Click it to open the browser’s print preview. Briefly show the two saved scholarships and their preparation checklists, then click **Cancel** to return to the app. You do not need to print anything during the recording; use the browser’s Save as PDF option if you want a copy afterward.
+
+**Say:** “I can also take this shortlist away as a printable plan. It brings together the saved scholarships, deadlines, preparation checklists, and official sources, so I have something to work through after the conversation.”
+
+## 3:30–3:50 — Wrap up
 
 **Show:** keep the comparison or saved scholarships visible. No more typing is needed.
 
