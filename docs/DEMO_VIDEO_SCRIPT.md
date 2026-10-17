@@ -1,20 +1,20 @@
-# NextStep Scholarships — 4–5 minute recording script
+# NextStep Scholarships — 3–4 minute recording script
 
-Target: **4:45**, including three answer waits. Based on the two verified journeys in [October 17 rehearsal](DEMO_REHEARSAL_2026-10-17.md). Published app: https://nextstep-scholarships.replit.app/. Both journeys were verified on the published app; see [the hosted check](PUBLISHED_DEMO_CHECK_2026-10-17.md). Do not show keys, Secrets, billing screens or the terminal during the recording.
+Target: **3:30**, including two answer waits. Based on the verified senior journey in [October 17 rehearsal](DEMO_REHEARSAL_2026-10-17.md). Published app: https://nextstep-scholarships.replit.app/. This journey was verified on the published app; see [the hosted check](PUBLISHED_DEMO_CHECK_2026-10-17.md). Do not show keys, Secrets, billing screens or the terminal during the recording.
 
-Before recording: open the app and this script side by side; each step includes its paste-ready text, so you can follow this script from top to bottom. Use two fresh browser tabs, one per scenario, so the senior profile does not carry into the junior example. Paste instead of typing. Keep sources open only long enough to show the evidence. Allow 10–15 seconds for each generated answer; if necessary trim waiting time in the recording, without implying faster measured latency. Both hosted scenarios have passed their recording check.
+Before recording: open the app and this script side by side; each step includes its paste-ready text, so you can follow this script from top to bottom. Start with a fresh app tab and an empty saved plan. Paste instead of typing. Keep sources open only long enough to show the evidence. Allow 10–15 seconds for each generated answer; if necessary trim waiting time in the recording, without implying faster measured latency. The hosted senior scenario passed its recording check.
 
 ## 0:00–0:20 — What the app does
 
 **Show:** the app’s opening page, without entering a profile yet.
 
-**Say:** “I built NextStep Scholarships to help Georgia high-school juniors and seniors find scholarships that fit their plans. Students can describe themselves, review their matches, and ask follow-up questions about requirements and what to prepare. The answers link back to scholarship sources so they can check the details.”
+**Say:** “I built NextStep Scholarships to help Georgia high-school students find scholarships that fit their plans. Students can describe themselves, review their matches, and ask follow-up questions about requirements and what to prepare. The answers link back to scholarship sources so they can check the details.”
 
 ## 0:20–0:55 — A look behind the app
 
 **Show:** briefly show the architecture diagram in the submission document, then return to the app. No need to open local admin during this short video.
 
-**Say:** “Behind the app, I’ve organized 39 award records from 63 source documents. I split the content around its structure, aiming for 500-token chunks with 75-token overlap. I use OpenAI embeddings and Pinecone, and combine semantic and keyword search to select up to eight passages for an answer. I also built an evaluation view to compare retrieval strategies and inspect individual answers. Let me show you how that works for a senior, then a junior.”
+**Say:** “Behind the app, I’ve organized 39 award records from 63 source documents. I split the content around its structure, aiming for 500-token chunks with 75-token overlap. I use OpenAI embeddings and Pinecone, and combine semantic and keyword search to select up to eight passages for an answer. I also built an evaluation view to compare retrieval strategies and inspect individual answers. Let me show you one example, from a student’s profile to a scholarship comparison.”
 
 ## 0:55–1:40 — Senior profile and shortlist
 
@@ -54,40 +54,18 @@ I haven’t provided SAT or ACT scores. How does that affect what you can conclu
 
 **Say:** “I can keep the conversation going. I haven’t entered SAT or ACT scores, so I’ll ask what that means for Auburn. I want the answer to explain what’s missing here, without assuming the student hasn’t sent scores to the university. I included that distinction in my testing.”
 
-## 3:10–3:50 — Junior profile and confirmation
+## 3:10–3:30 — Wrap up
 
-**Click:** switch to a fresh tab. School year → Junior; Georgia resident → Yes; optional GPA → 3.5; GPA documentation → Estimated. Paste the junior note directly below. Review the detected details; check **Use these reviewed details in my matches**; click **Find my matches**.
+**Show:** keep the comparison or saved scholarships visible. No more typing is needed.
 
-**Paste into the student description box (not spoken):**
-
-```text
-I am interested in engineering; I want Georgia Tech and maybe Kennesaw State. I do not have any volunteer experience.But I am part of the Science Olympiad School. I am a Georgia resident and a United States citizen.
-```
-
-**Say:** “Next I’ll try a junior considering Georgia Tech and Kennesaw State. They’re in Science Olympiad and haven’t volunteered. I can review the citizenship, residency and college details before finding matches. My current collection doesn’t include a Kennesaw-specific award, so I keep that preference without inventing a scholarship for it.”
-
-## 3:50–4:45 — Junior planning, chat and evidence
-
-**Click:** locate Georgia Tech Stamps President’s and Gold Scholarships; click **Ask about this**. Wait for the introductory question to finish populating, then replace it with the junior question directly below. Click **Ask**. When the response appears, open **Sources (n)** and show the calendar passage; close the sources popup.
-
-**Paste into the chat question box, replacing the introductory question (not spoken):**
-
-```text
-I’m a junior. Based on the sources, what can I prepare now, and which dates or requirements need checking for my future application cycle? Do not assume the current deadline applies to me.
-```
-
-**Say while waiting:** “For this student, I’m more interested in preparation than applying immediately. I’ll ask what they can do now and which dates need checking for their future application cycle.”
-
-**Say after reading:** “The answer separates things they can prepare now from dates they’ll need to verify later. I can open the calendar source and see which cycle that deadline belongs to. The student can keep asking questions from here as their plans develop.”
-
-Do not assert a particular answer before reading it. The rehearsal correctly labeled October 15, 2026 as the Fall 2027 cycle; do not describe that closed deadline as upcoming.
+**Say:** “That’s one example of how I can go from a student’s plans to a shortlist and a more focused conversation. I built the app to make scholarship information easier to explore, while keeping the supporting sources close at hand and making clear what still needs checking.”
 
 ## Recording checks
 
-- Use the published URL above; both scenarios were checked there on October 17.
+- Use the published URL above; this scenario was checked there on October 17.
 - Match counts and Sources counts are snapshot-dependent; read what appears, rather than promising a fixed number.
-- Ensure Georgia Tech does not ask again for confirmed US citizenship.
-- Both college preferences should appear in the reviewed profile; no Kennesaw award exists in this corpus.
+- Confirm Auburn, Georgia residency, and US citizenship appear correctly in the reviewed profile.
+- Confirm only Burger King General Track and Auburn Academic Charter are saved before comparing.
 - Ensure Auburn's recalculation footnote remains visible in citations.
 - If a response fails or contradicts evidence, stop and report it; do not narrate an expected result over a failed response.
 - The 95% faithfulness goal is a target, not an achieved result established by this recording. Historical tuning evals are not a new benchmark of every current award.
