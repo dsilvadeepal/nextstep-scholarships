@@ -33,3 +33,6 @@ dist/
 artifacts/
 test-results/
 playwright-report/
+
+# Personal recording script (local only)
+/docs/DEMO_VIDEO_SCRIPT.md
