@@ -166,7 +166,7 @@ These are provisional targets to assess after the baseline, not existing results
 
 - Restricted run controls: choose suite and semantic/hybrid/comparison mode.
 - Progress and per-case saved results; only one active eval run initially.
-- Summary: counts, correctness, evidence recall, citation support, unknown handling, latency, and available usage/cost estimates.
+- Summary: counts, correctness, evidence recall, citation support, unknown handling, latency, and available usage metrics.
 - Comparison: improvements, regressions, unchanged results, and failures for the same cases.
 - Case inspector: profile, question, expected outcome/evidence, actual answer, retrieved passages, citations, and reason for the score.
 - Reproducibility metadata: corpus/test-set version, evaluation date, chunk settings, retrieval settings, prompt/model identifiers, run ID, and timestamps.
@@ -186,7 +186,7 @@ Use one Replit project with React/TypeScript frontend and a Python FastAPI backe
 | OpenAI | Embeddings, structured extraction, and cited answer generation; optional judge calls |
 | LangSmith | Evaluation experiments/traces and diagnostics linked to app results |
 
-Develop and test using Replit preview or the local workspace. Publish using Autoscale when ready for public access, after checking account credits and costs. No Reserved VM, process supervisor, always-running worker, or general job queue is included. Autoscale startup delay is measured separately in demo readiness checks.
+Develop and test using Replit preview or the local workspace. Publish using Autoscale when ready for public access, after confirming deployment settings. No Reserved VM, process supervisor, always-running worker, or general job queue is included. Autoscale startup delay is measured separately in demo readiness checks.
 
 Ingestion runs explicitly from the development workspace against configured services. Credentials and production storage access must be verified through supported connections; do not assume local and published environments share credentials or data automatically. A scheduled deployment is a later option, not a first-version requirement.
 
@@ -206,11 +206,11 @@ A failed fetch indicates access failure, not program withdrawal. A recent fetch 
 
 The demo proves one controlled source update affecting structured matching and retrieved answers. Continuous crawling, freshness guarantees, notifications, and a full source editing/approval UI are deferred.
 
-## 11. Tools, cost, and boundaries
+## 11. Tools and boundaries
 
-Use the user's OpenAI API credentials and Pinecone account. LangChain is a library; LangSmith is the tracing/evaluation service. Course credits may help with Replit, LangSmith, and optional Tavily discovery, but balances and expiration must be checked rather than assumed. ChatGPT subscription access is not an OpenAI API budget.
+Use the user's OpenAI API credentials and Pinecone account. LangChain is a library; LangSmith is the tracing/evaluation service.
 
-Do not add Nebius, Toloka, Tandem, Mem0, LlamaIndex, Neo4j, or another backend solely because credits exist. Exact model IDs, machine configuration, numerical spend ceilings, and SDK versions are implementation-plan decisions based on account availability and measurements, not reasons to expand product scope.
+Do not add Nebius, Toloka, Tandem, Mem0, LlamaIndex, Neo4j, or another backend solely because credits exist. Exact model IDs, machine configuration, and SDK versions are implementation-plan decisions based on account availability and measurements, not reasons to expand product scope.
 
 Reuse unchanged embeddings. Keep corpus summaries visible: actual program/source counts, information status, collection date, and known gaps. Do not advertise comprehensive statewide coverage or fabricated evaluation results.
 

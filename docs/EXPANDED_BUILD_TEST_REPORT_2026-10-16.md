@@ -16,9 +16,6 @@ calls; invalid-program rejection; and server-side version pinning despite a stal
 client version. Phone and desktop rendered 39 awards without page errors or
 horizontal overflow. These are smoke checks, not a new 47-case evaluation run.
 
-Activation cost $0. Testing added **$0.00807484**; cumulative ledger total is
-**$2.08153838 / $5**, including four previously recorded ambiguous-call liabilities.
-There are zero outstanding reservations. The original live ledger remains authoritative.
 No Docker, hosted deployment, namespace deletion, or `.env` edits occurred.
 
 Receipts: `artifacts/reports/local-activation-2026-10-16.json` and
@@ -28,7 +25,7 @@ The frozen bundle and vector metadata preserve their staging-time
 active-corpus pointer and namespace, not that historical metadata field. Evidence,
 source hashes, cycle metadata, and all source references were preserved unchanged.
 
-Rollback from the repository root (does not reset or restore the spend ledger):
+Rollback from the repository root:
 
 ```sh
 PYTHONPATH=backend:scripts .venv/bin/python - <<'PYROLLBACK'
@@ -67,9 +64,7 @@ publication, namespace deletion, Docker operation, or `.env` edit occurred.
 | Final focused-context API | Same UAB question returned a direct cited no-superscore answer, only UAB retrieval, and no invented test-date restriction |
 | Printing | One-page candidate plan; heading, award, unresolved requirements, and official links verified in extracted text and rendered page |
 
-The candidate app checks used an isolated catalog fixture database. All paid
-providers used the original `artifacts/nextstep-live.db` ledger. They did not
-create a second spending ledger or alter the authoritative active pointer.
+The candidate app checks used an isolated catalog fixture database and did not alter the authoritative active pointer.
 Viewport screenshots replayed the saved real answer for visual inspection without
 additional paid calls; they are not additional live-answer runs.
 
@@ -133,7 +128,7 @@ judge references, and responsiveness problems. Run
 automated 21/21 pass was not accepted as final proof because its UAB answer was
 empty and its Watson-Brown answer did not resolve the entry-versus-renewal question.
 
-## Metadata, costs, and remaining boundary
+## Metadata and remaining boundary
 
 The immutable bundle SHA-256 remains
 `ecbaad48333345838dd2bd983298f8a0127723b5eb35c104c7f87bd87f09c52e`.
@@ -142,15 +137,12 @@ serialized source references, cycle fields, program/version links, review dates,
 and inactive-candidate status. Raw hashes, exact admitted spans, offsets,
 headings, table exceptions, and registered content exclusions passed validation.
 
-The cumulative ledger after the final evaluation is **$2.07346354 of $5**. It
-includes conservative charges for ambiguous provider operations; it was not
-reset. New v3 document embeddings cost $0.00153482; v4 reused all 201 cached
-vectors. Subsequent changes required no document re-embedding.
+The v4 corpus reused all 201 cached vectors. Subsequent changes required no document re-embedding.
 
 The corpus is not comprehensive. Deferred programs, unpublished future-cycle
 rules, unknown GPA scales/types, and Cooke's source distinctions remain explicit.
 Candidate publication and hosted auth/deployment checks are separate from this
-local evidence. Retain the prior namespace and the same ledger when activating.
+local evidence. Retain the prior namespace when activating.
 
 Raw receipts are under `artifacts/reports/`, including the two saved run IDs,
 `candidate-api-preview.json`, `candidate-browser-preview.json`,

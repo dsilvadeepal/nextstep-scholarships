@@ -10,7 +10,7 @@
 
 `Chunk` contains exactly one program, original section references, neighbors, source hash and pinned corpus version. Target 500 tokens; overlap <=75 within a long section. Tables/FAQ/exceptions can remain indivisible. Retrieval caps whole passages at eight / 5,000 passage tokens. An oversized indivisible passage can be omitted rather than truncated; this must be inspected in live evaluations.
 
-Catalog and passage storage use immutable corpus manifests, retained vector namespaces, query-readiness checks and transactional activation. Rollback switches only to a ready retained corpus. Budget reservations survive ambiguous provider failures. Rate-limit keys are daily HMACs, not raw stored addresses.
+Catalog and passage storage use immutable corpus manifests, retained vector namespaces, query-readiness checks and transactional activation. Rollback switches only to a ready retained corpus. Rate-limit keys are daily HMACs, not raw stored addresses.
 
 Evaluation cases contain fictional profiles, frozen date, checked source references, explicit user-selected program IDs (empty by default), expected claims/conditions and critical flags. References are assertions, never retrieval filters. Runs snapshot cases, suite hash, models, embedding/index identity, prompts, chunk/retrieval settings, prices and caps. Changed execution settings reject resume. Results preserve attempts, errors, denominators and a correlated automated judge label. Trace upload occurs only after result persistence and only for these fixed fictional cases.
 

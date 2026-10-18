@@ -21,9 +21,9 @@ A stress test also produced “27 or higher” for Capstone, broadening the exac
 
 ## Recovery and validation
 
-Original state: `c4fddf4`, tag `checkpoint/pre-rag-answer-2026-10-15`. Branch: `feat/rag-answer-comparison`. Keep the current branch and switch to a new branch/worktree from the checkpoint to inspect the old app; do not use a destructive reset. Secrets remain ignored. Never restore an old budget ledger after paid calls. Baseline retrieval remains selectable using `retrieval_policy: "baseline"`.
+Original state: `c4fddf4`, tag `checkpoint/pre-rag-answer-2026-10-15`. Branch: `feat/rag-answer-comparison`. Keep the current branch and switch to a new branch/worktree from the checkpoint to inspect the old app; do not use a destructive reset. Secrets remain ignored. Baseline retrieval remains selectable using `retrieval_policy: "baseline"`.
 
-Full run inputs, outputs, retrieved passages, citations, review decisions, and per-question costs are tracked in `evals/results/2026-10-15-answer-comparison.json`. Intermediate attempts, including failures, remain under ignored `artifacts/reports/rag-*`.
+Full run inputs, outputs, retrieved passages, citations, review decisions are tracked in `evals/results/2026-10-15-answer-comparison.json`. Intermediate attempts, including failures, remain under ignored `artifacts/reports/rag-*`.
 
 The final absence-of-information filter converts unsupported-topic statements into gaps instead of citing unrelated passages; it was added after the saved comparison and does not change any of the five demo answers.
 
@@ -33,17 +33,15 @@ The final local default is phase 1 + phase 2; this revision has not been deploye
 
 ## Measured comparison
 
-| Case | Phase 1 OpenAI cost | Phase 1 + 2 OpenAI cost | Finding |
-|---|---:|---:|---|
-| Georgia Southern | $0.00216400 | $0.00230200 | Renewability, core GPA caveat, February 1 priority date covered in both. |
-| Park | $0.00326160 | $0.00329880 | Non-rounded 3.80, separate applications and November 1 timing covered in both. |
-| Coolidge | $0.00531480 | $0.00501480 | Correct junior/Fall 2028 cohort, deadline/timezone, two letters and remaining requirements covered in both. |
-| Alabama versus Auburn | $0.00367240 | $0.00399320 | Phase 1 misses Heritage ACT31–32 and broadens the exact Capstone tier to 27 or higher. Phase 2 supplies the decisive below-threshold conclusion and automatic versus competitive distinction, with awkward superscore wording. |
-| 2027–28 HOPE gap | $0E-8 | $0E-8 | Both abstain on unconfirmed 2027–28 rules and provide official links. |
+| Case | Finding |
+|---|---|
+| Georgia Southern | Renewability, core GPA caveat, February 1 priority date covered in both. |
+| Park | Non-rounded 3.80, separate applications and November 1 timing covered in both. |
+| Coolidge | Correct junior/Fall 2028 cohort, deadline/timezone, two letters and remaining requirements covered in both. |
+| Alabama versus Auburn | Phase 1 misses Heritage ACT31–32 and broadens the exact Capstone tier to 27 or higher. Phase 2 supplies the decisive below-threshold conclusion and automatic versus competitive distinction, with awkward superscore wording. |
+| 2027–28 HOPE gap | Both abstain on unconfirmed 2027–28 rules and provide official links. |
 
-Five-case totals: phase 1 **$0.01441280**; phase 1 + 2 **$0.01460880**; combined **$0.02902160**. Difference: **$0.00019600** for five questions.
-Mean latency including the zero-cost HOPE guard: 3.55s versus 3.47s. These timings exclude uncached dense retrieval for this matched comparison.
-Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. Dense candidates were reused across the final A/B runs. Development iterations and three boundary checks added $0.16045696, taking the cumulative ledger from $0.82332942 to $0.98378638 of the $5 cap at report preparation.
+Mean latency including the HOPE guard: 3.55s versus 3.47s. These timings exclude uncached dense retrieval for this matched comparison.
 
 ## Exact final outputs
 
@@ -51,7 +49,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Question:** For a Georgia resident entering Georgia Southern in Fall 2027, is the first-year merit scholarship renewable? Is my 3.60 transcript GPA enough to know the award tier, and when should I complete the admission application?
 
-**Phase 1 — $0.00216400, 3.755 seconds**
+**Phase 1 — 3.755 seconds**
 
 - The Georgia Southern First-Year Merit Scholarship for Fall 2027 is a one-time award for the first academic year and is not renewable for subsequent years.
 - Your 3.60 transcript GPA alone is not sufficient to determine the award tier because the scholarship uses a recalculated admissions core GPA, which may differ from your cumulative transcript GPA.
@@ -64,7 +62,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Source pages:** [Official page](https://www.georgiasouthern.edu/admissions-aid/tuition-and-scholarships/types-of-aid/scholarships)
 
-**Phase 1 + 2 — $0.00230200, 4.053 seconds**
+**Phase 1 + 2 — 4.053 seconds**
 
 - The Georgia Southern First-Year Merit Scholarship for Fall 2027 is a one-time award and is not renewable for subsequent years. This means the scholarship will only apply to the first academic year and does not continue beyond that.
 - Your 3.60 transcript GPA alone is not sufficient to determine the scholarship award tier because the scholarship eligibility and tier are based on a recalculated admissions core GPA, which may differ from your cumulative transcript GPA. The minimum tier for the scholarship is a recalculated core GPA of 3.50.
@@ -81,7 +79,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Question:** Park lists a 3.80 unweighted minimum. Can my 3.79 be rounded up? Do I need separate NC State and Park applications, and when are the applications and recommendations due?
 
-**Phase 1 — $0.00326160, 3.958 seconds**
+**Phase 1 — 3.958 seconds**
 
 - Your 3.79 unweighted GPA does not meet the Park Scholarship's minimum 3.80 unweighted GPA requirement because the rule specifies a non-rounded minimum of 3.80, so rounding up is not allowed.
 - You must submit separate applications for NC State undergraduate admission and the Park Scholarships program, as the application processes are separate.
@@ -95,7 +93,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Source pages:** [Official page](https://park.ncsu.edu/apply/) · [Official page](https://park.ncsu.edu/faq/)
 
-**Phase 1 + 2 — $0.00329880, 3.826 seconds**
+**Phase 1 + 2 — 3.826 seconds**
 
 - Your 3.79 unweighted GPA does not meet the Park Scholarship's minimum requirement of 3.80 unweighted without rounding, so it cannot be rounded up to qualify.
 - You must submit separate applications for NC State undergraduate admission and the Park Scholarships program, as these are distinct processes.
@@ -113,7 +111,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Question:** I am a junior graduating in spring 2028. Is this the Coolidge cycle for me? What is the deadline for the application and two reference letters, and what should I check before applying?
 
-**Phase 1 — $0.00531480, 5.548 seconds**
+**Phase 1 — 5.548 seconds**
 
 - You are in the correct Coolidge Scholarship cycle if you are a high school junior graduating in spring 2028 and plan to start college full-time in fall 2028, which matches the 2026-27 application cycle for first college enrollment in fall 2028.
 - The deadline for submitting the Coolidge Scholarship application and the two letters of reference is December 1, 2026, at 5:00 PM Pacific Time.
@@ -126,7 +124,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Source pages:** [Official page](https://coolidgescholars.org/about/faq/) · [Official page](https://coolidgescholars.org/eligibility/) · [Official page](https://coolidgescholars.org/selection-timeline/)
 
-**Phase 1 + 2 — $0.00501480, 4.068 seconds**
+**Phase 1 + 2 — 4.068 seconds**
 
 - The 2026–27 Coolidge Scholarship application cycle is the correct cycle for a student graduating high school in spring 2028 and planning to enroll full-time in college in fall 2028, which matches your junior year and graduation timeline.
 - The deadline for submitting the Coolidge Scholarship application and the two required letters of reference is December 1, 2026, at 5:00 PM Pacific Time.
@@ -142,7 +140,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Question:** My ACT superscore is 27, but neither single test date was 27. Could that satisfy Alabama's Capstone score rule? Does Auburn handle scores the same way, and are these awards guaranteed?
 
-**Phase 1 — $0.00367240, 4.5 seconds**
+**Phase 1 — 4.5 seconds**
 
 - University of Alabama Capstone is an automatic merit award, subject to all published eligibility and application requirements. This does not confirm an award for you.
 - The University of Alabama Capstone scholarship requires an official ACT composite score from a single test date of 27 or higher; superscores are not accepted for this scholarship. Therefore, an ACT superscore of 27 does not satisfy the Capstone score rule if no single test date score is 27. The award is automatic for qualifying students meeting all eligibility and application requirements.
@@ -162,7 +160,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Source pages:** [Official page](https://afford.ua.edu/scholarships/oos-international-freshman/) · [Official page](https://www.auburn.edu/administration/finaid/apply/first-year-students.php) · [Official page](https://www.auburn.edu/admissions/testscores.php)
 
-**Phase 1 + 2 — $0.00399320, 5.416 seconds**
+**Phase 1 + 2 — 5.416 seconds**
 
 - Your stated ACT score of 27 is below the listed ACT 31–32 tier for Auburn Academic Heritage Scholarship. This comparison addresses the score threshold only.
 - University of Alabama Capstone is an automatic merit award, subject to all published eligibility and application requirements. This does not confirm an award for you.
@@ -188,7 +186,7 @@ Costs are measured OpenAI ledger amounts, not total hosting/Pinecone charges. De
 
 **Question:** What are the confirmed 2027–28 HOPE Scholarship rules for a student entering college in Fall 2027? Can you confirm my required GPA and application deadline?
 
-**Phase 1 — $0E-8, 0.001 seconds**
+**Phase 1 — 0.001 seconds**
 
 No answer blocks.
 
@@ -198,7 +196,7 @@ No answer blocks.
 
 **Source pages:** [Official page](https://gafutures.org/hope-state-aid-programs/hope-zell-miller-scholarships/hope-scholarship/application-and-deadline/) · [Official page](https://gsfc.georgia.gov/programs-and-regulations)
 
-**Phase 1 + 2 — $0E-8, 0.001 seconds**
+**Phase 1 + 2 — 0.001 seconds**
 
 No answer blocks.
 

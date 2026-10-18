@@ -132,7 +132,7 @@ Persist completed eval results and source artifacts. Closing the admin page does
 
 ## 10. Dependencies, risks, and planning decisions
 
-Dependencies are the user's service access and credentials, supported Replit setup, accessible source content, and a small checked evaluation reference set. Course credits are opportunities rather than confirmed balances. Check hosting/API costs before provisioning or publication.
+Dependencies are the user's service access and credentials, supported Replit setup, accessible source content, and a small checked evaluation reference set.
 
 | Risk | Release response |
 | --- | --- |
@@ -143,7 +143,7 @@ Dependencies are the user's service access and credentials, supported Replit set
 | External service fails during presentation | Explicit errors and clearly labeled saved results from a real previous run |
 | Technical choices expand complexity | Follow the simplified architecture and add tools only for demonstrated needs |
 
-Implementation planning resolves exact models/embedding settings, retrieval budgets and hybrid implementation, transparent ordering, data schemas, auth integration, eval rubrics, and spend limits. Those are engineering details, not invitations to expand the agreed product. Final brand name can use the working name until changed by the product owner.
+Implementation planning resolves exact models/embedding settings, retrieval budgets and hybrid implementation, transparent ordering, data schemas, auth integration, and eval rubrics. Those are engineering details, not invitations to expand the agreed product. Final brand name can use the working name until changed by the product owner.
 
 ## 11. Delivery evidence and next step
 

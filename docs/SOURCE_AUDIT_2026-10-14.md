@@ -163,6 +163,6 @@ The [2027 Coca-Cola Scholars application](https://www.coca-colascholarsfoundatio
 2. Split multi-award pages into specific awards; maintain one evidence-linked fact per mandatory rule, exception, deadline, and application step.
 3. Reconcile conflicting pages with the current sponsor rules, and flag unresolved conflicts rather than selecting a convenient version.
 4. Produce a review sheet of in-scope programs, excluded programs, and unknowns. Then choose a bounded pilot corpus and rebuild the live index. Current indexed material is provisional and must not support release claims.
-5. Recheck evaluation cases against the reviewed rules before another paid run. Preserve the cumulative local API ledger; do not reset the $5 ceiling.
+5. Recheck evaluation cases against the reviewed rules before another paid run.
 
 This audit is a first source-level pass. It does not claim exhaustive coverage of every university in the five neighboring states or every fund at a university. Coverage must be declared by institution and award when the review sheet is finished.
