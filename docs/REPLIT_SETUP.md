@@ -1,5 +1,8 @@
 # Replit development setup — October 14, 2026
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 Setup chat owns environment/transfer checks; build chat owns application source/tests/corpus. Direct coordination is authorized by the owner.
 
 - Project: https://replit.com/@DeepalDSilva/nextstep-scholarships (private; owner signed in)
@@ -84,7 +87,7 @@ Replit preflight constructed the app with production settings against the prepar
 
 Publication remains **Unpublished**. Existing settings: Autoscale, 2 vCPU/4 GiB, maximum 3 machines; no setting change claimed for machine sizing. Consider maximum 1 for instructor traffic. Domain shown available: nextstep-scholarships.replit.app. Provider keys are present and masked in deployment secrets. No Replit Agent invoked, no merge/push, no Google Doc edits.
 
-Latest local backend verification: 141 passed, 2 skipped. See recording script (historical document removed) for the timed two-scenario walkthrough.
+Latest local backend verification: 141 passed, 2 skipped. The recording script is kept locally and is not included in the repository.
 
 ### Pre-publication cleanup
 
@@ -92,4 +95,4 @@ Rate limiting, corpus readiness, context bounds and hosted admin denial remain. 
 
 ## Published release verified — October 17, 2026
 
-Owner approved hosting, publication and merging. PR #1 merged into main at `1d404568d37513ea2279669993a103116cb4025d`. Replit successfully published https://nextstep-scholarships.replit.app/ and both exact demo journeys ran against it with real chat and inspected citations. See published verification (historical document removed). The earlier publication-pending entries are historical. Repository remains private.
+Owner approved hosting, publication and merging. PR #1 merged into main at `1d404568d37513ea2279669993a103116cb4025d`. Replit successfully published https://nextstep-scholarships.replit.app/ and both exact demo journeys ran against it with real chat and inspected citations. The earlier publication-pending entries are historical. Repository visibility was subsequently changed to public (verified October 18).

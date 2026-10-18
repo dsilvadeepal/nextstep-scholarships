@@ -1,45 +1,57 @@
-# Environment and setup handoff
+# Environment and setup
 
-## Reproduce locally — no Docker
+The student demo is already published. These instructions explain local development and the current deployment configuration; they are not a request to recreate the production database.
 
-Python 3.12 and Node 24 are the verified runtimes. Run `uv sync --locked`, `npm --prefix frontend ci`, and `npm --prefix frontend run build`. Start from the repository root with `sh scripts/start.sh`; this serves the production React build and API on `${PORT:-8000}`. For the existing preview, set `PORT=8014`. The Vite dev server is optional and not used in published runtime.
+## Run locally
 
-Current sandbox Python lives in `/tmp/nextstep-python`; use `UV_CACHE_DIR=/tmp/nextstep-uv-cache`. Reinstall Python if temporary files are cleared. Playwright browsers are under `/tmp/nextstep-browsers`. No Docker dependency, container command or work-Docker access is required.
+Use Python 3.12, Node.js 24, `uv`, and npm. Docker is not required.
 
-Tests: `uv run pytest -q`; `npm --prefix frontend test -- --run`; `npm --prefix frontend run build`; `PLAYWRIGHT_BROWSERS_PATH=/tmp/nextstep-browsers npm --prefix frontend run test:e2e`; `uv run ruff check backend tests migrations scripts`; `git diff --check`.
+```bash
+uv sync --locked
+npm --prefix frontend ci
+npm --prefix frontend run build
+sh scripts/start.sh
+```
 
-PostgreSQL integration ran against a separate PostgreSQL 17.7 executable built under `/tmp/nextstep-postgres`, using a private Unix socket `/tmp/nextstep-pgsocket`, port 55434, no TCP listener, UTF8 database `nextstep_test`. Tests create and remove random schemas. Set `TEST_POSTGRES_URL` only to an explicitly authorized development database; run `uv run pytest -m postgres -q`. This verifies actual PostgreSQL JSONB, concurrent run transactions and resume persistence; it does not verify Replit connectivity.
+Open `http://localhost:8000`, or set `PORT` before starting. The UI and API share one server. The Vite development server is optional.
 
-## What the owner needs to configure next
+A fresh checkout starts without a populated catalog. Connect `DATABASE_URL` to a prepared development database to browse real records. Migrations alone create tables, not scholarship records. Do not point local migration, ingestion, or test commands at the published app's database.
 
-1. **Replit project:** import this private repository/branch after deciding how to transfer local changes. Confirm Python 3.12, Node and uv are available. Keep development and production databases separate. No publish action is authorized by adding keys.
-2. **Development PostgreSQL:** provide `DATABASE_URL` in Replit Secrets (SQLAlchemy `postgresql+psycopg://...`). Run `uv run alembic upgrade head` only against that explicitly selected development database. The initial migration is frozen before first release. No prior production database exists in this build; do not apply it blindly to an unrelated schema.
-3. **App Storage:** enable a project bucket and set `APP_STORAGE_BUCKET_ID`. The SDK uses Replit runtime identity; no browser/cloud credentials are copied into the app.
-4. **Admin identity:** enable Replit Auth, confirm client ID and permitted callback `${PUBLIC_ORIGIN}/api/auth/callback`, sign in and obtain the immutable subject for `ADMIN_SUBJECTS` (JSON array). Set a 32+ character random `SESSION_SECRET`, separate stable `RATE_SECRET`, and HTTPS `PUBLIC_ORIGIN`. Signed sessions are verified server-side; client identity headers are not accepted. Hosted OIDC compatibility remains an integration check.
-5. **OpenAI:** set the server `OPENAI_API_KEY`. Live calls are disabled by default with `LIVE_CALLS_ENABLED=false`.
-6. **Pinecone:** the separate owner-authorized setup created `nextstep-scholarships` (1536 dimensions, cosine, AWS us-east-1). Key and index name are now present in ignored `.env`. Its setup note reports readiness and zero vectors. The application constructor incompatibility found there is fixed: timeout/retry policy belongs on `Pinecone`, not `Index`. No real application embeddings/search have been executed here.
-7. **LangSmith:** optional for local result persistence; configure server key/project for fictional evaluation traces when ready. Global tracing stays disabled for real student conversations. Trace-upload failure cannot discard a saved result.
+## Configuration
 
-Do not paste secrets into chat. `.env.example` lists variable names; put actual values only in ignored `.env` or Replit Secrets. Production startup rejects SQLite, missing stable secrets, missing owner identity configuration and non-HTTPS origin.
+Use `.env.example` as the variable-name reference. Save values only in an ignored `.env` or Replit Secrets; never commit keys.
 
-## Collection, preprocessing, extraction and publication
+- **Database:** `DATABASE_URL`, preferably `postgresql+psycopg://...`. On a new, explicitly selected development database, `uv run alembic upgrade head` creates the schema.
+- **Chat and embeddings:** server-side `OPENAI_API_KEY`, `PINECONE_API_KEY`, and `PINECONE_INDEX=nextstep-scholarships`. Local calls default to disabled; enabling `LIVE_CALLS_ENABLED=true` also requires a ready catalog and matching Pinecone namespace.
+- **Models:** defaults are `gpt-4.1-mini` and `text-embedding-3-small` with 1,536 dimensions.
+- **Storage:** `APP_STORAGE_BUCKET_ID` identifies the Replit App Storage bucket; the SDK uses Replit runtime identity. Local tests use a local artifact adapter.
+- **Admin:** hosted admin is disabled. The student app needs no account. Local evaluation tooling retains authentication boundaries; do not enable hosted admin just to run the public demo.
+- **Tracing:** LangSmith is optional for fictional evaluation traces. Real student conversations must not be globally traced.
 
-Collection/preprocessing already ran locally: 16 originals and normalized documents are saved in ignored `artifacts/`. This stage needs no model credentials. `uv run python -m nextstep.ingest.cli collect --sources data/sources.yaml` refreshes that inventory; add `--app-storage` inside the configured Replit runtime.
+The frozen release catalog is `data/corpus-candidate-2026-10-16-v4.json`. The live index namespace is `candidate-2026-10-16-v4`. The existing hosted database was prepared separately; legacy one-time setup scripts are not a generic fresh-clone installer. Do not rerun them against production.
 
-After OpenAI access, `... cli run --sources data/sources.yaml --version VERSION` collects, caches validated extraction, binds program IDs, preserves conflicts and stages catalog/chunks. Multi-award ambiguity fails visibly. Review the saved failure and add hash-pinned section partitions/aliases to the register; reruns reuse extracted output and embedding cache. Never automatically retry an ambiguous failed paid operation.
+## Tests
 
-`... cli publish --version VERSION` freezes the manifest, embeds, upserts, verifies fetched IDs/counts and searchable probes, then atomically activates it. `... cli rollback --version PREVIOUS_READY_VERSION` changes only the retained ready active pointer and needs no OpenAI calls or paid-call enablement.
+```bash
+uv run pytest -q
+npm --prefix frontend test -- --run
+npm --prefix frontend run build
+uv run ruff check backend tests migrations scripts
+git diff --check
+```
 
-## Publish preparation only
+For browser checks, install Playwright Chromium and use `npm --prefix frontend run test:e2e`. See the Playwright configuration for server setup. Live browser tests are separate and require a configured running app.
 
-`.replit` contains one-port build/run commands and `deploymentTarget="cloudrun"`. `scripts/build.sh` installs locked dependencies and builds React; `scripts/start.sh` starts one FastAPI service without access logs. Migrations and ingestion are explicit manual actions, not startup side effects. Use Replit Autoscale only after owner approval and account-specific allowance review. Cold/warm live checks, verified admin login, artifact persistence, a real saved comparison are still release gates.
+PostgreSQL tests require `TEST_POSTGRES_URL` pointing to an explicitly selected test database. Run `uv run pytest -m postgres -q`; tests use isolated schemas. Historical `/tmp/nextstep-*` runtimes and screenshots are local artifacts, not prerequisites provided by this repository.
 
-Configuration reference checked October 14: [Replit application configuration](https://docs.replit.com/features/project-setup/configuration), [Replit Auth](https://docs.replit.com/features/auth-and-identity/authentication). These document the platform; they do not prove this project's hosted configuration.
+## Ingestion and updates
 
-## Local configuration overwrite investigation — October 14, 2026
+The CLI supports `collect`, `run`, `publish`, and `rollback`. Collection preserves source provenance; extraction stages structured records and chunks; publication verifies the namespace before switching the active corpus. Run `uv run python -m nextstep.ingest.cli --help` for arguments. The initial `data/sources.yaml` register is historical; the expanded release also uses reviewed sections and exclusion records. Do not assume collecting the initial register reproduces the final corpus.
 
-VS Code local history confirmed both provider keys had been saved at 9:18:23 p.m. Eastern; the working `.env` was subsequently modified at 9:19:05 p.m. with both values empty. Repository app/test/start scripts contain no `.env` writer, and the setup chat was idle. The exact writer is unconfirmed; stale editor state is a hypothesis, not a proven cause. Process-level filesystem tracing requires administrator access that was unavailable.
+Preserve previous query-ready versions for rollback. Avoid automatically replaying provider requests with an uncertain completion status. See [content policy](OPERATIONAL_CONTENT_POLICY.md) and [data contracts](DATA_DICTIONARY.md).
 
-Both existing key values were recovered from the latest matching VS Code history entry without displaying them. Local `.env` now has owner-only permissions and macOS user-immutable protection (`uchg`). Both keys remain readable by Settings; opening the file for writing is denied. This prevents accidental overwrites, but does not identify or repair the responsible editor/process. No new keys were generated and no provider calls were made during recovery.
+## Published startup
 
-Before an intentional local configuration edit, unlock only this file with `chflags nouchg .env` from the project directory; after saving, restore protection with `chflags uchg .env`. Avoid leaving stale `.env` editor tabs open. Keep runtime-only database overrides outside this file until the writer is identified.
+`.replit` builds with `scripts/build.sh` and deploys with `scripts/start_hosted.sh`. The hosted wrapper requires PostgreSQL, the expected active corpus, provider keys, and a stable `SESSION_SECRET` of at least 32 characters. It derives the rate-limit secret, uses the published HTTPS origin, enables student chat, and keeps hosted admin disabled. It does not ingest sources on startup.
+
+The development Run command uses `scripts/start.sh`; its configuration comes from the local environment. Documentation-only changes do not require republishing. See [Replit release history](REPLIT_SETUP.md) for recorded setup and publication checks.

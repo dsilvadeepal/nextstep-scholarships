@@ -1,6 +1,9 @@
 # Scholarship source audit — October 14, 2026
 
-**This is the retained first-pass discovery register.** The subsequent second-pass review and admission decisions (historical document removed) supersede its proposed ingestion list. The verified local pilot is now active; historical statements below about the pause/no rebuild describe this first-pass checkpoint.
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
+**This is the retained first-pass discovery register.** Subsequent corpus admission decisions superseded this proposed ingestion list; see the current release manifest and build status. The verified local pilot is now active; historical statements below about the pause/no rebuild describe this first-pass checkpoint.
 
 Scope: Georgia high-school juniors and seniors, and first-year college awards they could pursue at Georgia or neighboring-state universities. This is a **research register**, not an approved ingestion manifest. A linked page is not automatically a complete or current rules source. Dates below are those shown by sponsors; they are not inferred from when a page was fetched. **Application year, high-school graduation year, college-entry year, funding/award year, and regulation effective year are separate fields.** For example, GSFC's 2026–27 PDF is the current published regulation as of this audit, but it does not establish a Fall 2027 entrant's later 2027–28 award rules.
 
@@ -166,3 +169,11 @@ The [2027 Coca-Cola Scholars application](https://www.coca-colascholarsfoundatio
 5. Recheck evaluation cases against the reviewed rules before another paid run.
 
 This audit is a first source-level pass. It does not claim exhaustive coverage of every university in the five neighboring states or every fund at a university. Coverage must be declared by institution and award when the review sheet is finished.
+
+## Source-link access check — October 18, 2026
+
+Automated access could not verify the following research links. HTTP 403 may be a site access restriction; a TLS failure is not proof that a page is missing. These historical references are retained for provenance and need browser/manual verification before reuse. A successful HTTP response elsewhere does not establish current scholarship rules.
+
+- https://financialaid.wfu.edu/applying-for-aid/first-year/ — HTTP 403.
+- https://financialaid.wfu.edu/types-of-aid/scholarships/ — HTTP 403.
+- https://www.financialaffairs.uab.edu/admissions/cost/scholarships/out-of-state-students — TLS certificate verification failed.

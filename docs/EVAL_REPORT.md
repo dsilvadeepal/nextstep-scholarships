@@ -1,5 +1,8 @@
 # Evaluation status
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 ## Local activation — October 16, 2026, 9:03 p.m. ET
 
 Following explicit user approval, `candidate-2026-10-16-v4` is now the active local
@@ -47,7 +50,7 @@ cases using equal-weight hybrid retrieval. The complete saved-run results,
 reference corrections, source spot-check limits, and provider failures are in
 the [October 16 build/test report](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
 
-The candidate is inactive. These are tuning results, not fresh held-out accuracy.
+At this pre-activation checkpoint the candidate was inactive. It was later activated and published; these remain tuning results, not fresh held-out accuracy.
 
 ## Historical October 14 evaluation
 

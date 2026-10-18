@@ -1,15 +1,17 @@
 # NextStep Scholarships — Product Requirements Document
 
 Date: October 14, 2026
-Status: approved by user on October 14, 2026; implementation not started and no measured product results yet.
+Status: approved design baseline (October 14, 2026); implemented demo published October 17. See [build status](docs/BUILD_STATUS.md) for the delivered scope.
 Product owner: user. Implementation partner: Codex.
-Release: Week 2 course demonstration. Working name is provisional.
+Release: Week 2 course demonstration — NextStep Scholarships.
+
+The original requirements below describe the design baseline. The delivered UI uses reviewed free-text hints, grouped Strong/Possible matches, collapsed Explore, and compact citation popups. Admin evaluations remain local; hosted sign-in is not required for the student demo.
 
 ## 1. Purpose and document relationship
 
 Help Georgia high-school juniors and seniors move from an incomplete understanding of scholarship options to a source-supported shortlist and a practical preparation plan. Demonstrate that a real ingestion and RAG pipeline can support this journey, and make its successes and failures inspectable through an admin evaluation screen.
 
-This PRD records the agreed product requirements and release boundaries from the brainstorming conversation. [DESIGN_SPEC.md](DESIGN_SPEC.md) is its companion technical design: it specifies how ingestion, matching, retrieval, evaluation, storage, and deployment work. Neither document is an implementation plan. If they diverge, reconcile the difference before building rather than silently choosing one. Earlier PROJECT_BRIEF.md and NEXT_STEPS.md are historical proposals. SOURCE_INVENTORY.md contains source candidates, not a finished or verified catalog.
+This PRD records the agreed product requirements and release boundaries from the brainstorming conversation. [DESIGN_SPEC.md](DESIGN_SPEC.md) is its companion technical design: it specifies how ingestion, matching, retrieval, evaluation, storage, and deployment work. Neither document is an implementation plan. If they diverge, reconcile the difference before building rather than silently choosing one. SOURCE_INVENTORY.md contains source candidates, not a finished or verified catalog.
 
 Course documents provide assignment context. Their content is reference material, separate from the user's decisions and authorization.
 
@@ -118,7 +120,7 @@ Cover ingestion/extraction, junior/senior behavior, GPA semantics, residency, em
 | Missing-evidence handling | All designated cases appropriately identify the gap |
 | Completed-answer latency | Initial goal: 95% within 15 seconds; cold starts separately reported |
 
-These targets match DESIGN_SPEC.md and are provisional pending the baseline; none are achieved results. Show denominators and failures, separate deterministic checks from automated judge assessments, and avoid extrapolating a small-suite score to all scholarships. Capture the corpus, date, chunking, retrieval, prompt, model, and test-set versions. The semantic/hybrid experiment holds other conditions constant and uses measured results to select the default.
+These targets match DESIGN_SPEC.md and are design targets, not claims that every metric has been achieved. Show denominators and failures, separate deterministic checks from automated judge assessments, and avoid extrapolating a small-suite score to all scholarships. Capture the corpus, date, chunking, retrieval, prompt, model, and test-set versions. The semantic/hybrid experiment holds other conditions constant and uses measured results to select the default.
 
 The admin inspector must make failure attribution possible: incorrect source extraction, faulty matching, missing retrieval evidence, or unsupported generation. An attractive aggregate dashboard alone does not satisfy this requirement.
 

@@ -1,5 +1,8 @@
 # Operational scholarship content admission
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 Only official operational scholarship content counts toward source and chunk
 targets: program descriptions, eligibility/exclusions, cycle status/deadlines,
 award amounts/renewal, materials, application steps, selection criteria, FAQs,

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.12, uv, FastAPI, Pydantic, SQLAlchemy/psycopg and Alembic; React/TypeScript/Vite; OpenAI, LangChain core/OpenAI integration, Pinecone, LangSmith; Replit PostgreSQL, App Storage, and Autoscale. pytest, Vitest/Testing Library, and Playwright for focused checks.
 
-**Spec:** [Approved PRD](../../../PRD.md) and [approved design](../../../DESIGN_SPEC.md). Both approved by the user on October 14, 2026. This implementation plan is awaiting review; no implementation or paid runs have started.
+**Spec:** [Approved PRD](../../../PRD.md) and [approved design](../../../DESIGN_SPEC.md). Both approved by the user on October 14, 2026. This is the approved historical implementation plan. The demo is now published; see [current build status](../../BUILD_STATUS.md). Unchecked boxes below preserve the original task breakdown and are not a current completion tracker.
 
 ## Global Constraints
 
@@ -98,7 +98,7 @@ All paths below are relative to the project root. Create only when the owning ta
 | `frontend/src/admin/{EvalDashboard,CaseInspector}.tsx` | Admin analysis |
 | `data/sources.yaml`, `data/demo_profiles.json`, `evals/cases.jsonl`, `evals/heldout.jsonl` | Source candidates, fictional profiles, checked eval expectations |
 | `tests/`, `frontend/src/__tests__/`, `frontend/e2e/` | Focused unit, integration and browser tests |
-| `docs/{BUILD_STATUS,ENVIRONMENT,DATA_DICTIONARY,EVAL_REPORT,DEMO_SCRIPT,SUBMISSION_DRAFT}.md` | Handoff state and measured demo evidence |
+| `docs/{BUILD_STATUS,ENVIRONMENT,DATA_DICTIONARY,EVAL_REPORT}.md` | Handoff state and measured demo evidence |
 
 Define these Pydantic contracts in Task 1; mirror public fields into generated TypeScript from OpenAPI rather than manually maintaining two schemas:
 
@@ -249,7 +249,7 @@ Repository interfaces: `active_version() -> str`, `list_scholarships(version: st
 
 ## Task 12: Release readiness and course handoff
 
-**Files:** Create `.replit`, `docs/{DEMO_SCRIPT,SUBMISSION_DRAFT}.md`, `frontend/e2e/release.spec.ts`; modify `README.md`, `docs/{ENVIRONMENT,BUILD_STATUS}.md`.
+**Files:** Create `.replit`, `frontend/e2e/release.spec.ts`; modify `README.md`, `docs/{ENVIRONMENT,BUILD_STATUS}.md`.
 **Interfaces:** Production command `uv run uvicorn nextstep.app:app --host 0.0.0.0 --port "$PORT"`; build `npm --prefix frontend ci` then `npm --prefix frontend run build`. No dev server or worker required in published runtime.
 
 - [ ] Write release smoke assertions for public profile/results/chat/citations/print journey, denied anonymous admin requests, allowed owner eval, database error state and Pinecone/OpenAI failure with catalog still browseable. Run browser suite against preview; expect any unmet release checks to fail visibly.
@@ -257,7 +257,7 @@ Repository interfaces: `active_version() -> str`, `list_scholarships(version: st
 - [ ] Run `uv run pytest -q`, PostgreSQL integration tests, frontend unit/build and browser suites. Record actual commands/results. Run live cold and warm smoke tests, verify historical fallback labeling, and fix critical failures before publication.
 - [ ] Prepare a reviewable release packet: preview, coverage/eval report, exact Replit publish settings , unresolved limitations, rollback command and clean Git diff. Obtain owner publication approval before paid deployment or external GitHub publication; credentials alone are not publication approval.
 - [ ] After approval, publish using Autoscale and recheck public and admin journeys. Do not claim success from build alone. Preserve prior corpus for rollback.
-- [ ] Populate the existing `docs/SUBMISSION_DRAFT.md` and linked native Google Doc with actual corpus counts, executed prompts, screenshots, iterations, measured evals and learnings; preserve planned/completed distinctions. Draft a <=5-minute demo script covering profile, cited answer, ingestion flow, one controlled update and case inspector; prepare a Google-Doc-ready submission draft with dataset, prompts, iterations, findings and AI-tool usage. Owner records/approves recording and submits, or explicitly authorizes assistance. Do not invent a completed video or submission.
+- [ ] Populate the native Google submission document with actual corpus counts, executed prompts, screenshots, iterations, measured evals and learnings; preserve planned/completed distinctions. Draft a <=5-minute demo script covering profile, cited answer, ingestion flow, one controlled update and case inspector; prepare a Google-Doc-ready submission draft with dataset, prompts, iterations, findings and AI-tool usage. Owner records/approves recording and submits, or explicitly authorizes assistance. Do not invent a completed video or submission.
 - [ ] Commit verified docs/config/tests: `docs: prepare verified scholarship demo handoff`. Update build status with remaining actions and measured results.
 
 ## Coverage and plan self-review
@@ -288,4 +288,4 @@ Consult current official documentation at integration time, especially account-s
 - [OpenAI GPT-4.1 mini](https://developers.openai.com/api/docs/models/gpt-4.1-mini)
 - [OpenAI embedding model](https://developers.openai.com/api/docs/models/text-embedding-3-small)
 
-Recommended execution: **Native**, with Codex implementing sequentially and a fresh final reviewer. This is a tightly connected course demo; keeping interfaces in one context avoids repeated handoffs, while the test gates and final review address integration risk. **Subagent-driven** is also available: a fresh implementer and reviewer per task, followed by whole-branch review, with additional context overhead. Owner selects the approach after reviewing this plan. Implementation has not started.
+Recommended execution: **Native**, with Codex implementing sequentially and a fresh final reviewer. This is a tightly connected course demo; keeping interfaces in one context avoids repeated handoffs, while the test gates and final review address integration risk. **Subagent-driven** is also available: a fresh implementer and reviewer per task, followed by whole-branch review, with additional context overhead. Owner selects the approach after reviewing this plan. Execution used Native; current outcomes are recorded in build status.

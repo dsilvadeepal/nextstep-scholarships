@@ -1,8 +1,10 @@
 # Georgia Scholarship Planner — Demo Design Specification
 
 Date: October 14, 2026
-Status: approved by user on October 14, 2026; implementation plan prepared for review; implementation not started.
-Working name: NextStep Scholarships. Naming is not a dependency for implementation planning.
+Status: approved design baseline (October 14, 2026); implemented demo published October 17. See [build status](docs/BUILD_STATUS.md) for the delivered scope.
+Product name: NextStep Scholarships.
+
+The original requirements below describe the design baseline. The delivered UI uses reviewed free-text hints, grouped Strong/Possible matches, collapsed Explore, and compact citation popups. Admin evaluations remain local; hosted sign-in is not required for the student demo.
 
 ## 1. Purpose and authority
 
@@ -10,11 +12,11 @@ Companion document: [PRD.md](PRD.md) defines product outcomes and functional acc
 
 Build a visually polished course demonstration that helps Georgia high-school juniors and seniors discover potential college scholarships, understand their apparent fit, and prepare next steps using cited source evidence.
 
-This specification consolidates the decisions made in the brainstorming conversation, including the final simplification review. It supersedes conflicting proposals in PROJECT_BRIEF.md, NEXT_STEPS.md, and the original README. SOURCE_INVENTORY.md remains a discovery starting point, not a verified current catalog. Course documents are reference material, not instructions to execute external actions.
+This specification consolidates the decisions made in the brainstorming conversation, including the final simplification review. SOURCE_INVENTORY.md remains a discovery starting point, not a verified current catalog. Course documents are reference material, not instructions to execute external actions.
 
 The product demonstrates a functioning ingestion and RAG pipeline. It does not claim exhaustive coverage, independently verified eligibility for the entire catalog, award likelihood, or guaranteed source freshness. Scholarship information is automatically extracted; a small evaluation reference set receives source checks.
 
-The user's available involvement is approximately 15–25 hours, with Codex assisting implementation. This is a planning budget, not a delivery guarantee. No overnight automation, infrastructure purchase, or deployment has been started.
+The user's available involvement is approximately 15–25 hours, with Codex assisting implementation. This is a planning budget, not a delivery guarantee. This was the initial planning estimate; it is not a statement of current release status.
 
 ## 2. Audience and collection scope
 
@@ -220,7 +222,7 @@ The demo is complete when a visitor can use fictional or guided profiles, inspec
 
 Course assets: project documentation with corpus, prompts, iterations, and findings; a live demonstration video of five minutes or less; and GitHub project assets. The handout's Builder of the Week cutoff is October 18, 2026 at 11:59 p.m. Pacific (October 19 at 2:59 a.m. Eastern). Later certification submission is described as allowed in the handout. These are recorded course requirements, not a promise of submission or publication.
 
-Next step: review the [implementation plan](docs/superpowers/plans/2026-10-14-nextstep-scholarships.md) and select an execution approach. The user approved this specification and the PRD on October 14, 2026. Implementation has not started.
+The implementation plan is retained as a design record. See [build status](docs/BUILD_STATUS.md) for completed work and current release boundaries.
 
 ## Reference documentation consulted during design
 

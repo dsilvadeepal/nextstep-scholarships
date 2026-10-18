@@ -1,4 +1,17 @@
-# Build status — October 16, 2026
+# Build status — reviewed October 18, 2026
+
+## Current release
+
+- Public repository: `dsilvadeepal/nextstep-scholarships`, default branch `main`; verified October 18.
+- Published app: https://nextstep-scholarships.replit.app/ (HTTP 200 checked October 18).
+- Active release corpus: `candidate-2026-10-16-v4`, 39 award records, 31 families, 201 chunks, 63 official documents.
+- Public student chat, confirmed profile hints, grouped matches, saved comparisons, citation popups, and printable plans are included. Admin evaluations remain local; hosted admin is disabled.
+- Recorded final release checks: 142 backend tests passed with 2 skipped, 14 frontend tests passed, TypeScript and production build passed. Both hosted demo journeys were checked October 17. This documentation review did not rerun model calls or the test suite.
+- Course video recording and submission are owner actions; completion is not established by this repository.
+
+## Historical development checkpoints
+
+The dated notes below preserve earlier evidence. Statements about inactive corpora, feature branches, pending setup, or unavailable hosting describe their checkpoint only and are superseded by the current release above. Local `artifacts/` and `/tmp/` evidence is not included in a fresh clone.
 
 ## Local activation — October 16, 2026, 9:03 p.m. ET
 
@@ -50,7 +63,7 @@ print checks also passed.
 The active catalog remains `verified-2026-10-14-v2` (18 records / 174 chunks);
 `candidate-2026-10-16-v4` is staged and inactive. Activation was excluded from the
 ingestion scope. No Docker or secret-file edits occurred. See the
-[complete current evidence and limitations](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
+[October 16 evidence and limitations](EXPANDED_BUILD_TEST_REPORT_2026-10-16.md).
 
 The checkpoints below are historical; their counts and stop points are superseded
 by this dated update.
@@ -59,7 +72,7 @@ by this dated update.
 
 ## Current checkpoint: verified local corpus active
 
-The second-pass research, local ingestion, metadata verification and local application tests are complete. Active corpus: **`verified-2026-10-14-v2`**, with **18 award records / 10 award families / 174 chunks / 19 contributing official documents**. Every Pinecone vector's metadata was fetched and compared exactly with its canonical manifest. Older namespaces are retained but no longer queried by the active local application. See second-pass review (historical document removed) for admitted/deferred sources and limitations.
+The second-pass research, local ingestion, metadata verification and local application tests are complete. Active corpus: **`verified-2026-10-14-v2`**, with **18 award records / 10 award families / 174 chunks / 19 contributing official documents**. Every Pinecone vector's metadata was fetched and compared exactly with its canonical manifest. Older namespaces are retained but no longer queried by the active local application. Source coverage and limitations are retained in the evaluation and source-audit reports.
 
 - **84 backend tests passed**; the two PostgreSQL tests skipped in that default invocation **also passed separately** against the dedicated native Unix-socket PostgreSQL instance. No Docker.
 - **7 frontend unit tests**, TypeScript and production build passed. **18 mocked browser regressions** passed. **6 real local browser/API checks** passed across phone and desktop, including two live cited answers, unknown requirements, removed-program rejection, server-side version pinning, coverage gaps and compact printing. Printed output was visually inspected after fixing repeated quotes and a blank first page.

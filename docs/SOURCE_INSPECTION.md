@@ -1,5 +1,8 @@
 # Source inspection — October 14, 2026
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 16 public candidate documents were downloaded and parsed; **this is not 16 verified scholarships**. No paid extraction, embeddings or real answer generation has run. Source register: `data/sources.yaml`; original/normalized files and processing report: ignored `artifacts/`. Download hashes and fetch times are recorded in `artifacts/reports/collection.json`.
 
 | Category | Documents | Inspection outcome |

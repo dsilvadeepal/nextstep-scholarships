@@ -1,5 +1,8 @@
 # Expanded corpus build and testing — October 16, 2026
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 ## Local activation — October 16, 2026, 9:03 p.m. ET
 
 Following explicit user approval, `candidate-2026-10-16-v4` is now the active local

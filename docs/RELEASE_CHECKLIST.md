@@ -1,18 +1,17 @@
-# Reviewable release packet
+# Release and submission checklist
 
-Local feature branch: `feat/nextstep-native`. Main is unchanged. No merge, push, deployment, recording or course submission performed.
+The student demo is published at [NextStep Scholarships](https://nextstep-scholarships.replit.app/) and the public repository uses `main`. See [build status](BUILD_STATUS.md) for recorded validation; this checklist does not claim that the course submission has been sent.
 
-Ready locally: responsive student profile/results/details/scenarios/shortlist/print, cited chat component and bounded API, default-deny admin with saved run inspector/driver, source collector/parsers/extraction/provenance/partition/reconciliation, rate guards, versioned publication/rollback, 24 fictional reference cases, synthetic controlled update, production build and one-port scripts.
+## Before submitting
 
-Evidence: `BUILD_STATUS.md`, `SOURCE_INSPECTION.md`, `EVAL_REPORT.md`, `DATA_DICTIONARY.md`, `ENVIRONMENT.md`, automated tests, synthetic screenshots/PDFs under `/tmp/nextstep-*`. Synthetic browser answers are explicitly test responses, not live model output. The public preview intentionally reports unavailable catalog until a real corpus is published.
+- Open the published app and confirm it loads without student sign-in.
+- Confirm the repository and Google submission document are accessible to instructors.
+- Add the recorded video link to the submission document and check its sharing permissions.
+- Describe evaluation results with their corpus, test-set size, and limitations; do not present tuning results as independent accuracy.
+- Keep provider keys in server-side secrets. Hosted admin remains disabled; evaluations run locally.
 
-Required before approval request:
+## Future code releases
 
-- Configure development PostgreSQL, App Storage, owner OIDC and OpenAI with provider credentials. Pinecone setup exists separately; verify adapter end-to-end with the first real vectors.
-- Run real extraction, inspect flagged source partitions/cycles/conditions and incomplete leads, then publish only a query-ready namespace. Preserve original artifacts and prior ready version.
-- Execute tuning and heldout comparison, inspect failures, record cold/warm latency and threshold outcomes. Label correlated judge limitations.
-- Verify hosted anonymous denial and genuine owner login, API failure fallback, profile privacy, source citations and a real printable plan.
-- Confirm Replit Autoscale machine/maximum-instance settings and included allowance; obtain explicit publication approval. Do not assume credentials authorize publication.
-- After approval, publish, verify the public URL and rollback, synchronize actual outcomes to the submission draft, and record/approve a <=5 minute video. Course submission remains the owner's action unless explicitly delegated.
+Run the checks in the [README](../README.md), review the diff, and verify the active corpus before publication. After publishing, check matching, chat citations, and printing. Documentation-only updates do not require republishing Replit.
 
-Rollback: `uv run python -m nextstep.ingest.cli rollback --version PREVIOUS_READY_VERSION` with the intended database selected. No garbage collection or deletion of prior namespaces is part of this release.
+Corpus rollback uses `uv run python -m nextstep.ingest.cli rollback --version PREVIOUS_READY_VERSION` with the intended database selected and a retained, query-ready version. Do not delete the previous namespace as part of a release.

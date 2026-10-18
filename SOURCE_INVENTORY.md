@@ -41,3 +41,9 @@ Alabama: [UA out-of-state freshman awards](https://afford.ua.edu/scholarships/oo
 For each source: scholarship ID, sponsor, URL, document title/type, application cycle, graduation/entry year, published/effective date if available, fetched date, reviewed date, content hash, local path, page/section anchors, status, and reviewer notes. Unknown dates must remain unknown. Several programs can share a page; several documents can support one program. Do not count duplicate pages as new opportunities.
 
 For each program: reviewed mandatory conditions and alternatives, exclusions, application window, required materials, relevant colleges, renewal/award terms, and source links for every extracted fact. Respect source access and reuse conditions; private employee portals may offer insufficient public evidence.
+
+## Source-link access check — October 18, 2026
+
+Automated access could not verify the following research links. HTTP 403 may be a site access restriction; a TLS failure is not proof that a page is missing. These historical references are retained for provenance and need browser/manual verification before reuse. A successful HTTP response elsewhere does not establish current scholarship rules.
+
+- https://www.tn.gov/thec/data-research-reports/reports-studies-pub/financial-aid-reports/tn-hope-scholarship-program.html.html — HTTP 403.

@@ -1,5 +1,8 @@
 # Answer construction versus answer construction plus targeted retrieval
 
+> Historical evidence: dated checkpoints below are not current setup instructions. The published release is summarized in [build status](BUILD_STATUS.md). Local artifact paths are evidence references, not files distributed with this repository.
+
+
 Decision: use **phase 1 + phase 2** locally. It retains 50/50 keyword/vector fusion and recovers the named Auburn Heritage threshold that baseline selection omitted. No source re-chunking, corpus re-embedding, Pinecone writes or Docker were used.
 
 These are five exposed fictional regression cases, evaluated after development iterations. Both final runs used the same construction code, profile inputs, date, corpus and cached dense rankings; phase 2 changed final passage selection using existing local chunks. The model remains nondeterministic. This is a small diagnostic comparison, not a held-out accuracy claim.
