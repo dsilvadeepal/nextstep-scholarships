@@ -53,15 +53,11 @@ The project compares semantic retrieval with equal-weight hybrid retrieval on th
 
 Raw held-out results and saved-output rescoring are reported separately so rescoring is not presented as a fresh model run.
 
-See [evaluation report](docs/EVAL_REPORT.md), [demo run results](docs/DEMO_RUN_RESULTS_2026-10-15.md), and [RAG comparison](docs/RAG_COMPARISON_2026-10-15.md).
+See [evaluation report](docs/EVAL_REPORT.md), and [RAG comparison](docs/RAG_COMPARISON_2026-10-15.md).
 
 ## Live demo
 
 Open [NextStep Scholarships](https://nextstep-scholarships.replit.app/) without an account. Hosted admin is disabled; the evaluation tools remain local.
-
-## Instructor recording
-
-Use the [4–5 minute talk track and click path](docs/DEMO_VIDEO_SCRIPT.md), alongside the [two verified local rehearsals](docs/DEMO_REHEARSAL_2026-10-17.md). The app is published; see the [hosted rehearsal report](docs/PUBLISHED_DEMO_CHECK_2026-10-17.md) for the release checks.
 
 ## Run locally
 
@@ -97,7 +93,6 @@ PostgreSQL integration and browser-test instructions are documented in [environm
 - [Implementation plan](docs/superpowers/plans/2026-10-14-nextstep-scholarships.md)
 - [Build status](docs/BUILD_STATUS.md)
 - [Replit setup and verified handoffs](docs/REPLIT_SETUP.md)
-- [Submission draft](docs/SUBMISSION_DRAFT.md)
 - [Source inventory](SOURCE_INVENTORY.md)
 
 Current local work is on `feat/rag-answer-comparison`. Merging to `main`, publishing the Replit deployment, recording the demonstration, and submitting the course project remain separate owner decisions.

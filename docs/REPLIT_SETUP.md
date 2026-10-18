@@ -88,7 +88,7 @@ Official August pricing table checked October 17: Autoscale $1/month base, $0.60
 
 Illustrative month: 10 active app-processing hours at 44 compute units/second = $0.9504; five database compute-hours = $0.80; base $1; 1,000 requests = $0.0004. Total about $2.75 before small storage/transfer charges, credits and taxes. This is a scenario, not a guaranteed bill or enforced $5 hosting cap. Hosting and OpenAI budgets are separate.
 
-Latest local backend verification: 141 passed, 2 skipped. See [recording script](DEMO_VIDEO_SCRIPT.md) for the timed two-scenario walkthrough.
+Latest local backend verification: 141 passed, 2 skipped. See recording script (historical document removed) for the timed two-scenario walkthrough.
 
 ### Superseding owner decision — remove app spending enforcement
 
@@ -97,4 +97,4 @@ The owner explicitly requested removing cost details and the app's spending cap/
 
 ## Published release verified — October 17, 2026
 
-Owner approved hosting, publication and merging. PR #1 merged into main at `1d404568d37513ea2279669993a103116cb4025d`. Replit successfully published https://nextstep-scholarships.replit.app/ and both exact demo journeys ran against it with real chat and inspected citations. See [published verification](PUBLISHED_DEMO_CHECK_2026-10-17.md). The earlier publication-pending entries are historical. No app-level spending cap/ledger is used. Repository remains private.
+Owner approved hosting, publication and merging. PR #1 merged into main at `1d404568d37513ea2279669993a103116cb4025d`. Replit successfully published https://nextstep-scholarships.replit.app/ and both exact demo journeys ran against it with real chat and inspected citations. See published verification (historical document removed). The earlier publication-pending entries are historical. No app-level spending cap/ledger is used. Repository remains private.

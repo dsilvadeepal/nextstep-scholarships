@@ -62,7 +62,7 @@ by this dated update.
 
 ## Current checkpoint: verified local corpus active
 
-The second-pass research, local ingestion, metadata verification and local application tests are complete. Active corpus: **`verified-2026-10-14-v2`**, with **18 award records / 10 award families / 174 chunks / 19 contributing official documents**. Every Pinecone vector's metadata was fetched and compared exactly with its canonical manifest. Older namespaces are retained but no longer queried by the active local application. See [second-pass review](SECOND_PASS_REVIEW_2026-10-14.md) for admitted/deferred sources and limitations.
+The second-pass research, local ingestion, metadata verification and local application tests are complete. Active corpus: **`verified-2026-10-14-v2`**, with **18 award records / 10 award families / 174 chunks / 19 contributing official documents**. Every Pinecone vector's metadata was fetched and compared exactly with its canonical manifest. Older namespaces are retained but no longer queried by the active local application. See second-pass review (historical document removed) for admitted/deferred sources and limitations.
 
 - **84 backend tests passed**; the two PostgreSQL tests skipped in that default invocation **also passed separately** against the dedicated native Unix-socket PostgreSQL instance. No Docker.
 - **7 frontend unit tests**, TypeScript and production build passed. **18 mocked browser regressions** passed. **6 real local browser/API checks** passed across phone and desktop, including two live cited answers, unknown requirements, removed-program rejection, server-side version pinning, coverage gaps and compact printing. Printed output was visually inspected after fixing repeated quotes and a blank first page.

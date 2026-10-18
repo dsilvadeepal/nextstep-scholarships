@@ -1,6 +1,6 @@
 # Scholarship source audit — October 14, 2026
 
-**This is the retained first-pass discovery register.** The subsequent [second-pass review and admission decisions](SECOND_PASS_REVIEW_2026-10-14.md) supersede its proposed ingestion list. The verified local pilot is now active; historical statements below about the pause/no rebuild describe this first-pass checkpoint.
+**This is the retained first-pass discovery register.** The subsequent second-pass review and admission decisions (historical document removed) supersede its proposed ingestion list. The verified local pilot is now active; historical statements below about the pause/no rebuild describe this first-pass checkpoint.
 
 Scope: Georgia high-school juniors and seniors, and first-year college awards they could pursue at Georgia or neighboring-state universities. This is a **research register**, not an approved ingestion manifest. A linked page is not automatically a complete or current rules source. Dates below are those shown by sponsors; they are not inferred from when a page was fetched. **Application year, high-school graduation year, college-entry year, funding/award year, and regulation effective year are separate fields.** For example, GSFC's 2026–27 PDF is the current published regulation as of this audit, but it does not establish a Fall 2027 entrant's later 2027–28 award rules.
 
