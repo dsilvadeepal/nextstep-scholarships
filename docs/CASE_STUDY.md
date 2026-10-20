@@ -34,6 +34,38 @@ A responsive Replit-hosted demo with guided intake, grouped potential matches, c
 
 The system combines structured matching with retrieval-augmented generation: it retrieves relevant source passages before generating an explanation.
 
+## How the system works
+
+The React and TypeScript interface talks to a FastAPI backend. PostgreSQL stores the structured scholarship catalog and evaluation records; Pinecone stores vectors used to find relevant source passages. Replit hosts the student experience, while admin evaluations remain local.
+
+```mermaid
+flowchart TD
+    A[Official scholarship pages and PDFs] --> B[Structured scholarship records]
+    A --> C[Source passages and embeddings]
+    D[Student-confirmed profile] --> E[Deterministic eligibility checks]
+    B --> E
+    E --> F[Potential matches and unresolved conditions]
+    G[Student question] --> H[Hybrid retrieval]
+    C --> H
+    H --> I[Evidence-backed AI explanation]
+    D --> I
+    F --> J[Student interface]
+    I --> J
+```
+
+**Two complementary paths support the experience:**
+
+- **Matching:** Explicit rules compare the confirmed student profile with structured requirements. Each condition remains `met`, `unmet`, or `unknown`, so a missing detail does not silently become a qualification. This path depends on the quality of the extracted rules as well as the student’s inputs.
+- **Answering questions:** Official source text is split into passages, preserving document structure where possible. OpenAI embeddings represent those passages as vectors for semantic search. The app combines Pinecone semantic results with BM25 keyword results using equal-weight reciprocal-rank fusion—a method that combines the two ranked lists. Semantic search helps with differently worded questions; keyword search helps retain exact scholarship names and terms.
+
+The answer context is limited to **eight passages and 5,000 tokens**. `gpt-4.1-mini` produces structured explanations tied to source IDs, followed by a bounded support review. Citation checks and model review help catch errors, but do not guarantee that every interpretation is correct. LangChain supports splitting and model-call composition; the application follows a bounded workflow without an autonomous agent loop.
+
+## Technical trade-offs
+
+Keeping structured matching separate from answer generation makes eligibility decisions easier to inspect. Bounding the retrieved context limits how much evidence enters each answer, but makes passage selection important: a relevant document can still omit the decisive requirement from the selected context.
+
+In a five-case development comparison, targeted passage selection recovered a missing scholarship score threshold. That improvement supported the design, while remaining a small, exposed regression result rather than evidence of general accuracy. A separate 60/40 semantic–keyword experiment completed 25 of 26 cases and did not justify replacing the equal-weight hybrid default. These experiments informed the configuration without establishing that hybrid retrieval is universally better.
+
 ## Evaluation and limitations
 
 Testing exposed a wrong-program substitution when requested scholarship evidence was missing. A coverage guard was added, and the failure became a regression case.
@@ -46,4 +78,4 @@ The project demonstrates a working discovery flow and documented technical check
 
 Test whether students can identify an opportunity worth investigating, explain an unresolved requirement, and leave with a concrete preparation step. Use those observations to improve the experience before expanding its scope.
 
-*Sources: [Product requirements](../PRD.md), [release status](BUILD_STATUS.md), [evaluation report](EVAL_REPORT.md).*
+*Sources: [Product requirements](../PRD.md), [release status](BUILD_STATUS.md), [evaluation report](EVAL_REPORT.md), [retrieval comparison](RAG_COMPARISON_2026-10-15.md), [architecture and pipeline](../README.md#how-the-rag-pipeline-works).*
