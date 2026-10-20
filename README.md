@@ -8,6 +8,8 @@ The student app is published at [nextstep-scholarships.replit.app](https://nexts
 
 Repository: [dsilvadeepal/nextstep-scholarships](https://github.com/dsilvadeepal/nextstep-scholarships) (public).
 
+[Product case study](docs/CASE_STUDY.md) — my contribution, key product decisions, evaluation, and next steps.
+
 ## Student experience
 
 The main page starts with a short guided intake:
