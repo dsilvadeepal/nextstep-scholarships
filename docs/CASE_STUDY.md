@@ -74,8 +74,10 @@ The historical 26-case development suite passed for both semantic and equal-weig
 
 The project demonstrates a working discovery flow and documented technical checks. It does not yet establish student adoption, time savings, or improved scholarship outcomes.
 
-## Next step
+## Completed project
 
-Test whether students can identify an opportunity worth investigating, explain an unresolved requirement, and leave with a concrete preparation step. Use those observations to improve the experience before expanding its scope.
+This completed course demo brings product thinking and technical implementation together. Decisions about what to ask, how to represent uncertainty, and which claims the app could support shaped both the interface and the architecture.
+
+The implementation, evaluation records, and known limitations are available for inspection. Student research and adoption outcomes were not established as part of this project.
 
 *Sources: [Product requirements](../PRD.md), [release status](BUILD_STATUS.md), [evaluation report](EVAL_REPORT.md), [retrieval comparison](RAG_COMPARISON_2026-10-15.md), [architecture and pipeline](../README.md#how-the-rag-pipeline-works).*
